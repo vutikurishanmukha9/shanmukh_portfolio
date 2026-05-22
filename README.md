@@ -1,141 +1,132 @@
-# Shanmukha Vutikuri - Portfolio
+# Vutikuri Shanmukha — Systems Engineering and Technical Portfolio
 
-A modern, responsive portfolio website showcasing my projects, skills, and professional experience in AI/ML, Cloud Computing, and Data Analytics.
+![Vutikuri Shanmukha Portfolio - Technical Systems Console](Portfolio.png)
 
-## Live Demo
+A high-performance, tactile, editorial-grade developer portfolio website engineered to showcase systems programming, cloud architecture, and technical projects. This interface represents a complete departure from generic template designs, rejecting decorative glowing blobs, mesh gradients, and cursor trails in favor of technical layout honesty, sub-pixel grid alignment, and precision telemetry visualizations.
 
-**[View Portfolio](https://shanmukhworld.netlify.app/)**
+[View Live Portfolio](https://shanmukhworld.netlify.app/)
 
-## Preview
+---
 
-![Portfolio Preview](./Portfolio.png)
+## Design Philosophy and Visual Formula
 
-## Features
+The portfolio is structured around a precise design split, drawing inspiration from leading modern technical interfaces:
 
-- **Light/Dark Theme** - Toggle between elegant dark and clean light themes
-- **Premium UI Design** - Glassmorphism cards with gradient accents
-- **Custom Cursor** - Interactive cursor with glow effect and hover states
-- **Animated Particles** - Floating particle background in hero section
-- **Smooth Animations** - Scroll-triggered animations and micro-interactions
-- **Career Timeline** - Animated journey showcase with current status indicators
-- **Working Contact Form** - Netlify Forms integration for real email submissions
-- **Responsive Design** - Fully optimized for mobile, tablet, and desktop
-- **GitHub Activity** - Live contribution calendar with tooltips
-- **Skills-to-Projects Filter** - Click skills to filter related projects
-- **Page Loading Animation** - Elegant loading spinner on page load
+*   **Linear (60%): Precision Minimalism.** Sleek dark charcoal surfaces, sub-pixel 0.5px borders, micro-spacing grids, and ultra-snappy transition eases.
+*   **Claude (25%): Warm Editorial Canvas.** A welcoming light-mode cream canvas (`#faf9f5`) paired with classical serif display typography.
+*   **Cohere (15%): Structural Tabular Lists.** Dense monospaced metadata columns, thin rule-separated lists, and technical tabular alignment.
 
-## Sections
+---
 
-| Section | Description |
-|---------|-------------|
-| **Hero** | Animated intro with rotating titles and social links |
-| **About** | Professional summary with animated statistics |
-| **Building Activity** | GitHub contribution calendar with purple theme |
-| **Skills** | Interactive skills with project filtering |
-| **Career Journey** | Timeline of internship experiences with animations |
-| **Projects** | 10+ projects with filtering and expand/collapse |
-| **Certifications** | AWS, Oracle, and IBM certifications (clickable PDFs) |
-| **Publications** | IEEE research publication with key metrics |
-| **Contact** | Working contact form with Netlify Forms |
+## Architectural Revamp Details
 
-## Tech Stack
+### 1. Typography Hierarchy
+To maintain strict visual restraint and establish credibility, the typography is partitioned into three distinct layers:
+*   **Cormorant Garamond (Classical Serif):** Restricted strictly to main headers, publication papers, and section leads to convey a human-crafted editorial tone.
+*   **JetBrains Mono (Technical Monospace):** Used for terminal logs, metrics, active statuses, dates, skills tags, and telemetry data labels.
+*   **Inter (Neo-Grotesque Sans):** Reserved exclusively for high-readability body copy and descriptive paragraphs.
 
-- **Framework:** React 18 + TypeScript
-- **Build Tool:** Vite
-- **Styling:** TailwindCSS + Custom CSS
-- **UI Components:** shadcn/ui (minimal)
-- **Icons:** Lucide React
-- **GitHub Calendar:** react-github-calendar
-- **Tooltips:** react-tooltip
-- **Forms:** Netlify Forms
-- **Hosting:** Netlify
+### 2. Systems Telemetry Console Panel
+The landing hero replaces static image placeholders with a fully interactive Systems Telemetry Console Panel. This component simulates active infrastructure telemetry, including:
+*   **Cloud Deployment State:** Real-time indicator for AWS resources.
+*   **ML Model Training Loss:** Dynamic vector visualization rendering a custom convergence curve directly via SVG.
+*   **Database Metrics:** Live monospaced counts showing indexed vectors (FAISS store).
+*   **Service Status Logs:** Responsive rows listing runtime statuses of API servers, Vite environments, and Docker containers.
 
-## Quick Start
+### 3. Telemetry Project Silhouettes
+Rather than generic cards, projects are represented as ten interactive flat-dashboard wireframes. These silhouettes depict specialized engineering layouts such as neural network token layers, RAG chunking maps, financial candlestick charts, and coordinate index fields.
+
+### 4. Rule-Separated Tabular Lists
+All timelines, career journey items, certifications, and IEEE publications are structured as clean, rule-separated list tables (`border-[0.5px] border-border`). This provides high information density and structural clarity reminiscent of academic and technical documentation.
+
+### 5. Repository Optimization
+To ensure production-grade engineering standards, all unused aesthetic assets, legacy component templates, and redundant files have been pruned. This includes the removal of old custom cursor scripts, particle background renderers, snowfall modules, and unused skeletons, leaving a highly optimized, lean codebase.
+
+---
+
+## Technical Stack
+
+*   **Core Framework:** React 18 + TypeScript
+*   **Build Pipeline:** Vite
+*   **Styling Engine:** TailwindCSS 3.4 + Custom Vanilla CSS Utilities
+*   **Animation System:** Framer Motion 12 (configured with high-restraint cubic-bezier transition curves)
+*   **Iconography:** Lucide React
+*   **GitHub Integration:** `react-github-calendar`
+*   **Contact Telemetry:** Netlify Forms
+
+---
+
+## Getting Started
+
+### Prerequisites
+Ensure you have Node.js and a package manager (npm or bun) installed locally.
+
+### Installation and Local Development
 
 ```bash
 # Clone the repository
 git clone https://github.com/vutikurishanmukha9/shanmukh-vutikuri-portfolio.git
 
-# Navigate to directory
+# Navigate to the project directory
 cd shanmukh-vutikuri-portfolio
 
-# Install dependencies
+# Install project dependencies
 npm install
 
-# Start development server
+# Run the local Vite development server
 npm run dev
 
-# Build for production
+# Compile a production-ready static bundle
 npm run build
 ```
 
-## Project Structure
+---
+
+## Directory Structure
 
 ```
 src/
 ├── components/
-│   ├── ui/                       # Minimal shadcn/ui components
-│   ├── AboutSection.tsx
-│   ├── CareerJourneySection.tsx
-│   ├── CertificationsSection.tsx
-│   ├── ContactForm.tsx
-│   ├── ContactSection.tsx
-│   ├── CustomCursor.tsx
-│   ├── Footer.tsx
-│   ├── GrindingActivitySection.tsx  # GitHub contribution calendar
-│   ├── HeroSection.tsx
-│   ├── Navigation.tsx
-│   ├── PageLoader.tsx            # Loading animation
-│   ├── ParticlesBackground.tsx
-│   ├── ProjectsSection.tsx
-│   ├── PublicationsSection.tsx
-│   ├── SkillsSection.tsx
-│   └── ThemeToggle.tsx
+│   ├── ui/                       # Core atomic layout elements
+│   ├── AboutSection.tsx          # Bio summary and academic highlights
+│   ├── CareerJourneySection.tsx  # Tabular work history timeline
+│   ├── CertificationsSection.tsx  # Professional credentials table
+│   ├── ContactForm.tsx           # Contact input telemetry
+│   ├── ContactSection.tsx        # Structured networking links
+│   ├── Footer.tsx                # Monospaced system status and logs
+│   ├── GrindingActivitySection.tsx # Contributions calendar grid
+│   ├── HeroSection.tsx           # Telemetry console and display headers
+│   ├── MobileHeader.tsx          # Responsive mobile control bar
+│   ├── MobileNavDrawer.tsx       # Off-screen mobile navigational drawer
+│   ├── Navigation.tsx            # Floating sub-pixel navigation pill
+│   ├── NewsTicker.tsx            # Continuous system updates ticker
+│   ├── PageLoader.tsx            # Minimal initial loading state
+│   ├── ProjectsSection.tsx       # Technical dashboard interactive grid
+│   ├── PublicationsSection.tsx   # Peer-reviewed publication records
+│   └── SkillsSection.tsx         # Category-filtered skill matrices
 ├── context/
-│   ├── ThemeContext.tsx          # Theme state management
-│   └── SkillFilterContext.tsx    # Skills-to-projects filter
-├── hooks/                        # Custom React hooks
-├── lib/                          # Utility functions
-├── pages/
-│   ├── Index.tsx                 # Main portfolio page
-│   └── NotFound.tsx              # 404 page
-├── App.tsx                       # App entry with routing
-├── index.css                     # Global styles & design system
-└── main.tsx                      # React entry point
+│   ├── ThemeContext.tsx          # Cream and charcoal state controller
+│   └── SkillFilterContext.tsx    # Skills-to-projects interactive mapping
+├── hooks/
+│   └── use-toast.ts              # Lightweight system notifications
+├── lib/
+│   └── utils.ts                  # Tailwind merging helpers
+├── index.css                     # Editorial typography setups & keyframes
+├── App.tsx                       # Main application state and providers
+└── main.tsx                      # Render entrypoint
 ```
 
-## Customization
-
-### Theme Colors
-Edit the CSS variables in `src/index.css`:
-```css
-/* Dark Theme */
-:root, .dark {
-  --primary: 187 100% 42%;
-  --background: 240 10% 4%;
-}
-
-/* Light Theme */
-.light {
-  --primary: 187 100% 35%;
-  --background: 0 0% 100%;
-}
-```
-
-### Content
-- **Projects:** `src/components/ProjectsSection.tsx`
-- **Skills:** `src/components/SkillsSection.tsx`
-- **Career:** `src/components/CareerJourneySection.tsx`
-- **Certifications:** `src/components/CertificationsSection.tsx`
-- **GitHub Activity:** `src/components/GrindingActivitySection.tsx`
+---
 
 ## Author
 
 **Vutikuri Shanmukha**
-- GitHub: [@vutikurishanmukha9](https://github.com/vutikurishanmukha9)
-- LinkedIn: [shanmukha-vutikuri](https://linkedin.com/in/shanmukha-vutikuri)
-- Email: vutikurishanmukh17@gmail.com
+*   **GitHub:** [@vutikurishanmukha9](https://github.com/vutikurishanmukha9)
+*   **LinkedIn:** [shanmukha-vutikuri](https://linkedin.com/in/shanmukha-vutikuri)
+*   **Email:** vutikurishanmukh17@gmail.com
+
+---
 
 ## License
 
-This project is open source and available under the [MIT License](LICENSE).
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
