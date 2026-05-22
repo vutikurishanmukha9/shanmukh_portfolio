@@ -1,9 +1,7 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { CustomCursor } from "@/components/CustomCursor";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { SkillFilterProvider } from "@/context/SkillFilterContext";
 import { BackgroundCanvas } from "@/components/ui/background-canvas";
@@ -18,7 +16,6 @@ const App = () => (
       <SkillFilterProvider>
         <TooltipProvider>
           <BackgroundCanvas />
-          <CustomCursor />
           <Toaster />
           <BrowserRouter>
             <Routes>

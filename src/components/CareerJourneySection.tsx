@@ -1,6 +1,5 @@
 import { useRef } from 'react';
-import { Calendar, Briefcase, MapPin, GraduationCap } from 'lucide-react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
 
 type Experience = {
@@ -11,15 +10,10 @@ type Experience = {
     description: string;
     skills: string[];
     current: boolean;
-    isEducation?: boolean;
 };
 
 export const CareerJourneySection = () => {
     const containerRef = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start center", "end center"]
-    });
 
     const experiences: Experience[] = [
         {
@@ -27,7 +21,7 @@ export const CareerJourneySection = () => {
             company: 'Brain O Vision',
             location: 'Remote',
             period: 'June 2024 – Aug 2024',
-            description: 'Worked on cloud infrastructure projects, learned cloud deployment strategies, and gained practical experience with cloud platforms.',
+            description: 'Worked on cloud infrastructure projects, designed cloud deployment architectures, and gained hands-on expertise with AWS services.',
             skills: ['Cloud Computing', 'Python', 'AWS', 'Automation'],
             current: false,
         },
@@ -36,121 +30,88 @@ export const CareerJourneySection = () => {
             company: 'EXCELr EdTech',
             location: 'Remote',
             period: 'Dec 2024 – Apr 2025',
-            description: 'Gained hands-on experience in cloud computing technologies, worked with AWS services, and developed cloud-native solutions.',
-            skills: ['AWS', 'Cloud Architecture', 'DevOps', 'Infrastructure'],
+            description: 'Assisted in deploying cloud-native architectures, configured CI/CD deployment logic, and automated container orchestration pipelines.',
+            skills: ['AWS', 'Cloud Architecture', 'DevOps', 'Docker'],
             current: false,
         },
     ];
 
     return (
-        <SectionWrapper id="career" className="py-24 bg-muted/30">
+        <SectionWrapper id="career" className="py-24 bg-muted/20 border-b-[0.5px] border-border/40">
             <div className="container mx-auto px-4 lg:px-8 relative z-10" ref={containerRef}>
                 {/* Header */}
-                <div className="text-center mb-20 max-w-2xl mx-auto">
+                <div className="text-center mb-16 max-w-2xl mx-auto">
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-background border border-border shadow-sm mb-6"
+                        className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-card border-[0.5px] border-border/80 shadow-none mb-4"
                     >
-                        <span className="text-xs font-semibold tracking-wider text-muted-foreground uppercase">Experience</span>
+                        <span className="text-[10px] font-mono tracking-widest text-muted-foreground uppercase">Experience</span>
                     </motion.div>
                     <motion.h2
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
-                        className="text-4xl md:text-5xl font-bold font-display tracking-tight text-foreground"
+                        transition={{ delay: 0.05 }}
+                        className="text-4xl md:text-5xl font-serif-display font-medium tracking-tight text-foreground select-none"
                     >
                         Career Timeline
                     </motion.h2>
                 </div>
 
-                <div className="relative max-w-4xl mx-auto pl-6 md:pl-10">
-                    {/* Clean Vertical Line */}
-                    <div className="absolute left-0 md:left-4 top-2 bottom-0 w-[1px] bg-border z-0" />
-                    <motion.div
-                        style={{ scaleY: scrollYProgress, transformOrigin: "top" }}
-                        className="absolute left-[calc(0px-0.5px)] md:left-[calc(1rem-0.5px)] top-2 w-[2px] h-full bg-primary z-0"
-                    />
+                {/* Cohere-Inspired Tabular Rows */}
+                <div className="max-w-4xl mx-auto border-[0.5px] border-border bg-card/60 backdrop-blur-md rounded-lg overflow-hidden shadow-none">
+                    <div className="divide-y divide-border/60">
+                        {experiences.map((exp, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 15 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.4, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                                className="p-6 md:p-8 flex flex-col md:grid md:grid-cols-[1.25fr_2.5fr_1.25fr] gap-6 items-start hover:bg-background/20 transition-colors duration-200"
+                            >
+                                {/* Left: Period & Location */}
+                                <div className="flex flex-col gap-1">
+                                    <span className="text-[11px] font-mono font-medium tracking-wider text-primary uppercase">
+                                        {exp.period}
+                                    </span>
+                                    <span className="text-[9px] font-mono tracking-widest uppercase text-muted-foreground">
+                                        {exp.location}
+                                    </span>
+                                </div>
 
-                    <div className="space-y-12">
-                        {/* Next Stop Indicator */}
-                        <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            className="relative z-10 flex items-start group"
-                        >
-                            {/* Node */}
-                            <div className="absolute -left-[1.95rem] md:-left-[2.1rem] top-1.5">
-                                <div className="w-4 h-4 rounded-full bg-background border-2 border-primary ring-4 ring-primary/10 animate-pulse" />
-                            </div>
-                            
-                            <div className="w-full glass-panel p-6 border-l-4 border-l-primary/50">
-                                <h3 className="text-lg font-semibold text-foreground font-display">Next Value Stop</h3>
-                                <p className="text-sm text-muted-foreground mt-1">Open to opportunities where I can make a tangible impact.</p>
-                            </div>
-                        </motion.div>
-
-                        {/* Experience Cards */}
-                        {experiences.map((exp, index) => {
-                            const isEducation = exp.isEducation;
-                            const Icon = isEducation ? GraduationCap : Briefcase;
-
-                            return (
-                                <motion.div
-                                    key={index}
-                                    initial={{ opacity: 0, y: 30 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true, margin: "-50px" }}
-                                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                                    className="relative z-10 flex items-start group"
-                                >
-                                    {/* Node */}
-                                    <div className="absolute -left-10 md:-left-[2.75rem] top-6 bg-background p-2 rounded-full border border-border shadow-sm group-hover:border-primary group-hover:text-primary transition-colors">
-                                        <Icon className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                                {/* Middle: Title, Company, Description */}
+                                <div className="space-y-1.5">
+                                    <h3 className="text-base font-serif-display font-medium text-foreground leading-tight">
+                                        {exp.title}
+                                    </h3>
+                                    <div className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground">
+                                        {exp.company}
                                     </div>
+                                    <p className="text-muted-foreground text-xs leading-relaxed max-w-xl">
+                                        {exp.description}
+                                    </p>
+                                </div>
 
-                                    {/* Card */}
-                                    <div className="w-full glass-panel p-8 hover-lift-minimal border border-border/60">
-                                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
-                                            <div>
-                                                <h3 className="text-xl font-semibold text-foreground font-display">{exp.title}</h3>
-                                                <div className="flex flex-wrap items-center gap-2 mt-2 text-muted-foreground text-sm">
-                                                    <span className="font-medium text-foreground/80">{exp.company}</span>
-                                                    <span className="w-1 h-1 rounded-full bg-border" />
-                                                    <MapPin className="h-3.5 w-3.5" />
-                                                    <span>{exp.location}</span>
-                                                </div>
-                                            </div>
-                                            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-muted border border-border text-xs font-medium text-muted-foreground whitespace-nowrap">
-                                                <Calendar className="h-3.5 w-3.5" />
-                                                {exp.period}
-                                            </span>
-                                        </div>
-
-                                        <p className="text-muted-foreground leading-relaxed mb-6 text-sm">
-                                            {exp.description}
-                                        </p>
-
-                                        <div className="flex flex-wrap gap-2">
-                                            {exp.skills.map((skill, i) => (
-                                                <span 
-                                                    key={i} 
-                                                    className="px-2.5 py-1 rounded-md bg-background border border-border text-xs font-medium text-muted-foreground transition-colors group-hover:border-primary/30"
-                                                >
-                                                    {skill}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </motion.div>
-                            );
-                        })}
+                                {/* Right: Skills Tags */}
+                                <div className="flex flex-wrap gap-1 md:justify-end w-full">
+                                    {exp.skills.map((skill, i) => (
+                                        <span
+                                            key={i}
+                                            className="px-2 py-0.5 rounded bg-background/50 border-[0.5px] border-border/80 text-[9px] font-mono text-muted-foreground"
+                                        >
+                                            {skill}
+                                        </span>
+                                    ))}
+                                </div>
+                            </motion.div>
+                        ))}
                     </div>
                 </div>
             </div>
         </SectionWrapper>
     );
 };
+

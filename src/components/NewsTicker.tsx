@@ -7,72 +7,38 @@ interface NewsTickerProps {
 
 export const NewsTicker = ({ items, speed = 30 }: NewsTickerProps) => {
     const [isPaused, setIsPaused] = useState(false);
-    const [isHovered, setIsHovered] = useState(false);
 
     // Duplicate items for seamless infinite scroll (only 2 copies needed)
     const tickerContent = [...items, ...items];
 
-    const handleMouseEnter = () => {
-        setIsPaused(true);
-        setIsHovered(true);
-    };
-
-    const handleMouseLeave = () => {
-        setIsPaused(false);
-        setIsHovered(false);
-    };
-
     return (
         <div
-            className="news-ticker-container w-full overflow-hidden transition-all duration-300"
-            style={{
-                background: isHovered
-                    ? 'linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--card) / 0.98) 100%)'
-                    : 'linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--card) / 0.95) 100%)',
-                borderBottom: isHovered
-                    ? '1px solid hsl(var(--primary) / 0.5)'
-                    : '1px solid hsl(var(--primary) / 0.3)',
-                boxShadow: isHovered
-                    ? '0 4px 20px hsl(var(--primary) / 0.15)'
-                    : '0 2px 12px hsl(var(--primary) / 0.08)',
-            }}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
+            className="w-full overflow-hidden bg-card/90 backdrop-blur-md border-b-[0.5px] border-border/60 transition-all duration-200 select-none"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
             onTouchStart={() => setIsPaused(true)}
             onTouchEnd={() => setIsPaused(false)}
         >
-            <div className="py-2 md:py-2.5 relative flex items-center">
+            <div className="py-1.5 relative flex items-center h-8">
                 {/* LIVE Badge */}
-                <div className="flex-shrink-0 flex items-center gap-2 px-3 md:px-4 border-r border-primary/20">
-                    <span className="relative flex h-2.5 w-2.5">
+                <div className="flex-shrink-0 flex items-center gap-2 px-4 border-r-[0.5px] border-border/60 bg-card z-20 h-full">
+                    <span className="relative flex h-1.5 w-1.5">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500 shadow-lg shadow-red-500/50"></span>
+                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span>
                     </span>
-                    <span className="text-xs md:text-sm font-bold tracking-wider text-red-500 drop-shadow-sm">
+                    <span className="text-[10px] font-mono font-bold tracking-widest text-red-500">
                         LIVE
                     </span>
                 </div>
 
                 {/* Scrolling content container */}
-                <div className="flex-1 overflow-hidden relative">
+                <div className="flex-1 overflow-hidden relative h-full flex items-center">
                     {/* Left fade */}
-                    <div
-                        className="absolute left-0 top-0 bottom-0 w-12 md:w-24 z-10 pointer-events-none transition-opacity duration-300"
-                        style={{
-                            background: 'linear-gradient(to right, hsl(var(--card)), transparent)',
-                            opacity: isHovered ? 0.9 : 1
-                        }}
-                    />
+                    <div className="absolute left-0 top-0 bottom-0 w-8 z-10 pointer-events-none bg-gradient-to-r from-card to-transparent" />
                     {/* Right fade */}
-                    <div
-                        className="absolute right-0 top-0 bottom-0 w-12 md:w-24 z-10 pointer-events-none transition-opacity duration-300"
-                        style={{
-                            background: 'linear-gradient(to left, hsl(var(--card)), transparent)',
-                            opacity: isHovered ? 0.9 : 1
-                        }}
-                    />
+                    <div className="absolute right-0 top-0 bottom-0 w-8 z-10 pointer-events-none bg-gradient-to-l from-card to-transparent" />
 
-                    {/* Scrolling content - uses marquee-style animation */}
+                    {/* Scrolling content */}
                     <div
                         className="ticker-track flex whitespace-nowrap"
                         style={{
@@ -83,17 +49,11 @@ export const NewsTicker = ({ items, speed = 30 }: NewsTickerProps) => {
                         {tickerContent.map((item, index) => (
                             <span
                                 key={index}
-                                className="inline-flex items-center mx-4 md:mx-6 text-xs md:text-sm font-medium transition-all duration-200 hover:text-primary group"
+                                className="inline-flex items-center mx-4 text-[10px] font-mono tracking-widest text-muted-foreground uppercase select-none"
                             >
-                                {/* Diamond separator */}
-                                <span
-                                    className="w-1.5 h-1.5 mr-2 md:mr-3 rotate-45 transition-all duration-200 group-hover:scale-125 group-hover:rotate-[225deg]"
-                                    style={{
-                                        background: 'linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)))',
-                                        boxShadow: '0 0 8px hsl(var(--primary) / 0.6)',
-                                    }}
-                                />
-                                <span className="text-foreground/90 group-hover:text-foreground transition-colors duration-200">
+                                {/* Clean asterisk separator */}
+                                <span className="text-primary/60 mr-3 text-xs">•</span>
+                                <span className="hover:text-foreground transition-colors duration-200">
                                     {item}
                                 </span>
                             </span>
@@ -128,6 +88,7 @@ export const defaultStatusItems = [
     "B.Tech in ECE",
     "10+ Projects Completed",
     "AWS Certified Cloud Practitioner",
-    "AI/ML Enthusiast",
+    "AI/ML Specialist",
     "vutikurishanmukh17@gmail.com",
 ];
+

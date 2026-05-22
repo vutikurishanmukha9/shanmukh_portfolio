@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Code, Database, Cloud, Brain, BarChart3, Cpu, Palette, Hammer, Shield, ChevronRight, Layers, LineChart, PieChart } from 'lucide-react';
+import { Code, Database, Cloud, Brain, BarChart3, Cpu, Palette, Hammer, Shield, Layers, LineChart, PieChart } from 'lucide-react';
 import { useSkillFilter } from '@/context/SkillFilterContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
@@ -9,7 +9,7 @@ const pipelineStages = [
   { id: 'ingest', label: 'Ingest', icon: Database },
   { id: 'process', label: 'Process', icon: Cpu },
   { id: 'store', label: 'Store', icon: Cloud },
-  { id: 'analyze', label: 'Analyze', icon: BarChart3 },
+  { id: 'analyze', label: 'Analyze', icon: Brain },
   { id: 'visualize', label: 'Visualize', icon: Palette },
 ];
 
@@ -79,7 +79,7 @@ export const SkillsSection = () => {
     if (selectedSkill !== skill) {
       setTimeout(() => {
         document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
+      }, 150);
     }
   };
 
@@ -88,25 +88,25 @@ export const SkillsSection = () => {
     : skillCategories;
 
   return (
-    <SectionWrapper id="skills" className="py-24 bg-background">
+    <SectionWrapper id="skills" className="py-24 bg-background border-b-[0.5px] border-border/40">
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
 
         {/* Header */}
-        <div className="text-center mb-16 max-w-2xl mx-auto">
+        <div className="text-center mb-12 max-w-2xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-background border border-border shadow-sm mb-6"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-card border-[0.5px] border-border/80 shadow-none mb-4"
           >
-            <span className="text-xs font-semibold tracking-wider text-muted-foreground uppercase">Expertise</span>
+            <span className="text-[10px] font-mono tracking-widest text-muted-foreground uppercase">Expertise</span>
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-bold font-display tracking-tight text-foreground"
+            transition={{ delay: 0.05 }}
+            className="text-4xl md:text-5xl font-serif-display font-medium tracking-tight text-foreground select-none"
           >
             Technical Arsenal
           </motion.h2>
@@ -114,41 +114,56 @@ export const SkillsSection = () => {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="mt-4 text-muted-foreground text-lg"
+            transition={{ delay: 0.1 }}
+            className="mt-4 text-muted-foreground text-sm max-w-xl mx-auto leading-relaxed"
           >
-            Technologies I use to bring ideas to life. Select a skill to filter projects.
+            Select a skill to filter projects. Clicking will dynamically highlight matching engineering outcomes.
           </motion.p>
         </div>
 
-        {/* Pipeline Filters */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-3 mb-16 max-w-3xl mx-auto"
-        >
-          {pipelineStages.map((stage) => {
-            const Icon = stage.icon;
-            const isSelected = selectedStage === stage.id;
-            return (
-              <button
-                key={stage.id}
-                onClick={() => setSelectedStage(isSelected ? null : stage.id)}
-                className={cn(
-                  "flex items-center gap-2 px-5 py-2.5 rounded-full border transition-all duration-300 text-sm font-medium",
-                  isSelected
-                    ? "bg-primary text-primary-foreground border-primary shadow-md"
-                    : "glass-panel hover:bg-muted text-muted-foreground hover:text-foreground hover:border-border"
-                )}
-              >
-                <Icon className={cn("w-4 h-4", isSelected ? "text-primary-foreground" : "text-primary")} />
-                {stage.label}
-              </button>
-            );
-          })}
-        </motion.div>
+        {/* Cal.com Pill Filters */}
+        <div className="flex justify-center mb-16 select-none">
+          <div className="inline-flex p-1 bg-muted/65 border-[0.5px] border-border/60 rounded-full items-center relative flex-wrap gap-y-1 justify-center max-w-full">
+            <button
+              onClick={() => setSelectedStage(null)}
+              className={cn(
+                "relative px-4 py-1.5 text-[9px] font-mono tracking-widest uppercase transition-colors duration-200 z-10",
+                selectedStage === null ? "text-foreground font-semibold" : "text-muted-foreground hover:text-foreground"
+              )}
+            >
+              {selectedStage === null && (
+                <motion.div
+                  layoutId="skills-filter-pill"
+                  className="absolute inset-0 rounded-full bg-card border-[0.5px] border-border/50 shadow-[0_1px_3px_rgba(0,0,0,0.05)]"
+                  transition={{ type: "tween", ease: [0.16, 1, 0.3, 1], duration: 0.2 }}
+                />
+              )}
+              <span className="relative z-20">All Categories</span>
+            </button>
+            {pipelineStages.map((stage) => {
+              const isSelected = selectedStage === stage.id;
+              return (
+                <button
+                  key={stage.id}
+                  onClick={() => setSelectedStage(stage.id)}
+                  className={cn(
+                    "relative px-4 py-1.5 text-[9px] font-mono tracking-widest uppercase transition-colors duration-200 z-10",
+                    isSelected ? "text-foreground font-semibold" : "text-muted-foreground hover:text-foreground"
+                  )}
+                >
+                  {isSelected && (
+                    <motion.div
+                      layoutId="skills-filter-pill"
+                      className="absolute inset-0 rounded-full bg-card border-[0.5px] border-border/50 shadow-[0_1px_3px_rgba(0,0,0,0.05)]"
+                      transition={{ type: "tween", ease: [0.16, 1, 0.3, 1], duration: 0.2 }}
+                    />
+                  )}
+                  <span className="relative z-20">{stage.label}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
 
         {/* Categories Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
@@ -158,38 +173,40 @@ export const SkillsSection = () => {
               return (
                 <motion.div
                   layout
-                  initial={{ opacity: 0, scale: 0.9 }}
+                  initial={{ opacity: 0, scale: 0.98 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.3 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
                   key={category.title}
-                  className="glass-panel p-8 hover-lift-minimal flex flex-col h-full"
+                  className="glass-panel p-6 hover-lift-minimal flex flex-col h-full justify-between"
                 >
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <Icon className="w-6 h-6 text-primary" />
+                  <div>
+                    <div className="flex items-center gap-3.5 mb-6 border-b-[0.5px] border-border/40 pb-4">
+                      <div className="w-9 h-9 rounded bg-primary/5 border-[0.5px] border-primary/15 flex items-center justify-center">
+                        <Icon className="w-4.5 h-4.5 text-primary" />
+                      </div>
+                      <h3 className="text-base font-serif-display font-medium text-foreground">{category.title}</h3>
                     </div>
-                    <h3 className="text-xl font-semibold text-foreground font-display">{category.title}</h3>
-                  </div>
 
-                  <div className="flex flex-wrap gap-2">
-                    {category.skills.map((skill) => {
-                      const isSkillSelected = selectedSkill === skill;
-                      return (
-                        <button
-                          key={skill}
-                          onClick={() => handleSkillClick(skill)}
-                          className={cn(
-                            "px-4 py-2 rounded-full text-xs font-medium border transition-colors duration-300",
-                            isSkillSelected
-                              ? "bg-primary text-primary-foreground border-primary shadow-sm scale-105"
-                              : "bg-background/50 text-muted-foreground border-border/50 hover:border-primary/50 hover:text-foreground"
-                          )}
-                        >
-                          {skill}
-                        </button>
-                      );
-                    })}
+                    <div className="flex flex-wrap gap-1.5">
+                      {category.skills.map((skill) => {
+                        const isSkillSelected = selectedSkill === skill;
+                        return (
+                          <button
+                            key={skill}
+                            onClick={() => handleSkillClick(skill)}
+                            className={cn(
+                              "px-3 py-1 rounded-md text-[10px] font-mono border transition-all duration-200",
+                              isSkillSelected
+                                ? "bg-primary/10 text-primary border-primary/30"
+                                : "bg-background/40 text-muted-foreground border-border/40 hover:border-primary/20 hover:text-foreground"
+                            )}
+                          >
+                            {skill}
+                          </button>
+                        );
+                      })}
+                    </div>
                   </div>
                 </motion.div>
               );

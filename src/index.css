@@ -2,120 +2,142 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Option A: Minimalist Glass Design System (Apple Inspired) */
-
 @layer base {
-  /* Light Theme (Default) - Highly Breathable, Clean */
+  /* Light Theme (Claude Tinted Editorial) - Warm, Elegant, Humanist */
   :root {
-    --background: 0 0% 98%;      /* Very light gray/white #fafafa */
-    --foreground: 0 0% 10%;       /* Near black text */
+    --background: 48 25% 97%;      /* Warm cream canvas #faf9f5 */
+    --foreground: 60 3% 8%;        /* Deep dark-warm ink #141413 */
 
-    --card: 0 0% 100%;           /* White cards */
-    --card-foreground: 0 0% 10%;
+    --card: 43 24% 94%;            /* Warm cream stone panels #f5f0e8 */
+    --card-foreground: 60 3% 8%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 10%;
+    --popover: 48 25% 97%;
+    --popover-foreground: 60 3% 8%;
 
-    --primary: 210 100% 50%;     /* Clean Blue (Apple-like) */
+    --primary: 15 52% 58%;         /* Warm humanist coral #cc785c */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 94%;       /* Soft gray */
-    --secondary-foreground: 0 0% 10%;
+    --secondary: 43 24% 94%;
+    --secondary-foreground: 60 3% 8%;
 
-    --muted: 0 0% 92%;           /* Muted backgrounds */
-    --muted-foreground: 0 0% 45%;/* Muted text */
+    --muted: 43 24% 94%;
+    --muted-foreground: 40 4% 41%; /* Dark muted mineral text #6c6a64 */
 
-    --accent: 210 100% 50%;
+    --accent: 15 52% 58%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 72% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 88%;          /* Very soft borders */
-    --input: 0 0% 88%;
-    --ring: 210 100% 50%;
+    --border: 34 23% 88%;          /* Ultra-fine hairline border #e6dfd8 */
+    --input: 34 23% 88%;
+    --ring: 15 52% 58%;
 
-    --radius: 1.25rem;           /* Smoother Apple-like curves */
+    --radius: 0.5rem;              /* Precise micro-rounded corners (8px) for technical rigor */
 
-    /* Typography */
-    --font-primary: -apple-system, BlinkMacSystemFont, 'Inter', 'SF Pro Text', sans-serif;
-    --font-display: -apple-system, BlinkMacSystemFont, 'Inter', 'SF Pro Display', sans-serif;
+    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
   }
 
-  /* Deep Refined Dark Theme */
+  /* Deep Refined Dark Theme (Linear Software-Craft Charcoal) */
   .dark {
-    --background: 0 0% 5%;       /* Very deep gray, not pitch black */
-    --foreground: 0 0% 98%;
+    --background: 240 10% 5%;      /* Deep warm charcoal canvas #0d0d0f */
+    --foreground: 48 10% 92%;      /* Cream-tinted white text #f4f3ef */
 
-    --card: 0 0% 9%;             /* Slightly elevated card color */
-    --card-foreground: 0 0% 98%;
+    --card: 240 6% 9%;             /* Elevated dark-charcoal panel #141517 */
+    --card-foreground: 48 10% 92%;
 
-    --popover: 0 0% 9%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 240 10% 5%;
+    --popover-foreground: 48 10% 92%;
 
-    --primary: 210 100% 60%;     /* Slightly softer blue for dark mode visibility */
+    --primary: 15 52% 58%;         /* Deployed with warm coral highlight #cc785c */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 240 6% 9%;
+    --secondary-foreground: 48 10% 92%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 240 6% 9%;
+    --muted-foreground: 240 4% 65%;/* Muted technical gray #a0a0a5 */
 
-    --accent: 210 100% 60%;
+    --accent: 15 52% 58%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 62% 40%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 15%;          /* Very subtle borders in dark mode */
-    --input: 0 0% 15%;
-    --ring: 210 100% 60%;
+    --border: 223 10% 15%;         /* Charcoal hairline borders #23252a */
+    --input: 223 10% 15%;
+    --ring: 15 52% 58%;
   }
 }
 
 @layer base {
   * {
     @apply border-border;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+    /* Raycast/Linear Transition: snappier, highly controlled 150-220ms transitions with no elastic bounce */
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    transition-duration: 200ms;
   }
+  
   body {
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-primary);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: smooth;
+    overflow-x: clip; /* Avoid visual bugs or horizontal scrollbars */
+  }
+
+  /* Limit body copy density globally */
+  p {
+    @apply leading-relaxed font-normal;
+    max-width: 65ch; /* Ideal reading line length for elegant editorial pacing */
   }
 }
 
 @layer components {
-  /* Minimalist Glass Container */
+  /* Flat Tactile Panel replacing glassy neon blobs (color containment over shadows) */
   .glass-panel {
-    background: hsl(var(--card) / 0.75);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid hsl(var(--border) / 0.5);
+    background: hsl(var(--card));
+    border: 0.5px solid hsl(var(--border));
     border-radius: var(--radius);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+    box-shadow: none; /* Suppress heavy drop shadows */
+    @apply transition-all duration-200;
   }
 
-  /* Elevated Glass (For nav/tooltips) */
-  .glass-elevated {
-    background: hsl(var(--card) / 0.9);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid hsl(var(--border) / 0.8);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
-  }
-
-  /* Clean minimal hover lift */
+  /* Slightly more prominent hover state - micro Y translate and crisp border highlighting */
   .hover-lift-minimal {
-    @apply transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg;
+    @apply hover:-translate-y-[2px];
+    transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), border-color 200ms ease;
+  }
+  
+  .hover-lift-minimal:hover {
+    border-color: hsl(var(--primary) / 0.4);
+  }
+
+  /* Custom pill-in-pill switcher layout (Cal.com Inspired) */
+  .nav-pill-group {
+    @apply flex p-1 bg-muted/40 rounded-full border border-border/80 relative;
+  }
+
+  /* Elegant monospaced labels (Cohere Inspired) */
+  .font-technical-mono {
+    font-family: var(--font-mono);
+    @apply text-xs uppercase tracking-[0.15em] font-medium text-muted-foreground;
+  }
+
+  /* Sophisticated serif display layout (Claude Inspired) */
+  .font-serif-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+    @apply font-medium leading-tight text-foreground;
   }
 
   /* Custom thin scrollbar for internal element scrolling */
   .thin-scrollbar::-webkit-scrollbar {
-    width: 6px;
+    width: 4px;
   }
   .thin-scrollbar::-webkit-scrollbar-track {
     background: transparent;
@@ -124,58 +146,25 @@
     background-color: hsl(var(--border));
     border-radius: 20px;
   }
-
-  /* Smooth fade animations */
-  .fade-in {
-    animation: fade-in 0.8s ease-out forwards;
-  }
-  .slide-up {
-    animation: slide-up 0.8s ease-out forwards;
-  }
-  
-  @keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  @keyframes slide-up {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
 }
 
 @layer utilities {
-  .font-display {
-    font-family: var(--font-display);
-    letter-spacing: -0.03em;
-  }
-  
-  .text-gradient {
-    /* Subtle metallic/monochrome gradient */
-    background: linear-gradient(135deg, hsl(var(--foreground)) 0%, hsl(var(--muted-foreground)) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  /* For large hero text */
-  .text-massive {
-    font-size: clamp(3rem, 10vw, 8rem);
-    line-height: 1;
-    letter-spacing: -0.04em;
-    font-weight: 700;
+  .subpixel-border {
+    border-width: 0.5px;
   }
 }
 
-/* Premium micro-interactions */
+/* Premium tactile micro-interactions selection style */
 ::selection {
-  background-color: hsl(var(--foreground));
-  color: hsl(var(--background));
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
 }
 ::-moz-selection {
-  background-color: hsl(var(--foreground));
-  color: hsl(var(--background));
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
 }
 
+/* Very subtle noise layer to create a paper/mineral textured canvas texture */
 body::after {
   content: "";
   position: fixed;
@@ -185,7 +174,7 @@ body::after {
   height: 100vh;
   z-index: 9999;
   pointer-events: none;
-  opacity: 0.035;
+  opacity: 0.015;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 

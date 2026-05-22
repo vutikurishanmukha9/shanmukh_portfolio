@@ -74,8 +74,8 @@ export const ContactForm = () => {
         </label>
       </p>
 
-      <div className="space-y-2">
-        <label htmlFor="name" className="text-sm font-medium text-foreground">
+      <div className="space-y-1.5">
+        <label htmlFor="name" className="text-[9px] font-mono tracking-widest text-muted-foreground uppercase">
           Name
         </label>
         <Input
@@ -85,12 +85,12 @@ export const ContactForm = () => {
           onChange={handleChange}
           placeholder="Your name"
           required
-          className="bg-transparent border-border/60 focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all rounded-xl px-4 py-6"
+          className="bg-transparent border-[0.5px] border-border/80 focus:border-primary focus:ring-[0.5px] focus:ring-primary/30 transition-all rounded px-3 py-4 text-xs font-sans h-9"
         />
       </div>
 
-      <div className="space-y-2">
-        <label htmlFor="email" className="text-sm font-medium text-foreground">
+      <div className="space-y-1.5">
+        <label htmlFor="email" className="text-[9px] font-mono tracking-widest text-muted-foreground uppercase">
           Email
         </label>
         <Input
@@ -101,12 +101,12 @@ export const ContactForm = () => {
           onChange={handleChange}
           placeholder="your.email@example.com"
           required
-          className="bg-transparent border-border/60 focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all rounded-xl px-4 py-6"
+          className="bg-transparent border-[0.5px] border-border/80 focus:border-primary focus:ring-[0.5px] focus:ring-primary/30 transition-all rounded px-3 py-4 text-xs font-sans h-9"
         />
       </div>
 
-      <div className="space-y-2">
-        <label htmlFor="subject" className="text-sm font-medium text-foreground">
+      <div className="space-y-1.5">
+        <label htmlFor="subject" className="text-[9px] font-mono tracking-widest text-muted-foreground uppercase">
           Subject
         </label>
         <Input
@@ -116,12 +116,12 @@ export const ContactForm = () => {
           onChange={handleChange}
           placeholder="What is this about?"
           required
-          className="bg-transparent border-border/60 focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all rounded-xl px-4 py-6"
+          className="bg-transparent border-[0.5px] border-border/80 focus:border-primary focus:ring-[0.5px] focus:ring-primary/30 transition-all rounded px-3 py-4 text-xs font-sans h-9"
         />
       </div>
 
-      <div className="space-y-2">
-        <label htmlFor="message" className="text-sm font-medium text-foreground">
+      <div className="space-y-1.5">
+        <label htmlFor="message" className="text-[9px] font-mono tracking-widest text-muted-foreground uppercase">
           Message
         </label>
         <Textarea
@@ -131,24 +131,24 @@ export const ContactForm = () => {
           onChange={handleChange}
           placeholder="Tell me about your project..."
           required
-          rows={5}
-          className="bg-transparent border-border/60 focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all rounded-xl px-4 py-4 resize-none"
+          rows={4}
+          className="bg-transparent border-[0.5px] border-border/80 focus:border-primary focus:ring-[0.5px] focus:ring-primary/30 transition-all rounded px-3 py-2.5 text-xs font-sans resize-none"
         />
       </div>
 
       <Button
         type="submit"
-        className="w-full h-14 rounded-xl bg-foreground text-background hover:bg-foreground/90 transition-all font-medium text-base shadow-sm group"
+        className="w-full h-9 rounded bg-foreground text-background hover:bg-foreground/90 transition-colors duration-200 font-mono text-[10px] tracking-widest uppercase shadow-none group"
         disabled={isSubmitting}
       >
         {isSubmitting ? (
           <>
-            <Loader2 className="h-5 w-5 mr-3 animate-spin" />
-            Sending Message...
+            <Loader2 className="h-3.5 w-3.5 mr-2 animate-spin" />
+            Sending...
           </>
         ) : (
           <>
-            <Send className="h-5 w-5 mr-3 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+            <Send className="h-3.5 w-3.5 mr-2 transition-transform duration-200" />
             Send Message
           </>
         )}

@@ -61,71 +61,68 @@ export const Navigation = () => {
       <motion.header
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: "circOut" }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         className="w-full flex justify-center px-4 pointer-events-none z-50 py-2"
       >
         <div
           className={cn(
-            "pointer-events-auto flex items-center p-1.5 rounded-full transition-all duration-500 overflow-hidden relative glass-elevated",
-            isScrolled ? "scale-95" : "scale-100"
+            "pointer-events-auto flex items-center p-1 bg-card/95 border-[0.5px] border-border/80 backdrop-blur-md rounded-full shadow-none transition-all duration-300 relative",
+            isScrolled ? "scale-98" : "scale-100"
           )}
         >
           {/* Brand - Mobile only */}
           <a
             href="#home"
             onClick={(e) => handleScrollTo(e, '#home')}
-            className="px-4 py-2 font-black text-lg tracking-tighter text-foreground hover:text-primary transition-colors md:hidden relative z-10"
+            className="px-4 py-1.5 font-serif-display text-lg tracking-tight text-foreground hover:text-primary transition-colors md:hidden relative z-10"
           >
             VS<span className="text-primary">.</span>
           </a>
 
           {/* Mobile Toggle */}
-          <div className="md:hidden pr-2 relative z-10">
+          <div className="md:hidden pr-1 relative z-10">
             <Button
               variant="ghost"
               size="icon"
-              className="rounded-full hover:bg-muted text-foreground"
+              className="rounded-full hover:bg-muted text-foreground h-8 w-8"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              {isMobileMenuOpen ? <X size={16} /> : <Menu size={16} />}
             </Button>
           </div>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center relative z-10">
+          <nav className="hidden md:flex items-center relative z-10 p-0.5">
             {navItems.map((item) => {
               const isActive = activeHash === item.href;
               return (
-                <motion.a
+                <a
                   key={item.href}
                   href={item.href}
                   onClick={(e) => handleScrollTo(e, item.href)}
-                  whileHover={{ y: -2, scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   className={cn(
-                    "relative px-5 py-2 text-sm font-medium tracking-wide rounded-full transition-colors duration-300",
+                    "relative px-4 py-1.5 text-xs font-mono tracking-wider uppercase transition-colors duration-200",
                     isActive ? "text-primary font-semibold" : "text-muted-foreground hover:text-foreground"
                   )}
                 >
                   {isActive && (
                     <motion.div
                       layoutId="nav-pill"
-                      className="absolute inset-0 rounded-full bg-primary/10"
-                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      className="absolute inset-0 rounded-full bg-primary/10 border-[0.5px] border-primary/20"
+                      transition={{ type: "tween", ease: [0.16, 1, 0.3, 1], duration: 0.2 }}
                     />
                   )}
                   <span className="relative z-10">{item.label}</span>
-                </motion.a>
+                </a>
               );
             })}
           </nav>
 
           {/* Vertical Divider */}
-          <div className="hidden md:block w-px h-5 bg-border mx-2 relative z-10" />
+          <div className="hidden md:block w-[0.5px] h-4 bg-border/80 mx-2 relative z-10" />
 
           {/* Theme Toggle - Integrated */}
-          <div className="hidden md:block relative z-10 pr-2">
+          <div className="hidden md:block relative z-10 pr-1">
             <ThemeToggle />
           </div>
 
@@ -152,13 +149,13 @@ export const Navigation = () => {
                   key={item.href}
                   href={item.href}
                   onClick={(e) => handleScrollTo(e, item.href)}
-                  initial={{ x: -20, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  whileHover={{ scale: 1.05, x: 10 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ delay: 0.1 + (i * 0.05), type: "spring", stiffness: 400, damping: 17 }}
+                  initial={{ y: 8, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ delay: 0.05 + (i * 0.02), type: "tween", ease: [0.16, 1, 0.3, 1], duration: 0.2 }}
                   className={cn(
-                    "text-3xl font-display font-semibold tracking-tight w-full text-center py-2 border-b border-border/50 transition-colors",
+                    "text-2xl font-serif-display font-medium tracking-tight w-full text-center py-2 border-b-[0.5px] border-border/40 transition-colors",
                     activeHash === item.href ? "text-primary" : "text-muted-foreground hover:text-foreground"
                   )}
                 >

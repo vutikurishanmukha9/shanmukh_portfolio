@@ -1,159 +1,218 @@
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ArrowUpRight, ChevronDown, Github, Linkedin, Mail, Sparkles } from 'lucide-react';
+import { ArrowUpRight, ChevronDown, Github, Linkedin, Mail } from 'lucide-react';
+
+const TelemetryDashboard = () => {
+  return (
+    <div className="relative border-[0.5px] border-border bg-card/60 backdrop-blur-md rounded-lg p-5 font-mono text-[11px] text-muted-foreground select-none overflow-hidden h-[420px] flex flex-col justify-between shadow-none">
+      {/* Top Header Bar */}
+      <div>
+        <div className="flex items-center justify-between border-b-[0.5px] border-border/60 pb-3">
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="font-bold tracking-widest text-foreground text-[9px] uppercase">
+              CONSOLE_SESSION // ACTIVE
+            </span>
+          </div>
+          <span className="text-[9px] opacity-60 tracking-widest">SHANMUKHA.SYS</span>
+        </div>
+
+        {/* Console Log Lines */}
+        <div className="mt-4 space-y-2">
+          <div className="flex justify-between items-center py-1 border-b-[0.5px] border-border/20">
+            <span className="opacity-70">AWS_DEPLOY_STATE</span>
+            <span className="text-emerald-600 dark:text-emerald-400 font-bold text-[10px]">READY (ap-south-1)</span>
+          </div>
+          <div className="flex justify-between items-center py-1 border-b-[0.5px] border-border/20">
+            <span className="opacity-70">ML_MODEL_TRAIN</span>
+            <span className="text-foreground">LOSS: 0.0082 // ACC: 99.14%</span>
+          </div>
+          <div className="flex justify-between items-center py-1 border-b-[0.5px] border-border/20">
+            <span className="opacity-70">VECTORS_INDEXED</span>
+            <span className="text-foreground">1,248,512 (FAISS_STORE)</span>
+          </div>
+          <div className="flex justify-between items-center py-1 border-b-[0.5px] border-border/20">
+            <span className="opacity-70">LAST_COMMIT_HASH</span>
+            <span className="text-foreground opacity-60">9af8b2c [revamp]</span>
+          </div>
+        </div>
+      </div>
+
+      {/* SVG Loss Curve / Convergence Visualizer */}
+      <div className="my-3 flex-1 flex flex-col justify-center">
+        <span className="text-[9px] uppercase tracking-widest text-muted-foreground/60 mb-2 block font-semibold">
+          Convergence Telemetry Log
+        </span>
+        <div className="w-full h-24 border-[0.5px] border-border/40 rounded bg-background/40 relative overflow-hidden flex items-end p-1">
+          {/* Micro Grid Lines */}
+          <div className="absolute inset-0 grid grid-cols-6 grid-rows-3 pointer-events-none opacity-5">
+            <div className="border-r border-b border-foreground" />
+            <div className="border-r border-b border-foreground" />
+            <div className="border-r border-b border-foreground" />
+            <div className="border-r border-b border-foreground" />
+            <div className="border-r border-b border-foreground" />
+            <div className="border-r border-b border-foreground" />
+          </div>
+          <svg className="w-full h-full text-primary/80" viewBox="0 0 100 30" preserveAspectRatio="none">
+            <path
+              d="M0,28 C10,25 20,12 35,10 C50,8 70,3 100,2"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1"
+            />
+            <circle cx="0" cy="28" r="1" fill="currentColor" />
+            <circle cx="35" cy="10" r="1" fill="currentColor" />
+            <circle cx="100" cy="2" r="1" fill="currentColor" />
+          </svg>
+        </div>
+      </div>
+
+      {/* Database/Cohere Table Rows */}
+      <div className="border-t-[0.5px] border-border/60 pt-3">
+        <div className="grid grid-cols-3 text-[9px] uppercase tracking-widest text-muted-foreground/60 mb-1 font-semibold">
+          <span>service</span>
+          <span className="text-center">port</span>
+          <span className="text-right">status</span>
+        </div>
+        <div className="space-y-1 text-foreground text-[10px]">
+          <div className="grid grid-cols-3">
+            <span className="opacity-80">FastAPI_Server</span>
+            <span className="text-center opacity-50">8000</span>
+            <span className="text-right text-emerald-600 dark:text-emerald-400 font-semibold">ONLINE</span>
+          </div>
+          <div className="grid grid-cols-3">
+            <span className="opacity-80">React_Vite</span>
+            <span className="text-center opacity-50">5173</span>
+            <span className="text-right text-emerald-600 dark:text-emerald-400 font-semibold">ONLINE</span>
+          </div>
+          <div className="grid grid-cols-3">
+            <span className="opacity-80">Docker_Env</span>
+            <span className="text-center opacity-50">2375</span>
+            <span className="text-right text-emerald-600 dark:text-emerald-400 font-semibold">RUNNING</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export const HeroSection = () => {
   return (
-    <section id="home" className="relative min-h-screen overflow-hidden pt-36 pb-14">
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-x-0 top-0 h-72 bg-gradient-to-b from-primary/10 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-muted/60 to-transparent" />
-      </div>
+    <section id="home" className="relative min-h-screen overflow-hidden pt-32 pb-14">
+      {/* Remove glowing gradient colors. Retain very high restraint clean backgrounds */}
+      <div className="absolute inset-0 -z-10 bg-background" />
+
       <div className="container mx-auto px-4 relative z-10 w-full">
         <div className="grid min-h-[calc(100vh-10rem)] items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="max-w-4xl space-y-8 text-center lg:text-left">
-          
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="inline-flex items-center gap-2 rounded-full border border-emerald-500/25 bg-emerald-500/10 px-4 py-2 shadow-sm"
-          >
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-sm font-semibold tracking-wide text-foreground">Available for software, AI, cloud, and data roles</span>
-          </motion.div>
-
-          <div className="overflow-hidden">
-            <motion.h1 
-              initial={{ y: "100%", opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="font-display text-6xl font-black tracking-tight text-foreground sm:text-7xl md:text-8xl lg:text-[6.5rem] lg:leading-[0.98]"
+          <div className="max-w-4xl space-y-6 text-center lg:text-left flex flex-col justify-center">
+            
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="inline-flex self-center lg:self-start items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/5 px-4 py-1.5"
             >
-              Vutikuri <br />
-              <span className="text-gradient">Shanmukha</span>
-            </motion.h1>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-[10px] font-mono tracking-widest uppercase text-emerald-600 dark:text-emerald-400 font-semibold">
+                Available for roles • SDE | AI | Cloud
+              </span>
+            </motion.div>
+
+            <div className="overflow-hidden">
+              <motion.h1 
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+                className="font-serif-display text-5xl font-normal tracking-tight text-foreground sm:text-6xl md:text-7xl lg:text-[5.5rem] lg:leading-[0.98] select-none"
+              >
+                Vutikuri <br />
+                <span className="text-primary">Shanmukha</span>
+              </motion.h1>
+            </div>
+
+            <motion.p 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg lg:mx-0 font-normal"
+            >
+              I build production-minded AI, cloud, and data products with clean interfaces, scalable backends, and measurable user value.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className="grid grid-cols-3 border-[0.5px] border-border bg-card/40 divide-x divide-border/60 shadow-none rounded-lg overflow-hidden sm:max-w-xl lg:max-w-2xl mx-auto lg:mx-0 select-none"
+            >
+              {[
+                ['10+', 'Products Built'],
+                ['6', 'Live Demos'],
+                ['IEEE', 'Published'],
+              ].map(([value, label]) => (
+                <div key={label} className="px-5 py-3 text-center">
+                  <div className="text-xl font-serif-display text-foreground md:text-2xl font-normal">{value}</div>
+                  <div className="mt-1 text-[9px] font-mono tracking-widest uppercase text-muted-foreground font-medium">{label}</div>
+                </div>
+              ))}
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="flex w-full flex-col items-center gap-4 pt-2 sm:w-auto sm:flex-row lg:items-start justify-center lg:justify-start"
+            >
+              <div className="w-full sm:w-auto">
+                <Button
+                  size="lg"
+                  onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="h-11 w-full rounded-full bg-foreground px-6 text-xs font-mono tracking-wider uppercase text-background hover:bg-foreground/90 sm:w-auto"
+                >
+                  View Product Work
+                  <ArrowUpRight className="h-3.5 w-3.5 ml-1" />
+                </Button>
+              </div>
+              <div className="w-full sm:w-auto">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="h-11 w-full rounded-full bg-background border-[0.5px] border-border/80 px-6 text-xs font-mono tracking-wider uppercase sm:w-auto hover:bg-muted"
+                >
+                  Contact Me
+                </Button>
+              </div>
+              
+              <div className="flex items-center gap-2 mt-2 sm:mt-0">
+                {[
+                  ['https://github.com/vutikurishanmukha9', Github, 'GitHub'],
+                  ['https://linkedin.com/in/shanmukha-vutikuri', Linkedin, 'LinkedIn'],
+                  ['mailto:vutikurishanmukh17@gmail.com', Mail, 'Email']
+                ].map(([url, Icon, label]) => (
+                  <a 
+                    key={url as string}
+                    href={url as string} 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    className="p-2.5 rounded-full hover:bg-muted text-muted-foreground hover:text-foreground border-[0.5px] border-transparent hover:border-border/60 transition-all duration-200"
+                  >
+                    <Icon className="h-4.5 w-4.5" />
+                    <span className="sr-only">{label as string}</span>
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+
           </div>
 
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="mx-auto max-w-2xl text-xl leading-8 text-muted-foreground md:text-2xl lg:mx-0"
-          >
-            I build production-minded AI, cloud, and data products with clean interfaces, scalable backends, and measurable user value.
-          </motion.p>
-
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.25, ease: "easeOut" }}
-            className="grid grid-cols-3 gap-3 rounded-3xl border border-border bg-card/75 p-3 shadow-sm backdrop-blur-xl sm:max-w-xl lg:max-w-2xl"
+            transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full max-w-md lg:max-w-lg mx-auto"
           >
-            {[
-              ['10+', 'Products'],
-              ['6', 'Live demos'],
-              ['IEEE', 'Published'],
-            ].map(([value, label]) => (
-              <div key={label} className="rounded-2xl bg-background/80 px-4 py-4 text-center">
-                <div className="text-2xl font-black text-foreground md:text-3xl">{value}</div>
-                <div className="mt-1 text-[10px] font-bold uppercase tracking-wide text-muted-foreground md:text-xs">{label}</div>
-              </div>
-            ))}
-          </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-            className="flex w-full flex-col items-center gap-5 pt-2 sm:w-auto sm:flex-row lg:items-start"
-          >
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="w-full sm:w-auto">
-              <Button
-                size="lg"
-                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-                className="h-14 w-full rounded-full bg-foreground px-9 text-base font-bold text-background shadow-lg transition-all hover:bg-foreground/90 sm:w-auto"
-              >
-                View Product Work
-                <ArrowUpRight className="h-4 w-4" />
-              </Button>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} className="w-full sm:w-auto">
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="h-14 w-full rounded-full bg-background px-9 text-base font-bold sm:w-auto"
-              >
-                Contact Me
-              </Button>
-            </motion.div>
-            
-            <div className="flex items-center gap-3">
-              <motion.a 
-                whileHover={{ y: -4, scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                href="https://github.com/vutikurishanmukha9" 
-                target="_blank" 
-                rel="noreferrer" 
-                className="p-3 rounded-full hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
-              >
-                <Github className="h-6 w-6" />
-                <span className="sr-only">GitHub</span>
-              </motion.a>
-              <motion.a 
-                whileHover={{ y: -4, scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                href="https://linkedin.com/in/shanmukha-vutikuri" 
-                target="_blank" 
-                rel="noreferrer" 
-                className="p-3 rounded-full hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
-              >
-                <Linkedin className="h-6 w-6" />
-                <span className="sr-only">LinkedIn</span>
-              </motion.a>
-              <motion.a 
-                whileHover={{ y: -4, scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                href="mailto:vutikurishanmukh17@gmail.com" 
-                className="p-3 rounded-full hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
-              >
-                <Mail className="h-6 w-6" />
-                <span className="sr-only">Email</span>
-              </motion.a>
-            </div>
-          </motion.div>
-
-        </div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: 24 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.25, ease: "easeOut" }}
-            className="relative mx-auto w-full max-w-md lg:max-w-lg"
-          >
-            <div className="absolute -inset-4 rounded-[2.5rem] bg-gradient-to-br from-primary/25 via-emerald-400/10 to-amber-300/20 blur-2xl" />
-            <div className="relative overflow-hidden rounded-[2rem] border border-border bg-card/85 p-4 shadow-2xl shadow-primary/10 backdrop-blur-xl">
-              <div className="relative overflow-hidden rounded-[1.5rem] bg-muted">
-                <img
-                  src="/hero-portrait.png"
-                  alt="Vutikuri Shanmukha"
-                  className="aspect-[4/5] w-full object-cover object-center"
-                />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background via-background/55 to-transparent p-5 pt-24">
-                  <div className="flex items-center gap-2 rounded-2xl border border-border bg-card/85 p-3 backdrop-blur-xl">
-                    <Sparkles className="h-5 w-5 text-primary" />
-                    <div>
-                      <p className="text-sm font-bold text-foreground">Product-minded engineer</p>
-                      <p className="text-xs text-muted-foreground">AI systems, cloud platforms, and clean web apps</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <TelemetryDashboard />
           </motion.div>
         </div>
         
@@ -161,14 +220,15 @@ export const HeroSection = () => {
         <motion.div
            initial={{ opacity: 0 }}
            animate={{ opacity: 1 }}
-           transition={{ delay: 1, duration: 1 }}
-           className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer z-20 text-muted-foreground hover:text-foreground transition-colors"
+           transition={{ delay: 0.6, duration: 0.6 }}
+           className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 cursor-pointer z-20 text-muted-foreground hover:text-foreground transition-colors"
            onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
         >
-          <span className="text-xs font-medium tracking-[0.2em] uppercase">Scroll to explore</span>
-          <ChevronDown className="animate-bounce w-5 h-5 mt-1 text-primary/70" />
+          <span className="text-[9px] font-mono tracking-[0.25em] uppercase">Scroll to explore</span>
+          <ChevronDown className="animate-bounce w-4 h-4 text-primary/80 mt-0.5" />
         </motion.div>
       </div>
     </section>
   );
 };
+

@@ -31,23 +31,23 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="relative bg-muted/30 border-t border-border mt-20">
+    <footer className="relative bg-muted/30 border-t-[0.5px] border-border mt-20">
       <div className="container mx-auto px-4 lg:px-8 py-16">
         <div className="grid md:grid-cols-3 gap-12 md:gap-8 mb-12">
           {/* Brand */}
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold font-display tracking-tight text-foreground">Vutikuri Shanmukha</h3>
-            <p className="text-muted-foreground leading-relaxed text-sm max-w-xs">
-              Building intelligent solutions through AI, cloud computing, and elegant software design.
+            <h3 className="text-xl font-serif-display font-medium text-foreground tracking-tight select-none">Vutikuri Shanmukha</h3>
+            <p className="text-muted-foreground leading-relaxed text-xs max-w-xs">
+              Building intelligent solutions through AI integrations, cloud telemetry, and robust software design.
             </p>
-            <div className="flex gap-3 pt-2">
+            <div className="flex gap-2 pt-2">
               {socialLinks.map((social, index) => (
                 <a
                   key={index}
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2.5 rounded-full bg-background border border-border text-muted-foreground hover:text-primary hover:border-primary/50 transition-all duration-300 hover-lift-minimal"
+                  className="p-2 rounded border-[0.5px] border-border bg-background/50 hover:bg-background/80 text-muted-foreground hover:text-primary transition-colors duration-200 shadow-none"
                   aria-label={social.name}
                 >
                   <social.icon className="h-4 w-4" />
@@ -57,14 +57,14 @@ export const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div className="space-y-4 md:ml-auto">
-            <h4 className="text-lg font-semibold text-foreground font-display">Navigation</h4>
+          <div className="space-y-4 md:ml-auto w-full md:max-w-[160px]">
+            <h4 className="text-[10px] font-mono tracking-widest text-foreground uppercase border-b-[0.5px] border-border/40 pb-1.5 mb-3">Navigation</h4>
             <nav className="flex flex-col gap-2">
               {quickLinks.map((link, index) => (
                 <button
                   key={index}
                   onClick={() => scrollToSection(link.href)}
-                  className="text-left text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 w-fit"
+                  className="text-left text-xs text-muted-foreground hover:text-foreground transition-colors duration-200 w-fit"
                 >
                   {link.label}
                 </button>
@@ -73,41 +73,41 @@ export const Footer = () => {
           </div>
 
           {/* Contact Info */}
-          <div className="space-y-4 md:ml-auto">
-            <h4 className="text-lg font-semibold text-foreground font-display">Connect</h4>
-            <div className="flex flex-col gap-2 text-sm text-muted-foreground">
-              <a href="mailto:vutikurishanmukh17@gmail.com" className="hover:text-foreground transition-colors">
+          <div className="space-y-4 md:ml-auto w-full md:max-w-[240px]">
+            <h4 className="text-[10px] font-mono tracking-widest text-foreground uppercase border-b-[0.5px] border-border/40 pb-1.5 mb-3">Connect</h4>
+            <div className="flex flex-col gap-2 text-xs text-muted-foreground font-sans">
+              <a href="mailto:vutikurishanmukh17@gmail.com" className="hover:text-foreground transition-colors font-mono text-[11px]">
                 vutikurishanmukh17@gmail.com
               </a>
-              <p>Available for new opportunities</p>
+              <p className="text-[11px] text-muted-foreground font-mono uppercase tracking-wider">[ AVAILABLE FOR OPPORTUNITIES ]</p>
             </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-sm text-muted-foreground">
+        <div className="border-t-[0.5px] border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-xs text-muted-foreground">
             <p>© {currentYear} Vutikuri Shanmukha. All rights reserved.</p>
-            <span className="hidden sm:inline text-border">•</span>
-            <p className="flex items-center gap-1.5">
-              <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-              Maintained Constantly
+            <span className="hidden sm:inline text-border/60">•</span>
+            <p className="flex items-center gap-1.5 font-mono text-[10px]">
+              <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
+              SYSTEM ACTIVE
             </p>
           </div>
 
           <div className="flex items-center gap-4">
-            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-background border border-border text-xs text-muted-foreground">
-              <span>Built with React + Vite</span>
+            <div className="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded bg-background border-[0.5px] border-border text-[9px] font-mono tracking-wide text-muted-foreground">
+              <span>REACT + VITE + TAILWIND</span>
             </div>
 
             <Button
               variant="outline"
               size="sm"
               onClick={scrollToTop}
-              className="rounded-full hover-lift-minimal bg-background"
+              className="rounded border-[0.5px] border-border/80 bg-background/50 hover:bg-background text-[9px] font-mono uppercase tracking-wider h-8 shadow-none"
             >
-              <ArrowUp className="h-4 w-4 mr-2" />
-              Back to top
+              <ArrowUp className="h-3.5 w-3.5 mr-1.5" />
+              Top
             </Button>
           </div>
         </div>

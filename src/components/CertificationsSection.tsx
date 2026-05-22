@@ -1,56 +1,52 @@
-import { Award, Cloud, Database, Code, BarChart3, FileSpreadsheet, Brain } from 'lucide-react';
+import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
 
 export const CertificationsSection = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const certifications = [
     {
       title: 'AWS Certified Cloud Practitioner',
       issuer: 'Amazon Web Services',
-      icon: Cloud,
       description: 'Foundational understanding of AWS Cloud concepts, services, and terminology.',
       category: 'Cloud Computing',
     },
     {
       title: 'Oracle Certified AI Foundations Associate',
       issuer: 'Oracle',
-      icon: Brain,
       description: 'Foundational knowledge of AI and machine learning concepts.',
       category: 'Artificial Intelligence',
     },
     {
       title: 'Oracle Certified Foundations Associate',
       issuer: 'Oracle',
-      icon: Database,
       description: 'Comprehensive knowledge of Oracle Cloud Infrastructure fundamentals.',
       category: 'Cloud & Database',
     },
     {
       title: 'IBM Data Analysis with Python',
       issuer: 'IBM',
-      icon: BarChart3,
       description: 'Data analysis techniques using Python, pandas, and NumPy.',
       category: 'Data Analysis',
     },
     {
       title: 'IBM SQL for Data Science',
       issuer: 'IBM',
-      icon: FileSpreadsheet,
       description: 'SQL fundamentals for data science and database querying.',
       category: 'Data Science',
     },
     {
       title: 'IBM Python for Data Science',
       issuer: 'IBM',
-      icon: Code,
       description: 'Python programming fundamentals for data science.',
       category: 'Programming',
     },
   ];
 
   return (
-    <SectionWrapper id="certifications" className="py-24 bg-background">
-      <div className="container mx-auto px-4 lg:px-8 relative z-10">
+    <SectionWrapper id="certifications" className="py-24 bg-background border-b-[0.5px] border-border/40">
+      <div className="container mx-auto px-4 lg:px-8 relative z-10" ref={containerRef}>
         
         {/* Header */}
         <div className="text-center mb-16 max-w-2xl mx-auto">
@@ -58,16 +54,16 @@ export const CertificationsSection = () => {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-background border border-border shadow-sm mb-6"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-card border-[0.5px] border-border/80 shadow-none mb-4"
           >
-            <span className="text-xs font-semibold tracking-wider text-muted-foreground uppercase">Credentials</span>
+            <span className="text-[10px] font-mono tracking-widest text-muted-foreground uppercase">Credentials</span>
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-bold font-display tracking-tight text-foreground"
+            transition={{ delay: 0.05 }}
+            className="text-4xl md:text-5xl font-serif-display font-medium tracking-tight text-foreground select-none"
           >
             Certifications
           </motion.h2>
@@ -75,58 +71,54 @@ export const CertificationsSection = () => {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="mt-4 text-muted-foreground text-lg max-w-xl mx-auto"
+            transition={{ delay: 0.1 }}
+            className="mt-3 text-muted-foreground text-xs max-w-md mx-auto leading-relaxed"
           >
-            Continuously advancing my expertise through industry-recognized certifications.
+            Continuously advancing my technical expertise through industry-recognized certifications.
           </motion.p>
         </div>
 
-        {/* Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {certifications.map((cert, index) => {
-              const Icon = cert.icon;
-              return (
-                <motion.div
+        {/* Cohere-Inspired Tabular Rows */}
+        <div className="max-w-4xl mx-auto border-[0.5px] border-border bg-card/60 backdrop-blur-md rounded-lg overflow-hidden shadow-none">
+          <div className="divide-y divide-border/60">
+            {certifications.map((cert, index) => (
+              <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="glass-panel rounded-3xl p-8 hover-lift-minimal border border-border/60 relative group flex flex-col h-full"
-                >
-                {/* Category Badge */}
-                <div className="flex items-center gap-2 mb-6">
-                    <span className="px-3 py-1 bg-muted text-muted-foreground text-xs font-semibold rounded-md border border-border">
+                transition={{ duration: 0.4, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                className="p-6 md:p-8 flex flex-col md:grid md:grid-cols-[1.25fr_2.5fr_1.25fr] gap-6 items-start hover:bg-background/20 transition-colors duration-200"
+              >
+                {/* Left: Issuer & Category */}
+                <div className="flex flex-col gap-1">
+                  <span className="text-[11px] font-mono font-medium tracking-wider text-primary uppercase">
+                    {cert.issuer}
+                  </span>
+                  <span className="text-[9px] font-mono tracking-widest uppercase text-muted-foreground">
                     {cert.category}
-                    </span>
+                  </span>
                 </div>
 
-                {/* Icon */}
-                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary transition-colors duration-300">
-                    <Icon className="h-6 w-6 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
-                </div>
-
-                {/* Content */}
-                <div className="space-y-3 flex-1">
-                    <h3 className="text-xl font-semibold text-foreground font-display leading-tight">
+                {/* Middle: Title & Description */}
+                <div className="space-y-1.5">
+                  <h3 className="text-base font-serif-display font-medium text-foreground leading-tight">
                     {cert.title}
-                    </h3>
-                    
-                    <div className="flex items-center gap-2">
-                        <Award className="h-4 w-4 text-primary" />
-                        <p className="text-foreground font-medium text-sm">
-                        {cert.issuer}
-                        </p>
-                    </div>
-
-                    <p className="text-muted-foreground text-sm leading-relaxed font-light mt-4">
+                  </h3>
+                  <p className="text-muted-foreground text-xs leading-relaxed max-w-xl">
                     {cert.description}
-                    </p>
+                  </p>
                 </div>
-                </motion.div>
-              );
-          })}
+
+                {/* Right: Status Tag */}
+                <div className="flex flex-wrap gap-1 md:justify-end w-full">
+                  <span className="px-2 py-0.5 rounded bg-background/50 border-[0.5px] border-border/80 text-[9px] font-mono text-muted-foreground select-none uppercase tracking-wider">
+                    [ VERIFIED ]
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </SectionWrapper>

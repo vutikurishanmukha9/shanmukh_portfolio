@@ -25,7 +25,7 @@ export const AboutSection = () => {
   ];
 
   return (
-    <SectionWrapper id="about" className="py-24 bg-muted/30">
+    <SectionWrapper id="about" className="py-24 bg-muted/20 border-y-[0.5px] border-border/40">
       <div className="container mx-auto px-4 lg:px-8 relative z-10" ref={containerRef}>
         
         {/* Header */}
@@ -34,51 +34,54 @@ export const AboutSection = () => {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-background border border-border shadow-sm mb-6"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-card border-[0.5px] border-border/80 shadow-none mb-4"
           >
-            <span className="text-xs font-semibold tracking-wider text-muted-foreground uppercase">Introduction</span>
+            <span className="text-[10px] font-mono tracking-widest text-muted-foreground uppercase">Philosophy</span>
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-bold font-display tracking-tight text-foreground"
+            transition={{ delay: 0.05 }}
+            className="text-4xl md:text-5xl font-serif-display font-medium tracking-tight text-foreground select-none"
           >
-            Engineering Philosophy
+            Engineering Doctrine
           </motion.h2>
         </div>
 
         {/* Philosophy Cards - Clean Bento Style */}
-        <div className="grid md:grid-cols-3 gap-6 mb-20 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 mb-16 max-w-5xl mx-auto">
           {philosophyCards.map((card, index) => {
             const Icon = card.icon;
             return (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="glass-panel p-8 hover-lift-minimal group"
+                transition={{ delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                className="glass-panel p-6 hover-lift-minimal group flex flex-col justify-between"
               >
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary transition-colors duration-300">
-                  <Icon className="h-6 w-6 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
+                <div>
+                  <div className="w-10 h-10 rounded bg-primary/5 flex items-center justify-center mb-6 border-[0.5px] border-primary/15">
+                    <Icon className="h-5 w-5 text-primary" />
+                  </div>
+                  <h3 className="text-lg font-serif-display font-medium text-foreground mb-2">{card.title}</h3>
+                  <p className="text-muted-foreground text-xs leading-relaxed max-w-[45ch]">{card.description}</p>
                 </div>
-                <h3 className="text-xl font-semibold text-foreground mb-3 font-display">{card.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{card.description}</p>
               </motion.div>
             );
           })}
         </div>
 
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-2xl mx-auto">
           {/* Bio Content */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="space-y-6 text-lg text-muted-foreground leading-relaxed font-light"
+            transition={{ delay: 0.1 }}
+            className="space-y-6 text-base text-muted-foreground leading-relaxed font-normal"
           >
             <p>
               I am an <strong className="text-foreground font-medium">Applied AI and Cloud Engineer</strong> with a background in Electronics & Communication Engineering. Although I am relatively early in my career, I have already developed and deployed <strong className="text-foreground font-medium">5+ production-grade projects</strong> ranging from AI-driven trading analysis to scalable backend infrastructure.
@@ -97,3 +100,4 @@ export const AboutSection = () => {
     </SectionWrapper>
   );
 };
+
