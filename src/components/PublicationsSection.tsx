@@ -3,6 +3,103 @@ import { motion } from 'framer-motion';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
 import { ExternalLink, FileText } from 'lucide-react';
 
+interface LaTeXPaperPreviewProps {
+  url: string;
+}
+
+const LaTeXPaperPreview = ({ url }: { url: string }) => {
+  return (
+    <a 
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group relative block aspect-[1/1.41] w-full max-w-[210px] mx-auto bg-card border-[0.5px] border-border/80 shadow-[0_4px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.05)] hover:-translate-y-1 transition-all duration-300 p-4 rounded-md select-none overflow-hidden"
+    >
+      {/* LaTeX Document Body */}
+      <div className="h-full flex flex-col justify-between text-[6px] text-foreground font-serif leading-tight">
+        
+        {/* Header Block */}
+        <div className="text-center space-y-1 border-b-[0.3px] border-foreground/25 pb-2">
+          <p className="font-mono text-[4px] uppercase tracking-widest text-muted-foreground">IEEE CONFERENCE REPRINT</p>
+          <h5 className="font-serif font-bold text-[7.2px] tracking-tight leading-none px-1">
+            Optimizing Energy Efficiency in Smart Buildings Through IoT Occupancy Sensing
+          </h5>
+          <p className="text-[4.5px] text-muted-foreground">V. Shanmukha, et al. — NIT Jalandhar</p>
+        </div>
+
+        {/* Double-Column Abstract Content */}
+        <div className="flex-1 grid grid-cols-2 gap-2 mt-2 select-none pointer-events-none opacity-85">
+          
+          {/* Column 1: Abstract Text blocks */}
+          <div className="space-y-1.5 border-r-[0.3px] border-foreground/15 pr-1.5">
+            <span className="font-bold text-[5.2px] block font-mono">ABSTRACT:</span>
+            <div className="space-y-1">
+              <div className="h-1 bg-muted-foreground/35 rounded-sm w-full" />
+              <div className="h-1 bg-muted-foreground/35 rounded-sm w-full" />
+              <div className="h-1 bg-muted-foreground/35 rounded-sm w-[90%]" />
+              <div className="h-1 bg-muted-foreground/35 rounded-sm w-[95%]" />
+              <div className="h-1 bg-muted-foreground/35 rounded-sm w-[80%]" />
+            </div>
+            <span className="font-bold text-[5.2px] block font-mono mt-1.5">I. INTRODUCTION</span>
+            <div className="space-y-1">
+              <div className="h-1 bg-muted-foreground/20 rounded-sm w-full" />
+              <div className="h-1 bg-muted-foreground/20 rounded-sm w-[85%]" />
+              <div className="h-1 bg-muted-foreground/20 rounded-sm w-full" />
+            </div>
+          </div>
+
+          {/* Column 2: SVG Diagram and figures */}
+          <div className="flex flex-col justify-between pl-0.5 space-y-1.5">
+            <span className="font-bold text-[5.2px] block font-mono">II. TELEMETRY</span>
+            
+            {/* SVG Schematic Block */}
+            <div className="flex-1 border-[0.3px] border-foreground/20 bg-muted/20 rounded p-1 flex items-center justify-center">
+              <svg className="w-full h-11 text-primary/70" viewBox="0 0 60 40">
+                {/* MCU module */}
+                <rect x="2" y="13" width="16" height="14" rx="1" fill="none" stroke="currentColor" strokeWidth="0.3" />
+                <text x="10" y="21" textAnchor="middle" fontSize="3" fontFamily="monospace" fill="currentColor">MCU</text>
+                
+                {/* Sensors link */}
+                <path d="M 10 5 L 10 13" stroke="currentColor" strokeWidth="0.3" strokeDasharray="0.5 0.5" />
+                <rect x="6" y="2" width="8" height="3" rx="0.5" fill="none" stroke="currentColor" strokeWidth="0.3" />
+                <text x="10" y="4.2" textAnchor="middle" fontSize="2" fontFamily="monospace" fill="currentColor">DHT22</text>
+                
+                {/* Link line to cloud gateway */}
+                <path d="M 18 20 L 32 20" stroke="currentColor" strokeWidth="0.3" strokeDasharray="0.5 0.5" />
+                
+                {/* Cloud telemetry base */}
+                <rect x="32" y="11" width="24" height="18" rx="1" fill="none" stroke="currentColor" strokeWidth="0.3" />
+                <text x="44" y="18" textAnchor="middle" fontSize="3.2" fontFamily="monospace" fill="currentColor">CLOUD</text>
+                <text x="44" y="24" textAnchor="middle" fontSize="2.8" fontFamily="monospace" fill="currentColor" className="fill-emerald-500 font-bold">96%_ACC</text>
+              </svg>
+            </div>
+            
+            <p className="text-[3.8px] text-muted-foreground/75 leading-none italic text-center font-serif">
+              Fig 1. Decoupled IoT Sensor telemetry dataflow.
+            </p>
+          </div>
+
+        </div>
+
+        {/* LaTeX Page Footer */}
+        <div className="border-t-[0.3px] border-foreground/25 pt-1 flex justify-between text-[4px] font-mono text-muted-foreground">
+          <span>IEEE EAIC 2025</span>
+          <span>PAGE 4 OF 6</span>
+        </div>
+
+      </div>
+
+      {/* Hover blur overlay [READ ARTICLE] */}
+      <div className="absolute inset-0 bg-background/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-[1px]">
+        <div className="border-[0.5px] border-primary/45 bg-primary/5 px-3 py-1.5 rounded flex items-center gap-1.5 text-[9px] font-mono uppercase tracking-widest text-primary font-bold shadow-none animate-pulse">
+          READ ARTICLE
+          <ExternalLink className="h-3 w-3" />
+        </div>
+      </div>
+    </a>
+  );
+};
+
 export const PublicationsSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -59,7 +156,7 @@ export const PublicationsSection = () => {
         </div>
 
         {/* Tabular Publication View */}
-        <div className="max-w-4xl mx-auto border-[0.5px] border-border bg-card/60 backdrop-blur-md rounded-lg overflow-hidden shadow-none">
+        <div className="max-w-6xl mx-auto border-[0.5px] border-border bg-card/60 backdrop-blur-md rounded-lg overflow-hidden shadow-none">
           <div className="divide-y divide-border/60">
             {publications.map((pub, index) => (
               <motion.div
@@ -89,11 +186,12 @@ export const PublicationsSection = () => {
                     <span>{pub.year}</span>
                   </div>
                 </div>
-
-                {/* Main Content Details Grid */}
-                <div className="grid md:grid-cols-[2.2fr_1fr] gap-8">
-                  {/* Left Column: Title, Authors, Description */}
-                  <div className="space-y-4">
+ 
+                {/* Main Content Details Grid - Expanded 3-Column Layout */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 items-center">
+                  
+                  {/* Left Column: Title, Authors, Description (5 Columns) */}
+                  <div className="space-y-4 lg:col-span-5">
                     <div className="space-y-2">
                       <h3 className="text-lg md:text-xl font-serif-display font-medium text-foreground leading-snug">
                         {pub.title}
@@ -120,8 +218,13 @@ export const PublicationsSection = () => {
                     </div>
                   </div>
 
-                  {/* Right Column: Telemetry Performance Metrics Grid */}
-                  <div className="flex flex-col justify-between border-[0.5px] border-border rounded bg-background/40 p-4">
+                  {/* Middle Column: LaTeX PDF reprint Abstract Card (4 Columns) */}
+                  <div className="lg:col-span-4 flex items-center justify-center">
+                    <LaTeXPaperPreview url={pub.link} />
+                  </div>
+
+                  {/* Right Column: Telemetry Performance Metrics Grid (3 Columns) */}
+                  <div className="lg:col-span-3 flex flex-col justify-between border-[0.5px] border-border rounded bg-background/40 p-4 h-full min-h-[180px]">
                     <div>
                       <div className="text-[9px] font-mono tracking-widest uppercase text-muted-foreground border-b-[0.5px] border-border/40 pb-2 mb-3">
                         SYSTEM TELEMETRY
@@ -145,6 +248,7 @@ export const PublicationsSection = () => {
                       VERIFIED R&D DATA
                     </div>
                   </div>
+
                 </div>
               </motion.div>
             ))}
