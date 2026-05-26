@@ -146,11 +146,11 @@ export const AboutSection = () => {
                     className="space-y-6 text-sm text-muted-foreground leading-relaxed font-normal"
                   >
                     <p>
-                      I graduated with a B.Tech in <strong className="text-foreground font-medium border-b-[0.5px] border-border/60 pb-0.5">Electronics and Communication Engineering</strong>, but my real education happened while building things. Over the past two years, I've shipped <span className="font-mono text-[9.5px] bg-primary/10 border border-primary/20 text-primary px-1.5 py-0.5 rounded font-semibold tracking-tight">10+ full-stack AI products</span> — not side projects that sit on GitHub, but live, working tools with real users, real backends, and real complexity.
+                      I graduated with a B.Tech in <strong className="text-foreground font-medium border-b-[0.5px] border-border/60 pb-0.5">Electronics and Communication Engineering</strong>, but my real education happened while building things. Over the past two years, I've shipped <span className="font-mono text-[9.5px] bg-primary/10 border border-primary/20 text-primary px-1.5 py-0.5 rounded font-semibold tracking-tight">10+ full-stack AI products</span>. These are not side projects that sit on GitHub, but live, working tools with real users, real backends, and real complexity.
                     </p>
 
                     <p>
-                      From <span className="text-foreground font-semibold font-mono text-[10px] bg-background border border-border px-1.5 py-0.5 rounded shadow-none">HeartOut</span> — an anonymous storytelling platform with 541+ automated tests and a full CI/CD pipeline — to <span className="text-foreground font-semibold font-mono text-[10px] bg-background border border-border px-1.5 py-0.5 rounded shadow-none">GetReport</span>, an AI data analysis tool with a Hybrid RAG engine, Celery task queues, and AWS S3. I've built AI debate arenas, HR outreach tools with AES-256 encryption, virtual chemistry workbenches with WebXR and hand tracking, and a conversational assessment recommender with a three-tier LLM failover system. I don't just connect APIs — I understand what's happening under the hood.
+                      From <span className="text-foreground font-semibold font-mono text-[10px] bg-background border border-border px-1.5 py-0.5 rounded shadow-none">HeartOut</span>, an anonymous storytelling platform with 541+ automated tests and a full CI/CD pipeline, to <span className="text-foreground font-semibold font-mono text-[10px] bg-background border border-border px-1.5 py-0.5 rounded shadow-none">GetReport</span>, an AI data analysis tool with a Hybrid RAG engine, Celery task queues, and AWS S3. I've built AI debate arenas, HR outreach tools with AES-256 encryption, virtual chemistry workbenches with WebXR and hand tracking, and a conversational assessment recommender with a three-tier LLM failover system. I don't just connect APIs; I understand what's happening under the hood.
                     </p>
 
                     <p>
@@ -158,7 +158,7 @@ export const AboutSection = () => {
                     </p>
 
                     <p>
-                      Right now I'm looking for an entry-level role where I can contribute to something ambitious in the AI, data, or full-stack space. If you're building something that needs someone who <strong className="text-foreground font-medium">ships fast and thinks carefully</strong> — I'd genuinely love to talk.
+                      Right now I'm looking for an entry-level role where I can contribute to something ambitious in the AI, data, or full-stack space. If you're building something that needs someone who <strong className="text-foreground font-medium">ships fast and thinks carefully</strong>, I'd genuinely love to talk.
                     </p>
 
                     <div className="pt-4 border-t-[0.5px] border-border/40 flex flex-wrap gap-x-6 gap-y-2 items-center text-[10px] font-mono text-muted-foreground select-none">
