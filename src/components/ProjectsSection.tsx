@@ -14,9 +14,14 @@ import {
   Sparkles,
   Terminal,
   X,
+  Network,
+  Server,
+  Layers,
+  Cpu,
+  ArrowRight,
   type LucideIcon,
 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
 import { cn } from '@/lib/utils';
 import { useSkillFilter } from '@/context/SkillFilterContext';
@@ -182,6 +187,174 @@ const projects: Project[] = [
 
 const categories: Array<ProjectCategory | 'All'> = ['All', 'Web App', 'AI/ML', 'Computer Vision', 'Data Analysis', 'Cloud'];
 
+// SVG Network Topology Map for AWS Infrastructure
+const AwsTopologyMap = () => {
+  const [hoveredNode, setHoveredNode] = useState<string | null>(null);
+
+  const nodes = [
+    { id: 'client', label: 'Vite React', type: 'CLIENT_UI', cx: 40, cy: 60, icon: Globe, details: 'React SPA Client / Netlify CDN / HTTPS Routing' },
+    { id: 'gateway', label: 'FastAPI', type: 'API_GATEWAY', cx: 120, cy: 60, icon: Server, details: 'FastAPI CORS Gate / JWT Authentication / AES-256' },
+    { id: 'broker', label: 'Redis Broker', type: 'TASK_BROKER', cx: 200, cy: 30, icon: Layers, details: 'Celery Broker / Memory-Cache / Pub-Sub Streaming' },
+    { id: 'worker', label: 'Celery Node', type: 'ASYNC_WORKER', cx: 280, cy: 30, icon: Cpu, details: 'Decoupled Worker Nodes / Polars Parsing / PDF Generation' },
+    { id: 's3', label: 'AWS S3', type: 'DATA_LAKE', cx: 360, cy: 30, icon: Cloud, details: 'AWS Object Bucket / Deployed Assets Storage' },
+    { id: 'db', label: 'Postgres / FAISS', type: 'DATA_STORE', cx: 200, cy: 90, icon: Database, details: 'Vector Store Databases / User Credentials Index' },
+    { id: 'llm', label: 'LLM providers', type: 'COGNITIVE_API', cx: 360, cy: 90, icon: Brain, details: 'OpenAI, Anthropic & Gemini Decoupled Router / Fallback' },
+  ];
+
+  const links = [
+    { from: 'client', to: 'gateway', label: 'REST / SSE' },
+    { from: 'gateway', to: 'broker', label: 'Celery Task' },
+    { from: 'broker', to: 'worker', label: 'Task Pull' },
+    { from: 'worker', to: 's3', label: 'Upload' },
+    { from: 'gateway', to: 'db', label: 'SQL query' },
+    { from: 'gateway', to: 'llm', label: 'API request' },
+  ];
+
+  const activeNodeInfo = nodes.find(node => node.id === hoveredNode);
+
+  return (
+    <div className="border-[0.5px] border-border bg-card/45 backdrop-blur-md rounded-lg p-5 mb-8 select-none">
+      <div className="flex items-center justify-between border-b-[0.5px] border-border/40 pb-3 mb-4 font-mono text-[10px]">
+        <div className="flex items-center gap-2">
+          <Network className="w-4 h-4 text-primary" />
+          <span className="font-semibold text-foreground tracking-wider">AWS_INFRASTRUCTURE_BLUEPRINT // AP-SOUTH-1</span>
+        </div>
+        <span className="text-[8px] bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25 px-1.5 py-0.5 rounded-sm font-semibold animate-pulse">
+          SIMULATOR STATUS: ACTIVE
+        </span>
+      </div>
+
+      <div className="grid lg:grid-cols-[2.5fr_1fr] gap-6 items-center">
+        
+        {/* SVG Topology Diagram */}
+        <div className="relative border-[0.5px] border-border/60 bg-background/35 rounded-md p-4 flex items-center justify-center overflow-hidden">
+          <svg className="w-full h-auto max-w-[480px] text-muted-foreground/35" viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg">
+            
+            {/* Draw Links/Connection Tracks */}
+            {links.map((link, i) => {
+              const fromNode = nodes.find(n => n.id === link.from)!;
+              const toNode = nodes.find(n => n.id === link.to)!;
+              const isActive = hoveredNode === link.from || hoveredNode === link.to;
+
+              return (
+                <g key={i}>
+                  <line 
+                    x1={fromNode.cx} 
+                    y1={fromNode.cy} 
+                    x2={toNode.cx} 
+                    y2={toNode.cy} 
+                    stroke={isActive ? 'hsl(var(--primary))' : 'currentColor'} 
+                    strokeWidth={isActive ? '0.75' : '0.4'}
+                    strokeDasharray="1.5 1.5"
+                    className="transition-colors duration-200"
+                  />
+                  {isActive && (
+                    <motion.circle
+                      r="1.2"
+                      fill="hsl(var(--primary))"
+                      animate={{
+                        cx: [fromNode.cx, toNode.cx],
+                        cy: [fromNode.cy, toNode.cy],
+                      }}
+                      transition={{
+                        repeat: Infinity,
+                        duration: 1.5,
+                        ease: "linear",
+                      }}
+                    />
+                  )}
+                </g>
+              );
+            })}
+
+            {/* Draw Interactive Nodes */}
+            {nodes.map((node) => {
+              const Icon = node.icon;
+              const isActive = hoveredNode === node.id;
+
+              return (
+                <g 
+                  key={node.id} 
+                  className="cursor-pointer group"
+                  onMouseEnter={() => setHoveredNode(node.id)}
+                  onMouseLeave={() => setHoveredNode(null)}
+                >
+                  <circle 
+                    cx={node.cx} 
+                    cy={node.cy} 
+                    r="8.5" 
+                    fill="hsl(var(--card))" 
+                    stroke={isActive ? 'hsl(var(--primary))' : 'hsl(var(--border))'} 
+                    strokeWidth={isActive ? '1.2' : '0.5'}
+                    className="transition-colors duration-200"
+                  />
+                  <foreignObject x={node.cx - 4.5} y={node.cy - 4.5} width="9" height="9">
+                    <div className="flex items-center justify-center h-full w-full">
+                      <Icon className={cn("w-3.5 h-3.5", isActive ? "text-primary" : "text-muted-foreground/80")} />
+                    </div>
+                  </foreignObject>
+                  <text 
+                    x={node.cx} 
+                    y={node.cy + 14} 
+                    textAnchor="middle" 
+                    fontSize="4.5" 
+                    fontFamily="monospace" 
+                    className={cn("fill-muted-foreground font-medium", isActive && "fill-foreground font-bold")}
+                  >
+                    {node.label}
+                  </text>
+                </g>
+              );
+            })}
+
+          </svg>
+        </div>
+
+        {/* Node Live Details Console */}
+        <div className="border-[0.5px] border-border/85 bg-background/50 rounded-md p-4 font-mono text-[9px] text-muted-foreground min-h-[120px] flex flex-col justify-between">
+          <AnimatePresence mode="wait">
+            {activeNodeInfo ? (
+              <motion.div
+                key={activeNodeInfo.id}
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -5 }}
+                transition={{ duration: 0.15 }}
+                className="space-y-2.5"
+              >
+                <div className="flex justify-between items-center border-b-[0.5px] border-border/30 pb-1.5">
+                  <span className="text-foreground font-semibold uppercase">{activeNodeInfo.type}</span>
+                  <span className="text-primary font-bold">READY</span>
+                </div>
+                <div className="space-y-1">
+                  <div className="text-[10px] text-foreground font-semibold">{activeNodeInfo.label}</div>
+                  <div className="leading-relaxed opacity-85 text-justify">{activeNodeInfo.details}</div>
+                </div>
+              </motion.div>
+            ) : (
+              <div className="space-y-2.5">
+                <div className="flex justify-between items-center border-b-[0.5px] border-border/30 pb-1.5">
+                  <span className="text-foreground/85 font-semibold">INFRASTRUCTURE_LEDGER</span>
+                  <span className="text-muted-foreground/60">[STANDBY]</span>
+                </div>
+                <p className="leading-relaxed opacity-75">
+                  Hover or tap any node in the AWS topology map to inspect individual network status variables, port routes, and data pipelines in real-time.
+                </p>
+              </div>
+            )}
+          </AnimatePresence>
+
+          <div className="border-t-[0.5px] border-border/30 pt-1.5 flex justify-between text-[8px] opacity-70 mt-3 select-none">
+            <span>PING: {hoveredNode ? '12.4 ms' : 'OP_IST'}</span>
+            <span>SECURE GATEWAY</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+};
+
 const PreviewPanel = ({ project, compact = false }: { project: Project; compact?: boolean }) => {
   const previewContent: Record<PreviewType, React.ReactNode> = {
     report: (
@@ -340,7 +513,7 @@ const PreviewPanel = ({ project, compact = false }: { project: Project; compact?
         </div>
         <div className="border-t-[0.5px] border-border/60 pt-2 text-[8px] opacity-60 flex justify-between">
           <span>TOP_K: 4</span>
-          <span>COSINE_SIM: 0.8924</span>
+          <span>COSINE_SIM: 0.8922</span>
         </div>
       </div>
     ),
@@ -448,6 +621,12 @@ const ProjectCard = ({ project, index, variant = 'card' }: { project: Project; i
   const primaryTech = project.tech.slice(0, 4);
   const isHero = variant === 'hero';
 
+  const { selectedSkill } = useSkillFilter();
+
+  const isMatchingSkillActive = useMemo(() => {
+    return selectedSkill && project.tech.some((tech) => tech.toLowerCase().includes(selectedSkill.toLowerCase()));
+  }, [selectedSkill, project.tech]);
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 20 }}
@@ -455,11 +634,45 @@ const ProjectCard = ({ project, index, variant = 'card' }: { project: Project; i
       viewport={{ once: true }}
       transition={{ duration: 0.4, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
       className={cn(
-        'group relative overflow-hidden rounded-lg border border-border/80 bg-card/40 p-3.5 shadow-none backdrop-blur-md hover-lift-minimal flex flex-col justify-between h-full',
-        isHero ? 'grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:p-5' : 'flex h-full flex-col gap-4'
+        'group relative overflow-hidden rounded-lg border bg-card/45 p-3.5 shadow-none backdrop-blur-md hover-lift-minimal flex flex-col justify-between h-full transition-all duration-300',
+        isHero ? 'grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:p-5' : 'flex h-full flex-col gap-4',
+        isMatchingSkillActive 
+          ? 'border-primary/50 shadow-[0_2px_10px_hsl(var(--primary)/0.04)] bg-primary/2' 
+          : 'border-border/80 bg-card/40'
       )}
     >
-      <div className="flex flex-col gap-4 h-full justify-between">
+      {/* Dynamic Telemetry Connections inside matching card */}
+      {isMatchingSkillActive && (
+        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+          <svg className="w-full h-full text-primary/30" xmlns="http://www.w3.org/2000/svg">
+            <motion.path 
+              d="M 16 0 L 16 35 L 50 35" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="0.85" 
+              strokeDasharray="3 3"
+              animate={{ strokeDashoffset: [0, -20] }}
+              transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
+            />
+            <motion.circle
+              r="1.5"
+              fill="currentColor"
+              className="text-primary"
+              animate={{
+                cx: [16, 16, 50],
+                cy: [0, 35, 35],
+              }}
+              transition={{
+                repeat: Infinity,
+                duration: 1.5,
+                ease: "linear",
+              }}
+            />
+          </svg>
+        </div>
+      )}
+
+      <div className="flex flex-col gap-4 h-full justify-between relative z-10">
         <div>
           <PreviewPanel project={project} compact={!isHero} />
         </div>
@@ -513,16 +726,22 @@ const ProjectCard = ({ project, index, variant = 'card' }: { project: Project; i
                   Primary Stack
                 </h4>
                 <div className="flex flex-wrap gap-1">
-                  {primaryTech.map((tech) => (
-                    <span key={tech} className="rounded px-2 py-0.5 border-[0.5px] border-border/80 bg-background text-[10px] font-mono text-muted-foreground">
-                      {tech}
-                    </span>
-                  ))}
-                  {project.tech.length > primaryTech.length && (
-                    <span className="rounded px-2 py-0.5 border-[0.5px] border-border/80 bg-muted text-[10px] font-mono text-muted-foreground/75">
-                      +{project.tech.length - primaryTech.length}
-                    </span>
-                  )}
+                  {project.tech.map((tech) => {
+                    const isSelected = selectedSkill && tech.toLowerCase().includes(selectedSkill.toLowerCase());
+                    return (
+                      <span 
+                        key={tech} 
+                        className={cn(
+                          "rounded px-2 py-0.5 border text-[10px] font-mono transition-colors duration-200",
+                          isSelected 
+                            ? "border-primary bg-primary/10 text-primary font-semibold" 
+                            : "border-border/80 bg-background text-muted-foreground"
+                        )}
+                      >
+                        {tech}
+                      </span>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -568,6 +787,8 @@ export const ProjectsSection = () => {
   return (
     <SectionWrapper id="projects" className="relative overflow-hidden bg-background py-24 border-b-[0.5px] border-border/40">
       <div className="container relative z-10 mx-auto px-4 lg:px-8">
+        
+        {/* Section Header */}
         <div className="mb-12 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
           <div className="max-w-3xl">
             <motion.div
@@ -610,6 +831,16 @@ export const ProjectsSection = () => {
             </div>
           </div>
         </div>
+
+        {/* Dynamic AWS Topology Map Panel */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <AwsTopologyMap />
+        </motion.div>
 
         {/* Sliding Pill-in-Pill Category Filters */}
         <div className="mb-8 flex flex-col gap-4 border-[0.5px] border-border/60 bg-muted/40 p-1.5 rounded-full md:flex-row md:items-center md:justify-between select-none">
@@ -668,4 +899,3 @@ export const ProjectsSection = () => {
     </SectionWrapper>
   );
 };
-

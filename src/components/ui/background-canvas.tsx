@@ -2,7 +2,7 @@ export const BackgroundCanvas = () => {
   return (
     <>
       {/* Dynamic Background Gradients */}
-      <div className="fixed inset-0 -z-10 overflow-hidden bg-background">
+      <div className="fixed inset-0 -z-20 overflow-hidden bg-background">
         <div
           className="absolute inset-x-0 top-0 h-72 opacity-[0.08] dark:opacity-[0.05]"
           style={{ background: 'linear-gradient(180deg, hsl(var(--primary)) 0%, transparent 100%)' }}
@@ -12,6 +12,18 @@ export const BackgroundCanvas = () => {
           style={{ background: 'linear-gradient(0deg, hsl(var(--muted)) 0%, transparent 100%)' }}
         />
       </div>
+
+      {/* Dynamic Blueprint Graphing Grid (40px mesh) */}
+      <div 
+        className="fixed inset-0 -z-10 overflow-hidden opacity-[0.22] dark:opacity-[0.14] pointer-events-none"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, hsl(var(--border) / 0.15) 1.2px, transparent 1.2px),
+            linear-gradient(to bottom, hsl(var(--border) / 0.15) 1.2px, transparent 1.2px)
+          `,
+          backgroundSize: '40px 40px',
+        }}
+      />
 
       {/* Tactile Paper Texture & Noise Grain Overlay */}
       <div 
