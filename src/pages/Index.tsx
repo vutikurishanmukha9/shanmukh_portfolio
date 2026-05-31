@@ -19,6 +19,9 @@ const CareerJourneySection = lazy(() =>
 const ProjectsSection = lazy(() =>
   import('@/components/ProjectsSection').then((module) => ({ default: module.ProjectsSection }))
 );
+const CaseStudiesSection = lazy(() =>
+  import('@/components/CaseStudiesSection').then((module) => ({ default: module.CaseStudiesSection }))
+);
 const CertificationsSection = lazy(() =>
   import('@/components/CertificationsSection').then((module) => ({ default: module.CertificationsSection }))
 );
@@ -63,6 +66,7 @@ const Index = () => {
           <SkillsSection />
           <CareerJourneySection />
           <ProjectsSection />
+          <CaseStudiesSection />
           <CertificationsSection />
           <PublicationsSection />
           <ContactSection />

@@ -171,21 +171,9 @@ const projects: Project[] = [
     github: 'https://github.com/vutikurishanmukha9/Automated-Attendance-System',
     previewType: 'attendance',
   },
-  {
-    title: 'Employee Data Analysis',
-    description: 'EDA workflow for cleaning, visualizing, and interpreting HR datasets to reveal retention and workforce trends.',
-    impact: 'Converted messy HR data into clear analysis views that expose workforce patterns and business insights.',
-    ownership: 'Solo Build',
-    metrics: ['EDA', 'Retention trends', 'Visual reports'],
-    tech: ['Python', 'Pandas', 'Matplotlib', 'Seaborn', 'Jupyter'],
-    category: 'Data Analysis',
-    focus: 'Data Insights',
-    github: 'https://github.com/vutikurishanmukha9/Employee_Data_Analysis',
-    previewType: 'analytics',
-  },
 ];
 
-const categories: Array<ProjectCategory | 'All'> = ['All', 'Web App', 'AI/ML', 'Computer Vision', 'Data Analysis', 'Cloud'];
+const categories: Array<ProjectCategory | 'All'> = ['All', 'Web App', 'AI/ML', 'Computer Vision', 'Cloud'];
 
 // SVG Network Topology Map for AWS Infrastructure
 const AwsTopologyMap = () => {
