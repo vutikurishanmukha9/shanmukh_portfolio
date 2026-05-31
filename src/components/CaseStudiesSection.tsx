@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
 import { cn } from '@/lib/utils';
 import {
@@ -36,22 +37,24 @@ type CaseStudy = {
 const caseStudies: CaseStudy[] = [
   {
     id: 'unicorn',
-    title: 'Global Unicorn Startup Analysis',
-    subtitle: 'Power BI deep-dive mapping 1,074 unicorn startups across 6 continents and 16 industries to uncover valuation divergence, funding efficiency gaps, and investor concentration patterns.',
-    focus: 'Business Intelligence',
+    title: 'Global Unicorn Startup Performance Analysis',
+    subtitle: 'Power BI deep-dive mapping 1,074 unicorn companies across 6 continents and 16 industries — $3,711B in total valuation, $591.8B total funding raised. Uncovered the 2021 explosion (48.4% of all unicorns created in a single year), geographic capital-efficiency gaps, and sector concentration risk in Fintech.',
+    focus: 'Business Intelligence / EDA',
     ownership: 'Solo Build',
     github: 'https://github.com/vutikurishanmukha9/Global-Unicorn-Startup',
-    tech: ['Power BI', 'SQL', 'Data Modeling', 'DAX', 'ETL'],
+    tech: ['Power BI', 'Power Query', 'DAX', 'Star Schema', 'ETL', 'Data Modeling'],
     metrics: [
       { label: 'Companies', value: '1,074' },
-      { label: 'N. America Share', value: '54.8%' },
-      { label: 'Avg Valuation', value: '$3.48B' },
-      { label: 'Industries', value: '16' },
+      { label: 'Total Valuation', value: '$3,711B' },
+      { label: '2021 Surge', value: '520 (48.4%)' },
+      { label: 'Avg Time-to-$1B', value: '7.0 Years' },
+      { label: 'Total Funding', value: '$591.8B' },
+      { label: 'Top Sector', value: 'Fintech (224)' },
     ],
     tabs: {
-      bottleneck: 'The global startup ecosystem crossed 1,000 unicorns, but the distribution of value, funding efficiency, and time-to-unicorn across geographies and industries was poorly understood.',
-      decision: 'Built a star-schema data model in Power BI with DAX measures to segment unicorns by continent, industry, and funding stage. Applied ETL pipelines to normalize investor and valuation data across 6 continents.',
-      outcome: 'Revealed that North America holds 54.8% of all unicorns yet Asia leads in median time-to-unicorn (5.8 years), exposing a structural capital-efficiency gap. Fintech dominates at 18.2% of the total count.',
+      bottleneck: 'The global startup ecosystem crossed 1,000 unicorns, but the structural distribution of value, funding efficiency, and time-to-unicorn across geographies and industries remained poorly understood. 520 of 1,074 unicorns (48.4%) were created in 2021 alone — a 5x increase over 2018-2019 baselines — raising questions about whether this was structural or cyclical.',
+      decision: 'Built a star-schema data model in Power BI with separate Funding and Investors dimension tables. Engineered DAX measures for valuation/funding efficiency ratios, average years-to-unicorn by sector, and investor count aggregations. Used Power Query ETL to clean valuation strings, parse date fields, and compute "Years to Unicorn" calculated columns across 6 continents.',
+      outcome: 'North America holds 589 companies (54.8%) and $2,032B in valuation, but Asia\'s startups require 25% more funding ($632M avg vs $504M) for similar outcomes. AI has the highest avg valuation at $4.49B but lower capital efficiency (4.88x) than Fintech (6.15x). Fastest unicorns (Brex, Wiz, Scale AI) reached $1B in under 12 months. SHEIN achieved 50x return on capital ($2B raised → $100B valuation).',
     },
     previewType: 'unicorn',
   },
@@ -104,31 +107,43 @@ const caseStudies: CaseStudy[] = [
 const UnicornPreview = () => (
   <div className="flex flex-col justify-between h-full font-mono text-[9px] text-muted-foreground">
     <div className="flex items-center justify-between border-b-[0.5px] border-border/60 pb-2">
-      <span className="font-semibold text-foreground">UNICORN_CONTINENT_DISTRIBUTION</span>
-      <span className="text-amber-500 font-semibold text-[8px]">1,074 CO.</span>
+      <span className="font-semibold text-foreground">UNICORN_GLOBAL_TELEMETRY</span>
+      <span className="text-amber-500 font-semibold text-[8px]">$3,711B VAL</span>
     </div>
-    <div className="my-2 space-y-1.5">
+    {/* Continent Distribution */}
+    <div className="my-1.5 space-y-1">
       {[
-        { region: 'N. America', pct: 54.8, color: 'bg-primary' },
-        { region: 'Asia', pct: 28.9, color: 'bg-amber-500' },
-        { region: 'Europe', pct: 11.4, color: 'bg-sky-500' },
-        { region: 'Other', pct: 4.9, color: 'bg-muted-foreground/50' },
+        { region: 'N. America', count: 589, pct: 54.8, color: 'bg-primary' },
+        { region: 'Asia', count: 310, pct: 28.9, color: 'bg-amber-500' },
+        { region: 'Europe', count: 143, pct: 13.3, color: 'bg-sky-500' },
+        { region: 'Other', count: 32, pct: 3.0, color: 'bg-muted-foreground/50' },
       ].map((d) => (
-        <div key={d.region} className="flex items-center gap-2">
-          <span className="w-16 text-[8px] text-right opacity-80 shrink-0">{d.region}</span>
-          <div className="flex-1 h-2.5 bg-background/60 border-[0.5px] border-border/30 rounded-sm overflow-hidden">
+        <div key={d.region} className="flex items-center gap-1.5">
+          <span className="w-14 text-[7.5px] text-right opacity-80 shrink-0">{d.region}</span>
+          <div className="flex-1 h-2 bg-background/60 border-[0.5px] border-border/30 rounded-sm overflow-hidden">
             <div className={cn('h-full rounded-sm', d.color)} style={{ width: `${d.pct}%` }} />
           </div>
-          <span className="w-10 text-[8px] text-foreground font-semibold tabular-nums">{d.pct}%</span>
+          <span className="w-16 text-[7px] text-foreground font-semibold tabular-nums">{d.count} ({d.pct}%)</span>
         </div>
       ))}
     </div>
-    <div className="border-t-[0.5px] border-border/60 pt-2 flex justify-between items-center">
-      <div className="flex gap-3 text-[8px] opacity-70">
-        <span>AVG_VAL: <span className="text-foreground font-semibold">$3.48B</span></span>
-        <span>MEDIAN: <span className="text-foreground font-semibold">$2.0B</span></span>
+    {/* 2021 Surge Indicator */}
+    <div className="border-[0.5px] border-amber-500/20 bg-amber-500/5 rounded px-2 py-1 my-1">
+      <div className="flex justify-between items-center text-[7.5px]">
+        <span className="text-amber-600 dark:text-amber-400 font-semibold">2021_SURGE</span>
+        <span className="text-foreground font-bold">520 / 1,074 (48.4%)</span>
       </div>
-      <span className="text-[7px] opacity-50">POWER_BI // DAX</span>
+      <div className="h-1.5 bg-background/60 border-[0.5px] border-border/30 rounded-sm overflow-hidden mt-1">
+        <div className="h-full rounded-sm bg-amber-500" style={{ width: '48.4%' }} />
+      </div>
+    </div>
+    {/* Bottom Stats */}
+    <div className="border-t-[0.5px] border-border/60 pt-1.5 flex justify-between items-center">
+      <div className="flex gap-2.5 text-[7.5px] opacity-70">
+        <span>FUND: <span className="text-foreground font-semibold">$591.8B</span></span>
+        <span>AVG_TTU: <span className="text-foreground font-semibold">7.0yr</span></span>
+      </div>
+      <span className="text-[6.5px] opacity-50">STAR_SCHEMA // DAX</span>
     </div>
   </div>
 );
@@ -291,7 +306,7 @@ const CaseStudyCard = ({ study, index }: { study: CaseStudy; index: number }) =>
           </div>
 
           {/* Metrics Row */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 mb-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-1.5 mb-4">
             {study.metrics.map((m) => (
               <div
                 key={m.label}
@@ -322,6 +337,16 @@ const CaseStudyCard = ({ study, index }: { study: CaseStudy; index: number }) =>
               </div>
             </div>
             <div className="flex flex-wrap gap-2 pt-1">
+              <Button
+                size="sm"
+                className="rounded-full h-8 px-4 text-[10px] font-mono uppercase tracking-wider bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+                asChild
+              >
+                <Link to={`/case-study/${study.id}`}>
+                  Full Case Study
+                  <ArrowUpRight className="h-3.5 w-3.5 ml-1" />
+                </Link>
+              </Button>
               <Button
                 variant="outline"
                 size="sm"
