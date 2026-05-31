@@ -64,7 +64,7 @@ const caseStudies: CaseStudy[] = [
     subtitle: 'Highly rigorous exploratory data analysis solving 15 structured business questions with spike anomaly detection, YoY growth tracking, and operating margin breakdowns.',
     focus: 'Exploratory Data Analysis',
     ownership: 'Solo Build',
-    github: 'https://github.com/vutikurishanmukha9/Adidas-US-Sales-Analysis',
+    github: 'https://github.com/vutikurishanmukha9/Adidas_US_Sales',
     tech: ['Python', 'Pandas', 'NumPy', 'Matplotlib', 'Seaborn'],
     metrics: [
       { label: 'Online Margin', value: '46.4%' },
