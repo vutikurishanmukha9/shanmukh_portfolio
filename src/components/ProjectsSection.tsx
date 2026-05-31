@@ -831,8 +831,8 @@ export const ProjectsSection = () => {
         </motion.div>
 
         {/* Sliding Pill-in-Pill Category Filters */}
-        <div className="mb-8 flex flex-col gap-4 border-[0.5px] border-border/60 bg-muted/40 p-1.5 rounded-full md:flex-row md:items-center md:justify-between select-none">
-          <div className="flex flex-wrap gap-1 justify-center md:justify-start">
+        <div className="mb-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-between sm:items-center select-none">
+          <div className="flex border-[0.5px] border-border/60 bg-muted/40 p-0.5 rounded-full w-fit">
             {categories.map((category) => {
               const isSelected = selectedCategory === category;
               return (
@@ -860,7 +860,7 @@ export const ProjectsSection = () => {
           {selectedSkill && (
             <button
               onClick={() => setSelectedSkill(null)}
-              className="inline-flex items-center justify-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-[9px] font-mono tracking-widest uppercase text-primary transition-colors hover:bg-primary/10 self-center md:self-auto"
+              className="inline-flex items-center justify-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-[9px] font-mono tracking-widest uppercase text-primary transition-colors hover:bg-primary/10"
             >
               Skill: {selectedSkill}
               <X className="h-3 w-3" />
