@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    {
+      "source": "/((?!assets/|favicon.svg|placeholder.svg).*)/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/case-study/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
