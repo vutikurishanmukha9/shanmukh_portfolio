@@ -40,7 +40,7 @@ const caseStudies: CaseStudy[] = [
     subtitle: 'Power BI deep-dive mapping 1,074 unicorn startups across 6 continents and 16 industries to uncover valuation divergence, funding efficiency gaps, and investor concentration patterns.',
     focus: 'Business Intelligence',
     ownership: 'Solo Build',
-    github: 'https://github.com/vutikurishanmukha9/Global-Unicorn-Startup-Analysis',
+    github: 'https://github.com/vutikurishanmukha9/Global-Unicorn-Startup',
     tech: ['Power BI', 'SQL', 'Data Modeling', 'DAX', 'ETL'],
     metrics: [
       { label: 'Companies', value: '1,074' },
