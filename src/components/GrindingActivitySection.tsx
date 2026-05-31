@@ -1,39 +1,11 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React from 'react';
 import { GitHubCalendar } from 'react-github-calendar';
-import { Github, Code2, Terminal, Activity, FileCode2 } from 'lucide-react';
+import { Github } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
 import { motion } from 'framer-motion';
-
-const PLATFORMS = [
-    {
-        name: 'LeetCode',
-        url: 'https://leetcode.com/u/vutikurishanmukh9/',
-        icon: <Code2 className="w-5 h-5 text-current" />
-    },
-    {
-        name: 'HackerRank',
-        url: 'https://www.hackerrank.com/profile/vutikurishanmuk1',
-        icon: <Terminal className="w-5 h-5 text-current" />
-    },
-    {
-        name: 'CodeChef',
-        url: 'https://www.codechef.com/users/vshanmukh17',
-        icon: <FileCode2 className="w-5 h-5 text-current" />
-    },
-    {
-        name: 'GeeksforGeeks',
-        url: 'https://www.geeksforgeeks.org/profile/shanmukh17vutikuri?tab=activity',
-        icon: <Activity className="w-5 h-5 text-current" />
-    },
-    {
-        name: 'Codolio',
-        url: 'https://codolio.com/profile/Shanmukh1122',
-        icon: <Terminal className="w-5 h-5 text-current" />
-    }
-];
 
 export const GrindingActivitySection = () => {
     const { theme } = useTheme();
@@ -123,38 +95,6 @@ export const GrindingActivitySection = () => {
                         </div>
                     </div>
                 </motion.div>
-
-                {/* Other Platforms */}
-                <div className="max-w-5xl mx-auto">
-                    <div className="flex items-center justify-center gap-4 mb-8">
-                        <div className="h-px flex-1 bg-border" />
-                        <span className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Competitive Programming</span>
-                        <div className="h-px flex-1 bg-border" />
-                    </div>
-
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                        {PLATFORMS.map((platform, i) => (
-                            <motion.a
-                                key={platform.name}
-                                href={platform.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.1 }}
-                                className="glass-panel p-6 flex flex-col items-center justify-center gap-4 hover-lift-minimal group border border-border/50"
-                            >
-                                <div className="text-muted-foreground group-hover:text-primary transition-colors">
-                                    {platform.icon}
-                                </div>
-                                <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
-                                    {platform.name}
-                                </span>
-                            </motion.a>
-                        ))}
-                    </div>
-                </div>
 
             </div>
         </SectionWrapper>
