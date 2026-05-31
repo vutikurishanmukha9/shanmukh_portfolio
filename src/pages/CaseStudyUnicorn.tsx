@@ -447,7 +447,7 @@ const CaseStudyUnicorn = () => {
               <span className="text-[9px] font-mono uppercase tracking-widest text-amber-600 dark:text-amber-400 font-bold">Country Spotlight: India</span>
             </div>
             <p className="text-xs text-muted-foreground leading-relaxed mb-3">
-              India ranks as the **third-largest** unicorn hub globally with 65 companies and a combined $196B valuation. However, Indian unicorns require exceptionally heavy capital to scale, posting an average funding of <span className="text-foreground font-semibold">$733M</span>—among the highest averages globally. They take <span className="text-foreground font-semibold">7.7 years</span> to cross $1B, slower than China (5.8) and the USA (6.8). E-commerce (16) and Fintech (15) account for 47.7% of all Indian unicorns. 
+              India ranks as the <strong className="text-foreground font-semibold">third-largest</strong> unicorn hub globally with 65 companies and a combined $196B valuation. However, Indian unicorns require exceptionally heavy capital to scale, posting an average funding of <span className="text-foreground font-semibold">$733M</span>, among the highest averages globally. They take <span className="text-foreground font-semibold">7.7 years</span> to cross $1B, slower than China (5.8) and the USA (6.8). E-commerce (16) and Fintech (15) account for 47.7% of all Indian unicorns. 
             </p>
             <div className="flex flex-wrap gap-2 text-[10px] font-mono text-muted-foreground">
               <span>Top 5 India:</span>
@@ -595,7 +595,7 @@ const CaseStudyUnicorn = () => {
           <div className="border-[0.5px] border-amber-500/20 bg-amber-500/5 rounded-lg p-6 mb-8">
             <h4 className="font-serif-display text-xl text-foreground font-normal mb-3">520 Unicorns Created in a Single Calendar Year</h4>
             <p className="text-xs text-muted-foreground leading-relaxed mb-6">
-              The single most significant finding in the entire historical ledger: **520 out of 1,074 unicorns (48.4%)** were created in 2021. This represents a staggering **4.8x single-year acceleration** over the historical pre-2020 baseline of ~104/year.
+              The single most significant finding in the entire historical ledger: <strong className="text-foreground font-semibold">520 out of 1,074 unicorns (48.4%)</strong> were created in 2021. This represents a staggering <strong className="text-foreground font-semibold">4.8x single-year acceleration</strong> over the historical pre-2020 baseline of ~104/year.
             </p>
 
             <div className="grid md:grid-cols-[1.2fr_0.8fr] gap-6">
@@ -623,9 +623,9 @@ const CaseStudyUnicorn = () => {
               {/* Drivers info */}
               <div className="text-xs text-muted-foreground leading-relaxed space-y-2 border-l-[0.5px] border-border/40 pl-5">
                 <div className="text-[9px] font-mono uppercase tracking-widest text-amber-600 dark:text-amber-400 font-bold mb-1">Macroeconomic Drivers</div>
-                <p>• **Zero Interest Rates:** Pushed private capital aggressively into risk assets.</p>
-                <p>• **Post-COVID Digital Surge:** Software validation timelines collapsed overnight.</p>
-                <p>• **SPAC Liquidity:** Lowered listing barriers to artificially secure private valuations.</p>
+                <p>• <strong className="text-foreground font-semibold">Zero Interest Rates:</strong> Pushed private capital aggressively into risk assets.</p>
+                <p>• <strong className="text-foreground font-semibold">Post-COVID Digital Surge:</strong> Software validation timelines collapsed overnight.</p>
+                <p>• <strong className="text-foreground font-semibold">SPAC Liquidity:</strong> Lowered listing barriers to artificially secure private valuations.</p>
                 <p className="text-[10px] mt-2 italic text-muted-foreground/80">
                   * Post-peak Correction: 2022 collapse reverted new counts down to 116, marking a 77.7% drop and sliding average valuations to historical lows.
                 </p>
@@ -747,7 +747,7 @@ const CaseStudyUnicorn = () => {
               <div className="border-[0.5px] border-border/80 bg-card/45 rounded-lg p-5">
                 <div className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground font-semibold mb-3">The Bootstrapping Outlier</div>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  <span className="text-foreground font-semibold">Zapier is the ultimate outlier in global data.</span> Reaching a <span className="text-foreground font-semibold">$4B valuation on just $1M in total funding</span>, yielding a legendary **4,000x efficiency ratio**. Zapier achieved this by maintaining strict bootstrapping discipline for 10 years, avoiding venture capital dilution entirely.
+                  <span className="text-foreground font-semibold">Zapier is the ultimate outlier in global data.</span> Reaching a <span className="text-foreground font-semibold">$4B valuation on just $1M in total funding</span>, yielding a legendary <strong className="text-foreground font-semibold">4,000x efficiency ratio</strong>. Zapier achieved this by maintaining strict bootstrapping discipline for 10 years, avoiding venture capital dilution entirely.
                 </p>
                 <div className="border-[0.5px] border-primary/20 bg-primary/5 rounded p-3 font-mono text-[10px] text-muted-foreground mt-3">
                   <div className="text-primary font-semibold">Zapier capital profile:</div>
@@ -760,10 +760,10 @@ const CaseStudyUnicorn = () => {
               <div className="border-[0.5px] border-border/80 bg-card/45 rounded-lg p-5">
                 <div className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground font-semibold mb-2">TIMELINE ANOMALIES: 1-YEAR vs 98-YEARS</div>
                 <p className="text-xs text-muted-foreground leading-relaxed mb-3">
-                  * **Fastest (1 Year):** Brex, Devoted Health, candy.com, and Chehaoduo reached unicorn status within 12 months. These were heavily backed by serial founders and VC teams rather than standard organic product paths.
+                  * <strong className="text-foreground font-semibold">Fastest (1 Year):</strong> Brex, Devoted Health, candy.com, and Chehaoduo reached unicorn status within 12 months. These were heavily backed by serial founders and VC teams rather than standard organic product paths.
                 </p>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  * **Slowest (98 Years):** Otto Bock HealthCare (Germany, founded 1919) joined the registry in 2017. This showcases a definitional quirk: unicorn status is about valuation at a point in time, not standard venture-backed startups.
+                  * <strong className="text-foreground font-semibold">Slowest (98 Years):</strong> Otto Bock HealthCare (Germany, founded 1919) joined the registry in 2017. This showcases a definitional quirk: unicorn status is about valuation at a point in time, not standard venture-backed startups.
                 </p>
               </div>
             </div>
@@ -830,10 +830,10 @@ const CaseStudyUnicorn = () => {
               <div className="border-[0.5px] border-border/80 bg-card/45 rounded-lg p-5">
                 <div className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground font-semibold mb-2">Venture Franchise Takeaways</div>
                 <p className="text-xs text-muted-foreground leading-relaxed mb-2">
-                  * **Accel Leads Solo:** Portfolio count of 60 unicorn investments, typically backing startups at the early-stage layers.
+                  * <strong className="text-foreground font-semibold">Accel Leads Solo:</strong> Portfolio count of 60 unicorn investments, typically backing startups at the early-stage layers.
                 </p>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  * **Sequoia Family Power:** Sequoia Capital (47) + Sequoia China (48) + Sequoia India (25) aggregate to **120 portfolio unicorns** across regional franchises.
+                  * <strong className="text-foreground font-semibold">Sequoia Family Power:</strong> Sequoia Capital (47) + Sequoia China (48) + Sequoia India (25) aggregate to <strong className="text-foreground font-semibold">120 portfolio unicorns</strong> across regional franchises.
                 </p>
               </div>
             </div>
@@ -873,7 +873,7 @@ const CaseStudyUnicorn = () => {
             <div className="border-[0.5px] border-border/80 bg-card/45 rounded-lg p-5">
               <div className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground mb-3 font-semibold">1. Relational Modeling</div>
               <ul className="space-y-2 text-xs text-muted-foreground leading-relaxed">
-                <li>• Engineered highly optimized **Star Schema** relational database.</li>
+                <li>• Engineered highly optimized <strong className="text-foreground font-semibold">Star Schema</strong> relational database.</li>
                 <li>• Separated high-volume transaction fact dimensions (`Unicorn_Companies`) from dimension sets (`Funding` and `Investors`).</li>
                 <li>• Managed dynamic cross-filtering paths across separate XLSX/CSV files.</li>
               </ul>

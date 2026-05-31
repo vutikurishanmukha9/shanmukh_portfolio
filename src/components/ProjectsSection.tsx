@@ -831,7 +831,7 @@ export const ProjectsSection = () => {
         </motion.div>
 
         {/* Sliding Pill-in-Pill Category Filters */}
-        <div className="mb-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-between sm:items-center select-none">
+        <div className="mb-8 flex flex-col items-center justify-center gap-4 sm:flex-row sm:justify-center sm:items-center select-none">
           <div className="flex border-[0.5px] border-border/60 bg-muted/40 p-0.5 rounded-full w-fit">
             {categories.map((category) => {
               const isSelected = selectedCategory === category;

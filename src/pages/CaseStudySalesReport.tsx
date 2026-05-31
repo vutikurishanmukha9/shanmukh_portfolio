@@ -172,7 +172,7 @@ const CaseStudySalesReport = () => {
           {/* ── STAR-SCHEMA WAREHOUSE ARCHITECTURE ── */}
           <SectionHeading icon={Database} label="Star-Schema Relational Model" />
           <p className="text-sm leading-relaxed text-muted-foreground mb-6">
-            Instead of flat-file denormalized models that lag under large transaction sets, this database implements a high-performance **Star Schema**. The center Fact table connects to optimized Dimension tables via 1-to-many relationship keys.
+            Instead of flat-file denormalized models that lag under large transaction sets, this database implements a high-performance <strong className="text-foreground font-semibold">Star Schema</strong>. The center Fact table connects to optimized Dimension tables via 1-to-many relationship keys.
           </p>
 
           <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 mb-8">
@@ -200,7 +200,7 @@ const CaseStudySalesReport = () => {
                     <span className="text-foreground font-semibold">Fact_Sales</span> houses 30,000+ distinct transaction rows containing foreign keys to dimensions and direct numerical fields: `SalesAmount`, `OrderQuantity`, `Discount`, `ShippingCost`, and `ProfitMargin`.
                   </p>
                   <p>
-                    By enforcing reference integrity at the database layer and disabling auto-date/time hierarchies in Power BI, model size was compressed by **70%**, enabling sub-second visual refresh rates under active filtering.
+                    By enforcing reference integrity at the database layer and disabling auto-date/time hierarchies in Power BI, model size was compressed by <strong className="text-foreground font-semibold">70%</strong>, enabling sub-second visual refresh rates under active filtering.
                   </p>
                 </div>
               </div>
@@ -238,10 +238,10 @@ const CaseStudySalesReport = () => {
             <div className="border-[0.5px] border-border/80 bg-card/45 rounded-lg p-5">
               <div className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground mb-3 font-semibold">Distribution Efficiencies</div>
               <p className="text-xs text-muted-foreground leading-relaxed mb-3">
-                <span className="text-foreground font-semibold">Standard Class shipping</span> handles **60.0%** of all customer transactions. Model indicates it yields the highest absolute profit despite slow transit (5-day avg).
+                <span className="text-foreground font-semibold">Standard Class shipping</span> handles <strong className="text-foreground font-semibold">60.0%</strong> of all customer transactions. Model indicates it yields the highest absolute profit despite slow transit (5-day avg).
               </p>
               <p className="text-xs text-muted-foreground leading-relaxed mb-3">
-                <span className="text-foreground font-semibold">First Class and Same Day</span> express models account for 20% aggregate volume, but show **12% higher profit erosion** due to fuel surcharges and rush courier fees.
+                <span className="text-foreground font-semibold">First Class and Same Day</span> express models account for 20% aggregate volume, but show <strong className="text-foreground font-semibold">12% higher profit erosion</strong> due to fuel surcharges and rush courier fees.
               </p>
               <p className="text-xs text-muted-foreground leading-relaxed">
                 Recommendation engine flags regions where Priority shipping is selected by default, suggesting opportunities to transition accounts to Standard hubs and save shipping expenses.
@@ -256,7 +256,7 @@ const CaseStudySalesReport = () => {
           <div className="border-[0.5px] border-amber-500/20 bg-amber-500/5 rounded-lg p-6 mb-8">
             <h4 className="font-serif-display text-lg text-foreground mb-2 font-normal">Steady +35% Year-End Uplift</h4>
             <p className="text-xs text-muted-foreground leading-relaxed mb-4">
-              Across all three tracking cycles, quarterly retail volume exhibits a recurring upward trajectory. Q4 consistently captures **35%** of yearly transaction value.
+              Across all three tracking cycles, quarterly retail volume exhibits a recurring upward trajectory. Q4 consistently captures <strong className="text-foreground font-semibold">35%</strong> of yearly transaction value.
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {quarterlyRevenues.map((q) => (
