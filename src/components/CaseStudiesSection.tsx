@@ -38,7 +38,7 @@ const caseStudies: CaseStudy[] = [
   {
     id: 'unicorn',
     title: 'Global Unicorn Startup Performance Analysis',
-    subtitle: 'Power BI deep-dive mapping 1,074 unicorn companies across 6 continents and 16 industries — $3,711B in total valuation, $591.8B total funding raised. Uncovered the 2021 explosion (48.4% of all unicorns created in a single year), geographic capital-efficiency gaps, and sector concentration risk in Fintech.',
+    subtitle: 'Power BI deep-dive mapping 1,074 unicorn companies across 6 continents and 16 industries, representing $3,711B in total valuation and $591.8B total funding raised. Uncovered the 2021 explosion (48.4% of all unicorns created in a single year), geographic capital-efficiency gaps, and sector concentration risk in Fintech.',
     focus: 'Business Intelligence / EDA',
     ownership: 'Solo Build',
     github: 'https://github.com/vutikurishanmukha9/Global-Unicorn-Startup',
@@ -52,7 +52,7 @@ const caseStudies: CaseStudy[] = [
       { label: 'Top Sector', value: 'Fintech (224)' },
     ],
     tabs: {
-      bottleneck: 'The global startup ecosystem crossed 1,000 unicorns, but the structural distribution of value, funding efficiency, and time-to-unicorn across geographies and industries remained poorly understood. 520 of 1,074 unicorns (48.4%) were created in 2021 alone — a 5x increase over 2018-2019 baselines — raising questions about whether this was structural or cyclical.',
+      bottleneck: 'The global startup ecosystem crossed 1,000 unicorns, but the structural distribution of value, funding efficiency, and time-to-unicorn across geographies and industries remained poorly understood. 520 of 1,074 unicorns (48.4%) were created in 2021 alone, representing a 5x increase over 2018-2019 baselines, and raising questions about whether this was structural or cyclical.',
       decision: 'Built a star-schema data model in Power BI with separate Funding and Investors dimension tables. Engineered DAX measures for valuation/funding efficiency ratios, average years-to-unicorn by sector, and investor count aggregations. Used Power Query ETL to clean valuation strings, parse date fields, and compute "Years to Unicorn" calculated columns across 6 continents.',
       outcome: 'North America holds 589 companies (54.8%) and $2,032B in valuation, but Asia\'s startups require 25% more funding ($632M avg vs $504M) for similar outcomes. AI has the highest avg valuation at $4.49B but lower capital efficiency (4.88x) than Fintech (6.15x). Fastest unicorns (Brex, Wiz, Scale AI) reached $1B in under 12 months. SHEIN achieved 50x return on capital ($2B raised → $100B valuation).',
     },
@@ -395,7 +395,7 @@ export const CaseStudiesSection = () => {
               Case Studies
             </motion.h2>
             <p className="mt-4 max-w-xl text-muted-foreground text-sm leading-relaxed">
-              Deep-dive analyses on real-world datasets — structured problem solving, statistical rigor, and actionable business intelligence.
+              Deep-dive analyses on real-world datasets, highlighting structured problem solving, statistical rigor, and actionable business intelligence.
             </p>
           </div>
 

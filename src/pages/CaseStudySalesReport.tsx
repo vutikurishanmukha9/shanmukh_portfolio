@@ -120,7 +120,7 @@ const CaseStudySalesReport = () => {
 
           {/* Lede */}
           <p className="max-w-2xl mx-auto text-muted-foreground text-sm md:text-base leading-relaxed">
-            A comprehensive Power BI business intelligence suite analyzing 3 years of retail operations — establishing a high-performance Star-Schema relational model and mapping shipping velocities, category margins, and temporal trends.
+            A comprehensive Power BI business intelligence suite analyzing 3 years of retail operations by establishing a high-performance Star-Schema relational model and mapping shipping velocities, category margins, and temporal trends.
           </p>
         </motion.div>
 

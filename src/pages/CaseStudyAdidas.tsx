@@ -126,7 +126,7 @@ const CaseStudyAdidas = () => {
 
           {/* Lede */}
           <p className="max-w-2xl mx-auto text-muted-foreground text-sm md:text-base leading-relaxed">
-            A highly rigorous exploratory data analysis solving 15 structured business questions — mapping channel margins, tracking year-over-year revenue, and building rolling anomaly detection models to optimize physical and digital retail locations.
+            A highly rigorous exploratory data analysis solving 15 structured business questions, mapping channel margins, tracking year-over-year revenue, and building rolling anomaly detection models to optimize physical and digital retail locations.
           </p>
         </motion.div>
 

@@ -24,7 +24,7 @@ const LaTeXPaperPreview = ({ url }: { url: string }) => {
           <h5 className="font-serif font-bold text-[7.2px] tracking-tight leading-none px-1">
             Optimizing Energy Efficiency in Smart Buildings Through IoT Occupancy Sensing
           </h5>
-          <p className="text-[4.5px] text-muted-foreground">V. Shanmukha, et al. — NIT Jalandhar</p>
+          <p className="text-[4.5px] text-muted-foreground">V. Shanmukha, et al. • NIT Jalandhar</p>
         </div>
 
         {/* Double-Column Abstract Content */}

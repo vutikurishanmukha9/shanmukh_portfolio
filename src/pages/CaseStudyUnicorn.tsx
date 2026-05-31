@@ -178,9 +178,9 @@ const capitalEfficiency = [
   { company: 'DJI Innovations', country: 'China', industry: 'Hardware', val: '$8B', funding: '$105M', ratio: '76.2x' },
   { company: 'Canva', country: 'Australia', industry: 'Internet Software', val: '$40B', funding: '$572M', ratio: '69.9x' },
   { company: 'Il Makiage', country: 'USA', industry: 'E-commerce', val: '$2B', funding: '$29M', ratio: '69.0x' },
+  { company: 'Upstox', country: 'India', industry: 'Fintech', val: '$3B', funding: '$54M', ratio: '55.6x' },
   { company: 'SHEIN', country: 'China', industry: 'E-commerce', val: '$100B', funding: '$2B', ratio: '50.0x' },
   { company: 'Stripe', country: 'USA', industry: 'Fintech', val: '$95B', funding: '$2B', ratio: '47.5x' },
-  { company: 'Upstox', country: 'India', industry: 'Fintech', val: '$3B', funding: '$54M', ratio: '55.6x' },
 ];
 
 const activeInvestors = [
@@ -382,9 +382,11 @@ const CaseStudyUnicorn = () => {
                 <tbody className="divide-y divide-border/30 text-xs">
                   {continentalBreakdown.map((c) => (
                     <tr key={c.name} className="hover:bg-muted/10 transition-colors">
-                      <td className="py-2.5 px-4 font-medium text-foreground flex items-center gap-2">
-                        <span className={cn('w-2 h-2 rounded-full', c.color)} />
-                        {c.name}
+                      <td className="py-2.5 px-4 font-medium text-foreground">
+                        <div className="flex items-center gap-2">
+                          <span className={cn('w-2 h-2 rounded-full', c.color)} />
+                          {c.name}
+                        </div>
                       </td>
                       <td className="py-2.5 px-4 text-right font-mono text-muted-foreground">{c.count}</td>
                       <td className="py-2.5 px-4 text-right font-mono font-semibold text-foreground">{c.val}</td>
@@ -435,7 +437,7 @@ const CaseStudyUnicorn = () => {
                 ))}
               </div>
               <p className="text-[10px] text-muted-foreground/80 leading-relaxed mt-4 italic">
-                * Strategic Synthesis: Chinese unicorns scale a full year faster and command higher average valuations but exhibit heavier capital dependencies.
+                • Strategic Synthesis: Chinese unicorns scale a full year faster and command higher average valuations but exhibit heavier capital dependencies.
               </p>
             </div>
           </div>
@@ -447,7 +449,7 @@ const CaseStudyUnicorn = () => {
               <span className="text-[9px] font-mono uppercase tracking-widest text-amber-600 dark:text-amber-400 font-bold">Country Spotlight: India</span>
             </div>
             <p className="text-xs text-muted-foreground leading-relaxed mb-3">
-              India ranks as the <strong className="text-foreground font-semibold">third-largest</strong> unicorn hub globally with 65 companies and a combined $196B valuation. However, Indian unicorns require exceptionally heavy capital to scale, posting an average funding of <span className="text-foreground font-semibold">$733M</span>, among the highest averages globally. They take <span className="text-foreground font-semibold">7.7 years</span> to cross $1B, slower than China (5.8) and the USA (6.8). E-commerce (16) and Fintech (15) account for 47.7% of all Indian unicorns. 
+              India ranks as the <strong className="text-foreground font-semibold">third-largest</strong> unicorn hub globally with 65 companies and a combined $196B valuation. However, Indian unicorns require exceptionally heavy capital to scale, posting an average funding of <span className="text-foreground font-semibold">$733M</span>, among the highest averages globally. They take <span className="text-foreground font-semibold">7.7 years</span> to cross $1B, slower than China (5.8) and the USA (6.8). E-commerce (16) and Fintech (15) account for 47.7% of all Indian unicorns. Edtech is disproportionately strong in India, represented by 6 unicorns including BYJU's at $22B, the country's highest-valued private company.
             </p>
             <div className="flex flex-wrap gap-2 text-[10px] font-mono text-muted-foreground">
               <span>Top 5 India:</span>
@@ -470,7 +472,7 @@ const CaseStudyUnicorn = () => {
                 <thead>
                   <tr className="border-b-[0.5px] border-border/60 bg-muted/20 text-[9px] font-mono uppercase tracking-widest text-muted-foreground sticky top-0 z-20">
                     <th className="py-2.5 px-4 bg-card/95">Country</th>
-                    <th className="py-2.5 px-4 text-right bg-card/95">Unicorn count</th>
+                    <th className="py-2.5 px-4 text-right bg-card/95">Unicorn Count</th>
                     <th className="py-2.5 px-4 text-right bg-card/95">Total Valuation</th>
                     <th className="py-2.5 px-4 text-right bg-card/95">Avg Valuation</th>
                     <th className="py-2.5 px-4 text-right bg-card/95">Avg Funding</th>
@@ -511,7 +513,7 @@ const CaseStudyUnicorn = () => {
               ))}
             </div>
             <p className="text-[10px] text-muted-foreground mt-4 leading-relaxed italic">
-              * The San Francisco outlier concentration ($724B combined) is worth more than China's second-largest city Shanghai ($99B) by a factor of 7x. Combined Bay Area cities represent over $830B, exceeding the unicorn wealth of all Asian nations combined.
+              • The San Francisco outlier concentration ($724B combined) is worth more than China's second-largest city Shanghai ($99B) by a factor of 7x. Combined Bay Area cities represent over $830B, exceeding the unicorn wealth of all Asian nations combined.
             </p>
           </div>
 
@@ -530,7 +532,7 @@ const CaseStudyUnicorn = () => {
                 <thead>
                   <tr className="border-b-[0.5px] border-border/60 bg-muted/20 text-[9px] font-mono uppercase tracking-widest text-muted-foreground sticky top-0 z-20">
                     <th className="py-2.5 px-4 bg-card/95">Industry Sector</th>
-                    <th className="py-2.5 px-4 text-right bg-card/95">Unicorn count</th>
+                    <th className="py-2.5 px-4 text-right bg-card/95">Unicorn Count</th>
                     <th className="py-2.5 px-4 text-right bg-card/95">Total Val.</th>
                     <th className="py-2.5 px-4 text-right bg-card/95">Avg Val.</th>
                     <th className="py-2.5 px-4 text-right bg-card/95">Median Val.</th>
@@ -627,7 +629,7 @@ const CaseStudyUnicorn = () => {
                 <p>• <strong className="text-foreground font-semibold">Post-COVID Digital Surge:</strong> Software validation timelines collapsed overnight.</p>
                 <p>• <strong className="text-foreground font-semibold">SPAC Liquidity:</strong> Lowered listing barriers to artificially secure private valuations.</p>
                 <p className="text-[10px] mt-2 italic text-muted-foreground/80">
-                  * Post-peak Correction: 2022 collapse reverted new counts down to 116, marking a 77.7% drop and sliding average valuations to historical lows.
+                  • Post-peak Correction: 2022 collapse reverted new counts down to 116, marking a 77.7% drop and sliding average valuations to historical lows.
                 </p>
               </div>
             </div>
@@ -673,8 +675,8 @@ const CaseStudyUnicorn = () => {
               </div>
             </div>
 
-            <div className="overflow-y-auto max-h-[300px]">
-              <table className="w-full text-left border-collapse">
+            <div className="overflow-auto max-h-[300px]">
+              <table className="w-full text-left border-collapse min-w-[650px]">
                 <thead>
                   <tr className="border-b-[0.5px] border-border/60 bg-muted/20 text-[9px] font-mono uppercase tracking-widest text-muted-foreground sticky top-0 z-20">
                     <th className="py-2 px-4 bg-card/95">Company</th>
@@ -760,10 +762,10 @@ const CaseStudyUnicorn = () => {
               <div className="border-[0.5px] border-border/80 bg-card/45 rounded-lg p-5">
                 <div className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground font-semibold mb-2">TIMELINE ANOMALIES: 1-YEAR vs 98-YEARS</div>
                 <p className="text-xs text-muted-foreground leading-relaxed mb-3">
-                  * <strong className="text-foreground font-semibold">Fastest (1 Year):</strong> Brex, Devoted Health, candy.com, and Chehaoduo reached unicorn status within 12 months. These were heavily backed by serial founders and VC teams rather than standard organic product paths.
+                  • <strong className="text-foreground font-semibold">Fastest (1 Year):</strong> Brex, Devoted Health, candy.com, and Chehaoduo reached unicorn status within 12 months. These were heavily backed by serial founders and VC teams rather than standard organic product paths.
                 </p>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  * <strong className="text-foreground font-semibold">Slowest (98 Years):</strong> Otto Bock HealthCare (Germany, founded 1919) joined the registry in 2017. This showcases a definitional quirk: unicorn status is about valuation at a point in time, not standard venture-backed startups.
+                  • <strong className="text-foreground font-semibold">Slowest (98 Years):</strong> Otto Bock HealthCare (Germany, founded 1919) joined the registry in 2017. This showcases a definitional quirk: unicorn status is about valuation at a point in time, not standard venture-backed startups.
                 </p>
               </div>
             </div>
@@ -823,17 +825,17 @@ const CaseStudyUnicorn = () => {
                   ))}
                 </div>
                 <p className="text-[9.5px] text-muted-foreground/80 mt-4 leading-relaxed italic">
-                  * Compression Signal: Timeline to become a unicorn dropped from 21.4 years in the 1990s down to 5.7 years in the 2010s. Startups scale at unprecedented pacing.
+                  • Compression Signal: Timeline to become a unicorn dropped from 21.4 years in the 1990s down to 5.7 years in the 2010s. Startups scale at unprecedented pacing. (Note: Excludes 3 outlier companies founded prior to 1990, such as Otto Bock HealthCare founded in 1919).
                 </p>
               </div>
 
               <div className="border-[0.5px] border-border/80 bg-card/45 rounded-lg p-5">
                 <div className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground font-semibold mb-2">Venture Franchise Takeaways</div>
                 <p className="text-xs text-muted-foreground leading-relaxed mb-2">
-                  * <strong className="text-foreground font-semibold">Accel Leads Solo:</strong> Portfolio count of 60 unicorn investments, typically backing startups at the early-stage layers.
+                  • <strong className="text-foreground font-semibold">Accel Leads Solo:</strong> Portfolio count of 60 unicorn investments, typically backing startups at the early-stage layers.
                 </p>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  * <strong className="text-foreground font-semibold">Sequoia Family Power:</strong> Sequoia Capital (47) + Sequoia China (48) + Sequoia India (25) aggregate to <strong className="text-foreground font-semibold">120 portfolio unicorns</strong> across regional franchises.
+                  • <strong className="text-foreground font-semibold">Sequoia Family Power:</strong> Sequoia Capital (47) + Sequoia China (48) + Sequoia India (25) aggregate to <strong className="text-foreground font-semibold">120 portfolio unicorns</strong> across regional franchises.
                 </p>
               </div>
             </div>
