@@ -188,3 +188,27 @@ body::after {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ─── Platform Overlay & Branding Suppressor (Lovable / GPT Engineer) ─── */
+/* Hides any dynamically injected platform badges, loaders, overlays, or preview elements */
+[id*="lovable"],
+[class*="lovable"],
+[id*="gpt-engineer"],
+[id*="gptengineer"],
+[class*="gptengineer"],
+[class*="gpt-engineer"],
+gptengineer-brand,
+gptengineer-brand-container,
+#gpt-engineer-brand,
+.gpt-engineer-brand,
+#lovable-badge,
+.lovable-badge,
+#lovable-loading-overlay,
+.lovable-loading-overlay {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
