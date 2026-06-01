@@ -83,24 +83,24 @@ const caseStudies: CaseStudy[] = [
   },
   {
     id: 'sales',
-    title: 'Complete Sales Report',
-    subtitle: 'Comprehensive Power BI retail transaction dashboard analyzing 3 years of temporal sales trends, shipment mode distributions, and product category performance.',
-    focus: 'Retail Dashboard',
+    title: 'HR Employee Retention & Workforce Optimization',
+    subtitle: 'Comprehensive Power BI business intelligence dashboard analyzing employee attrition drivers, workforce demographics, and role-based risk profiles.',
+    focus: 'HR Analytics / BI',
     ownership: 'Solo Build',
-    github: 'https://github.com/vutikurishanmukha9/Complete-Sales-Report',
-    tech: ['Power BI', 'DAX', 'Excel', 'ETL', 'Data Modeling'],
+    github: 'https://github.com/vutikurishanmukha9/HR-Employee-Retention',
+    tech: ['Power BI', 'DAX', 'Excel', 'Power Query', 'Data Modeling'],
     metrics: [
-      { label: 'Time Span', value: '3 Years' },
-      { label: 'Ship Modes', value: '4 Tracked' },
-      { label: 'Categories', value: '3 Segments' },
-      { label: 'Regions Mapped', value: '4 Regions' },
-      { label: 'Standard Class', value: '60.0% Share' },
-      { label: 'Q4 Seasonal Lift', value: '+35.0%' },
+      { label: 'Workforce Size', value: '1,470 FTEs' },
+      { label: 'Attrition Rate', value: '16.1%' },
+      { label: 'Target Attrition', value: '< 10.0%' },
+      { label: 'Key Driver', value: 'Overtime' },
+      { label: 'Avg Monthly Pay', value: '$6,503' },
+      { label: 'High Risk Role', value: 'Sales Rep' },
     ],
     tabs: {
-      bottleneck: 'Retail leadership needed a single-pane dashboard to monitor how sales volume distributes across time periods, shipping methods, and product categories without querying raw transaction logs.',
-      decision: 'Modeled a star-schema warehouse in Power BI connecting fact tables (transactions) to dimension tables (dates, products, regions, ship modes). Built DAX time-intelligence measures for MoM and YoY comparison.',
-      outcome: 'Standard Class shipping accounts for 60% of all orders. Technology category drives the highest revenue. Q4 consistently shows 35% seasonal uplift across all three years tracked.',
+      bottleneck: 'HR leadership faced elevated employee attrition rates, with limited analytical visibility into what specific organizational vectors (overtime, job satisfaction, department structures) drove departures.',
+      decision: 'Engineered a star-schema relational workforce warehouse in Power BI. Calculated custom DAX measures for Attrition Rate, Average tenure, and Overtime correlation. Designed custom visuals mapping department risk tiers.',
+      outcome: 'Isolated Overtime (30.5% attrition) and Low Job Involvement as the twin primary attrition drivers. Identified Sales Representatives (39.8% attrition) as high-risk roles. Proposed targeted wellness interventions.',
     },
     previewType: 'sales',
   },
@@ -185,8 +185,8 @@ const AdidasPreview = () => (
 const SalesPreview = () => (
   <div className="flex flex-col justify-between h-full font-mono text-[9px] text-muted-foreground">
     <div className="flex items-center justify-between border-b-[0.5px] border-border/60 pb-2">
-      <span className="font-semibold text-foreground">RETAIL_QUARTERLY_TRENDS</span>
-      <span className="text-sky-500 font-semibold text-[8px]">3-YR SPAN</span>
+      <span className="font-semibold text-foreground">WORKFORCE_ATTRITION_INDEX</span>
+      <span className="text-sky-500 font-semibold text-[8px]">1,470 FTE</span>
     </div>
     <div className="my-2 flex items-end justify-between h-14 px-1 relative">
       {/* Grid lines */}
@@ -195,28 +195,28 @@ const SalesPreview = () => (
         <div className="border-b border-foreground" />
         <div className="border-b border-foreground" />
       </div>
-      {/* Quarterly bars */}
+      {/* Tenure bars */}
       {[
-        { q: 'Q1', h: '30%', c: 'bg-muted-foreground/30' },
-        { q: 'Q2', h: '45%', c: 'bg-muted-foreground/40' },
-        { q: 'Q3', h: '55%', c: 'bg-sky-500/60' },
-        { q: 'Q4', h: '90%', c: 'bg-primary' },
-        { q: 'Q1', h: '35%', c: 'bg-muted-foreground/30' },
-        { q: 'Q2', h: '50%', c: 'bg-muted-foreground/40' },
-        { q: 'Q3', h: '60%', c: 'bg-sky-500/60' },
-        { q: 'Q4', h: '95%', c: 'bg-primary' },
+        { t: 'Y1', h: '75%', c: 'bg-primary' },
+        { t: 'Y2', h: '55%', c: 'bg-primary/80' },
+        { t: 'Y3', h: '40%', c: 'bg-amber-500' },
+        { t: 'Y4', h: '28%', c: 'bg-amber-500/80' },
+        { t: 'Y5', h: '20%', c: 'bg-emerald-500/80' },
+        { t: 'Y6', h: '14%', c: 'bg-emerald-500/60' },
+        { t: 'Y7', h: '10%', c: 'bg-emerald-500/40' },
+        { t: 'Y8', h: '6%', c: 'bg-emerald-500/20' },
       ].map((bar, i) => (
         <div key={i} className="flex flex-col items-center gap-0.5 flex-1">
           <div
             className={cn('w-full max-w-[14px] rounded-t-sm border-[0.5px] border-border/40', bar.c)}
             style={{ height: bar.h }}
           />
-          <span className="text-[6px] opacity-50">{bar.q}</span>
+          <span className="text-[6px] opacity-50">{bar.t}</span>
         </div>
       ))}
     </div>
     <div className="border-t-[0.5px] border-border/60 pt-2 flex justify-between items-center text-[8px]">
-      <span className="opacity-70">Q4_UPLIFT: <span className="text-foreground font-semibold">+35%</span></span>
+      <span className="opacity-70">OVERTIME_CORR: <span className="text-foreground font-semibold">+30.5%</span></span>
       <span className="opacity-50">POWER_BI // DAX</span>
     </div>
   </div>
