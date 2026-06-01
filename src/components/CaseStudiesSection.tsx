@@ -158,7 +158,7 @@ const AdidasPreview = () => (
       {[
         { channel: 'Online', margin: 46.4, color: 'bg-emerald-500' },
         { channel: 'In-Store', margin: 35.6, color: 'bg-primary' },
-        { channel: 'Outlet', margin: 28.1, color: 'bg-muted-foreground/50' },
+        { channel: 'Outlet', margin: 39.5, color: 'bg-muted-foreground/50' },
       ].map((d) => (
         <div key={d.channel} className="space-y-0.5">
           <div className="flex justify-between text-[8px]">
