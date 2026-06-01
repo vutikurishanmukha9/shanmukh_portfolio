@@ -11,7 +11,7 @@ import {
   Globe,
   Layers3,
   ScanFace,
-  Sparkles,
+  Zap,
   Terminal,
   X,
   Network,
@@ -50,7 +50,7 @@ const categoryConfig: Record<ProjectCategory, { icon: LucideIcon; color: string;
   'Web App': { icon: Globe, color: 'text-primary', label: 'Web Development' },
   'Computer Vision': { icon: Eye, color: 'text-emerald-500', label: 'Computer Vision' },
   'Data Analysis': { icon: Brain, color: 'text-amber-500', label: 'Data Science' },
-  Other: { icon: Sparkles, color: 'text-muted-foreground', label: 'Various Engineering' },
+  Other: { icon: Layers3, color: 'text-muted-foreground', label: 'Various Engineering' },
 };
 
 const projects: Project[] = [
@@ -693,7 +693,7 @@ const ProjectCard = ({ project, index, variant = 'card' }: { project: Project; i
           <div>
             <div className="mb-4 rounded bg-muted/10 border-[0.5px] border-border/60 p-3.5 shadow-none">
               <div className="mb-1.5 flex items-center gap-1.5 text-[9px] font-mono uppercase tracking-wider text-foreground font-semibold">
-                <Sparkles className="h-3 w-3 text-primary" />
+                <Zap className="h-3 w-3 text-primary" />
                 Impact summary
               </div>
               <p className="text-xs leading-relaxed text-muted-foreground">{project.impact}</p>
