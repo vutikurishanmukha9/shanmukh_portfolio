@@ -1,6 +1,4 @@
-
-import { motion, useScroll, useTransform, HTMLMotionProps } from 'framer-motion';
-import { useRef } from 'react';
+import { motion, HTMLMotionProps } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 interface SectionWrapperProps extends HTMLMotionProps<"div"> {
@@ -11,23 +9,13 @@ interface SectionWrapperProps extends HTMLMotionProps<"div"> {
 }
 
 export const SectionWrapper = ({ children, className, id, delay = 0, ...props }: SectionWrapperProps) => {
-    const ref = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({
-        target: ref,
-        offset: ["start end", "end start"]
-    });
-
-    const opacity = useTransform(scrollYProgress, [0, 0.2, 0.9, 1], [0, 1, 1, 0]);
-    const y = useTransform(scrollYProgress, [0, 0.2], [50, 0]);
 
     return (
         <motion.section
-            ref={ref}
             id={id}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay, ease: "easeOut" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay, ease: "easeOut" }}
             className={cn("py-10 lg:py-16 relative", className)}
             {...props}
         >

@@ -256,7 +256,7 @@ const CaseStudyAdidas = () => {
           <SectionHeading icon={Search} label="1. Business Context & Strategic Questions" />
           <div className="border-l-2 border-primary/30 pl-5 mb-8">
             <p className="text-sm md:text-base leading-relaxed text-muted-foreground italic font-serif-display text-lg md:text-xl">
-              "Adidas operates through multiple retail partners across the United States. This analysis was conducted to understand how sales performance varied across product categories, regions, retailers, and sales channels, and to identify where the company should focus investment to maximize profitability."
+              “Adidas operates through multiple retail partners across the United States. This analysis was conducted to understand how sales performance varied across product categories, regions, retailers, and sales channels, and to identify where the company should focus investment to maximize profitability.”
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-6 mb-8">

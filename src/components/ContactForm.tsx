@@ -129,7 +129,7 @@ export const ContactForm = () => {
           name="message"
           value={formData.message}
           onChange={handleChange}
-          placeholder="Tell me about your project..."
+          placeholder="Tell me about your project…"
           required
           rows={4}
           className="bg-transparent border-[0.5px] border-border/80 focus:border-primary focus:ring-[0.5px] focus:ring-primary/30 transition-all rounded px-3 py-2.5 text-xs font-sans resize-none"
