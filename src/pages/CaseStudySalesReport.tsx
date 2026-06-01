@@ -872,7 +872,7 @@ const CaseStudySalesReport = () => {
           <div className="text-center py-8">
             <div className="flex flex-wrap items-center justify-center gap-3">
               <Button size="sm" className="rounded-full h-9 px-6 text-[10px] font-mono uppercase tracking-wider" asChild>
-                <a href="https://github.com/vutikurishanmukha9/HR-Employee-Retention" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/vutikurishanmukha9/Employee_Data_Analysis" target="_blank" rel="noopener noreferrer">
                   <Github className="h-3.5 w-3.5 mr-1.5" />
                   View Source Code
                   <ArrowUpRight className="h-3 w-3 ml-1" />

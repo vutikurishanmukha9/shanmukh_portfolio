@@ -87,7 +87,7 @@ const caseStudies: CaseStudy[] = [
     subtitle: 'Comprehensive Power BI business intelligence dashboard analyzing employee attrition drivers, workforce demographics, and role-based risk profiles.',
     focus: 'HR Analytics / BI',
     ownership: 'Solo Build',
-    github: 'https://github.com/vutikurishanmukha9/HR-Employee-Retention',
+    github: 'https://github.com/vutikurishanmukha9/Employee_Data_Analysis',
     tech: ['Power BI', 'DAX', 'Excel', 'Power Query', 'Data Modeling'],
     metrics: [
       { label: 'Workforce Size', value: '1,470 FTEs' },
