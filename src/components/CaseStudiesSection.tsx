@@ -84,23 +84,23 @@ const caseStudies: CaseStudy[] = [
   {
     id: 'sales',
     title: 'HR Employee Retention & Workforce Optimization',
-    subtitle: 'Comprehensive Power BI business intelligence dashboard analyzing employee attrition drivers, workforce demographics, and role-based risk profiles.',
-    focus: 'HR Analytics / BI',
+    subtitle: 'Rigorous workforce analysis and exploratory data modeling diagnosing systemic early-lifecycle attrition failures, performance rating paradoxes, and leadership stability risks across 3,000 employee records.',
+    focus: 'HR Analytics / EDA',
     ownership: 'Solo Build',
     github: 'https://github.com/vutikurishanmukha9/Employee_Data_Analysis',
-    tech: ['Power BI', 'DAX', 'Excel', 'Power Query', 'Data Modeling'],
+    tech: ['Python', 'Pandas', 'NumPy', 'Seaborn', 'Data Modeling'],
     metrics: [
-      { label: 'Workforce Size', value: '1,470 FTEs' },
-      { label: 'Attrition Rate', value: '16.1%' },
-      { label: 'Target Attrition', value: '< 10.0%' },
-      { label: 'Key Driver', value: 'Overtime' },
-      { label: 'Avg Monthly Pay', value: '$6,503' },
-      { label: 'High Risk Role', value: 'Sales Rep' },
+      { label: 'Workforce Size', value: '3,000 FTEs' },
+      { label: 'Overall Exit Rate', value: '51.1%' },
+      { label: 'Mapped Exits', value: '1,533 Staff' },
+      { label: '1st Yr Exits', value: '47.3%' },
+      { label: 'High Risk Role', value: 'Eng Manager' },
+      { label: 'Exec Churn', value: '79.2%' },
     ],
     tabs: {
-      bottleneck: 'HR leadership faced elevated employee attrition rates, with limited analytical visibility into what specific organizational vectors (overtime, job satisfaction, department structures) drove departures.',
-      decision: 'Engineered a star-schema relational workforce warehouse in Power BI. Calculated custom DAX measures for Attrition Rate, Average tenure, and Overtime correlation. Designed custom visuals mapping department risk tiers.',
-      outcome: 'Isolated Overtime (30.5% attrition) and Low Job Involvement as the twin primary attrition drivers. Identified Sales Representatives (39.8% attrition) as high-risk roles. Proposed targeted wellness interventions.',
+      bottleneck: 'HR leadership faced severe employee churn, losing over half of the workforce (51.1%) over the tracking period, with no visibility into early-career exits, performance linkages, or role-specific talent drain.',
+      decision: 'Ingested 3,000 employee records to construct normalized tenure spans, exited indicators, and age cohorts. Coded dynamic seaborn visualization functions and programmatic cell manipulation layers in Python.',
+      outcome: 'Isolated a critical year-one failure point (47.3% of exits). Exposed a major performance paradox where high performers leave at the same rate as PIP employees (52%), and discovered a 79.2% Executive Office turnover.',
     },
     previewType: 'sales',
   },
@@ -186,38 +186,39 @@ const SalesPreview = () => (
   <div className="flex flex-col justify-between h-full font-mono text-[9px] text-muted-foreground">
     <div className="flex items-center justify-between border-b-[0.5px] border-border/60 pb-2">
       <span className="font-semibold text-foreground">WORKFORCE_ATTRITION_INDEX</span>
-      <span className="text-sky-500 font-semibold text-[8px]">1,470 FTE</span>
+      <span className="text-sky-500 font-semibold text-[8px]">3,000 FTE</span>
     </div>
-    <div className="my-2 flex items-end justify-between h-14 px-1 relative">
+    <div className="my-3 flex items-end justify-between h-20 px-1 relative">
       {/* Grid lines */}
-      <div className="absolute inset-0 grid grid-rows-3 pointer-events-none opacity-[0.06]">
+      <div className="absolute inset-0 grid grid-rows-4 pointer-events-none opacity-[0.06]">
+        <div className="border-b border-foreground" />
         <div className="border-b border-foreground" />
         <div className="border-b border-foreground" />
         <div className="border-b border-foreground" />
       </div>
       {/* Tenure bars */}
       {[
-        { t: 'Y1', h: '75%', c: 'bg-primary' },
-        { t: 'Y2', h: '55%', c: 'bg-primary/80' },
-        { t: 'Y3', h: '40%', c: 'bg-amber-500' },
-        { t: 'Y4', h: '28%', c: 'bg-amber-500/80' },
-        { t: 'Y5', h: '20%', c: 'bg-emerald-500/80' },
-        { t: 'Y6', h: '14%', c: 'bg-emerald-500/60' },
+        { t: 'Y1', h: '85%', c: 'bg-primary shadow-[0_0_8px_rgba(245,158,11,0.2)]' },
+        { t: 'Y2', h: '65%', c: 'bg-primary/80' },
+        { t: 'Y3', h: '45%', c: 'bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.15)]' },
+        { t: 'Y4', h: '32%', c: 'bg-amber-500/80' },
+        { t: 'Y5', h: '22%', c: 'bg-emerald-500/80' },
+        { t: 'Y6', h: '16%', c: 'bg-emerald-500/60' },
         { t: 'Y7', h: '10%', c: 'bg-emerald-500/40' },
         { t: 'Y8', h: '6%', c: 'bg-emerald-500/20' },
       ].map((bar, i) => (
-        <div key={i} className="flex flex-col items-center gap-0.5 flex-1">
+        <div key={i} className="flex flex-col items-center justify-end h-full gap-1.5 flex-1">
           <div
-            className={cn('w-full max-w-[14px] rounded-t-sm border-[0.5px] border-border/40', bar.c)}
+            className={cn('w-full max-w-[14px] rounded-t-md border-[0.5px] border-border/40 transition-all duration-300 hover:scale-y-110 origin-bottom', bar.c)}
             style={{ height: bar.h }}
           />
-          <span className="text-[6px] opacity-50">{bar.t}</span>
+          <span className="text-[6px] opacity-60 font-semibold">{bar.t}</span>
         </div>
       ))}
     </div>
     <div className="border-t-[0.5px] border-border/60 pt-2 flex justify-between items-center text-[8px]">
       <span className="opacity-70">OVERTIME_CORR: <span className="text-foreground font-semibold">+30.5%</span></span>
-      <span className="opacity-50">POWER_BI // DAX</span>
+      <span className="opacity-50">PYTHON // PANDAS</span>
     </div>
   </div>
 );
