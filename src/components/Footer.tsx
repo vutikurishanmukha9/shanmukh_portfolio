@@ -41,6 +41,7 @@ export const Footer = () => {
     { label: 'About', href: '#about' },
     { label: 'Skills', href: '#skills' },
     { label: 'Projects', href: '#projects' },
+    { label: 'Case Studies', href: '#case-studies' },
     { label: 'Contact', href: '#contact' },
   ];
 
@@ -58,7 +59,10 @@ export const Footer = () => {
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const offset = 120;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
     }
   };
 
@@ -79,10 +83,10 @@ export const Footer = () => {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded border-[0.5px] border-border bg-background/50 hover:bg-background/80 text-muted-foreground hover:text-primary transition-colors duration-200 shadow-none"
+                  className="p-2 rounded border-[0.5px] border-border bg-background/50 hover:bg-background hover:text-primary hover:border-primary/40 hover:-translate-y-0.5 hover:scale-105 transition-all duration-300 text-muted-foreground shadow-none"
                   aria-label={social.name}
                 >
-                  <social.icon className="h-4 w-4" />
+                  <social.icon className="h-4 w-4 animate-duration-300" />
                 </a>
               ))}
             </div>
@@ -96,9 +100,14 @@ export const Footer = () => {
                 <button
                   key={index}
                   onClick={() => scrollToSection(link.href)}
-                  className="text-left text-xs text-muted-foreground hover:text-foreground transition-colors duration-200 w-fit"
+                  className="group flex items-center text-xs text-muted-foreground hover:text-primary transition-all duration-300 w-fit select-none"
                 >
-                  {link.label}
+                  <span className="w-0 opacity-0 group-hover:w-2.5 group-hover:opacity-100 text-primary font-mono transition-all duration-300 mr-0.5 leading-none select-none">
+                    ›
+                  </span>
+                  <span className="group-hover:translate-x-0.5 transition-transform duration-300">
+                    {link.label}
+                  </span>
                 </button>
               ))}
             </nav>
@@ -108,10 +117,18 @@ export const Footer = () => {
           <div className="space-y-4 md:ml-auto w-full md:max-w-[240px]">
             <h4 className="text-[10px] font-mono tracking-widest text-foreground uppercase border-b-[0.5px] border-border/40 pb-1.5 mb-3">Connect</h4>
             <div className="flex flex-col gap-2 text-xs text-muted-foreground font-sans">
-              <a href="mailto:vutikurishanmukh17@gmail.com" className="hover:text-foreground transition-colors font-mono text-[11px]">
-                vutikurishanmukh17@gmail.com
+              <a 
+                href="mailto:vutikurishanmukh17@gmail.com" 
+                className="group flex items-center hover:text-primary transition-colors duration-300 font-mono text-[11px]"
+              >
+                <span className="w-0 opacity-0 group-hover:w-2.5 group-hover:opacity-100 text-primary transition-all duration-300 mr-0.5 leading-none">
+                  ›
+                </span>
+                <span className="group-hover:translate-x-0.5 transition-transform duration-300">
+                  vutikurishanmukh17@gmail.com
+                </span>
               </a>
-              <p className="text-[11px] text-muted-foreground font-mono uppercase tracking-wider">[ AVAILABLE FOR OPPORTUNITIES ]</p>
+              <p className="text-[10px] text-muted-foreground font-mono uppercase tracking-wider">[ AVAILABLE FOR OPPORTUNITIES ]</p>
             </div>
           </div>
         </div>
@@ -135,7 +152,7 @@ export const Footer = () => {
             </span>
             <span className="text-border/60">|</span>
             <span className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 bg-emerald-500/40 rounded-full" />
+              <span className="w-1.5 h-1.5 bg-emerald-500/40 rounded-full animate-pulse" style={{ animationDuration: '3s' }} />
               OP_IST: <span className="text-foreground font-semibold">{time.ist}</span>
             </span>
           </div>
@@ -149,10 +166,10 @@ export const Footer = () => {
               variant="outline"
               size="sm"
               onClick={scrollToTop}
-              className="rounded border-[0.5px] border-border/80 bg-background/50 hover:bg-background text-[9px] font-mono uppercase tracking-wider h-8 shadow-none"
+              className="group rounded border-[0.5px] border-border/80 bg-background/50 hover:bg-background hover:border-primary/40 text-[9px] font-mono uppercase tracking-wider h-8 shadow-none transition-all duration-300 hover:scale-105"
             >
-              <ArrowUp className="h-3.5 w-3.5 mr-1.5" />
-              Top
+              <ArrowUp className="h-3.5 w-3.5 mr-1.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110 text-muted-foreground group-hover:text-primary" />
+              <span className="group-hover:text-primary transition-colors">Top</span>
             </Button>
           </div>
         </div>
