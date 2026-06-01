@@ -86,6 +86,9 @@ const cityIntelligence = [
   { city: 'San Francisco', sales: '$34,539,220', margin: '29.7%', status: 'EXPENSIVE' },
   { city: 'Miami', sales: '$31,600,863', margin: '38.5%', status: 'HIGH_VOLUME' },
   { city: 'Portland', sales: '$30,545,652', margin: '35.2%', status: 'STABLE' },
+  { city: 'Birmingham', sales: '$17,624,102', margin: '51.9%', status: 'HIDDEN_GEM' },
+  { city: 'Knoxville', sales: '$12,410,230', margin: '47.0%', status: 'HIDDEN_GEM' },
+  { city: 'Boise', sales: '$11,540,891', margin: '45.8%', status: 'HIDDEN_GEM' },
 ];
 
 const retailerPerformance = [
