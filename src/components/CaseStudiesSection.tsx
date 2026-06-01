@@ -67,10 +67,12 @@ const caseStudies: CaseStudy[] = [
     github: 'https://github.com/vutikurishanmukha9/Adidas_US_Sales',
     tech: ['Python', 'Pandas', 'NumPy', 'Matplotlib', 'Seaborn'],
     metrics: [
+      { label: 'Total Revenue', value: '$899.9M' },
+      { label: 'Operating Profit', value: '$332.1M' },
       { label: 'Online Margin', value: '46.4%' },
       { label: 'In-Store Margin', value: '35.6%' },
-      { label: 'Questions Solved', value: '15' },
-      { label: 'Spike Anomalies', value: 'Detected' },
+      { label: 'Overall Margin', value: '36.9%' },
+      { label: 'YoY Growth', value: '+294.2%' },
     ],
     tabs: {
       bottleneck: 'Adidas lacked a unified analytical view of how sales channels, product categories, and regional markets compare on profitability and growth trends across their US retail footprint.',
@@ -91,7 +93,9 @@ const caseStudies: CaseStudy[] = [
       { label: 'Time Span', value: '3 Years' },
       { label: 'Ship Modes', value: '4 Tracked' },
       { label: 'Categories', value: '3 Segments' },
-      { label: 'Regions', value: '4 Mapped' },
+      { label: 'Regions Mapped', value: '4 Regions' },
+      { label: 'Standard Class', value: '60.0% Share' },
+      { label: 'Q4 Seasonal Lift', value: '+35.0%' },
     ],
     tabs: {
       bottleneck: 'Retail leadership needed a single-pane dashboard to monitor how sales volume distributes across time periods, shipping methods, and product categories without querying raw transaction logs.',
