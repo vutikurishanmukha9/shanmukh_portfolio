@@ -23,7 +23,7 @@ export const GrindingActivitySection = () => {
     );
 
     return (
-        <SectionWrapper id="activity" className="py-24 bg-background">
+        <SectionWrapper id="activity" className="py-16 bg-background">
             <div className="container mx-auto px-4 lg:px-8 relative z-10">
                 
                 <div className="text-center mb-16 max-w-2xl mx-auto">

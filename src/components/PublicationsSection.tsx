@@ -122,7 +122,7 @@ export const PublicationsSection = () => {
   ];
 
   return (
-    <SectionWrapper id="publications" className="py-24 bg-muted/10 border-b-[0.5px] border-border/40">
+    <SectionWrapper id="publications" className="py-16 bg-muted/10 border-b-[0.5px] border-border/40">
       <div className="container mx-auto px-4 lg:px-8 relative z-10" ref={containerRef}>
         
         {/* Header */}

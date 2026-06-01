@@ -773,7 +773,7 @@ export const ProjectsSection = () => {
   const standardProjects = filteredProjects.filter((project) => project !== heroProject);
 
   return (
-    <SectionWrapper id="projects" className="relative overflow-hidden bg-background py-24 border-b-[0.5px] border-border/40">
+    <SectionWrapper id="projects" className="relative overflow-hidden bg-background py-16 border-b-[0.5px] border-border/40">
       <div className="container relative z-10 mx-auto px-4 lg:px-8">
         
         {/* Section Header */}

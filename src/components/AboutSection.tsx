@@ -19,7 +19,7 @@ export const AboutSection = () => {
   ];
 
   return (
-    <SectionWrapper id="about" className="py-24 bg-muted/20 border-y-[0.5px] border-border/40 overflow-hidden">
+    <SectionWrapper id="about" className="py-16 bg-muted/20 border-y-[0.5px] border-border/40 overflow-hidden">
       <div className="container mx-auto px-4 lg:px-8 relative z-10" ref={containerRef}>
         
         {/* Monospaced Section Indicator */}

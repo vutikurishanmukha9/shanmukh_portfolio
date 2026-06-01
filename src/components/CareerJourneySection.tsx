@@ -37,7 +37,7 @@ export const CareerJourneySection = () => {
     ];
 
     return (
-        <SectionWrapper id="career" className="py-24 bg-muted/20 border-b-[0.5px] border-border/40">
+        <SectionWrapper id="career" className="py-16 bg-muted/20 border-b-[0.5px] border-border/40">
             <div className="container mx-auto px-4 lg:px-8 relative z-10" ref={containerRef}>
                 {/* Header */}
                 <div className="text-center mb-16 max-w-2xl mx-auto">
