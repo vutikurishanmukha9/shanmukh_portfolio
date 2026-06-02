@@ -443,21 +443,53 @@ const CaseStudyUnicorn = () => {
           </div>
 
           {/* India Spotlight Panel */}
-          <div className="border-[0.5px] border-amber-500/20 bg-amber-500/5 rounded-lg p-5 mb-8">
-            <div className="flex items-center gap-2 mb-3">
-              <Award className="h-4 w-4 text-amber-500 shrink-0" />
-              <span className="text-[9px] font-mono uppercase tracking-widest text-amber-600 dark:text-amber-400 font-bold">Country Spotlight: India</span>
+          <div className="border-[0.5px] border-border bg-card/60 backdrop-blur-md rounded-lg p-6 mb-8 relative overflow-hidden shadow-none">
+            {/* Top accented border line */}
+            <div className="absolute top-0 inset-x-0 h-[2px] bg-amber-500/80" />
+            
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b-[0.5px] border-border/40 pb-4 mb-5">
+              <div className="flex items-center gap-2">
+                <Award className="h-4.5 w-4.5 text-amber-500 shrink-0" />
+                <span className="text-[10px] font-mono uppercase tracking-widest text-foreground font-bold">EXECUTIVE SPOTLIGHT // GEOGRAPHIC INDEX: IN</span>
+              </div>
+              <span className="text-[9px] font-mono text-amber-600 dark:text-amber-400 font-bold bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded uppercase tracking-wider">
+                India Startup Hub
+              </span>
             </div>
-            <p className="text-xs text-muted-foreground leading-relaxed mb-3">
-              India ranks as the <strong className="text-foreground font-semibold">third-largest</strong> unicorn hub globally with 65 companies and a combined $196B valuation. However, Indian unicorns require exceptionally heavy capital to scale, posting an average funding of <span className="text-foreground font-semibold">$733M</span>, among the highest averages globally. They take <span className="text-foreground font-semibold">7.7 years</span> to cross $1B, slower than China (5.8) and the USA (6.8). E-commerce (16) and Fintech (15) account for 47.7% of all Indian unicorns. Edtech is disproportionately strong in India, represented by 6 unicorns including BYJU's at $22B, the country's highest-valued private company.
-            </p>
-            <div className="flex flex-wrap gap-2 text-[10px] font-mono text-muted-foreground">
-              <span>Top 5 India:</span>
-              <span className="text-foreground font-semibold bg-background/50 px-1.5 py-0.5 rounded border-[0.5px] border-border/30">BYJU's ($22B)</span>
-              <span className="text-foreground font-semibold bg-background/50 px-1.5 py-0.5 rounded border-[0.5px] border-border/30">Swiggy ($11B)</span>
-              <span className="text-foreground font-semibold bg-background/50 px-1.5 py-0.5 rounded border-[0.5px] border-border/30">OYO Rooms ($10B)</span>
-              <span className="text-foreground font-semibold bg-background/50 px-1.5 py-0.5 rounded border-[0.5px] border-border/30">Dream11 ($8B)</span>
-              <span className="text-foreground font-semibold bg-background/50 px-1.5 py-0.5 rounded border-[0.5px] border-border/30">Razorpay ($8B)</span>
+
+            <div className="grid grid-cols-1 lg:grid-cols-[1.8fr_1.2fr] gap-6">
+              <div className="space-y-3">
+                <h3 className="font-serif-display text-lg font-medium text-foreground tracking-tight leading-snug">
+                  High-Capital Dependency in the Third-Largest Global Hub
+                </h3>
+                <p className="text-xs text-muted-foreground leading-relaxed text-justify">
+                  India ranks as the <strong className="text-foreground font-semibold">third-largest</strong> unicorn hub globally with 65 companies and a combined $196B valuation. However, Indian unicorns require exceptionally heavy capital to scale, posting an average funding of <span className="text-foreground font-semibold">$733M</span>, among the highest averages globally. They take <span className="text-foreground font-semibold">7.7 years</span> to cross $1B, slower than China (5.8) and the USA (6.8). E-commerce (16) and Fintech (15) account for 47.7% of all Indian unicorns. Edtech is disproportionately strong in India, represented by 6 unicorns including BYJU's at $22B, the country's highest-valued private company.
+                </p>
+              </div>
+
+              {/* Stats & Top 5 Grid */}
+              <div className="flex flex-col justify-between border-[0.5px] border-border/60 bg-muted/20 rounded p-4 font-mono text-[10px] h-full justify-start gap-4">
+                <div className="border-b-[0.5px] border-border/40 pb-2">
+                  <span className="text-[9px] text-muted-foreground uppercase font-bold tracking-widest">TOP INDIAN UNICORNS</span>
+                </div>
+                <div className="space-y-2.5">
+                  {[
+                    { name: "BYJU's", val: "$22B" },
+                    { name: "Swiggy", val: "$11B" },
+                    { name: "OYO Rooms", val: "$10B" },
+                    { name: "Dream11", val: "$8B" },
+                    { name: "Razorpay", val: "$8B" }
+                  ].map((unicorn, i) => (
+                    <div key={unicorn.name} className="flex justify-between items-center text-xs border-b-[0.5px] border-border/10 pb-1.5 last:border-0 last:pb-0">
+                      <div className="flex items-center gap-1.5 text-muted-foreground">
+                        <span className="text-[9px] opacity-40 font-semibold">0{i+1}.</span>
+                        <span className="text-foreground font-semibold">{unicorn.name}</span>
+                      </div>
+                      <span className="text-amber-600 dark:text-amber-400 font-bold">{unicorn.val}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
 
