@@ -39,7 +39,7 @@ export const CareerJourneySection = () => {
             company: 'Codegnan IT Solutions',
             location: 'Hyderabad',
             period: 'June 2025 – Feb 2026',
-            description: 'Completed intensive training in Data Analytics under Sr. Data Science Lead Mr. Puneet Kansal. Built an Exploratory Data Analysis dashboard on Global Unicorn Companies using Power BI, and developed multi-region sales analytics reports.',
+            description: 'Mastered advanced data analytics workflows under Sr. Data Science Lead Mr. Puneet Kansal and translated them into production-ready solutions. Built and deployed a dynamic Exploratory Data Analysis dashboard on Global Unicorn Companies using Power BI, and engineered multi-region sales analytics reports to drive business decisions.',
             skills: ['Python', 'MySQL', 'Power BI', 'Statistics', 'EDA', 'Excel', 'Snowflake'],
             current: false,
         },
