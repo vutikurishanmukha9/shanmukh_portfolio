@@ -215,8 +215,8 @@ const AwsTopologyMap = () => {
       <div className="grid lg:grid-cols-[2.5fr_1fr] gap-6 items-center">
         
         {/* SVG Topology Diagram */}
-        <div className="relative border-[0.5px] border-border/60 bg-background/35 rounded-md p-4 flex items-center justify-center overflow-hidden">
-          <svg className="w-full h-auto max-w-[480px] text-muted-foreground/35" viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg">
+        <div className="hidden md:flex relative border-[0.5px] border-border/60 bg-background/35 rounded-md p-4 items-center justify-center overflow-hidden">
+          <svg className="w-full h-auto max-w-[480px] text-muted-foreground/35" viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AWS Infrastructure topology diagram showing connections between Client UI, API Gateway, Redis Broker, Celery Node, AWS S3, Vector Database, and LLM Router">
             
             {/* Draw Links/Connection Tracks */}
             {links.map((link, i) => {
@@ -266,6 +266,7 @@ const AwsTopologyMap = () => {
                   className="cursor-pointer group"
                   onMouseEnter={() => setHoveredNode(node.id)}
                   onMouseLeave={() => setHoveredNode(null)}
+                  onClick={() => setHoveredNode(hoveredNode === node.id ? null : node.id)}
                 >
                   <circle 
                     cx={node.cx} 
@@ -296,6 +297,26 @@ const AwsTopologyMap = () => {
             })}
 
           </svg>
+        </div>
+
+        {/* Mobile Tech Stack Fallback */}
+        <div className="md:hidden block border-[0.5px] border-border/60 bg-background/35 rounded-md p-4 font-mono text-[11px]">
+          <span className="text-[9px] uppercase tracking-widest text-muted-foreground/60 mb-2.5 block font-semibold">Tech Stack Architecture</span>
+          <div className="space-y-2 text-muted-foreground">
+            {nodes.map(node => {
+              const Icon = node.icon;
+              return (
+                <div key={node.id} className="flex items-start gap-2 py-1.5 border-b-[0.5px] border-border/10 last:border-0 text-left">
+                  <Icon className="w-3.5 h-3.5 text-primary mt-0.5 shrink-0" />
+                  <div>
+                    <span className="text-foreground font-semibold">{node.label}</span>
+                    <span className="mx-1.5 opacity-40">//</span>
+                    <span className="opacity-80">{node.details}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
 
         {/* Node Live Details Console */}
@@ -442,7 +463,7 @@ const PreviewPanel = ({ project, compact = false }: { project: Project; compact?
           <span className="opacity-60">Fingertip tracked</span>
         </div>
         <div className="relative h-16 my-2 flex items-center justify-center">
-          <svg className="w-12 h-12 text-primary/80" viewBox="0 0 40 40">
+          <svg className="w-12 h-12 text-primary/80" viewBox="0 0 40 40" role="img" aria-label="3D projection graph showing fingertip tracked matrices">
             <line x1="20" y1="8" x2="32" y2="16" stroke="currentColor" strokeWidth="0.5" strokeDasharray="1 1" />
             <line x1="32" y1="16" x2="28" y2="30" stroke="currentColor" strokeWidth="0.5" strokeDasharray="1 1" />
             <line x1="28" y1="30" x2="12" y2="30" stroke="currentColor" strokeWidth="0.5" strokeDasharray="1 1" />
@@ -632,7 +653,7 @@ const ProjectCard = ({ project, index, variant = 'card' }: { project: Project; i
       {/* Dynamic Telemetry Connections inside matching card */}
       {isMatchingSkillActive && (
         <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-          <svg className="w-full h-full text-primary/30" xmlns="http://www.w3.org/2000/svg">
+          <svg className="w-full h-full text-primary/30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <motion.path 
               d="M 16 0 L 16 35 L 50 35" 
               fill="none" 

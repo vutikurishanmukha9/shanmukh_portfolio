@@ -34,6 +34,15 @@ export const CareerJourneySection = () => {
             skills: ['AWS', 'Cloud Architecture', 'DevOps', 'Docker'],
             current: false,
         },
+        {
+            title: 'Data Analytics Intern',
+            company: 'Codegnan IT Solutions',
+            location: 'Hyderabad',
+            period: 'June 2025 – Feb 2026',
+            description: 'Completed intensive training in Data Analytics under Sr. Data Science Lead Mr. Puneet Kansal. Built an Exploratory Data Analysis dashboard on Global Unicorn Companies using Power BI, and developed multi-region sales analytics reports.',
+            skills: ['Python', 'MySQL', 'Power BI', 'Statistics', 'EDA', 'Excel', 'Snowflake'],
+            current: false,
+        },
     ];
 
     return (

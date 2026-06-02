@@ -83,7 +83,7 @@ export const Footer = () => {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded border-[0.5px] border-border bg-background/50 hover:bg-background hover:text-primary hover:border-primary/40 hover:-translate-y-[1.5px] transition-all duration-200 text-muted-foreground shadow-none"
+                  className="p-2 rounded border-[0.5px] border-border bg-background/50 hover:bg-background hover:text-primary hover:border-primary/40 hover:-translate-y-[1.5px] transition-[transform,border-color,color,background-color] duration-200 text-muted-foreground shadow-none"
                   aria-label={social.name}
                 >
                   <social.icon className="h-4 w-4 animate-duration-300" />
@@ -100,9 +100,9 @@ export const Footer = () => {
                 <button
                   key={index}
                   onClick={() => scrollToSection(link.href)}
-                  className="group flex items-center text-xs text-muted-foreground hover:text-primary transition-all duration-300 w-fit select-none"
+                  className="group flex items-center text-xs text-muted-foreground hover:text-primary transition-colors duration-300 w-fit select-none"
                 >
-                  <span className="w-0 opacity-0 group-hover:w-2.5 group-hover:opacity-100 text-primary font-mono transition-all duration-300 mr-0.5 leading-none select-none">
+                  <span className="w-0 opacity-0 group-hover:w-2.5 group-hover:opacity-100 text-primary font-mono transition-[width,opacity] duration-300 mr-0.5 leading-none select-none">
                     ›
                   </span>
                   <span className="group-hover:translate-x-0.5 transition-transform duration-300">
@@ -121,7 +121,7 @@ export const Footer = () => {
                 href="mailto:vutikurishanmukh17@gmail.com" 
                 className="group flex items-center hover:text-primary transition-colors duration-300 font-mono text-[11px]"
               >
-                <span className="w-0 opacity-0 group-hover:w-2.5 group-hover:opacity-100 text-primary transition-all duration-300 mr-0.5 leading-none">
+                <span className="w-0 opacity-0 group-hover:w-2.5 group-hover:opacity-100 text-primary transition-[width,opacity] duration-300 mr-0.5 leading-none">
                   ›
                 </span>
                 <span className="group-hover:translate-x-0.5 transition-transform duration-300">
@@ -166,7 +166,7 @@ export const Footer = () => {
               variant="outline"
               size="sm"
               onClick={scrollToTop}
-              className="group rounded border-[0.5px] border-border/80 bg-background/50 hover:bg-background hover:border-primary/40 text-[9px] font-mono uppercase tracking-wider h-8 shadow-none transition-all duration-200 hover:-translate-y-[1px]"
+              className="group rounded border-[0.5px] border-border/80 bg-background/50 hover:bg-background hover:border-primary/40 text-[9px] font-mono uppercase tracking-wider h-8 shadow-none transition-[transform,border-color,color,background-color] duration-200 hover:-translate-y-[1px]"
             >
               <ArrowUp className="h-3.5 w-3.5 mr-1.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110 text-muted-foreground group-hover:text-primary" />
               <span className="group-hover:text-primary transition-colors">Top</span>

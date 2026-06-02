@@ -37,7 +37,7 @@ export const AboutSection = () => {
           {/* LEFT PANEL: Operator Dossier & Spec Ledger */}
           <div className="lg:col-span-5 flex flex-col justify-between space-y-8 bg-card/45 backdrop-blur-md border-[0.5px] border-border/80 p-6 md:p-8 rounded-lg shadow-none">
             <div className="space-y-6">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded border-[0.5px] border-primary/20 bg-primary/5 text-[9px] font-mono uppercase tracking-wider text-primary shadow-none">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded border-[0.5px] border-primary/20 bg-primary/5 text-[10px] sm:text-[9px] font-mono uppercase tracking-wider text-primary shadow-none">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 SYSTEM OPERATOR // ACTIVE
               </span>
@@ -55,7 +55,7 @@ export const AboutSection = () => {
 
             {/* Spec Ledger - Thin Monospaced Rows */}
             <div className="space-y-3 pt-6 border-t-[0.5px] border-border/40">
-              <h4 className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground/75 mb-4">
+              <h4 className="text-[10px] sm:text-[9px] font-mono uppercase tracking-widest text-muted-foreground/75 mb-4">
                 CORE ENGINE SPECIFICATIONS
               </h4>
               <div className="divide-y divide-border/40">
@@ -88,7 +88,7 @@ export const AboutSection = () => {
               <button
                 onClick={() => setActiveTab('narrative')}
                 className={cn(
-                  "flex-1 px-4 py-3 text-[9px] font-mono tracking-widest uppercase transition-all duration-200 border-r-[0.5px] border-border/80 text-center relative",
+                  "flex-1 px-4 py-3 text-[10px] sm:text-[9px] font-mono tracking-widest uppercase transition-colors duration-200 border-r-[0.5px] border-border/80 text-center relative",
                   activeTab === 'narrative' 
                     ? "text-foreground font-bold bg-background/80" 
                     : "text-muted-foreground hover:text-foreground hover:bg-muted/10"
@@ -103,7 +103,7 @@ export const AboutSection = () => {
               <button
                 onClick={() => setActiveTab('telemetry')}
                 className={cn(
-                  "flex-1 px-4 py-3 text-[9px] font-mono tracking-widest uppercase transition-all duration-200 border-r-[0.5px] border-border/80 text-center relative",
+                  "flex-1 px-4 py-3 text-[10px] sm:text-[9px] font-mono tracking-widest uppercase transition-colors duration-200 border-r-[0.5px] border-border/80 text-center relative",
                   activeTab === 'telemetry' 
                     ? "text-foreground font-bold bg-background/80" 
                     : "text-muted-foreground hover:text-foreground hover:bg-muted/10"
@@ -118,7 +118,7 @@ export const AboutSection = () => {
               <button
                 onClick={() => setActiveTab('academic')}
                 className={cn(
-                  "flex-1 px-4 py-3 text-[9px] font-mono tracking-widest uppercase transition-all duration-200 text-center relative",
+                  "flex-1 px-4 py-3 text-[10px] sm:text-[9px] font-mono tracking-widest uppercase transition-colors duration-200 text-center relative",
                   activeTab === 'academic' 
                     ? "text-foreground font-bold bg-background/80" 
                     : "text-muted-foreground hover:text-foreground hover:bg-muted/10"
@@ -225,7 +225,7 @@ export const AboutSection = () => {
                         
                         {/* Custom SVG telemetry vector flow */}
                         <div className="h-16 flex items-center justify-center relative">
-                          <svg className="w-full h-10 text-primary/45" viewBox="0 0 160 40">
+                          <svg className="w-full h-10 text-primary/45" viewBox="0 0 160 40" role="img" aria-label="Pipeline schematic showing raw CSV converting via Celery worker and Redis to a PDF document">
                             <rect x="5" y="10" width="30" height="20" rx="2" fill="none" stroke="currentColor" strokeWidth="0.5" />
                             <text x="20" y="22" textAnchor="middle" fontSize="6" fontFamily="monospace" fill="currentColor">CSV</text>
                             

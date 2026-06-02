@@ -40,7 +40,7 @@ export const GrindingActivitySection = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-4xl md:text-5xl font-bold font-display tracking-tight text-foreground"
+                        className="text-4xl md:text-5xl font-serif-display font-medium tracking-tight text-foreground"
                     >
                         Daily Activity
                     </motion.h2>
@@ -60,7 +60,7 @@ export const GrindingActivitySection = () => {
                                     <Github className="w-6 h-6 text-foreground" />
                                 </div>
                                 <div>
-                                    <h3 className="text-lg font-semibold text-foreground font-display">GitHub Contributions</h3>
+                                    <h3 className="text-lg font-serif-display font-medium text-foreground">GitHub Contributions</h3>
                                     <p className="text-sm text-muted-foreground">@{GITHUB_USERNAME}</p>
                                 </div>
                             </div>

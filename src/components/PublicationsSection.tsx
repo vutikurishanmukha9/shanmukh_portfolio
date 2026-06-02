@@ -54,7 +54,7 @@ const LaTeXPaperPreview = ({ url }: { url: string }) => {
             
             {/* SVG Schematic Block */}
             <div className="flex-1 border-[0.3px] border-foreground/20 bg-muted/20 rounded p-1 flex items-center justify-center">
-              <svg className="w-full h-11 text-primary/70" viewBox="0 0 60 40">
+              <svg className="w-full h-11 text-primary/70" viewBox="0 0 60 40" role="img" aria-label="Fig 1. Decoupled IoT Sensor telemetry dataflow block diagram linking MCU with DHT22 sensors to CLOUD telemetry base">
                 {/* MCU module */}
                 <rect x="2" y="13" width="16" height="14" rx="1" fill="none" stroke="currentColor" strokeWidth="0.3" />
                 <text x="10" y="21" textAnchor="middle" fontSize="3" fontFamily="monospace" fill="currentColor">MCU</text>
@@ -91,7 +91,7 @@ const LaTeXPaperPreview = ({ url }: { url: string }) => {
 
       {/* Hover blur overlay [READ ARTICLE] */}
       <div className="absolute inset-0 bg-background/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-[1px]">
-        <div className="border-[0.5px] border-primary/45 bg-primary/5 px-3 py-1.5 rounded flex items-center gap-1.5 text-[9px] font-mono uppercase tracking-widest text-primary font-bold shadow-none animate-pulse">
+        <div className="border-[0.5px] border-primary/45 bg-primary/5 px-3 py-1.5 rounded flex items-center gap-1.5 text-[10px] sm:text-[9px] font-mono uppercase tracking-widest text-primary font-bold shadow-none animate-pulse">
           READ ARTICLE
           <ExternalLink className="h-3 w-3" />
         </div>
@@ -170,12 +170,12 @@ export const PublicationsSection = () => {
                 {/* Meta Row (Type, Journal, Year) */}
                 <div className="flex flex-wrap items-center justify-between gap-4 border-b-[0.5px] border-border/40 pb-4">
                   <div className="flex flex-wrap items-center gap-3">
-                    <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-background border-[0.5px] border-border text-[9px] font-mono text-muted-foreground uppercase tracking-wider">
+                    <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-background border-[0.5px] border-border text-[10px] sm:text-[9px] font-mono text-muted-foreground uppercase tracking-wider">
                       <FileText className="h-3 w-3 text-primary" />
                       {pub.type}
                     </span>
                     {pub.featured && (
-                      <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-primary/10 border-[0.5px] border-primary/20 text-[9px] font-mono text-primary uppercase tracking-wider">
+                      <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-primary/10 border-[0.5px] border-primary/20 text-[10px] sm:text-[9px] font-mono text-primary uppercase tracking-wider">
                         FEATURED
                       </span>
                     )}
@@ -226,7 +226,7 @@ export const PublicationsSection = () => {
                   {/* Right Column: Telemetry Performance Metrics Grid (3 Columns) */}
                   <div className="lg:col-span-3 flex flex-col justify-between border-[0.5px] border-border rounded bg-background/40 p-4 h-full min-h-[180px]">
                     <div>
-                      <div className="text-[9px] font-mono tracking-widest uppercase text-muted-foreground border-b-[0.5px] border-border/40 pb-2 mb-3">
+                      <div className="text-[10px] sm:text-[9px] font-mono tracking-widest uppercase text-muted-foreground border-b-[0.5px] border-border/40 pb-2 mb-3">
                         SYSTEM TELEMETRY
                       </div>
                       <div className="space-y-3 font-mono">

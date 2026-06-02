@@ -94,8 +94,8 @@ export const ContactSection = () => {
                               <div className="w-9 h-9 rounded bg-muted/60 flex items-center justify-center group-hover:bg-primary/10 transition-colors duration-200">
                                   <Icon className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
                               </div>
-                              <div>
-                                  <p className="text-[9px] font-mono tracking-widest text-muted-foreground uppercase mb-0.5">{contact.label}</p>
+                               <div>
+                                  <p className="text-[10px] sm:text-[9px] font-mono tracking-widest text-muted-foreground uppercase mb-0.5">{contact.label}</p>
                                   {contact.href !== '#' ? (
                                   <a
                                       href={contact.href}
@@ -115,7 +115,7 @@ export const ContactSection = () => {
 
               {/* Social Links */}
               <div>
-                <p className="text-[9px] font-mono tracking-widest text-muted-foreground uppercase mb-3">Social Profiles</p>
+                <p className="text-[10px] sm:text-[9px] font-mono tracking-widest text-muted-foreground uppercase mb-3">Social Profiles</p>
                 <div className="flex gap-2">
                   {socialLinks.map((social) => {
                       const Icon = social.icon;
@@ -127,6 +127,7 @@ export const ContactSection = () => {
                             rel="noopener noreferrer"
                             className="group p-3 rounded border-[0.5px] border-border bg-background/40 hover:bg-background/80 hover:border-primary/35 transition-colors duration-200 shadow-none"
                             title={social.name}
+                            aria-label={social.name}
                         >
                             <Icon className="h-4.5 w-4.5 text-muted-foreground group-hover:text-primary transition-colors duration-200" />
                         </a>

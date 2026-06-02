@@ -21,7 +21,7 @@ export const NewsTicker = ({ items, speed = 30 }: NewsTickerProps) => {
         >
             <div className="py-1.5 relative flex items-center h-8">
                 {/* LIVE Badge */}
-                <div className="flex-shrink-0 flex items-center gap-2 px-4 border-r-[0.5px] border-border/60 bg-card z-20 h-full">
+                <div className="flex-shrink-0 hidden sm:flex items-center gap-2 px-4 border-r-[0.5px] border-border/60 bg-card z-20 h-full">
                     <span className="relative flex h-1.5 w-1.5">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
                         <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span>
@@ -49,7 +49,7 @@ export const NewsTicker = ({ items, speed = 30 }: NewsTickerProps) => {
                         {tickerContent.map((item, index) => (
                             <span
                                 key={index}
-                                className="inline-flex items-center mx-4 text-[10px] font-mono tracking-widest text-muted-foreground uppercase select-none"
+                                className="inline-flex items-center mx-4 text-[11px] font-mono tracking-widest text-muted-foreground uppercase select-none"
                             >
                                 {/* Clean asterisk separator */}
                                 <span className="text-primary/60 mr-3 text-xs">•</span>

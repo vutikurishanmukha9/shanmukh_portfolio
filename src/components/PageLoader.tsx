@@ -5,6 +5,13 @@ export const PageLoader = () => {
     const [fadeOut, setFadeOut] = useState(false);
 
     useEffect(() => {
+        // Skip loader if user prefers reduced motion
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReducedMotion) {
+            setLoading(false);
+            return;
+        }
+
         // Start fade out after content likely loaded
         const fadeTimer = setTimeout(() => {
             setFadeOut(true);
@@ -39,7 +46,7 @@ export const PageLoader = () => {
 
                     {/* Center text */}
                     <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="text-xl font-bold text-gradient font-display">SV</span>
+                        <span className="text-xl font-bold text-primary font-serif-display">SV</span>
                     </div>
                 </div>
 

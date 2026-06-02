@@ -85,7 +85,7 @@ export const ContactForm = () => {
           onChange={handleChange}
           placeholder="Your name"
           required
-          className="bg-transparent border-[0.5px] border-border/80 focus:border-primary focus:ring-[0.5px] focus:ring-primary/30 transition-all rounded px-3 py-4 text-xs font-sans h-9"
+          className="bg-transparent border-[0.5px] border-border/80 focus:border-primary focus:ring-[0.5px] focus:ring-primary/30 transition-[border-color,box-shadow] rounded px-3 py-4 text-xs font-sans h-9"
         />
       </div>
 
@@ -101,7 +101,7 @@ export const ContactForm = () => {
           onChange={handleChange}
           placeholder="your.email@example.com"
           required
-          className="bg-transparent border-[0.5px] border-border/80 focus:border-primary focus:ring-[0.5px] focus:ring-primary/30 transition-all rounded px-3 py-4 text-xs font-sans h-9"
+          className="bg-transparent border-[0.5px] border-border/80 focus:border-primary focus:ring-[0.5px] focus:ring-primary/30 transition-[border-color,box-shadow] rounded px-3 py-4 text-xs font-sans h-9"
         />
       </div>
 
@@ -116,7 +116,7 @@ export const ContactForm = () => {
           onChange={handleChange}
           placeholder="What is this about?"
           required
-          className="bg-transparent border-[0.5px] border-border/80 focus:border-primary focus:ring-[0.5px] focus:ring-primary/30 transition-all rounded px-3 py-4 text-xs font-sans h-9"
+          className="bg-transparent border-[0.5px] border-border/80 focus:border-primary focus:ring-[0.5px] focus:ring-primary/30 transition-[border-color,box-shadow] rounded px-3 py-4 text-xs font-sans h-9"
         />
       </div>
 
@@ -132,7 +132,7 @@ export const ContactForm = () => {
           placeholder="Tell me about your project…"
           required
           rows={4}
-          className="bg-transparent border-[0.5px] border-border/80 focus:border-primary focus:ring-[0.5px] focus:ring-primary/30 transition-all rounded px-3 py-2.5 text-xs font-sans resize-none"
+          className="bg-transparent border-[0.5px] border-border/80 focus:border-primary focus:ring-[0.5px] focus:ring-primary/30 transition-[border-color,box-shadow] rounded px-3 py-2.5 text-xs font-sans resize-none"
         />
       </div>
 
@@ -144,7 +144,7 @@ export const ContactForm = () => {
         {isSubmitting ? (
           <>
             <Loader2 className="h-3.5 w-3.5 mr-2 animate-spin" />
-            Sending...
+            Sending…
           </>
         ) : (
           <>

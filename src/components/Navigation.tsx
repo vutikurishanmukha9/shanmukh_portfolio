@@ -87,6 +87,7 @@ export const Navigation = () => {
               size="icon"
               className="rounded-full hover:bg-muted text-foreground h-8 w-8"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
             >
               {isMobileMenuOpen ? <X size={16} /> : <Menu size={16} />}
             </Button>
