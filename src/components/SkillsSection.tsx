@@ -16,19 +16,19 @@ const pipelineStages = [
 const skillCategories = [
   {
     title: 'Programming',
-    skills: ['Python', 'SQL', 'C', 'C++', 'Java', 'TypeScript', 'OOP'],
+    skills: ['Python', 'SQL', 'OOP'],
     icon: Code,
     stage: 'process',
   },
   {
     title: 'Cloud & DevOps',
-    skills: ['AWS S3', 'AWS EC2', 'AWS RDS', 'AWS Lambda', 'Docker', 'Kubernetes', 'GitHub Actions', 'CI/CD'],
+    skills: ['AWS S3', 'AWS EC2', 'AWS RDS', 'AWS Lambda', 'Docker', 'GitHub Actions', 'CI/CD'],
     icon: Cloud,
     stage: 'store',
   },
   {
     title: 'Data & AI',
-    skills: ['Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'Scikit-learn', 'TensorFlow', 'PyTorch', 'PySpark', 'NLP', 'Computer Vision', 'RAG Systems'],
+    skills: ['Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'Scikit-learn', 'PySpark', 'NLP', 'Computer Vision', 'RAG Systems'],
     icon: Brain,
     stage: 'analyze',
   },

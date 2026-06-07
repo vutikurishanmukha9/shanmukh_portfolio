@@ -61,7 +61,7 @@ To ensure production-grade engineering standards, all unused aesthetic assets, l
 ### Prerequisites
 Ensure you have Node.js and a package manager (npm or bun) installed locally.
 
-### Installation and Local Development
+### Local Development Setup
 
 ```bash
 # Clone the repository
