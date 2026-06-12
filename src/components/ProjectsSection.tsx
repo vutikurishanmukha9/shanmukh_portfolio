@@ -34,7 +34,6 @@ type Project = {
   title: string;
   description: string;
   impact: string;
-  ownership: string;
   metrics: string[];
   tech: string[];
   category: ProjectCategory;

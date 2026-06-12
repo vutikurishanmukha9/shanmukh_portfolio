@@ -228,7 +228,7 @@ const anomalyRecords = [
 
 // ─── Helpers ──────────────────────────────────────────────────────────
 
-const Divider = () => (
+const Divider = (props: React.HTMLAttributes<HTMLDivElement>) => (
   <div className="flex items-center gap-3 my-8 select-none">
     <div className="flex-1 border-t-[0.5px] border-border/60" />
     <div className="w-1.5 h-1.5 rotate-45 border-[0.5px] border-border/80 bg-card" />
@@ -236,7 +236,7 @@ const Divider = () => (
   </div>
 );
 
-const SectionHeading = ({ icon: Icon, label }: { icon: any; label: string }) => (
+const SectionHeading = ({ icon: Icon, label }: { icon: React.ElementType; label: string }) => (
   <div className="flex items-center gap-2 mb-5">
     <Icon className="h-4 w-4 text-primary shrink-0" />
     <h3 className="text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground font-semibold leading-none">{label}</h3>
