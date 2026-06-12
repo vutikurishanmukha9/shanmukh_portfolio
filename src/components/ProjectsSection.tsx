@@ -25,9 +25,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
 import { cn } from '@/lib/utils';
 import { useSkillFilter } from '@/context/SkillFilterContext';
+import { Link } from 'react-router-dom';
 
 type ProjectCategory = 'AI/ML' | 'Cloud' | 'Web App' | 'Computer Vision' | 'Data Analysis' | 'Other';
-type PreviewType = 'report' | 'signals' | 'community' | 'molecule' | 'prompt' | 'rag' | 'health' | 'gesture' | 'attendance' | 'analytics';
+type PreviewType = 'report' | 'signals' | 'community' | 'molecule' | 'prompt' | 'rag' | 'health' | 'gesture' | 'attendance' | 'analytics' | 'terminal';
 
 type Project = {
   title: string;
@@ -40,6 +41,8 @@ type Project = {
   focus: string;
   github: string;
   demo?: string;
+  demoLabel?: string;
+  caseStudy?: string;
   featured?: boolean;
   previewType: PreviewType;
 };
@@ -55,10 +58,24 @@ const categoryConfig: Record<ProjectCategory, { icon: LucideIcon; color: string;
 
 const projects: Project[] = [
   {
+    title: 'Context-Ly',
+    description: 'Open-source Context Intelligence Engine and CLI that acts as a persistent memory layer for LLMs to prevent token waste.',
+    impact: 'Architected a Python CLI with static analysis to automatically discover team conventions and package codebase context for AI.',
+    metrics: ['AST parsing', '100% test coverage', 'PyPI Package'],
+    tech: ['Python', 'Typer', 'Rich', 'Pytest', 'PyYAML'],
+    category: 'AI/ML',
+    focus: 'Developer Tools',
+    github: 'https://github.com/vutikurishanmukha9/contextly',
+    demo: 'https://pypi.org/project/contextly/',
+    demoLabel: 'View',
+    caseStudy: '/project/contextly',
+    featured: true,
+    previewType: 'terminal',
+  },
+  {
     title: 'GetReport',
     description: 'Full-stack reporting platform that turns raw datasets into PDF reports with fast Polars processing and AI-assisted semantic querying.',
     impact: 'Built a complete data-to-report workflow for uploading files, exploring data, and generating polished reports.',
-    ownership: 'Solo Build',
     metrics: ['PDF reports', 'RAG querying', 'Polars pipeline'],
     tech: ['FastAPI', 'React', 'Polars', 'Redis', 'OpenAI', 'Docker'],
     category: 'Web App',
@@ -72,7 +89,6 @@ const projects: Project[] = [
     title: 'Candle-Light',
     description: 'AI-powered market pattern analysis experience with multi-model fallback and low-latency recognition flows.',
     impact: 'Created a visual AI workflow for reading market patterns and presenting signals in a cleaner product experience.',
-    ownership: 'Solo Build',
     metrics: ['Pattern analysis', 'Model fallback', 'Live UI'],
     tech: ['React', 'TailwindCSS', 'Machine Learning', 'OAuth'],
     category: 'AI/ML',
@@ -86,7 +102,6 @@ const projects: Project[] = [
     title: 'HeartOut',
     description: 'Anonymous storytelling platform with role-based access control, JWT authentication, and a scalable MongoDB content model.',
     impact: 'Shipped a secure community-style product foundation with authentication, content flows, and backend structure.',
-    ownership: 'Solo Build',
     metrics: ['JWT auth', 'RBAC', 'MongoDB schema'],
     tech: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT'],
     category: 'Web App',
@@ -100,7 +115,6 @@ const projects: Project[] = [
     title: 'Ele-Visualize',
     description: 'Interactive 3D molecule visualization engine using WebGL and MediaPipe hand tracking for gesture-led exploration.',
     impact: 'Designed a touchless 3D learning prototype that turns hand movement into molecule interaction.',
-    ownership: 'Solo Build',
     metrics: ['3D WebGL', 'Hand tracking', 'STEM UX'],
     tech: ['React', 'Three.js', 'MediaPipe', 'WebGL'],
     category: 'Computer Vision',
@@ -113,7 +127,6 @@ const projects: Project[] = [
     title: 'PromptBuddy',
     description: 'Prompt optimization workspace with reusable templates and intelligent slot filling for faster AI workflows.',
     impact: 'Created a productivity tool that makes prompt reuse, structure, and iteration easier for everyday AI work.',
-    ownership: 'Solo Build',
     metrics: ['Templates', 'Prompt slots', 'Fast workflow'],
     tech: ['React', 'TypeScript', 'Vite', 'TailwindCSS'],
     category: 'Web App',
@@ -126,7 +139,6 @@ const projects: Project[] = [
     title: 'Jarvis PDF Chatbot',
     description: 'Document intelligence app with vector retrieval pipelines and provider fallback for reliable PDF question answering.',
     impact: 'Built a RAG pipeline that turns static PDFs into searchable knowledge with conversational retrieval.',
-    ownership: 'Solo Build',
     metrics: ['FAISS retrieval', 'PDF Q&A', 'Provider fallback'],
     tech: ['Python', 'LangChain', 'Streamlit', 'OpenAI', 'FAISS'],
     category: 'AI/ML',
@@ -138,7 +150,6 @@ const projects: Project[] = [
     title: 'AI Health ChatBot',
     description: 'Diagnostic assistant prototype using NLP models for symptom intake and guided medical consultation flows.',
     impact: 'Created a healthcare conversation prototype that organizes symptom input into a guided assistant experience.',
-    ownership: 'Solo Build',
     metrics: ['NLP flow', 'Symptom intake', 'Assistant UI'],
     tech: ['Python', 'NLP', 'TensorFlow', 'Flask', 'React'],
     category: 'AI/ML',
@@ -151,7 +162,6 @@ const projects: Project[] = [
     title: 'Touchless Keyboard',
     description: 'Gesture-based text input system using OpenCV and MediaPipe for low-latency keystroke detection.',
     impact: 'Built a hands-free input prototype focused on gesture detection, responsiveness, and accessibility-minded control.',
-    ownership: 'Solo Build',
     metrics: ['OpenCV', 'MediaPipe', 'Gesture input'],
     tech: ['Python', 'OpenCV', 'MediaPipe', 'Machine Learning'],
     category: 'Computer Vision',
@@ -163,7 +173,6 @@ const projects: Project[] = [
     title: 'Automated Attendance',
     description: 'Facial recognition attendance pipeline with real-time matching and cloud database synchronization.',
     impact: 'Engineered a recognition workflow for identifying users, recording attendance, and syncing data.',
-    ownership: 'Solo Build',
     metrics: ['Face matching', 'AWS sync', 'MySQL storage'],
     tech: ['Python', 'OpenCV', 'AWS', 'MySQL', 'React'],
     category: 'Computer Vision',
@@ -610,6 +619,37 @@ const PreviewPanel = ({ project, compact = false }: { project: Project; compact?
         </div>
       </div>
     ),
+    terminal: (
+      <div className="flex flex-col justify-between h-full font-mono text-[9px] text-muted-foreground">
+        <div className="flex items-center justify-between border-b-[0.5px] border-border/60 pb-2">
+          <span className="font-semibold text-foreground">CONTEXT_LY_CLI</span>
+          <span className="opacity-60 text-[8px]">v1.0.0</span>
+        </div>
+        <div className="space-y-1.5 my-2">
+          <div className="text-left text-[8px] leading-relaxed">
+            <span className="text-emerald-500 font-semibold">$</span> <span className="text-primary font-semibold">contextly</span> analyze
+          </div>
+          <div className="bg-background/60 border-[0.5px] border-border/40 p-1.5 rounded space-y-1 text-[7.5px]">
+            <div className="flex items-center gap-1.5">
+              <span className="text-emerald-500">✓</span>
+              <span className="text-muted-foreground">Scanned 124 files</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="text-emerald-500">✓</span>
+              <span className="text-muted-foreground">Identified: React, Tailwind</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="text-emerald-500">✓</span>
+              <span className="text-muted-foreground">Generated PROJECT_CONTEXT.md</span>
+            </div>
+          </div>
+        </div>
+        <div className="border-t-[0.5px] border-border/60 pt-2 text-[8px] opacity-60 flex justify-between">
+          <span>TOKENS_SAVED: 45K</span>
+          <span className="text-emerald-500 animate-pulse font-semibold">SUCCESS</span>
+        </div>
+      </div>
+    ),
   };
 
   return (
@@ -693,10 +733,6 @@ const ProjectCard = ({ project, index, variant = 'card' }: { project: Project; i
                 <IconComponent className="h-3 w-3 text-primary/70" />
                 {project.category}
               </span>
-              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded border-[0.5px] border-emerald-500/20 bg-emerald-500/5 text-[9px] font-mono uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-semibold shadow-none">
-                <CheckCircle2 className="h-3 w-3" />
-                {project.ownership}
-              </span>
             </div>
 
             <div className="mb-3">
@@ -755,10 +791,18 @@ const ProjectCard = ({ project, index, variant = 'card' }: { project: Project; i
               </div>
 
               <div className="flex flex-wrap gap-2 pt-1">
+                {project.caseStudy && (
+                  <Button size="sm" className="rounded-full h-8 px-4 text-[10px] font-mono uppercase tracking-wider bg-primary text-primary-foreground hover:bg-primary/90" asChild>
+                    <Link to={project.caseStudy}>
+                      View Details
+                      <ArrowUpRight className="h-3.5 w-3.5 ml-1" />
+                    </Link>
+                  </Button>
+                )}
                 {project.demo && (
-                  <Button size="sm" className="rounded-full h-8 px-4 text-[10px] font-mono uppercase tracking-wider" asChild>
+                  <Button variant={project.caseStudy ? "outline" : "default"} size="sm" className={cn("rounded-full h-8 px-4 text-[10px] font-mono uppercase tracking-wider", project.caseStudy ? "bg-background" : "")} asChild>
                     <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                      Live Demo
+                      {project.demoLabel || 'Live Demo'}
                       <ArrowUpRight className="h-3.5 w-3.5 ml-1" />
                     </a>
                   </Button>

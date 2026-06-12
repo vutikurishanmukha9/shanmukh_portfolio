@@ -210,7 +210,7 @@ const CaseStudySalesReport = () => {
 
       <main className="container mx-auto px-4 lg:px-8 py-12 lg:py-20">
 
-        {/* 🏛️ NEWSPAPER MASTHEAD */}
+        {/* NEWSPAPER MASTHEAD */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -232,8 +232,6 @@ const CaseStudySalesReport = () => {
           <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground mb-6">
             <span className="font-medium text-foreground">Vutikuri Shanmukha</span>
             <span className="opacity-40">|</span>
-            <span>Solo Build</span>
-            <span className="opacity-40">|</span>
             <span>Python, Pandas, Power BI, DAX, Star Schema Data Modeling</span>
           </div>
 
@@ -242,7 +240,7 @@ const CaseStudySalesReport = () => {
           </p>
         </motion.div>
 
-        {/* 📊 CORE TELEMETRY METRICS TICKER */}
+        {/* CORE TELEMETRY METRICS TICKER */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -267,7 +265,7 @@ const CaseStudySalesReport = () => {
 
         <Divider />
 
-        {/* 📰 NARRATIVE CONTENT */}
+        {/* NARRATIVE CONTENT */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

@@ -301,8 +301,6 @@ const CaseStudyUnicorn = () => {
           <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground mb-6">
             <span className="font-medium text-foreground">V. Shanmukha</span>
             <span className="opacity-40">|</span>
-            <span>Solo Build</span>
-            <span className="opacity-40">|</span>
             <span>Power BI, Power Query, DAX, Star Schema</span>
           </div>
 

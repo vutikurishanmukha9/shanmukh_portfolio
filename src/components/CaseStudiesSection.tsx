@@ -22,7 +22,6 @@ type CaseStudy = {
   title: string;
   subtitle: string;
   focus: string;
-  ownership: string;
   github: string;
   tech: string[];
   metrics: { label: string; value: string }[];
@@ -40,7 +39,6 @@ const caseStudies: CaseStudy[] = [
     title: 'Global Unicorn Startup Performance Analysis',
     subtitle: 'Power BI deep-dive mapping 1,074 unicorn companies across 6 continents and 16 industries, representing $3,711B in total valuation and $591.8B total funding raised. Uncovered the 2021 explosion (48.4% of all unicorns created in a single year), geographic capital-efficiency gaps, and sector concentration risk in Fintech.',
     focus: 'Business Intelligence / EDA',
-    ownership: 'Solo Build',
     github: 'https://github.com/vutikurishanmukha9/Global-Unicorn-Startup',
     tech: ['Power BI', 'Power Query', 'DAX', 'Star Schema', 'ETL', 'Data Modeling'],
     metrics: [
@@ -63,7 +61,6 @@ const caseStudies: CaseStudy[] = [
     title: 'Adidas US Retail Sales Analysis',
     subtitle: 'Highly rigorous exploratory data analysis solving 15 structured business questions with spike anomaly detection, YoY growth tracking, and operating margin breakdowns.',
     focus: 'Exploratory Data Analysis',
-    ownership: 'Solo Build',
     github: 'https://github.com/vutikurishanmukha9/Adidas_US_Sales',
     tech: ['Python', 'Pandas', 'NumPy', 'Matplotlib', 'Seaborn'],
     metrics: [
@@ -86,7 +83,6 @@ const caseStudies: CaseStudy[] = [
     title: 'HR Employee Retention & Workforce Optimization',
     subtitle: 'Rigorous workforce analysis and exploratory data modeling diagnosing systemic early-lifecycle attrition failures, performance rating paradoxes, and leadership stability risks across 3,000 employee records.',
     focus: 'HR Analytics / EDA',
-    ownership: 'Solo Build',
     github: 'https://github.com/vutikurishanmukha9/Employee_Data_Analysis',
     tech: ['Python', 'Pandas', 'NumPy', 'Seaborn', 'Data Modeling'],
     metrics: [
@@ -264,10 +260,6 @@ const CaseStudyCard = ({ study, index }: { study: CaseStudy; index: number }) =>
               <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded border-[0.5px] border-border bg-background text-[9px] font-mono uppercase tracking-wider text-muted-foreground">
                 <BarChart3 className="h-3 w-3 text-amber-500" />
                 {study.focus}
-              </span>
-              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded border-[0.5px] border-emerald-500/20 bg-emerald-500/5 text-[9px] font-mono uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-semibold">
-                <CheckCircle2 className="h-3 w-3" />
-                {study.ownership}
               </span>
             </div>
 

@@ -10,6 +10,7 @@ import NotFound from "./pages/NotFound";
 import CaseStudyUnicorn from "./pages/CaseStudyUnicorn";
 import CaseStudyAdidas from "./pages/CaseStudyAdidas";
 import CaseStudySalesReport from "./pages/CaseStudySalesReport";
+import ProjectContextLy from "./pages/ProjectContextLy";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
               <Route path="/case-study/adidas" element={<CaseStudyAdidas />} />
               <Route path="/case-study/sales" element={<CaseStudySalesReport />} />
               <Route path="/case-study/sales-report" element={<CaseStudySalesReport />} /> {/* Redirect/alias for safety */}
+              <Route path="/project/contextly" element={<ProjectContextLy />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

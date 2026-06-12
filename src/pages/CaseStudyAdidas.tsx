@@ -208,8 +208,6 @@ const CaseStudyAdidas = () => {
           <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground mb-6">
             <span className="font-medium text-foreground">Vutikuri Shanmukha</span>
             <span className="opacity-40">|</span>
-            <span>Solo Build</span>
-            <span className="opacity-40">|</span>
             <span>Python, Pandas, NumPy, Seaborn, Matplotlib, Power BI</span>
           </div>
 
