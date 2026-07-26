@@ -130,7 +130,7 @@ const UnicornPreview = () => (
     {/* 2021 Surge Indicator */}
     <div className="border-[0.5px] border-amber-500/20 bg-amber-500/5 rounded px-2 py-1 my-1">
       <div className="flex justify-between items-center text-[7.5px]">
-        <span className="text-amber-600 dark:text-amber-400 font-semibold">2021_SURGE</span>
+        <span className="text-amber-600 font-semibold">2021_SURGE</span>
         <span className="text-foreground font-bold">520 / 1,074 (48.4%)</span>
       </div>
       <div className="h-1.5 bg-background/60 border-[0.5px] border-border/30 rounded-sm overflow-hidden mt-1">

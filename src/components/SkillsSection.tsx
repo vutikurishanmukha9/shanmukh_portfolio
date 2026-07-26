@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Code, Database, Cloud, Brain, BarChart3, Cpu, Palette, Hammer, Shield, Layers, LineChart, PieChart } from 'lucide-react';
 import { useSkillFilter } from '@/context/SkillFilterContext';
+import { useSound } from '@/hooks/useSound';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
 import { cn } from '@/lib/utils';
@@ -70,11 +71,29 @@ const skillCategories = [
   },
 ];
 
+const skillCounts: Record<string, number> = {
+  Python: 6,
+  SQL: 5,
+  'AWS S3': 4,
+  'AWS EC2': 3,
+  'AWS RDS': 3,
+  Docker: 4,
+  Pandas: 4,
+  'Scikit-learn': 3,
+  PostgreSQL: 3,
+  'ETL/ELT Pipelines': 4,
+  'Data Modeling': 3,
+  'System Design': 3,
+  'Power BI': 2,
+};
+
 export const SkillsSection = () => {
   const [selectedStage, setSelectedStage] = useState<string | null>(null);
   const { selectedSkill, setSelectedSkill } = useSkillFilter();
+  const { playFilter } = useSound();
 
   const handleSkillClick = (skill: string) => {
+    playFilter();
     setSelectedSkill(selectedSkill === skill ? null : skill);
     if (selectedSkill !== skill) {
       setTimeout(() => {
@@ -191,18 +210,24 @@ export const SkillsSection = () => {
                     <div className="flex flex-wrap gap-1.5">
                       {category.skills.map((skill) => {
                         const isSkillSelected = selectedSkill === skill;
+                        const count = skillCounts[skill];
                         return (
                           <button
                             key={skill}
                             onClick={() => handleSkillClick(skill)}
                             className={cn(
-                              "px-3 py-1 rounded-md text-[10px] font-mono border transition-all duration-200",
+                              "px-3 py-1 rounded-md text-[10px] font-mono border transition-all duration-200 flex items-center gap-1.5",
                               isSkillSelected
-                                ? "bg-primary/10 text-primary border-primary/30"
+                                ? "bg-primary/10 text-primary border-primary/30 font-semibold"
                                 : "bg-background/40 text-muted-foreground border-border/40 hover:border-primary/20 hover:text-foreground"
                             )}
                           >
-                            {skill}
+                            <span>{skill}</span>
+                            {count && (
+                              <span className="text-[8px] opacity-70 px-1 py-0.2 bg-muted/60 rounded border-[0.5px] border-border/40">
+                                {count}
+                              </span>
+                            )}
                           </button>
                         );
                       })}

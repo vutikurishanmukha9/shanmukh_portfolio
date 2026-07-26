@@ -601,7 +601,7 @@ const CaseStudyAdidas = () => {
                       <td className="py-2 px-4 font-serif-display font-bold text-foreground">{m.month}</td>
                       <td className="py-2 px-4 text-right text-muted-foreground">{m.rev2020}</td>
                       <td className="py-2 px-4 text-right text-foreground font-semibold">{m.rev2021}</td>
-                      <td className="py-2 px-4 text-right text-emerald-600 dark:text-emerald-400 font-bold">{m.yoy}</td>
+                      <td className="py-2 px-4 text-right text-emerald-600 font-bold">{m.yoy}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -624,18 +624,17 @@ const CaseStudyAdidas = () => {
             
             {/* Spikes Card */}
             <div className="border-[0.5px] border-emerald-500/20 bg-emerald-500/5 rounded-lg p-5">
-              <div className="text-[9px] font-mono uppercase tracking-widest text-emerald-600 dark:text-emerald-400 font-bold mb-3">Top Sales Daily Spikes</div>
-              <div className="space-y-3">
-                {topSpikes.map((s) => (
-                  <div key={s.date} className="flex justify-between items-center text-xs border-b-[0.5px] border-emerald-500/10 pb-1.5 last:border-0 last:pb-0">
-                    <div>
-                      <span className="font-mono text-foreground font-semibold">{s.date}</span>
-                      <div className="text-[9px] text-muted-foreground font-mono">{s.note}</div>
-                    </div>
-                    <div className="text-right font-mono">
-                      <div className="text-foreground font-semibold">{s.sales}</div>
-                      <div className="text-emerald-600 dark:text-emerald-400 text-[10px] font-bold">{s.change}</div>
-                    </div>
+              <div className="text-[9px] font-mono uppercase tracking-widest text-emerald-600 font-bold mb-3">Top Sales Daily Spikes</div>
+              <div className="space-y-1.5">
+                {[
+                  { date: "2021-04-16", val: "$3.88M", change: "+142% vs avg" },
+                  { date: "2021-09-17", val: "$3.72M", change: "+131% vs avg" },
+                  { date: "2021-12-10", val: "$3.65M", change: "+127% vs avg" },
+                ].map(s => (
+                  <div key={s.date} className="flex justify-between items-center text-[10px] bg-background/50 border-[0.5px] border-border/30 p-1.5 rounded">
+                    <span className="font-mono text-muted-foreground">{s.date}</span>
+                    <span className="font-bold text-foreground">{s.val}</span>
+                    <div className="text-emerald-600 text-[10px] font-bold">{s.change}</div>
                   </div>
                 ))}
               </div>
@@ -643,18 +642,17 @@ const CaseStudyAdidas = () => {
 
             {/* Drops Card */}
             <div className="border-[0.5px] border-rose-500/20 bg-rose-500/5 rounded-lg p-5">
-              <div className="text-[9px] font-mono uppercase tracking-widest text-rose-600 dark:text-rose-400 font-bold mb-3">Top Sales Daily Drops</div>
-              <div className="space-y-3">
-                {topDrops.map((d) => (
-                  <div key={d.date} className="flex justify-between items-center text-xs border-b-[0.5px] border-rose-500/10 pb-1.5 last:border-0 last:pb-0">
-                    <div>
-                      <span className="font-mono text-foreground font-semibold">{d.date}</span>
-                      <div className="text-[9px] text-muted-foreground font-mono">{d.note}</div>
-                    </div>
-                    <div className="text-right font-mono">
-                      <div className="text-foreground font-semibold">{d.sales}</div>
-                      <div className="text-rose-600 dark:text-rose-400 text-[10px] font-bold">{d.change}</div>
-                    </div>
+              <div className="text-[9px] font-mono uppercase tracking-widest text-rose-600 font-bold mb-3">Top Sales Daily Drops</div>
+              <div className="space-y-1.5">
+                {[
+                  { date: "2020-04-05", val: "$0.41M", change: "-74% vs avg" },
+                  { date: "2020-03-29", val: "$0.48M", change: "-70% vs avg" },
+                  { date: "2020-04-12", val: "$0.52M", change: "-67% vs avg" },
+                ].map(d => (
+                  <div key={d.date} className="flex justify-between items-center text-[10px] bg-background/50 border-[0.5px] border-border/30 p-1.5 rounded">
+                    <span className="font-mono text-muted-foreground">{d.date}</span>
+                    <span className="font-bold text-foreground">{d.val}</span>
+                    <div className="text-rose-600 text-[10px] font-bold">{d.change}</div>
                   </div>
                 ))}
               </div>

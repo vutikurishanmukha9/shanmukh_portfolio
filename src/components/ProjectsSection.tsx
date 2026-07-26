@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
+import { ProjectModal, type ProjectData } from '@/components/ProjectModal';
 import { cn } from '@/lib/utils';
 import { useSkillFilter } from '@/context/SkillFilterContext';
 import { Link } from 'react-router-dom';
@@ -215,7 +216,7 @@ const AwsTopologyMap = () => {
           <Network className="w-4 h-4 text-primary" />
           <span className="font-semibold text-foreground tracking-wider">AWS_INFRASTRUCTURE_BLUEPRINT // AP-SOUTH-1</span>
         </div>
-        <span className="text-[8px] bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25 px-1.5 py-0.5 rounded-sm font-semibold animate-pulse">
+        <span className="text-[8px] bg-emerald-500/10 text-emerald-600 border border-emerald-500/25 px-1.5 py-0.5 rounded-sm font-semibold animate-pulse">
           SIMULATOR STATUS: ACTIVE
         </span>
       </div>
@@ -451,11 +452,11 @@ const PreviewPanel = ({ project, compact = false }: { project: Project; compact?
         <div className="space-y-1.5 my-2">
           <div className="flex items-center justify-between bg-background/60 border-[0.5px] border-border/40 p-1 rounded">
             <span>usr_a89c</span>
-            <span className="text-[8px] bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-1.5 border border-emerald-500/25 rounded-sm">JWT_VERIFIED</span>
+            <span className="text-[8px] bg-emerald-500/10 text-emerald-600 px-1.5 border border-emerald-500/25 rounded-sm">JWT_VERIFIED</span>
           </div>
           <div className="flex items-center justify-between bg-background/60 border-[0.5px] border-border/40 p-1 rounded">
             <span>usr_224b</span>
-            <span className="text-[8px] bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-1.5 border border-emerald-500/25 rounded-sm">JWT_VERIFIED</span>
+            <span className="text-[8px] bg-emerald-500/10 text-emerald-600 px-1.5 border border-emerald-500/25 rounded-sm">JWT_VERIFIED</span>
           </div>
         </div>
         <div className="border-t-[0.5px] border-border/60 pt-2 text-[8px] opacity-60 flex justify-between">
@@ -663,7 +664,7 @@ const PreviewPanel = ({ project, compact = false }: { project: Project; compact?
   );
 };
 
-const ProjectCard = ({ project, index, variant = 'card' }: { project: Project; index: number; variant?: 'hero' | 'card' }) => {
+const ProjectCard = ({ project, index, variant = 'card', onInspect }: { project: Project; index: number; variant?: 'hero' | 'card'; onInspect?: (project: Project) => void }) => {
   const visual = categoryConfig[project.category];
   const IconComponent = visual.icon;
   const primaryTech = project.tech.slice(0, 4);
@@ -789,7 +790,7 @@ const ProjectCard = ({ project, index, variant = 'card' }: { project: Project; i
                 </div>
               </div>
 
-              <div className="flex flex-wrap gap-2 pt-1">
+              <div className="flex flex-wrap items-center gap-2 pt-1">
                 {project.caseStudy && (
                   <Button size="sm" className="rounded-full h-8 px-4 text-[10px] font-mono uppercase tracking-wider bg-primary text-primary-foreground hover:bg-primary/90" asChild>
                     <Link to={project.caseStudy}>
@@ -798,6 +799,17 @@ const ProjectCard = ({ project, index, variant = 'card' }: { project: Project; i
                     </Link>
                   </Button>
                 )}
+
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => onInspect?.(project)}
+                  className="rounded-full h-8 px-3 text-[10px] font-mono uppercase tracking-wider border-border/80 text-muted-foreground hover:text-foreground"
+                >
+                  <Eye className="h-3 w-3 mr-1 text-primary" />
+                  Inspect
+                </Button>
+
                 {project.demo && (
                   <Button variant={project.caseStudy ? "outline" : "default"} size="sm" className={cn("rounded-full h-8 px-4 text-[10px] font-mono uppercase tracking-wider", project.caseStudy ? "bg-background" : "")} asChild>
                     <a href={project.demo} target="_blank" rel="noopener noreferrer">
@@ -823,6 +835,7 @@ const ProjectCard = ({ project, index, variant = 'card' }: { project: Project; i
 
 export const ProjectsSection = () => {
   const [selectedCategory, setSelectedCategory] = useState<ProjectCategory | 'All'>('All');
+  const [activeModalProject, setActiveModalProject] = useState<ProjectData | null>(null);
   const { selectedSkill, setSelectedSkill } = useSkillFilter();
 
   const filteredProjects = useMemo(() => {
@@ -937,7 +950,25 @@ export const ProjectsSection = () => {
             {/* Filtered project list */}
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {filteredProjects.map((project, i) => (
-                <ProjectCard key={project.title} project={project} index={i} />
+                <ProjectCard
+                  key={project.title}
+                  project={project}
+                  index={i}
+                  onInspect={(p) => {
+                    setActiveModalProject({
+                      id: p.title,
+                      title: p.title,
+                      category: p.category,
+                      description: p.description,
+                      longDescription: p.impact,
+                      tags: p.tech,
+                      githubUrl: p.links.github,
+                      liveUrl: p.demo,
+                      caseStudyUrl: p.caseStudy,
+                      metrics: p.metrics.map(m => ({ label: 'METRIC', value: m })),
+                    });
+                  }}
+                />
               ))}
             </div>
           </div>
@@ -947,6 +978,11 @@ export const ProjectsSection = () => {
             <p className="mt-2 text-xs text-muted-foreground leading-relaxed">Clear active skills filter or adjust catalog categories.</p>
           </div>
         )}
+
+        <ProjectModal
+          project={activeModalProject}
+          onClose={() => setActiveModalProject(null)}
+        />
       </div>
     </SectionWrapper>
   );

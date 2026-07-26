@@ -1,7 +1,9 @@
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
-import { ExternalLink, FileText } from 'lucide-react';
+import { ExternalLink, FileText, Copy } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
+import { useSound } from '@/hooks/useSound';
 
 interface LaTeXPaperPreviewProps {
   url: string;
@@ -102,6 +104,21 @@ const LaTeXPaperPreview = ({ url }: { url: string }) => {
 
 export const PublicationsSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { toast } = useToast();
+  const { playClick } = useSound();
+
+  const handleCopyCitation = (format: 'BibTeX' | 'APA') => {
+    playClick(900, 0.04, 'sine');
+    const text = format === 'BibTeX'
+      ? `@inproceedings{shanmukha2025optimizing,\n  title={Optimizing Energy Efficiency in Smart Buildings Through IoT-Driven Occupancy Sensing},\n  author={Vutikuri Shanmukha and others},\n  booktitle={IEEE Conference Proceedings},\n  year={2025},\n  publisher={IEEE}\n}`
+      : `Shanmukha, V. (2025). Optimizing Energy Efficiency in Smart Buildings Through IoT-Driven Occupancy Sensing. IEEE Conference Proceedings.`;
+
+    navigator.clipboard.writeText(text);
+    toast({
+      title: `${format} Citation Copied!`,
+      description: `Copied IEEE publication ${format} citation to clipboard.`,
+    });
+  };
 
   const publications = [
     {
@@ -165,7 +182,7 @@ export const PublicationsSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
-                className="p-6 md:p-8 flex flex-col gap-6 hover:bg-background/20 transition-colors duration-200"
+                className="p-4 sm:p-6 md:p-8 flex flex-col gap-6 hover:bg-background/20 transition-colors duration-200"
               >
                 {/* Meta Row (Type, Journal, Year) */}
                 <div className="flex flex-wrap items-center justify-between gap-4 border-b-[0.5px] border-border/40 pb-4">
@@ -205,7 +222,7 @@ export const PublicationsSection = () => {
                       {pub.description}
                     </p>
 
-                    <div className="pt-2">
+                    <div className="pt-2 flex flex-wrap items-center gap-3">
                       <a
                         href={pub.link}
                         target="_blank"
@@ -215,6 +232,22 @@ export const PublicationsSection = () => {
                         [ VIEW ON IEEE XPLORE ]
                         <ExternalLink className="h-3 w-3" />
                       </a>
+
+                      <button
+                        onClick={() => handleCopyCitation('BibTeX')}
+                        className="inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors px-2 py-0.5 rounded bg-background border-[0.5px] border-border"
+                      >
+                        <Copy className="h-3 w-3 text-primary" />
+                        <span>BibTeX</span>
+                      </button>
+
+                      <button
+                        onClick={() => handleCopyCitation('APA')}
+                        className="inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors px-2 py-0.5 rounded bg-background border-[0.5px] border-border"
+                      >
+                        <Copy className="h-3 w-3 text-primary" />
+                        <span>APA</span>
+                      </button>
                     </div>
                   </div>
 

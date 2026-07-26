@@ -450,7 +450,7 @@ const CaseStudyUnicorn = () => {
                 <Award className="h-4.5 w-4.5 text-amber-500 shrink-0" />
                 <span className="text-[10px] font-mono uppercase tracking-widest text-foreground font-bold">EXECUTIVE SPOTLIGHT // GEOGRAPHIC INDEX: IN</span>
               </div>
-              <span className="text-[9px] font-mono text-amber-600 dark:text-amber-400 font-bold bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded uppercase tracking-wider">
+              <span className="text-[9px] font-mono text-amber-600 font-bold bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded uppercase tracking-wider">
                 India Startup Hub
               </span>
             </div>
@@ -483,7 +483,7 @@ const CaseStudyUnicorn = () => {
                         <span className="text-[9px] opacity-40 font-semibold">0{i+1}.</span>
                         <span className="text-foreground font-semibold">{unicorn.name}</span>
                       </div>
-                      <span className="text-amber-600 dark:text-amber-400 font-bold">{unicorn.val}</span>
+                      <span className="text-amber-600 font-bold">{unicorn.val}</span>
                     </div>
                   ))}
                 </div>
@@ -654,7 +654,7 @@ const CaseStudyUnicorn = () => {
 
               {/* Drivers info */}
               <div className="text-xs text-muted-foreground leading-relaxed space-y-2 border-l-[0.5px] border-border/40 pl-5">
-                <div className="text-[9px] font-mono uppercase tracking-widest text-amber-600 dark:text-amber-400 font-bold mb-1">Macroeconomic Drivers</div>
+                <div className="text-[9px] font-mono uppercase tracking-widest text-amber-600 font-bold mb-1">Macroeconomic Drivers</div>
                 <p>• <strong className="text-foreground font-semibold">Zero Interest Rates:</strong> Pushed private capital aggressively into risk assets.</p>
                 <p>• <strong className="text-foreground font-semibold">Post-COVID Digital Surge:</strong> Software validation timelines collapsed overnight.</p>
                 <p>• <strong className="text-foreground font-semibold">SPAC Liquidity:</strong> Lowered listing barriers to artificially secure private valuations.</p>

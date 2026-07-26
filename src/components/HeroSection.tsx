@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ArrowUpRight, ChevronDown, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowUpRight, ChevronDown, Github, Linkedin, Mail, FileText } from 'lucide-react';
+import { ResumeModal } from '@/components/ResumeModal';
 
 const TelemetryDashboard = () => {
   return (
@@ -21,7 +23,7 @@ const TelemetryDashboard = () => {
         <div className="mt-4 space-y-2">
           <div className="flex justify-between items-center py-1 border-b-[0.5px] border-border/20">
             <span className="opacity-70">AWS_DEPLOY_STATE</span>
-            <span className="text-emerald-600 dark:text-emerald-400 font-bold text-[10px]">READY (ap-south-1)</span>
+            <span className="text-emerald-600 font-bold text-[10px]">READY (ap-south-1)</span>
           </div>
           <div className="flex justify-between items-center py-1 border-b-[0.5px] border-border/20">
             <span className="opacity-70">ML_MODEL_TRAIN</span>
@@ -78,17 +80,17 @@ const TelemetryDashboard = () => {
           <div className="grid grid-cols-3">
             <span className="opacity-80">FastAPI_Server</span>
             <span className="text-center opacity-50">8000</span>
-            <span className="text-right text-emerald-600 dark:text-emerald-400 font-semibold">ONLINE</span>
+            <span className="text-right text-emerald-600 font-semibold">ONLINE</span>
           </div>
           <div className="grid grid-cols-3">
             <span className="opacity-80">React_Vite</span>
             <span className="text-center opacity-50">5173</span>
-            <span className="text-right text-emerald-600 dark:text-emerald-400 font-semibold">ONLINE</span>
+            <span className="text-right text-emerald-600 font-semibold">ONLINE</span>
           </div>
           <div className="grid grid-cols-3">
             <span className="opacity-80">Docker_Env</span>
             <span className="text-center opacity-50">2375</span>
-            <span className="text-right text-emerald-600 dark:text-emerald-400 font-semibold">RUNNING</span>
+            <span className="text-right text-emerald-600 font-semibold">RUNNING</span>
           </div>
         </div>
       </div>
@@ -97,8 +99,11 @@ const TelemetryDashboard = () => {
 };
 
 export const HeroSection = () => {
+  const [isResumeOpen, setIsResumeOpen] = useState(false);
+
   return (
     <section id="home" className="relative min-h-screen overflow-hidden pt-32 pb-14">
+      <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} />
       {/* Remove glowing gradient colors. Retain very high restraint clean backgrounds */}
       <div className="absolute inset-0 -z-10 bg-background" />
 
@@ -113,7 +118,7 @@ export const HeroSection = () => {
               className="inline-flex self-center lg:self-start items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/5 px-4 py-1.5"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-[10px] font-mono tracking-widest uppercase text-emerald-600 dark:text-emerald-400 font-semibold">
+              <span className="text-[10px] font-mono tracking-widest uppercase text-emerald-600 font-semibold">
                 Available for roles • SDE | AI | Cloud
               </span>
             </motion.div>
@@ -171,6 +176,17 @@ export const HeroSection = () => {
                 >
                   View Product Work
                   <ArrowUpRight className="h-3.5 w-3.5 ml-1" />
+                </Button>
+              </div>
+              <div className="w-full sm:w-auto">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={() => setIsResumeOpen(true)}
+                  className="h-11 w-full rounded-full bg-background border-[0.5px] border-primary/30 text-primary px-6 text-xs font-mono tracking-wider uppercase sm:w-auto hover:bg-primary/10"
+                >
+                  <FileText className="h-3.5 w-3.5 mr-1.5" />
+                  View Resume
                 </Button>
               </div>
               <div className="w-full sm:w-auto">

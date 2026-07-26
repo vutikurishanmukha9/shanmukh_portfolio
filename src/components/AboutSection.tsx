@@ -191,7 +191,7 @@ export const AboutSection = () => {
                           DEPLOYED PIPELINE LEDGER
                         </h4>
                       </div>
-                      <span className="text-[8px] font-mono bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25 px-1.5 py-0.5 rounded-sm font-semibold animate-pulse">
+                      <span className="text-[8px] font-mono bg-emerald-500/10 text-emerald-600 border border-emerald-500/25 px-1.5 py-0.5 rounded-sm font-semibold animate-pulse">
                         STATUS: OPERATIONAL
                       </span>
                     </div>
@@ -278,7 +278,7 @@ export const AboutSection = () => {
                           ACADEMIC PUBLICATION RECORDFILE
                         </h4>
                       </div>
-                      <span className="text-[8px] font-mono bg-violet-500/10 text-violet-600 dark:text-violet-400 border border-violet-500/25 px-1.5 py-0.5 rounded-sm font-semibold">
+                      <span className="text-[8px] font-mono bg-violet-500/10 text-violet-600 border border-violet-500/25 px-1.5 py-0.5 rounded-sm font-semibold">
                         PEER-REVIEWED
                       </span>
                     </div>

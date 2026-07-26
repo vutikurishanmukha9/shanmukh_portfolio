@@ -741,7 +741,7 @@ const CaseStudySalesReport = () => {
           {/* SECTION 16: SUPERVISOR ANALYSIS METHODOLOGICAL NOTE */}
           <SectionHeading icon={ShieldAlert} label="10. Methodological Note: Supervisor Noise Filtering" />
           <div className="border-[0.5px] border-amber-500/20 bg-amber-500/5 rounded-lg p-5 mb-8">
-            <h4 className="text-[10px] font-mono uppercase tracking-widest text-amber-600 dark:text-amber-400 font-bold mb-2">Avoiding Small-Sample Size Bias</h4>
+            <h4 className="text-[10px] font-mono uppercase tracking-widest text-amber-600 font-bold mb-2">Avoiding Small-Sample Size Bias</h4>
             <p className="text-xs text-muted-foreground leading-relaxed">
               Standard corporate queries returned several supervisors exhibiting trivially computed 100% exit rates. Upon detailed review, this was a statistical noise artifact — these supervisors managed exactly one direct report who happened to leave. 
               To surface actual organizational signals, our model filtered out teams with a headcount of under 5 employees. This enabled the notebook to isolate managers with structurally high exit rates, ensuring HR resources target real leadership issues rather than statistical noise.

@@ -5,6 +5,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { SkillFilterProvider } from "@/context/SkillFilterContext";
 import { BackgroundCanvas } from "@/components/ui/background-canvas";
+import { ScrollProgress } from "@/components/ScrollProgress";
+import { ActiveSkillFilterDock } from "@/components/ActiveSkillFilterDock";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import CaseStudyUnicorn from "./pages/CaseStudyUnicorn";
@@ -20,6 +22,8 @@ const App = () => (
       <SkillFilterProvider>
         <TooltipProvider>
           <BackgroundCanvas />
+          <ScrollProgress />
+          <ActiveSkillFilterDock />
           <Toaster />
           <BrowserRouter>
             <Routes>

@@ -39,37 +39,6 @@
     --font-display: 'Cormorant Garamond', Georgia, serif;
     --font-mono: 'JetBrains Mono', ui-monospace, monospace;
   }
-
-  /* Deep Refined Dark Theme (Linear Software-Craft Charcoal) */
-  .dark {
-    --background: 240 10% 5%;      /* Deep warm charcoal canvas #0d0d0f */
-    --foreground: 48 10% 92%;      /* Cream-tinted white text #f4f3ef */
-
-    --card: 240 6% 9%;             /* Elevated dark-charcoal panel #141517 */
-    --card-foreground: 48 10% 92%;
-
-    --popover: 240 10% 5%;
-    --popover-foreground: 48 10% 92%;
-
-    --primary: 15 52% 58%;         /* Deployed with warm coral highlight #cc785c */
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 240 6% 9%;
-    --secondary-foreground: 48 10% 92%;
-
-    --muted: 240 6% 9%;
-    --muted-foreground: 240 4% 65%;/* Muted technical gray #a0a0a5 */
-
-    --accent: 15 52% 58%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 62% 45%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 223 10% 15%;         /* Charcoal hairline borders #23252a */
-    --input: 223 10% 15%;
-    --ring: 15 52% 58%;
-  }
 }
 
 @layer base {

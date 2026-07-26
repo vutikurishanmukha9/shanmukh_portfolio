@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useToast } from '@/hooks/use-toast';
+import { useSound } from '@/hooks/useSound';
 
 interface NewsTickerProps {
     items: string[];
@@ -7,9 +9,28 @@ interface NewsTickerProps {
 
 export const NewsTicker = ({ items, speed = 30 }: NewsTickerProps) => {
     const [isPaused, setIsPaused] = useState(false);
+    const { toast } = useToast();
+    const { playClick } = useSound();
 
     // Duplicate items for seamless infinite scroll (only 2 copies needed)
     const tickerContent = [...items, ...items];
+
+    const handleItemClick = (item: string) => {
+      playClick(850, 0.04, 'sine');
+      if (item.includes('@')) {
+        navigator.clipboard.writeText(item);
+        toast({
+          title: "Email Copied!",
+          description: `Copied ${item} to clipboard.`,
+        });
+      } else if (item.includes("Cloud Practitioner") || item.includes("Certifi")) {
+        document.getElementById('certifications')?.scrollIntoView({ behavior: 'smooth' });
+      } else if (item.includes("Projects")) {
+        document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+      } else if (item.includes("Opportunities") || item.includes("Seeking")) {
+        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
 
     return (
         <div
@@ -49,11 +70,12 @@ export const NewsTicker = ({ items, speed = 30 }: NewsTickerProps) => {
                         {tickerContent.map((item, index) => (
                             <span
                                 key={index}
-                                className="inline-flex items-center mx-4 text-[11px] font-mono tracking-widest text-muted-foreground uppercase select-none"
+                                onClick={() => handleItemClick(item)}
+                                className="inline-flex items-center mx-4 text-[11px] font-mono tracking-widest text-muted-foreground uppercase cursor-pointer hover:text-primary transition-colors duration-200"
                             >
                                 {/* Clean asterisk separator */}
                                 <span className="text-primary/60 mr-3 text-xs">•</span>
-                                <span className="hover:text-foreground transition-colors duration-200">
+                                <span>
                                     {item}
                                 </span>
                             </span>

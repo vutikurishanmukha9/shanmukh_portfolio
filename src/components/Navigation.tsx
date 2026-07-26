@@ -4,6 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { SoundToggle } from "@/components/SoundToggle";
+import { useSound } from "@/hooks/useSound";
+import { ResumeModal } from "@/components/ResumeModal";
 
 const navItems = [
   { label: "Home", href: "#home" },
@@ -20,6 +23,8 @@ export const Navigation = () => {
   const [activeHash, setActiveHash] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isResumeOpen, setIsResumeOpen] = useState(false);
+  const { playClick } = useSound();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -123,13 +128,27 @@ export const Navigation = () => {
           {/* Vertical Divider */}
           <div className="hidden md:block w-[0.5px] h-4 bg-border/80 mx-2 relative z-10" />
 
-          {/* Theme Toggle - Integrated */}
-          <div className="hidden md:block relative z-10 pr-1">
+          {/* Theme & Sound Controls + Resume Button */}
+          <div className="hidden md:flex items-center gap-1.5 relative z-10 pr-1">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => {
+                playClick(800, 0.04, 'sine');
+                setIsResumeOpen(true);
+              }}
+              className="h-7 text-[10px] font-mono uppercase tracking-wider px-2.5 rounded-full border-primary/30 text-primary hover:bg-primary/10"
+            >
+              CV
+            </Button>
             <ThemeToggle />
+            <SoundToggle />
           </div>
 
         </div>
       </motion.header>
+
+      <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} />
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
@@ -165,8 +184,21 @@ export const Navigation = () => {
                 </motion.a>
               ))}
 
-              <div className="mt-8">
+              <div className="mt-6 flex items-center gap-3">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    playClick(800, 0.04, 'sine');
+                    setIsMobileMenuOpen(false);
+                    setIsResumeOpen(true);
+                  }}
+                  className="h-8 text-xs font-mono uppercase tracking-wider px-4 rounded-full border-primary/30 text-primary hover:bg-primary/10"
+                >
+                  View CV / Resume
+                </Button>
                 <ThemeToggle />
+                <SoundToggle />
               </div>
             </motion.nav>
           </motion.div>

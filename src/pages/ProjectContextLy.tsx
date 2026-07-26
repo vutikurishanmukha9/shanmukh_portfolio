@@ -72,7 +72,7 @@ export default function ProjectContextLy() {
         >
           {/* Header Section */}
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border-[0.5px] border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-mono uppercase tracking-widest mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border-[0.5px] border-emerald-500/30 bg-emerald-500/10 text-emerald-600 text-[10px] font-mono uppercase tracking-widest mb-6">
               <Terminal className="w-3.5 h-3.5" />
               Live on PyPI
             </div>
