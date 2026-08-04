@@ -172,10 +172,12 @@ export const HeroSection = () => {
                 <Button
                   size="lg"
                   onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="h-11 w-full rounded-full bg-foreground px-6 text-xs font-mono tracking-wider uppercase text-background hover:bg-foreground/90 sm:w-auto"
+                  className="group h-11 w-full rounded-full bg-foreground pl-6 pr-2.5 text-xs font-mono tracking-wider uppercase text-background hover:bg-foreground/90 active:scale-[0.98] transition-all sm:w-auto flex items-center justify-between gap-3"
                 >
-                  View Product Work
-                  <ArrowUpRight className="h-3.5 w-3.5 ml-1" />
+                  <span>View Product Work</span>
+                  <span className="w-6 h-6 rounded-full bg-background/20 text-background flex items-center justify-center transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                    <ArrowUpRight className="h-3 w-3" />
+                  </span>
                 </Button>
               </div>
               <div className="w-full sm:w-auto">
@@ -183,7 +185,7 @@ export const HeroSection = () => {
                   variant="outline"
                   size="lg"
                   onClick={() => setIsResumeOpen(true)}
-                  className="h-11 w-full rounded-full bg-background border-[0.5px] border-primary/30 text-primary px-6 text-xs font-mono tracking-wider uppercase sm:w-auto hover:bg-primary/10"
+                  className="h-11 w-full rounded-full bg-background border-[0.5px] border-primary/30 text-primary px-6 text-xs font-mono tracking-wider uppercase sm:w-auto hover:bg-primary/10 active:scale-[0.98] transition-all"
                 >
                   <FileText className="h-3.5 w-3.5 mr-1.5" />
                   View Resume
@@ -194,7 +196,7 @@ export const HeroSection = () => {
                   variant="outline"
                   size="lg"
                   onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="h-11 w-full rounded-full bg-background border-[0.5px] border-border/80 px-6 text-xs font-mono tracking-wider uppercase sm:w-auto hover:bg-muted"
+                  className="h-11 w-full rounded-full bg-background border-[0.5px] border-border/80 px-6 text-xs font-mono tracking-wider uppercase sm:w-auto hover:bg-muted active:scale-[0.98] transition-all"
                 >
                   Contact Me
                 </Button>

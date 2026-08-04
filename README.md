@@ -12,7 +12,7 @@ A high-performance, tactile, editorial-grade developer portfolio website enginee
 
 The portfolio is structured around a precise design split, drawing inspiration from leading modern technical interfaces:
 
-*   **Linear (60%): Precision Minimalism.** Sleek dark charcoal surfaces, sub-pixel 0.5px borders, micro-spacing grids, interactive project telemetry inspection, and ultra-snappy transition eases.
+*   **Linear (60%): Precision Minimalism.** Sleek warm cream surfaces, sub-pixel 0.5px borders, micro-spacing grids, interactive project telemetry inspection, and tactile spring transition physics.
 *   **Claude (25%): Warm Editorial Canvas.** A welcoming light-mode cream canvas (`#faf9f5`) paired with classical serif display typography.
 *   **Cohere (15%): Structural Tabular Lists.** Dense monospaced metadata columns, thin rule-separated lists, and technical tabular alignment.
 

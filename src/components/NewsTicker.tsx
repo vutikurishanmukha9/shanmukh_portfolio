@@ -48,7 +48,7 @@ export const NewsTicker = ({ items, speed = 30 }: NewsTickerProps) => {
                         <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span>
                     </span>
                     <span className="text-[10px] font-mono font-bold tracking-widest text-red-500">
-                        LIVE
+                        [ LIVE_TELEMETRY ]
                     </span>
                 </div>
 

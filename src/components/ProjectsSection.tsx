@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import {
   ArrowUpRight,
   Brain,
+  Check,
   CheckCircle2,
   Cloud,
   Database,
@@ -631,15 +632,15 @@ const PreviewPanel = ({ project, compact = false }: { project: Project; compact?
           </div>
           <div className="bg-background/60 border-[0.5px] border-border/40 p-1.5 rounded space-y-1 text-[7.5px]">
             <div className="flex items-center gap-1.5">
-              <span className="text-emerald-500">✓</span>
+              <Check className="h-2.5 w-2.5 text-emerald-500" />
               <span className="text-muted-foreground">Scanned 124 files</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <span className="text-emerald-500">✓</span>
+              <Check className="h-2.5 w-2.5 text-emerald-500" />
               <span className="text-muted-foreground">Identified: React, Tailwind</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <span className="text-emerald-500">✓</span>
+              <Check className="h-2.5 w-2.5 text-emerald-500" />
               <span className="text-muted-foreground">Generated PROJECT_CONTEXT.md</span>
             </div>
           </div>
@@ -962,7 +963,7 @@ export const ProjectsSection = () => {
                       description: p.description,
                       longDescription: p.impact,
                       tags: p.tech,
-                      githubUrl: p.links.github,
+                      githubUrl: p.github,
                       liveUrl: p.demo,
                       caseStudyUrl: p.caseStudy,
                       metrics: p.metrics.map(m => ({ label: 'METRIC', value: m })),

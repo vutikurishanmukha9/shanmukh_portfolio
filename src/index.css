@@ -59,10 +59,18 @@
     overflow-x: clip; /* Avoid visual bugs or horizontal scrollbars */
   }
 
-  /* Limit body copy density globally */
+  /* Limit body copy density globally and balance headings */
   p {
     @apply leading-relaxed font-normal;
     max-width: 65ch; /* Ideal reading line length for elegant editorial pacing */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+  }
+
+  button, a {
+    @apply focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-1;
   }
 }
 
