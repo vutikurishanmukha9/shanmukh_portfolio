@@ -4,6 +4,7 @@ import { useSkillFilter } from '@/context/SkillFilterContext';
 import { useSound } from '@/hooks/useSound';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
+import { BorderBeam } from '@/components/ui/BorderBeam';
 import { cn } from '@/lib/utils';
 
 const pipelineStages = [
@@ -197,8 +198,9 @@ export const SkillsSection = () => {
                   exit={{ opacity: 0, scale: 0.98 }}
                   transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
                   key={category.title}
-                  className="glass-panel p-6 hover-lift-minimal flex flex-col h-full justify-between"
+                  className="group relative glass-panel p-6 hover-lift-minimal flex flex-col h-full justify-between overflow-hidden"
                 >
+                  <BorderBeam variant="dark" duration={3.5} borderRadius={8} />
                   <div>
                     <div className="flex items-center gap-3.5 mb-6 border-b-[0.5px] border-border/40 pb-4">
                       <div className="w-9 h-9 rounded bg-primary/5 border-[0.5px] border-primary/15 flex items-center justify-center">

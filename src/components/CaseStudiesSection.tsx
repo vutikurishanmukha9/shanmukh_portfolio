@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
+import { BorderBeam } from '@/components/ui/BorderBeam';
 import { cn } from '@/lib/utils';
 import {
   BarChart3,
@@ -243,8 +244,11 @@ const CaseStudyCard = ({ study, index }: { study: CaseStudy; index: number }) =>
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.45, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-      className="group border-[0.5px] border-border/80 bg-card/45 backdrop-blur-md rounded-lg overflow-hidden hover-lift-minimal"
+      className="group relative border-[0.5px] border-border/80 bg-card/45 backdrop-blur-md rounded-lg overflow-hidden hover-lift-minimal"
     >
+      {/* Animated Dark Laser Border Beam on hover */}
+      <BorderBeam variant="dark" duration={3.8} borderRadius={8} />
+
       {/* Top: Preview + Content side-by-side on lg */}
       <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-0">
         {/* Preview Panel */}

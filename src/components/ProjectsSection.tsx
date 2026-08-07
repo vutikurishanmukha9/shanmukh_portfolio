@@ -24,6 +24,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
+import { BorderBeam } from '@/components/ui/BorderBeam';
 import { ProjectModal, type ProjectData } from '@/components/ProjectModal';
 import { cn } from '@/lib/utils';
 import { useSkillFilter } from '@/context/SkillFilterContext';
@@ -693,6 +694,8 @@ const ProjectCard = ({ project, index, variant = 'card', onInspect }: { project:
           : 'border-border/80 bg-card/40'
       )}
     >
+      {/* Animated Dark Laser Border Beam on hover */}
+      <BorderBeam variant="gradient" duration={3.2} borderRadius={8} />
       {/* Dynamic Telemetry Connections inside matching card */}
       {isMatchingSkillActive && (
         <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
