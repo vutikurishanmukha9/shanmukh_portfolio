@@ -1,7 +1,10 @@
 import { ContactForm } from '@/components/ContactForm';
-import { Github, Linkedin, Mail, ExternalLink } from 'lucide-react';
+import { Github, Linkedin, Mail, ExternalLink, Copy, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
+import { Magnetic } from '@/components/ui/Magnetic';
+import { cn } from '@/lib/utils';
+import { useState } from 'react';
 
 export const ContactSection = () => {
   const contactInfo = [
@@ -86,27 +89,49 @@ export const ContactSection = () => {
                 <div className="space-y-3 mb-8">
                   {contactInfo.map((contact, index) => {
                       const Icon = contact.icon;
+                      const [copied, setCopied] = useState(false);
+
+                      const handleCopy = (e: React.MouseEvent) => {
+                        e.preventDefault();
+                        navigator.clipboard.writeText(contact.value);
+                        setCopied(true);
+                        setTimeout(() => setCopied(false), 2000);
+                      };
+
                       return (
                           <div
                               key={index}
-                              className="group flex items-center gap-4 p-4 rounded border-[0.5px] border-border bg-background/40 hover:bg-background/80 transition-colors duration-200 shadow-none"
+                              className="group flex items-center justify-between gap-4 p-4 rounded border-[0.5px] border-border bg-background/40 hover:bg-background/80 transition-colors duration-200 shadow-none"
                           >
-                              <div className="w-9 h-9 rounded bg-muted/60 flex items-center justify-center group-hover:bg-primary/10 transition-colors duration-200">
-                                  <Icon className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                              <div className="flex items-center gap-4">
+                                <div className="w-9 h-9 rounded bg-muted/60 flex items-center justify-center group-hover:bg-primary/10 transition-colors duration-200">
+                                    <Icon className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                                </div>
+                                <div>
+                                    <p className="text-[10px] sm:text-[9px] font-mono tracking-widest text-muted-foreground uppercase mb-0.5">{contact.label}</p>
+                                    <a
+                                        href={contact.href}
+                                        className="text-xs font-mono text-foreground hover:text-primary transition-colors duration-200 break-all"
+                                    >
+                                        {contact.value}
+                                    </a>
+                                </div>
                               </div>
-                               <div>
-                                  <p className="text-[10px] sm:text-[9px] font-mono tracking-widest text-muted-foreground uppercase mb-0.5">{contact.label}</p>
-                                  {contact.href !== '#' ? (
-                                  <a
-                                      href={contact.href}
-                                      className="text-xs font-mono text-foreground hover:text-primary transition-colors duration-200 break-all"
-                                  >
-                                      {contact.value}
-                                  </a>
-                                  ) : (
-                                  <p className="text-xs font-mono text-foreground">{contact.value}</p>
-                                  )}
-                              </div>
+
+                              <motion.button
+                                whileHover={{ scale: 1.08 }}
+                                whileTap={{ scale: 0.92 }}
+                                onClick={handleCopy}
+                                className={cn(
+                                  "px-2.5 py-1 rounded text-[9px] font-mono uppercase tracking-wider border-[0.5px] transition-all flex items-center gap-1",
+                                  copied 
+                                    ? "bg-emerald-500/10 text-emerald-600 border-emerald-500/30 font-semibold"
+                                    : "bg-background/80 text-muted-foreground hover:text-foreground border-border"
+                                )}
+                              >
+                                {copied ? <Check className="h-3 w-3 text-emerald-600 animate-in zoom-in-50" /> : <Copy className="h-3 w-3 text-primary" />}
+                                <span>{copied ? "COPIED" : "COPY"}</span>
+                              </motion.button>
                           </div>
                       )
                   })}
@@ -120,17 +145,18 @@ export const ContactSection = () => {
                   {socialLinks.map((social) => {
                       const Icon = social.icon;
                       return (
-                        <a
-                            key={social.name}
-                            href={social.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="group p-3 rounded border-[0.5px] border-border bg-background/40 hover:bg-background/80 hover:border-primary/35 transition-colors duration-200 shadow-none"
-                            title={social.name}
-                            aria-label={social.name}
-                        >
-                            <Icon className="h-4.5 w-4.5 text-muted-foreground group-hover:text-primary transition-colors duration-200" />
-                        </a>
+                        <Magnetic key={social.name} strength={0.35} radius={80}>
+                          <a
+                              href={social.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="group p-3 rounded border-[0.5px] border-border bg-background/40 hover:bg-background/80 hover:border-primary/35 transition-colors duration-200 shadow-none block"
+                              title={social.name}
+                              aria-label={social.name}
+                          >
+                              <Icon className="h-4.5 w-4.5 text-muted-foreground group-hover:text-primary transition-colors duration-200" />
+                          </a>
+                        </Magnetic>
                       );
                   })}
                 </div>

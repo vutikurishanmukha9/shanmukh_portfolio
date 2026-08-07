@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import { Magnetic } from '@/components/ui/Magnetic';
 import { ArrowUpRight, ChevronDown, Github, Linkedin, Mail, FileText } from 'lucide-react';
 import { ResumeModal } from '@/components/ResumeModal';
 
@@ -40,10 +41,11 @@ const TelemetryDashboard = () => {
         </div>
       </div>
 
-      {/* SVG Loss Curve / Convergence Visualizer */}
+      {/* SVG Loss Curve / Convergence Visualizer with Animated Circuit Pulse */}
       <div className="my-3 flex-1 flex flex-col justify-center">
-        <span className="text-[11px] sm:text-[9px] uppercase tracking-widest text-muted-foreground/60 mb-2 block font-semibold">
-          Convergence Telemetry Log
+        <span className="text-[11px] sm:text-[9px] uppercase tracking-widest text-muted-foreground/60 mb-2 block font-semibold flex items-center justify-between">
+          <span>Convergence Telemetry Log</span>
+          <span className="text-emerald-500 font-bold tracking-wider text-[8px] animate-pulse">● LIVE STREAM</span>
         </span>
         <div className="w-full h-20 sm:h-24 border-[0.5px] border-border/40 rounded bg-background/40 relative overflow-hidden flex items-end p-1">
           {/* Micro Grid Lines */}
@@ -60,11 +62,22 @@ const TelemetryDashboard = () => {
               d="M0,28 C10,25 20,12 35,10 C50,8 70,3 100,2"
               fill="none"
               stroke="currentColor"
-              strokeWidth="1"
+              strokeWidth="0.9"
             />
-            <circle cx="0" cy="28" r="1" fill="currentColor" />
-            <circle cx="35" cy="10" r="1" fill="currentColor" />
-            <circle cx="100" cy="2" r="1" fill="currentColor" />
+            {/* Live Data Pulse Dot Traveling along Curve */}
+            <motion.path
+              d="M0,28 C10,25 20,12 35,10 C50,8 70,3 100,2"
+              fill="none"
+              stroke="hsl(var(--foreground))"
+              strokeWidth="1.5"
+              strokeDasharray="6 94"
+              animate={{ strokeDashoffset: [0, -100] }}
+              transition={{ repeat: Infinity, duration: 2.2, ease: "linear" }}
+            />
+            <circle cx="0" cy="28" r="1.2" fill="currentColor" />
+            <circle cx="35" cy="10" r="1.2" fill="currentColor" />
+            <circle cx="100" cy="2" r="1.4" fill="hsl(var(--primary))" className="animate-ping" />
+            <circle cx="100" cy="2" r="1.2" fill="currentColor" />
           </svg>
         </div>
       </div>
@@ -128,7 +141,7 @@ export const HeroSection = () => {
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-                className="font-serif-display text-5xl font-normal tracking-tight text-foreground sm:text-6xl md:text-7xl lg:text-[5.5rem] lg:leading-[0.98] select-none"
+                className="font-serif-display text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] lg:leading-[0.98] select-none tracking-tight text-foreground"
               >
                 Vutikuri <br />
                 <span className="text-primary">Shanmukha</span>
@@ -139,7 +152,7 @@ export const HeroSection = () => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg lg:mx-0 font-normal"
+              className="mx-auto max-w-2xl text-sm sm:text-base leading-relaxed text-muted-foreground md:text-lg lg:mx-0 font-normal"
             >
               I build production-minded AI, cloud, and data products with clean interfaces, scalable backends, and measurable user value.
             </motion.p>
@@ -148,16 +161,16 @@ export const HeroSection = () => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="grid grid-cols-1 sm:grid-cols-3 border-[0.5px] border-border bg-card/40 divide-y sm:divide-y-0 sm:divide-x divide-border/60 shadow-none rounded-lg overflow-hidden sm:max-w-xl lg:max-w-2xl mx-auto lg:mx-0 select-none"
+              className="grid grid-cols-3 border-[0.5px] border-border bg-card/40 divide-x divide-border/60 shadow-none rounded-lg overflow-hidden max-w-lg sm:max-w-xl lg:max-w-2xl mx-auto lg:mx-0 select-none"
             >
               {[
                 ['10+', 'Products Built'],
                 ['6', 'Live Demos'],
                 ['IEEE', 'Published'],
               ].map(([value, label]) => (
-                <div key={label} className="px-5 py-3 text-center">
-                  <div className="text-xl font-serif-display text-foreground md:text-2xl font-normal">{value}</div>
-                  <div className="mt-1 text-[11px] sm:text-[9px] font-mono tracking-widest uppercase text-muted-foreground font-medium">{label}</div>
+                <div key={label} className="px-2.5 py-2.5 sm:px-5 sm:py-3 text-center">
+                  <div className="text-lg sm:text-xl font-serif-display text-foreground md:text-2xl font-normal">{value}</div>
+                  <div className="mt-0.5 text-[9px] sm:text-[9px] font-mono tracking-wider uppercase text-muted-foreground font-medium">{label}</div>
                 </div>
               ))}
             </motion.div>
@@ -169,43 +182,43 @@ export const HeroSection = () => {
               className="flex w-full flex-col items-center gap-4 pt-2 sm:w-auto sm:flex-row lg:items-start justify-center lg:justify-start"
             >
               <div className="w-full sm:w-auto">
-                <motion.div whileHover={{ y: -2, scale: 1.02 }} whileTap={{ scale: 0.98 }} transition={{ type: "spring", stiffness: 400, damping: 25 }}>
+                <Magnetic strength={0.3} radius={100}>
                   <Button
                     size="lg"
                     onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-                    className="group h-11 w-full rounded-full bg-foreground pl-6 pr-2.5 text-xs font-mono tracking-wider uppercase text-background hover:bg-foreground/90 transition-all sm:w-auto flex items-center justify-between gap-3 shadow-sm"
+                    className="group h-11 w-full rounded-full bg-foreground pl-6 pr-2.5 text-xs font-mono tracking-wider uppercase text-background hover:bg-foreground/90 transition-all sm:w-auto flex items-center justify-between gap-3 shadow-sm active:scale-[0.98]"
                   >
                     <span>View Product Work</span>
                     <span className="w-6 h-6 rounded-full bg-background/20 text-background flex items-center justify-center transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                       <ArrowUpRight className="h-3 w-3" />
                     </span>
                   </Button>
-                </motion.div>
+                </Magnetic>
               </div>
               <div className="w-full sm:w-auto">
-                <motion.div whileHover={{ y: -2, scale: 1.02 }} whileTap={{ scale: 0.98 }} transition={{ type: "spring", stiffness: 400, damping: 25 }}>
+                <Magnetic strength={0.3} radius={100}>
                   <Button
                     variant="outline"
                     size="lg"
                     onClick={() => setIsResumeOpen(true)}
-                    className="h-11 w-full rounded-full bg-background border-[0.5px] border-primary/30 text-primary px-6 text-xs font-mono tracking-wider uppercase sm:w-auto hover:bg-primary/10 transition-all"
+                    className="h-11 w-full rounded-full bg-background border-[0.5px] border-primary/30 text-primary px-6 text-xs font-mono tracking-wider uppercase sm:w-auto hover:bg-primary/10 transition-all active:scale-[0.98]"
                   >
                     <FileText className="h-3.5 w-3.5 mr-1.5" />
                     View Resume
                   </Button>
-                </motion.div>
+                </Magnetic>
               </div>
               <div className="w-full sm:w-auto">
-                <motion.div whileHover={{ y: -2, scale: 1.02 }} whileTap={{ scale: 0.98 }} transition={{ type: "spring", stiffness: 400, damping: 25 }}>
+                <Magnetic strength={0.3} radius={100}>
                   <Button
                     variant="outline"
                     size="lg"
                     onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                    className="h-11 w-full rounded-full bg-background border-[0.5px] border-border/80 px-6 text-xs font-mono tracking-wider uppercase sm:w-auto hover:bg-muted transition-all"
+                    className="h-11 w-full rounded-full bg-background border-[0.5px] border-border/80 px-6 text-xs font-mono tracking-wider uppercase sm:w-auto hover:bg-muted transition-all active:scale-[0.98]"
                   >
                     Contact Me
                   </Button>
-                </motion.div>
+                </Magnetic>
               </div>
               
               <div className="flex items-center gap-2 mt-2 sm:mt-0">

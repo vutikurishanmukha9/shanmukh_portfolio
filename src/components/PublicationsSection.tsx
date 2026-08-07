@@ -1,9 +1,10 @@
-import { useRef } from 'react';
-import { motion } from 'framer-motion';
+import { useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
-import { ExternalLink, FileText, Copy } from 'lucide-react';
+import { ExternalLink, FileText, Copy, Check } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useSound } from '@/hooks/useSound';
+import { cn } from '@/lib/utils';
 
 interface LaTeXPaperPreviewProps {
   url: string;
@@ -50,12 +51,15 @@ const LaTeXPaperPreview = ({ url }: { url: string }) => {
             </div>
           </div>
 
-          {/* Column 2: SVG Diagram and figures */}
+          {/* Column 2: SVG Diagram with Live Traveling Circuit Pulses */}
           <div className="flex flex-col justify-between pl-0.5 space-y-1.5">
-            <span className="font-bold text-[5.2px] block font-mono">II. TELEMETRY</span>
+            <span className="font-bold text-[5.2px] block font-mono flex items-center justify-between">
+              <span>II. TELEMETRY</span>
+              <span className="text-[3px] text-emerald-500 font-mono">96%_ACC</span>
+            </span>
             
             {/* SVG Schematic Block */}
-            <div className="flex-1 border-[0.3px] border-foreground/20 bg-muted/20 rounded p-1 flex items-center justify-center">
+            <div className="flex-1 border-[0.3px] border-foreground/20 bg-muted/20 rounded p-1 flex items-center justify-center relative overflow-hidden">
               <svg className="w-full h-11 text-primary/70" viewBox="0 0 60 40" role="img" aria-label="Fig 1. Decoupled IoT Sensor telemetry dataflow block diagram linking MCU with DHT22 sensors to CLOUD telemetry base">
                 {/* MCU module */}
                 <rect x="2" y="13" width="16" height="14" rx="1" fill="none" stroke="currentColor" strokeWidth="0.3" />
@@ -69,6 +73,18 @@ const LaTeXPaperPreview = ({ url }: { url: string }) => {
                 {/* Link line to cloud gateway */}
                 <path d="M 18 20 L 32 20" stroke="currentColor" strokeWidth="0.3" strokeDasharray="0.5 0.5" />
                 
+                {/* Animated circuit pulse packet traveling MCU -> Cloud */}
+                <motion.circle
+                  r="0.8"
+                  fill="hsl(var(--primary))"
+                  animate={{
+                    cx: [18, 32],
+                    cy: [20, 20],
+                    opacity: [0, 1, 0]
+                  }}
+                  transition={{ repeat: Infinity, duration: 1.8, ease: "linear" }}
+                />
+
                 {/* Cloud telemetry base */}
                 <rect x="32" y="11" width="24" height="18" rx="1" fill="none" stroke="currentColor" strokeWidth="0.3" />
                 <text x="44" y="18" textAnchor="middle" fontSize="3.2" fontFamily="monospace" fill="currentColor">CLOUD</text>
@@ -104,6 +120,7 @@ const LaTeXPaperPreview = ({ url }: { url: string }) => {
 
 export const PublicationsSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [copiedFormat, setCopiedFormat] = useState<string | null>(null);
   const { toast } = useToast();
   const { playClick } = useSound();
 
@@ -114,6 +131,9 @@ export const PublicationsSection = () => {
       : `Shanmukha, V. (2025). Optimizing Energy Efficiency in Smart Buildings Through IoT-Driven Occupancy Sensing. IEEE Conference Proceedings.`;
 
     navigator.clipboard.writeText(text);
+    setCopiedFormat(format);
+    setTimeout(() => setCopiedFormat(null), 2000);
+
     toast({
       title: `${format} Citation Copied!`,
       description: `Copied IEEE publication ${format} citation to clipboard.`,
@@ -238,10 +258,19 @@ export const PublicationsSection = () => {
                         whileTap={{ scale: 0.95 }}
                         transition={{ type: "spring", stiffness: 400, damping: 25 }}
                         onClick={() => handleCopyCitation('BibTeX')}
-                        className="inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors px-2 py-0.5 rounded bg-background border-[0.5px] border-border"
+                        className={cn(
+                          "inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider transition-colors px-2 py-0.5 rounded border-[0.5px]",
+                          copiedFormat === 'BibTeX'
+                            ? "bg-emerald-500/10 text-emerald-600 border-emerald-500/30"
+                            : "text-muted-foreground hover:text-foreground bg-background border-border"
+                        )}
                       >
-                        <Copy className="h-3 w-3 text-primary" />
-                        <span>BibTeX</span>
+                        {copiedFormat === 'BibTeX' ? (
+                          <Check className="h-3 w-3 text-emerald-600 animate-in zoom-in-50" />
+                        ) : (
+                          <Copy className="h-3 w-3 text-primary" />
+                        )}
+                        <span>{copiedFormat === 'BibTeX' ? 'COPIED' : 'BibTeX'}</span>
                       </motion.button>
 
                       <motion.button
@@ -249,10 +278,19 @@ export const PublicationsSection = () => {
                         whileTap={{ scale: 0.95 }}
                         transition={{ type: "spring", stiffness: 400, damping: 25 }}
                         onClick={() => handleCopyCitation('APA')}
-                        className="inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors px-2 py-0.5 rounded bg-background border-[0.5px] border-border"
+                        className={cn(
+                          "inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider transition-colors px-2 py-0.5 rounded border-[0.5px]",
+                          copiedFormat === 'APA'
+                            ? "bg-emerald-500/10 text-emerald-600 border-emerald-500/30"
+                            : "text-muted-foreground hover:text-foreground bg-background border-border"
+                        )}
                       >
-                        <Copy className="h-3 w-3 text-primary" />
-                        <span>APA</span>
+                        {copiedFormat === 'APA' ? (
+                          <Check className="h-3 w-3 text-emerald-600 animate-in zoom-in-50" />
+                        ) : (
+                          <Copy className="h-3 w-3 text-primary" />
+                        )}
+                        <span>{copiedFormat === 'APA' ? 'COPIED' : 'APA'}</span>
                       </motion.button>
                     </div>
                   </div>
