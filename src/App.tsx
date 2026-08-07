@@ -7,6 +7,7 @@ import { SkillFilterProvider } from "@/context/SkillFilterContext";
 import { BackgroundCanvas } from "@/components/ui/background-canvas";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { ActiveSkillFilterDock } from "@/components/ActiveSkillFilterDock";
+import { CustomCursor } from "@/components/ui/CustomCursor";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import CaseStudyUnicorn from "./pages/CaseStudyUnicorn";
@@ -21,6 +22,7 @@ const App = () => (
     <ThemeProvider>
       <SkillFilterProvider>
         <TooltipProvider>
+          <CustomCursor />
           <BackgroundCanvas />
           <ScrollProgress />
           <ActiveSkillFilterDock />
