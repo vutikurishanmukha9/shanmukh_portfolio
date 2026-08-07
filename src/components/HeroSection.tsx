@@ -169,37 +169,43 @@ export const HeroSection = () => {
               className="flex w-full flex-col items-center gap-4 pt-2 sm:w-auto sm:flex-row lg:items-start justify-center lg:justify-start"
             >
               <div className="w-full sm:w-auto">
-                <Button
-                  size="lg"
-                  onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="group h-11 w-full rounded-full bg-foreground pl-6 pr-2.5 text-xs font-mono tracking-wider uppercase text-background hover:bg-foreground/90 active:scale-[0.98] transition-all sm:w-auto flex items-center justify-between gap-3"
-                >
-                  <span>View Product Work</span>
-                  <span className="w-6 h-6 rounded-full bg-background/20 text-background flex items-center justify-center transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                    <ArrowUpRight className="h-3 w-3" />
-                  </span>
-                </Button>
+                <motion.div whileHover={{ y: -2, scale: 1.02 }} whileTap={{ scale: 0.98 }} transition={{ type: "spring", stiffness: 400, damping: 25 }}>
+                  <Button
+                    size="lg"
+                    onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                    className="group h-11 w-full rounded-full bg-foreground pl-6 pr-2.5 text-xs font-mono tracking-wider uppercase text-background hover:bg-foreground/90 transition-all sm:w-auto flex items-center justify-between gap-3 shadow-sm"
+                  >
+                    <span>View Product Work</span>
+                    <span className="w-6 h-6 rounded-full bg-background/20 text-background flex items-center justify-center transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                      <ArrowUpRight className="h-3 w-3" />
+                    </span>
+                  </Button>
+                </motion.div>
               </div>
               <div className="w-full sm:w-auto">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  onClick={() => setIsResumeOpen(true)}
-                  className="h-11 w-full rounded-full bg-background border-[0.5px] border-primary/30 text-primary px-6 text-xs font-mono tracking-wider uppercase sm:w-auto hover:bg-primary/10 active:scale-[0.98] transition-all"
-                >
-                  <FileText className="h-3.5 w-3.5 mr-1.5" />
-                  View Resume
-                </Button>
+                <motion.div whileHover={{ y: -2, scale: 1.02 }} whileTap={{ scale: 0.98 }} transition={{ type: "spring", stiffness: 400, damping: 25 }}>
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    onClick={() => setIsResumeOpen(true)}
+                    className="h-11 w-full rounded-full bg-background border-[0.5px] border-primary/30 text-primary px-6 text-xs font-mono tracking-wider uppercase sm:w-auto hover:bg-primary/10 transition-all"
+                  >
+                    <FileText className="h-3.5 w-3.5 mr-1.5" />
+                    View Resume
+                  </Button>
+                </motion.div>
               </div>
               <div className="w-full sm:w-auto">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="h-11 w-full rounded-full bg-background border-[0.5px] border-border/80 px-6 text-xs font-mono tracking-wider uppercase sm:w-auto hover:bg-muted active:scale-[0.98] transition-all"
-                >
-                  Contact Me
-                </Button>
+                <motion.div whileHover={{ y: -2, scale: 1.02 }} whileTap={{ scale: 0.98 }} transition={{ type: "spring", stiffness: 400, damping: 25 }}>
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                    className="h-11 w-full rounded-full bg-background border-[0.5px] border-border/80 px-6 text-xs font-mono tracking-wider uppercase sm:w-auto hover:bg-muted transition-all"
+                  >
+                    Contact Me
+                  </Button>
+                </motion.div>
               </div>
               
               <div className="flex items-center gap-2 mt-2 sm:mt-0">
@@ -208,16 +214,19 @@ export const HeroSection = () => {
                   ['https://linkedin.com/in/shanmukha-vutikuri', Linkedin, 'LinkedIn'],
                   ['mailto:vutikurishanmukh17@gmail.com', Mail, 'Email']
                 ].map(([url, Icon, label]) => (
-                  <a 
+                  <motion.a 
                     key={url as string}
                     href={url as string} 
                     target="_blank" 
-                    rel="noreferrer" 
-                    className="p-2.5 rounded-full hover:bg-muted text-muted-foreground hover:text-foreground border-[0.5px] border-transparent hover:border-border/60 transition-[transform,border-color,color,background-color] duration-200"
+                    rel="noreferrer"
+                    whileHover={{ y: -2, scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                    className="p-2.5 rounded-full hover:bg-muted text-muted-foreground hover:text-foreground border-[0.5px] border-transparent hover:border-border/60 transition-[border-color,color,background-color] duration-200"
                   >
                     <Icon className="h-4.5 w-4.5" />
                     <span className="sr-only">{label as string}</span>
-                  </a>
+                  </motion.a>
                 ))}
               </div>
             </motion.div>

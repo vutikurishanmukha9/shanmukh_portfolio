@@ -86,9 +86,10 @@ export const CertificationsSection = () => {
                 key={index}
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ x: 4 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
-                className="p-6 md:p-8 flex flex-col md:grid md:grid-cols-[1.25fr_2.5fr_1.25fr] gap-6 items-start hover:bg-background/20 transition-colors duration-200"
+                transition={{ duration: 0.35, delay: index * 0.04, ease: [0.16, 1, 0.3, 1] }}
+                className="p-6 md:p-8 flex flex-col md:grid md:grid-cols-[1.25fr_2.5fr_1.25fr] gap-6 items-start hover:bg-background/25 transition-colors duration-200"
               >
                 {/* Left: Issuer & Category */}
                 <div className="flex flex-col gap-1">

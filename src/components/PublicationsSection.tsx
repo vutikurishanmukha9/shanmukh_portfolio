@@ -233,21 +233,27 @@ export const PublicationsSection = () => {
                         <ExternalLink className="h-3 w-3" />
                       </a>
 
-                      <button
+                      <motion.button
+                        whileHover={{ scale: 1.05, y: -1 }}
+                        whileTap={{ scale: 0.95 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 25 }}
                         onClick={() => handleCopyCitation('BibTeX')}
                         className="inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors px-2 py-0.5 rounded bg-background border-[0.5px] border-border"
                       >
                         <Copy className="h-3 w-3 text-primary" />
                         <span>BibTeX</span>
-                      </button>
+                      </motion.button>
 
-                      <button
+                      <motion.button
+                        whileHover={{ scale: 1.05, y: -1 }}
+                        whileTap={{ scale: 0.95 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 25 }}
                         onClick={() => handleCopyCitation('APA')}
                         className="inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors px-2 py-0.5 rounded bg-background border-[0.5px] border-border"
                       >
                         <Copy className="h-3 w-3 text-primary" />
                         <span>APA</span>
-                      </button>
+                      </motion.button>
                     </div>
                   </div>
 

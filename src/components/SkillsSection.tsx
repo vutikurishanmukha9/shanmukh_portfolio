@@ -212,8 +212,11 @@ export const SkillsSection = () => {
                         const isSkillSelected = selectedSkill === skill;
                         const count = skillCounts[skill];
                         return (
-                          <button
+                          <motion.button
                             key={skill}
+                            whileHover={{ scale: 1.04 }}
+                            whileTap={{ scale: 0.96 }}
+                            transition={{ type: "spring", stiffness: 400, damping: 25 }}
                             onClick={() => handleSkillClick(skill)}
                             className={cn(
                               "px-3 py-1 rounded-md text-[10px] font-mono border transition-all duration-200 flex items-center gap-1.5",
@@ -228,7 +231,7 @@ export const SkillsSection = () => {
                                 {count}
                               </span>
                             )}
-                          </button>
+                          </motion.button>
                         );
                       })}
                     </div>

@@ -679,10 +679,12 @@ const ProjectCard = ({ project, index, variant = 'card', onInspect }: { project:
 
   return (
     <motion.article
+      layout
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -4 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.4, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.35, delay: index * 0.04, ease: [0.16, 1, 0.3, 1] }}
       className={cn(
         'group relative overflow-hidden rounded-lg border bg-card/45 p-3.5 shadow-none backdrop-blur-md hover-lift-minimal flex flex-col justify-between h-full transition-all duration-300',
         isHero ? 'grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:p-5' : 'flex h-full flex-col gap-4',
@@ -946,39 +948,48 @@ export const ProjectsSection = () => {
           )}
         </div>
 
-        {filteredProjects.length > 0 ? (
-          <div className="space-y-6">
-            {/* Filtered project list */}
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {filteredProjects.map((project, i) => (
-                <ProjectCard
-                  key={project.title}
-                  project={project}
-                  index={i}
-                  onInspect={(p) => {
-                    setActiveModalProject({
-                      id: p.title,
-                      title: p.title,
-                      category: p.category,
-                      description: p.description,
-                      longDescription: p.impact,
-                      tags: p.tech,
-                      githubUrl: p.github,
-                      liveUrl: p.demo,
-                      caseStudyUrl: p.caseStudy,
-                      metrics: p.metrics.map(m => ({ label: 'METRIC', value: m })),
-                    });
-                  }}
-                />
-              ))}
-            </div>
-          </div>
-        ) : (
-          <div className="border-[0.5px] border-border/80 bg-card p-10 text-center rounded-lg shadow-none">
-            <p className="text-sm font-semibold text-foreground font-mono">NO OUTCOMES MATCH QUERY</p>
-            <p className="mt-2 text-xs text-muted-foreground leading-relaxed">Clear active skills filter or adjust catalog categories.</p>
-          </div>
-        )}
+        <AnimatePresence mode="popLayout">
+          {filteredProjects.length > 0 ? (
+            <motion.div layout className="space-y-6">
+              {/* Filtered project list */}
+              <motion.div layout className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {filteredProjects.map((project, i) => (
+                  <ProjectCard
+                    key={project.title}
+                    project={project}
+                    index={i}
+                    onInspect={(p) => {
+                      setActiveModalProject({
+                        id: p.title,
+                        title: p.title,
+                        category: p.category,
+                        description: p.description,
+                        longDescription: p.impact,
+                        tags: p.tech,
+                        githubUrl: p.github,
+                        liveUrl: p.demo,
+                        caseStudyUrl: p.caseStudy,
+                        metrics: p.metrics.map(m => ({ label: 'METRIC', value: m })),
+                      });
+                    }}
+                  />
+                ))}
+              </motion.div>
+            </motion.div>
+          ) : (
+            <motion.div
+              layout
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.25 }}
+              className="border-[0.5px] border-border/80 bg-card p-10 text-center rounded-lg shadow-none"
+            >
+              <p className="text-sm font-semibold text-foreground font-mono">NO OUTCOMES MATCH QUERY</p>
+              <p className="mt-2 text-xs text-muted-foreground leading-relaxed">Clear active skills filter or adjust catalog categories.</p>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <ProjectModal
           project={activeModalProject}
