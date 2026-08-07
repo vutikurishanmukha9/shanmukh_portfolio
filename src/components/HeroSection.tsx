@@ -2,13 +2,33 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Magnetic } from '@/components/ui/Magnetic';
-import { ArrowUpRight, ChevronDown, Github, Linkedin, Mail, FileText } from 'lucide-react';
+import { NumberTicker } from '@/components/ui/NumberTicker';
+import { SpotlightCard } from '@/components/ui/SpotlightCard';
+import { ArrowUpRight, ChevronDown, Github, Linkedin, Mail, FileText, Play, CheckCircle2 } from 'lucide-react';
 import { ResumeModal } from '@/components/ResumeModal';
 
 const TelemetryDashboard = () => {
+  const [activeTab, setActiveTab] = useState<'status' | 'rag'>('status');
+  const [isSimulating, setIsSimulating] = useState(false);
+  const [simTokens, setSimTokens] = useState<string[]>([]);
+
+  const runSimulation = () => {
+    setIsSimulating(true);
+    setSimTokens([]);
+    const tokens = ['[PROMPT]', 'retrieve_chunks()', '→', 'FAISS: 12ms', '→', 'Re-rank (0.94)', '→', 'LLM_Inference', '→', '200 OK (58ms)'];
+    tokens.forEach((token, idx) => {
+      setTimeout(() => {
+        setSimTokens((prev) => [...prev, token]);
+        if (idx === tokens.length - 1) {
+          setIsSimulating(false);
+        }
+      }, (idx + 1) * 220);
+    });
+  };
+
   return (
-    <div className="relative border-[0.5px] border-border bg-card/60 backdrop-blur-md rounded-lg p-5 font-mono text-[11px] text-muted-foreground select-none overflow-hidden h-[320px] sm:h-[380px] lg:h-[420px] flex flex-col justify-between shadow-none">
-      {/* Top Header Bar */}
+    <SpotlightCard className="relative border-[0.5px] border-border bg-card/60 backdrop-blur-md rounded-lg p-5 font-mono text-[11px] text-muted-foreground select-none overflow-hidden h-[340px] sm:h-[390px] lg:h-[430px] flex flex-col justify-between shadow-none">
+      {/* Top Header Bar with Interactive Switcher */}
       <div>
         <div className="flex items-center justify-between border-b-[0.5px] border-border/60 pb-3">
           <div className="flex items-center gap-2">
@@ -17,28 +37,88 @@ const TelemetryDashboard = () => {
               CONSOLE_SESSION // ACTIVE
             </span>
           </div>
-          <span className="text-[11px] sm:text-[9px] opacity-60 tracking-widest">SHANMUKHA.SYS</span>
+          <div className="flex items-center gap-1 bg-muted/50 p-0.5 rounded-md border-[0.5px] border-border/60">
+            <button
+              onClick={() => setActiveTab('status')}
+              className={`px-2 py-0.5 rounded text-[8px] uppercase tracking-widest transition-colors ${
+                activeTab === 'status' ? 'bg-card text-foreground font-bold shadow-xs' : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              STATUS
+            </button>
+            <button
+              onClick={() => setActiveTab('rag')}
+              className={`px-2 py-0.5 rounded text-[8px] uppercase tracking-widest transition-colors ${
+                activeTab === 'rag' ? 'bg-card text-foreground font-bold shadow-xs' : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              RAG_ENGINE
+            </button>
+          </div>
         </div>
 
-        {/* Console Log Lines */}
-        <div className="mt-4 space-y-2">
-          <div className="flex justify-between items-center py-1 border-b-[0.5px] border-border/20">
-            <span className="opacity-70">AWS_DEPLOY_STATE</span>
-            <span className="text-emerald-600 font-bold text-[10px]">READY (ap-south-1)</span>
+        {/* Tab 1: Live System Status Logs */}
+        {activeTab === 'status' ? (
+          <div className="mt-4 space-y-2">
+            <div className="flex justify-between items-center py-1 border-b-[0.5px] border-border/20">
+              <span className="opacity-70">AWS_DEPLOY_STATE</span>
+              <span className="text-emerald-600 font-bold text-[10px]">READY (ap-south-1)</span>
+            </div>
+            <div className="flex justify-between items-center py-1 border-b-[0.5px] border-border/20">
+              <span className="opacity-70">ML_MODEL_TRAIN</span>
+              <span className="text-foreground">LOSS: 0.0082 // ACC: 99.14%</span>
+            </div>
+            <div className="flex justify-between items-center py-1 border-b-[0.5px] border-border/20">
+              <span className="opacity-70">VECTORS_INDEXED</span>
+              <span className="text-foreground">
+                <NumberTicker value={1248512} delay={0.2} suffix=" (FAISS)" />
+              </span>
+            </div>
+            <div className="flex justify-between items-center py-1 border-b-[0.5px] border-border/20">
+              <span className="opacity-70">LAST_COMMIT_HASH</span>
+              <span className="text-foreground opacity-60">0d214f3 [verified]</span>
+            </div>
           </div>
-          <div className="flex justify-between items-center py-1 border-b-[0.5px] border-border/20">
-            <span className="opacity-70">ML_MODEL_TRAIN</span>
-            <span className="text-foreground">LOSS: 0.0082 // ACC: 99.14%</span>
+        ) : (
+          /* Tab 2: Interactive RAG Inference Simulator */
+          <div className="mt-4 space-y-2.5">
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] text-muted-foreground uppercase tracking-widest">Query Playground</span>
+              <button
+                onClick={runSimulation}
+                disabled={isSimulating}
+                className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-primary/10 border-[0.5px] border-primary/30 text-primary text-[9px] font-mono uppercase tracking-wider hover:bg-primary/20 transition-colors disabled:opacity-50"
+              >
+                <Play className="h-2.5 w-2.5" />
+                {isSimulating ? 'STREAMING...' : 'RUN QUERY'}
+              </button>
+            </div>
+            <div className="p-2.5 rounded bg-background/50 border-[0.5px] border-border/60 min-h-[92px] text-[10px] flex flex-wrap gap-1.5 items-center">
+              {simTokens.length > 0 ? (
+                simTokens.map((tok, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className={
+                      tok.includes('OK')
+                        ? 'text-emerald-500 font-bold px-1.5 py-0.5 rounded bg-emerald-500/10'
+                        : tok.includes('FAISS')
+                        ? 'text-primary font-bold px-1.5 py-0.5 rounded bg-primary/10'
+                        : 'text-foreground'
+                    }
+                  >
+                    {tok}
+                  </motion.span>
+                ))
+              ) : (
+                <span className="text-muted-foreground/60 italic text-[10px]">
+                  Click [RUN QUERY] to simulate real-time neural retrieval pipeline...
+                </span>
+              )}
+            </div>
           </div>
-          <div className="flex justify-between items-center py-1 border-b-[0.5px] border-border/20">
-            <span className="opacity-70">VECTORS_INDEXED</span>
-            <span className="text-foreground">1,248,512 (FAISS_STORE)</span>
-          </div>
-          <div className="flex justify-between items-center py-1 border-b-[0.5px] border-border/20">
-            <span className="opacity-70">LAST_COMMIT_HASH</span>
-            <span className="text-foreground opacity-60">9af8b2c [revamp]</span>
-          </div>
-        </div>
+        )}
       </div>
 
       {/* SVG Loss Curve / Convergence Visualizer with Animated Circuit Pulse */}
@@ -47,7 +127,7 @@ const TelemetryDashboard = () => {
           <span>Convergence Telemetry Log</span>
           <span className="text-emerald-500 font-bold tracking-wider text-[8px] animate-pulse">● LIVE STREAM</span>
         </span>
-        <div className="w-full h-20 sm:h-24 border-[0.5px] border-border/40 rounded bg-background/40 relative overflow-hidden flex items-end p-1">
+        <div className="w-full h-18 sm:h-22 border-[0.5px] border-border/40 rounded bg-background/40 relative overflow-hidden flex items-end p-1">
           {/* Micro Grid Lines */}
           <div className="absolute inset-0 grid grid-cols-6 grid-rows-3 pointer-events-none opacity-5">
             <div className="border-r border-b border-foreground" />
@@ -107,7 +187,7 @@ const TelemetryDashboard = () => {
           </div>
         </div>
       </div>
-    </div>
+    </SpotlightCard>
   );
 };
 
@@ -163,16 +243,22 @@ export const HeroSection = () => {
               transition={{ duration: 0.5, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
               className="grid grid-cols-3 border-[0.5px] border-border bg-card/40 divide-x divide-border/60 shadow-none rounded-lg overflow-hidden max-w-lg sm:max-w-xl lg:max-w-2xl mx-auto lg:mx-0 select-none"
             >
-              {[
-                ['10+', 'Products Built'],
-                ['6', 'Live Demos'],
-                ['IEEE', 'Published'],
-              ].map(([value, label]) => (
-                <div key={label} className="px-2.5 py-2.5 sm:px-5 sm:py-3 text-center">
-                  <div className="text-lg sm:text-xl font-serif-display text-foreground md:text-2xl font-normal">{value}</div>
-                  <div className="mt-0.5 text-[9px] sm:text-[9px] font-mono tracking-wider uppercase text-muted-foreground font-medium">{label}</div>
+              <div className="px-2.5 py-2.5 sm:px-5 sm:py-3 text-center">
+                <div className="text-lg sm:text-xl font-serif-display text-foreground md:text-2xl font-normal">
+                  <NumberTicker value={10} suffix="+" />
                 </div>
-              ))}
+                <div className="mt-0.5 text-[9px] sm:text-[9px] font-mono tracking-wider uppercase text-muted-foreground font-medium">Products Built</div>
+              </div>
+              <div className="px-2.5 py-2.5 sm:px-5 sm:py-3 text-center">
+                <div className="text-lg sm:text-xl font-serif-display text-foreground md:text-2xl font-normal">
+                  <NumberTicker value={6} />
+                </div>
+                <div className="mt-0.5 text-[9px] sm:text-[9px] font-mono tracking-wider uppercase text-muted-foreground font-medium">Live Demos</div>
+              </div>
+              <div className="px-2.5 py-2.5 sm:px-5 sm:py-3 text-center">
+                <div className="text-lg sm:text-xl font-serif-display text-foreground md:text-2xl font-normal">IEEE</div>
+                <div className="mt-0.5 text-[9px] sm:text-[9px] font-mono tracking-wider uppercase text-muted-foreground font-medium">Published</div>
+              </div>
             </motion.div>
 
             <motion.div 

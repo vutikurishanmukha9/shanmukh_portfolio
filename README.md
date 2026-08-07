@@ -30,8 +30,8 @@ To maintain strict visual restraint and establish credibility, the typography is
 The landing hero replaces static image placeholders with a fully interactive Systems Telemetry Console Panel. This component simulates active infrastructure telemetry, including:
 *   **Cloud Deployment State:** Real-time indicator for AWS resources.
 *   **ML Model Training Loss:** Dynamic vector visualization rendering a custom convergence curve directly via SVG with live circuit telemetry pulses and magnetic cursor attraction.
-*   **Database Metrics:** Live monospaced counts showing indexed vectors (FAISS store).
-*   **Service Status Logs:** Responsive rows listing runtime statuses of API servers, Vite environments, and Docker containers.
+*   **Database Metrics:** Live monospaced counts showing indexed vectors (FAISS store) with dynamic numerical counters.
+*   **Service Status Logs & RAG Simulator:** Responsive rows listing runtime statuses and interactive token inference benchmarks.
 
 ### 3. Telemetry Project Silhouettes
 Rather than generic cards, projects are represented as ten interactive flat-dashboard wireframes with fluid layout transitions, perimeter laser beam effects, and spring physics. These silhouettes depict specialized engineering layouts such as neural network token layers, RAG chunking maps, financial candlestick charts, and coordinate index fields.

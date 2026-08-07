@@ -25,6 +25,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
 import { BorderBeam } from '@/components/ui/BorderBeam';
+import { SpotlightCard } from '@/components/ui/SpotlightCard';
 import { ProjectModal, type ProjectData } from '@/components/ProjectModal';
 import { cn } from '@/lib/utils';
 import { useSkillFilter } from '@/context/SkillFilterContext';
@@ -679,23 +680,27 @@ const ProjectCard = ({ project, index, variant = 'card', onInspect }: { project:
   }, [selectedSkill, project.tech]);
 
   return (
-    <motion.article
-      layout
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -4 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.35, delay: index * 0.04, ease: [0.16, 1, 0.3, 1] }}
-      className={cn(
-        'group relative overflow-hidden rounded-lg border bg-card/45 p-3.5 shadow-none backdrop-blur-md hover-lift-minimal flex flex-col justify-between h-full transition-all duration-300',
-        isHero ? 'grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:p-5' : 'flex h-full flex-col gap-4',
-        isMatchingSkillActive 
-          ? 'border-primary/50 shadow-[0_2px_10px_hsl(var(--primary)/0.04)] bg-primary/2' 
-          : 'border-border/80 bg-card/40'
-      )}
+    <SpotlightCard
+      className="h-full rounded-lg"
+      spotlightColor="rgba(204, 120, 92, 0.09)"
     >
-      {/* Animated Dark Laser Border Beam on hover */}
-      <BorderBeam variant="gradient" duration={3.2} borderRadius={8} />
+      <motion.article
+        layout
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        whileHover={{ y: -4 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.35, delay: index * 0.04, ease: [0.16, 1, 0.3, 1] }}
+        className={cn(
+          'group relative overflow-hidden rounded-lg border bg-card/45 p-3.5 shadow-none backdrop-blur-md hover-lift-minimal flex flex-col justify-between h-full transition-all duration-300',
+          isHero ? 'grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:p-5' : 'flex h-full flex-col gap-4',
+          isMatchingSkillActive 
+            ? 'border-primary/50 shadow-[0_2px_10px_hsl(var(--primary)/0.04)] bg-primary/2' 
+            : 'border-border/80 bg-card/40'
+        )}
+      >
+        {/* Animated Dark Laser Border Beam on hover */}
+        <BorderBeam variant="gradient" duration={3.2} borderRadius={8} />
       {/* Dynamic Telemetry Connections inside matching card */}
       {isMatchingSkillActive && (
         <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
@@ -836,6 +841,7 @@ const ProjectCard = ({ project, index, variant = 'card', onInspect }: { project:
         </div>
       </div>
     </motion.article>
+    </SpotlightCard>
   );
 };
 
