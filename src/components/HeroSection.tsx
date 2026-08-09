@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Magnetic } from '@/components/ui/Magnetic';
 import { NumberTicker } from '@/components/ui/NumberTicker';
 import { SpotlightCard } from '@/components/ui/SpotlightCard';
+import { WaveText } from '@/components/ui/WaveText';
+import { useSound } from '@/hooks/useSound';
 import { ArrowUpRight, ChevronDown, Github, Linkedin, Mail, FileText, Play, CheckCircle2 } from 'lucide-react';
 import { ResumeModal } from '@/components/ResumeModal';
 
@@ -193,6 +195,7 @@ const TelemetryDashboard = () => {
 
 export const HeroSection = () => {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
+  const { playClick } = useSound();
 
   return (
     <section id="home" className="relative min-h-screen overflow-hidden pt-32 pb-14">
@@ -216,15 +219,27 @@ export const HeroSection = () => {
               </span>
             </motion.div>
 
-            <div className="overflow-hidden">
+            <div className="overflow-visible pt-1">
               <motion.h1 
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-                className="font-serif-display text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] lg:leading-[0.98] select-none tracking-tight text-foreground"
+                className="font-serif-display text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] lg:leading-[0.98] select-none tracking-tight text-foreground flex flex-col items-center lg:items-start"
               >
-                Vutikuri <br />
-                <span className="text-primary">Shanmukha</span>
+                <WaveText
+                  text="Vutikuri"
+                  className="text-foreground"
+                  jumpHeight={-16}
+                  staggerDuration={0.045}
+                  onHoverStart={() => playClick(950, 0.025, 'sine')}
+                />
+                <WaveText
+                  text="Shanmukha"
+                  className="text-primary"
+                  jumpHeight={-16}
+                  staggerDuration={0.045}
+                  onHoverStart={() => playClick(1100, 0.025, 'sine')}
+                />
               </motion.h1>
             </div>
 
@@ -268,7 +283,7 @@ export const HeroSection = () => {
               className="flex w-full flex-col items-center gap-4 pt-2 sm:w-auto sm:flex-row lg:items-start justify-center lg:justify-start"
             >
               <div className="w-full sm:w-auto">
-                <Magnetic strength={0.3} radius={100}>
+                <Magnetic strength={0.4} strengthY={0.48} radius={140}>
                   <Button
                     size="lg"
                     onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
@@ -282,7 +297,7 @@ export const HeroSection = () => {
                 </Magnetic>
               </div>
               <div className="w-full sm:w-auto">
-                <Magnetic strength={0.3} radius={100}>
+                <Magnetic strength={0.4} strengthY={0.48} radius={140}>
                   <Button
                     variant="outline"
                     size="lg"
@@ -295,7 +310,7 @@ export const HeroSection = () => {
                 </Magnetic>
               </div>
               <div className="w-full sm:w-auto">
-                <Magnetic strength={0.3} radius={100}>
+                <Magnetic strength={0.4} strengthY={0.48} radius={140}>
                   <Button
                     variant="outline"
                     size="lg"

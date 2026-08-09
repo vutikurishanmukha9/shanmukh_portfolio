@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useCallback, useEffect } from 'react';
 import { motion, useSpring } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
@@ -6,56 +6,71 @@ interface MagneticProps {
   children: React.ReactNode;
   className?: string;
   strength?: number; // Distance multiplier
-  radius?: number; // Interaction radius in pixels
+  strengthY?: number; // Optional vertical multiplier (defaults to strength)
+  radius?: number; // Proximity attraction radius in pixels
 }
 
 export const Magnetic: React.FC<MagneticProps> = ({
   children,
   className,
-  strength = 0.35,
-  radius = 120,
+  strength = 0.4,
+  strengthY = 0.45,
+  radius = 140,
 }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const springConfig = { damping: 15, stiffness: 150, mass: 0.1 };
+  const springConfig = { damping: 14, stiffness: 160, mass: 0.1 };
   const smoothX = useSpring(0, springConfig);
   const smoothY = useSpring(0, springConfig);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
-    const { clientX, clientY } = e;
-    const { left, top, width, height } = ref.current.getBoundingClientRect();
-    const centerX = left + width / 2;
-    const centerY = top + height / 2;
+  const handleMouseMove = useCallback(
+    (e: MouseEvent) => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
 
-    const distanceX = clientX - centerX;
-    const distanceY = clientY - centerY;
-    const distance = Math.hypot(distanceX, distanceY);
+      const deltaX = e.clientX - centerX;
+      const deltaY = e.clientY - centerY;
+      const distance = Math.hypot(deltaX, deltaY);
 
-    if (distance < radius) {
-      smoothX.set(distanceX * strength);
-      smoothY.set(distanceY * strength);
-    } else {
-      smoothX.set(0);
-      smoothY.set(0);
-    }
-  };
+      if (distance < radius) {
+        // Apply magnetic gravity pull in all directions (left, right, up, down)
+        smoothX.set(deltaX * strength);
+        smoothY.set(deltaY * (strengthY || strength));
+      } else {
+        smoothX.set(0);
+        smoothY.set(0);
+      }
+    },
+    [radius, strength, strengthY, smoothX, smoothY]
+  );
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = useCallback(() => {
     smoothX.set(0);
     smoothY.set(0);
-  };
+  }, [smoothX, smoothY]);
+
+  useEffect(() => {
+    // Listen to window mousemove for true magnetic proximity attraction even before entering button boundaries
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, [handleMouseMove]);
 
   return (
-    <motion.div
-      ref={ref}
-      onMouseMove={handleMouseMove}
+    <div
+      ref={containerRef}
       onMouseLeave={handleMouseLeave}
-      style={{ x: smoothX, y: smoothY }}
-      className={cn('inline-block', className)}
+      className={cn('inline-block relative', className)}
     >
-      {children}
-    </motion.div>
+      <motion.div
+        style={{ x: smoothX, y: smoothY }}
+        className="w-full h-full will-change-transform"
+      >
+        {children}
+      </motion.div>
+    </div>
   );
 };

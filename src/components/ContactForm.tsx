@@ -138,17 +138,18 @@ export const ContactForm = () => {
 
       <Button
         type="submit"
-        className="w-full h-9 rounded bg-foreground text-background hover:bg-foreground/90 transition-colors duration-200 font-mono text-[10px] tracking-widest uppercase shadow-none group"
+        size="lg"
+        className="w-full h-11 rounded-full bg-foreground text-background shadow-[0_1px_2px_rgba(0,0,0,0.08),0_4px_12px_rgba(0,0,0,0.04)] hover:bg-foreground/90 transition-all font-mono text-[11px] tracking-widest uppercase group active:scale-[0.98]"
         disabled={isSubmitting}
       >
         {isSubmitting ? (
           <>
-            <Loader2 className="h-3.5 w-3.5 mr-2 animate-spin" />
+            <Loader2 className="h-4 w-4 mr-2 animate-spin" />
             Sending…
           </>
         ) : (
           <>
-            <Send className="h-3.5 w-3.5 mr-2 transition-transform duration-200" />
+            <Send className="h-3.5 w-3.5 mr-2 transition-transform duration-200 group-hover:translate-x-0.5" />
             Send Message
           </>
         )}
