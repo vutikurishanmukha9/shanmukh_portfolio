@@ -12,110 +12,185 @@ interface LaTeXPaperPreviewProps {
 }
 
 const LaTeXPaperPreview = ({ url }: { url: string }) => {
+  const paperRef = useRef<HTMLAnchorElement>(null);
+  const [lensPos, setLensPos] = useState<{ x: number; y: number } | null>(null);
+  const [rotX, setRotX] = useState(0);
+  const [rotY, setRotY] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!paperRef.current) return;
+    const rect = paperRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    setLensPos({ x, y });
+
+    // Calculate subtle 3D tilt angles
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const tiltX = -((y - centerY) / centerY) * 7;
+    const tiltY = ((x - centerX) / centerX) * 7;
+    setRotX(tiltX);
+    setRotY(tiltY);
+  };
+
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    setLensPos(null);
+    setRotX(0);
+    setRotY(0);
+  };
+
   return (
-    <a 
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group relative block aspect-[1/1.41] w-full max-w-[210px] mx-auto bg-card border-[0.5px] border-border/80 shadow-[0_4px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.05)] hover:-translate-y-1 transition-all duration-300 p-4 rounded-md select-none overflow-hidden"
-    >
-      {/* LaTeX Document Body */}
-      <div className="h-full flex flex-col justify-between text-[6px] text-foreground font-serif leading-tight">
-        
-        {/* Header Block */}
-        <div className="text-center space-y-1 border-b-[0.3px] border-foreground/25 pb-2">
-          <p className="font-mono text-[4px] uppercase tracking-widest text-muted-foreground">IEEE CONFERENCE REPRINT</p>
-          <h5 className="font-serif font-bold text-[7.2px] tracking-tight leading-none px-1">
-            Optimizing Energy Efficiency in Smart Buildings Through IoT Occupancy Sensing
-          </h5>
-          <p className="text-[4.5px] text-muted-foreground">V. Shanmukha, et al. • NIT Jalandhar</p>
-        </div>
+    <div className="relative py-2 select-none" style={{ perspective: 1200 }}>
+      <motion.a 
+        ref={paperRef}
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        onMouseMove={handleMouseMove}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        animate={{
+          rotateX: rotX,
+          rotateY: rotY,
+          scale: isHovered ? 1.04 : 1,
+          boxShadow: isHovered
+            ? '0 24px 48px -12px rgba(20, 20, 19, 0.12), 0 4px 16px rgba(20, 20, 19, 0.04)'
+            : '0 4px 12px rgba(20, 20, 19, 0.02)',
+        }}
+        transition={{ type: 'spring', stiffness: 260, damping: 22 }}
+        className="group relative block aspect-[1/1.41] w-full max-w-[215px] mx-auto bg-card border-[0.5px] border-border/80 p-4 rounded-md overflow-hidden transform-gpu will-change-transform"
+      >
+        {/* Specular Ambient Sheen */}
+        {isHovered && (
+          <div 
+            className="absolute inset-0 pointer-events-none z-20 transition-opacity duration-300 opacity-60"
+            style={{
+              background: lensPos
+                ? `radial-gradient(180px circle at ${lensPos.x}px ${lensPos.y}px, rgba(255,255,255,0.4), transparent 80%)`
+                : 'none',
+            }}
+          />
+        )}
 
-        {/* Double-Column Abstract Content */}
-        <div className="flex-1 grid grid-cols-2 gap-2 mt-2 select-none pointer-events-none opacity-85">
+        {/* LaTeX Document Body */}
+        <div className="h-full flex flex-col justify-between text-[6px] text-foreground font-serif leading-tight relative z-10">
           
-          {/* Column 1: Abstract Text blocks */}
-          <div className="space-y-1.5 border-r-[0.3px] border-foreground/15 pr-1.5">
-            <span className="font-bold text-[5.2px] block font-mono">ABSTRACT:</span>
-            <div className="space-y-1">
-              <div className="h-1 bg-muted-foreground/35 rounded-sm w-full" />
-              <div className="h-1 bg-muted-foreground/35 rounded-sm w-full" />
-              <div className="h-1 bg-muted-foreground/35 rounded-sm w-[90%]" />
-              <div className="h-1 bg-muted-foreground/35 rounded-sm w-[95%]" />
-              <div className="h-1 bg-muted-foreground/35 rounded-sm w-[80%]" />
-            </div>
-            <span className="font-bold text-[5.2px] block font-mono mt-1.5">I. INTRODUCTION</span>
-            <div className="space-y-1">
-              <div className="h-1 bg-muted-foreground/20 rounded-sm w-full" />
-              <div className="h-1 bg-muted-foreground/20 rounded-sm w-[85%]" />
-              <div className="h-1 bg-muted-foreground/20 rounded-sm w-full" />
-            </div>
+          {/* Header Block */}
+          <div className="text-center space-y-1 border-b-[0.3px] border-foreground/25 pb-2">
+            <p className="font-mono text-[4px] uppercase tracking-widest text-muted-foreground">IEEE CONFERENCE REPRINT</p>
+            <h5 className="font-serif font-bold text-[7.2px] tracking-tight leading-none px-1">
+              Optimizing Energy Efficiency in Smart Buildings Through IoT Occupancy Sensing
+            </h5>
+            <p className="text-[4.5px] text-muted-foreground">V. Shanmukha, et al. • NIT Jalandhar</p>
           </div>
 
-          {/* Column 2: SVG Diagram with Live Traveling Circuit Pulses */}
-          <div className="flex flex-col justify-between pl-0.5 space-y-1.5">
-            <span className="font-bold text-[5.2px] block font-mono flex items-center justify-between">
-              <span>II. TELEMETRY</span>
-              <span className="text-[3px] text-emerald-500 font-mono">96%_ACC</span>
-            </span>
+          {/* Double-Column Abstract Content */}
+          <div className="flex-1 grid grid-cols-2 gap-2 mt-2 select-none pointer-events-none opacity-85">
             
-            {/* SVG Schematic Block */}
-            <div className="flex-1 border-[0.3px] border-foreground/20 bg-muted/20 rounded p-1 flex items-center justify-center relative overflow-hidden">
-              <svg className="w-full h-11 text-primary/70" viewBox="0 0 60 40" role="img" aria-label="Fig 1. Decoupled IoT Sensor telemetry dataflow block diagram linking MCU with DHT22 sensors to CLOUD telemetry base">
-                {/* MCU module */}
-                <rect x="2" y="13" width="16" height="14" rx="1" fill="none" stroke="currentColor" strokeWidth="0.3" />
-                <text x="10" y="21" textAnchor="middle" fontSize="3" fontFamily="monospace" fill="currentColor">MCU</text>
-                
-                {/* Sensors link */}
-                <path d="M 10 5 L 10 13" stroke="currentColor" strokeWidth="0.3" strokeDasharray="0.5 0.5" />
-                <rect x="6" y="2" width="8" height="3" rx="0.5" fill="none" stroke="currentColor" strokeWidth="0.3" />
-                <text x="10" y="4.2" textAnchor="middle" fontSize="2" fontFamily="monospace" fill="currentColor">DHT22</text>
-                
-                {/* Link line to cloud gateway */}
-                <path d="M 18 20 L 32 20" stroke="currentColor" strokeWidth="0.3" strokeDasharray="0.5 0.5" />
-                
-                {/* Animated circuit pulse packet traveling MCU -> Cloud */}
-                <motion.circle
-                  r="0.8"
-                  fill="hsl(var(--primary))"
-                  animate={{
-                    cx: [18, 32],
-                    cy: [20, 20],
-                    opacity: [0, 1, 0]
-                  }}
-                  transition={{ repeat: Infinity, duration: 1.8, ease: "linear" }}
-                />
-
-                {/* Cloud telemetry base */}
-                <rect x="32" y="11" width="24" height="18" rx="1" fill="none" stroke="currentColor" strokeWidth="0.3" />
-                <text x="44" y="18" textAnchor="middle" fontSize="3.2" fontFamily="monospace" fill="currentColor">CLOUD</text>
-                <text x="44" y="24" textAnchor="middle" fontSize="2.8" fontFamily="monospace" fill="currentColor" className="fill-emerald-500 font-bold">96%_ACC</text>
-              </svg>
+            {/* Column 1: Abstract Text blocks */}
+            <div className="space-y-1.5 border-r-[0.3px] border-foreground/15 pr-1.5">
+              <span className="font-bold text-[5.2px] block font-mono">ABSTRACT:</span>
+              <div className="space-y-1">
+                <div className="h-1 bg-muted-foreground/35 rounded-sm w-full" />
+                <div className="h-1 bg-muted-foreground/35 rounded-sm w-full" />
+                <div className="h-1 bg-muted-foreground/35 rounded-sm w-[90%]" />
+                <div className="h-1 bg-muted-foreground/35 rounded-sm w-[95%]" />
+                <div className="h-1 bg-muted-foreground/35 rounded-sm w-[80%]" />
+              </div>
+              <span className="font-bold text-[5.2px] block font-mono mt-1.5">I. INTRODUCTION</span>
+              <div className="space-y-1">
+                <div className="h-1 bg-muted-foreground/20 rounded-sm w-full" />
+                <div className="h-1 bg-muted-foreground/20 rounded-sm w-[85%]" />
+                <div className="h-1 bg-muted-foreground/20 rounded-sm w-full" />
+              </div>
             </div>
-            
-            <p className="text-[3.8px] text-muted-foreground/75 leading-none italic text-center font-serif">
-              Fig 1. Decoupled IoT Sensor telemetry dataflow.
-            </p>
+
+            {/* Column 2: SVG Diagram with Live Traveling Circuit Pulses */}
+            <div className="flex flex-col justify-between pl-0.5 space-y-1.5">
+              <span className="font-bold text-[5.2px] block font-mono flex items-center justify-between">
+                <span>II. TELEMETRY</span>
+                <span className="text-[3px] text-emerald-500 font-mono">96%_ACC</span>
+              </span>
+              
+              {/* SVG Schematic Block */}
+              <div className="flex-1 border-[0.3px] border-foreground/20 bg-muted/20 rounded p-1 flex items-center justify-center relative overflow-hidden">
+                <svg className="w-full h-11 text-primary/70" viewBox="0 0 60 40" role="img" aria-label="Fig 1. Decoupled IoT Sensor telemetry dataflow block diagram linking MCU with DHT22 sensors to CLOUD telemetry base">
+                  {/* MCU module */}
+                  <rect x="2" y="13" width="16" height="14" rx="1" fill="none" stroke="currentColor" strokeWidth="0.3" />
+                  <text x="10" y="21" textAnchor="middle" fontSize="3" fontFamily="monospace" fill="currentColor">MCU</text>
+                  
+                  {/* Sensors link */}
+                  <path d="M 10 5 L 10 13" stroke="currentColor" strokeWidth="0.3" strokeDasharray="0.5 0.5" />
+                  <rect x="6" y="2" width="8" height="3" rx="0.5" fill="none" stroke="currentColor" strokeWidth="0.3" />
+                  <text x="10" y="4.2" textAnchor="middle" fontSize="2" fontFamily="monospace" fill="currentColor">DHT22</text>
+                  
+                  {/* Link line to cloud gateway */}
+                  <path d="M 18 20 L 32 20" stroke="currentColor" strokeWidth="0.3" strokeDasharray="0.5 0.5" />
+                  
+                  {/* Animated circuit pulse packet traveling MCU -> Cloud */}
+                  <motion.circle
+                    r="0.8"
+                    fill="hsl(var(--primary))"
+                    animate={{
+                      cx: [18, 32],
+                      cy: [20, 20],
+                      opacity: [0, 1, 0]
+                    }}
+                    transition={{ repeat: Infinity, duration: 1.8, ease: "linear" }}
+                  />
+
+                  {/* Cloud telemetry base */}
+                  <rect x="32" y="11" width="24" height="18" rx="1" fill="none" stroke="currentColor" strokeWidth="0.3" />
+                  <text x="44" y="18" textAnchor="middle" fontSize="3.2" fontFamily="monospace" fill="currentColor">CLOUD</text>
+                  <text x="44" y="24" textAnchor="middle" fontSize="2.8" fontFamily="monospace" fill="currentColor" className="fill-emerald-500 font-bold">96%_ACC</text>
+                </svg>
+              </div>
+              
+              <p className="text-[3.8px] text-muted-foreground/75 leading-none italic text-center font-serif">
+                Fig 1. Decoupled IoT Sensor telemetry dataflow.
+              </p>
+            </div>
+
+          </div>
+
+          {/* LaTeX Page Footer */}
+          <div className="border-t-[0.3px] border-foreground/25 pt-1 flex justify-between text-[4px] font-mono text-muted-foreground">
+            <span>IEEE EAIC 2025</span>
+            <span>PAGE 4 OF 6</span>
           </div>
 
         </div>
 
-        {/* LaTeX Page Footer */}
-        <div className="border-t-[0.3px] border-foreground/25 pt-1 flex justify-between text-[4px] font-mono text-muted-foreground">
-          <span>IEEE EAIC 2025</span>
-          <span>PAGE 4 OF 6</span>
-        </div>
+        {/* Optical Glass Magnifying Reticle Following Cursor */}
+        {isHovered && lensPos && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="absolute pointer-events-none z-30 w-14 h-14 rounded-full border border-primary/50 bg-primary/5 backdrop-blur-[2px] shadow-[0_8px_20px_rgba(0,0,0,0.15)] flex items-center justify-center -translate-x-1/2 -translate-y-1/2"
+            style={{
+              left: lensPos.x,
+              top: lensPos.y,
+            }}
+          >
+            {/* Optical Crosshair Reticle */}
+            <div className="w-full h-[0.5px] bg-primary/40 absolute" />
+            <div className="h-full w-[0.5px] bg-primary/40 absolute" />
+            <div className="w-2 h-2 rounded-full border border-primary/60 bg-primary/20" />
+          </motion.div>
+        )}
 
-      </div>
-
-      {/* Hover blur overlay [READ ARTICLE] */}
-      <div className="absolute inset-0 bg-background/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-[1px]">
-        <div className="border-[0.5px] border-primary/45 bg-primary/5 px-3 py-1.5 rounded flex items-center gap-1.5 text-[10px] sm:text-[9px] font-mono uppercase tracking-widest text-primary font-bold shadow-none animate-pulse">
-          READ ARTICLE
-          <ExternalLink className="h-3 w-3" />
+        {/* Hover blur overlay [READ ARTICLE] badge */}
+        <div className="absolute inset-0 bg-background/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-[1px] z-40">
+          <div className="border-[0.5px] border-primary/50 bg-primary/10 px-3 py-1.5 rounded-full flex items-center gap-1.5 text-[10px] sm:text-[9px] font-mono uppercase tracking-widest text-primary font-bold shadow-sm">
+            READ ARTICLE
+            <ExternalLink className="h-3 w-3" />
+          </div>
         </div>
-      </div>
-    </a>
+      </motion.a>
+    </div>
   );
 };
 

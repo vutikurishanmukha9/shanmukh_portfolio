@@ -5,6 +5,7 @@ import { useSound } from '@/hooks/useSound';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
 import { BorderBeam } from '@/components/ui/BorderBeam';
+import { SpotlightBorderCard } from '@/components/ui/SpotlightBorderCard';
 import { cn } from '@/lib/utils';
 
 const pipelineStages = [
@@ -198,46 +199,53 @@ export const SkillsSection = () => {
                   exit={{ opacity: 0, scale: 0.98 }}
                   transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
                   key={category.title}
-                  className="group relative glass-panel p-6 hover-lift-minimal flex flex-col h-full justify-between overflow-hidden"
+                  className="h-full"
                 >
-                  <BorderBeam variant="dark" duration={3.5} borderRadius={8} />
-                  <div>
-                    <div className="flex items-center gap-3.5 mb-6 border-b-[0.5px] border-border/40 pb-4">
-                      <div className="w-9 h-9 rounded bg-primary/5 border-[0.5px] border-primary/15 flex items-center justify-center">
-                        <Icon className="w-4.5 h-4.5 text-primary" />
-                      </div>
-                      <h3 className="text-base font-serif-display font-medium text-foreground">{category.title}</h3>
-                    </div>
+                  <SpotlightBorderCard
+                    spotlightColor="rgba(204, 120, 92, 0.4)"
+                    spotlightRadius={130}
+                    className="h-full hover-lift-minimal"
+                  >
+                    <div className="p-6 flex flex-col h-full justify-between">
+                      <div>
+                        <div className="flex items-center gap-3.5 mb-6 border-b-[0.5px] border-border/40 pb-4">
+                          <div className="w-9 h-9 rounded bg-primary/5 border-[0.5px] border-primary/15 flex items-center justify-center">
+                            <Icon className="w-4.5 h-4.5 text-primary" />
+                          </div>
+                          <h3 className="text-base font-serif-display font-medium text-foreground">{category.title}</h3>
+                        </div>
 
-                    <div className="flex flex-wrap gap-1.5">
-                      {category.skills.map((skill) => {
-                        const isSkillSelected = selectedSkill === skill;
-                        const count = skillCounts[skill];
-                        return (
-                          <motion.button
-                            key={skill}
-                            whileHover={{ scale: 1.04 }}
-                            whileTap={{ scale: 0.96 }}
-                            transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                            onClick={() => handleSkillClick(skill)}
-                            className={cn(
-                              "px-3 py-1 rounded-md text-[10px] font-mono border transition-all duration-200 flex items-center gap-1.5",
-                              isSkillSelected
-                                ? "bg-primary/10 text-primary border-primary/30 font-semibold"
-                                : "bg-background/40 text-muted-foreground border-border/40 hover:border-primary/20 hover:text-foreground"
-                            )}
-                          >
-                            <span>{skill}</span>
-                            {count && (
-                              <span className="text-[8px] opacity-70 px-1 py-0.2 bg-muted/60 rounded border-[0.5px] border-border/40">
-                                {count}
-                              </span>
-                            )}
-                          </motion.button>
-                        );
-                      })}
+                        <div className="flex flex-wrap gap-1.5">
+                          {category.skills.map((skill) => {
+                            const isSkillSelected = selectedSkill === skill;
+                            const count = skillCounts[skill];
+                            return (
+                              <motion.button
+                                key={skill}
+                                whileHover={{ scale: 1.04 }}
+                                whileTap={{ scale: 0.96 }}
+                                transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                                onClick={() => handleSkillClick(skill)}
+                                className={cn(
+                                  "px-3 py-1 rounded-md text-[10px] font-mono border transition-all duration-200 flex items-center gap-1.5",
+                                  isSkillSelected
+                                    ? "bg-primary/10 text-primary border-primary/30 font-semibold"
+                                    : "bg-background/40 text-muted-foreground border-border/40 hover:border-primary/20 hover:text-foreground"
+                                )}
+                              >
+                                <span>{skill}</span>
+                                {count && (
+                                  <span className="text-[8px] opacity-70 px-1 py-0.2 bg-muted/60 rounded border-[0.5px] border-border/40">
+                                    {count}
+                                  </span>
+                                )}
+                              </motion.button>
+                            );
+                          })}
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                  </SpotlightBorderCard>
                 </motion.div>
               );
             })}

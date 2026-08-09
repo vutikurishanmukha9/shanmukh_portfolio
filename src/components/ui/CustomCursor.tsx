@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { useEffect, useState, useRef } from 'react';
+import { motion, useMotionValue, useSpring, useVelocity, useTransform } from 'framer-motion';
 
 export const CustomCursor = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -9,13 +9,22 @@ export const CustomCursor = () => {
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
+  // Measure velocities
+  const velocityX = useVelocity(cursorX);
+  const velocityY = useVelocity(cursorY);
+
   // Precision dot follows cursor tightly
-  const dotX = useSpring(cursorX, { damping: 40, stiffness: 450, mass: 0.05 });
-  const dotY = useSpring(cursorY, { damping: 40, stiffness: 450, mass: 0.05 });
+  const dotX = useSpring(cursorX, { damping: 38, stiffness: 500, mass: 0.04 });
+  const dotY = useSpring(cursorY, { damping: 38, stiffness: 500, mass: 0.04 });
 
   // Trailing ring follows with soft spring physics
-  const ringX = useSpring(cursorX, { damping: 25, stiffness: 200, mass: 0.1 });
-  const ringY = useSpring(cursorY, { damping: 25, stiffness: 200, mass: 0.1 });
+  const ringX = useSpring(cursorX, { damping: 24, stiffness: 220, mass: 0.08 });
+  const ringY = useSpring(cursorY, { damping: 24, stiffness: 220, mass: 0.08 });
+
+  // Compute speed for dynamic stretch ribbon
+  const [angle, setAngle] = useState(0);
+  const [speedScale, setSpeedScale] = useState(1);
+  const lastPos = useRef({ x: -100, y: -100 });
 
   useEffect(() => {
     // Only enable custom cursor on fine pointer devices (desktops/laptops)
@@ -23,11 +32,35 @@ export const CustomCursor = () => {
       return;
     }
 
+    let animationFrameId: number;
+
     const handleMouseMove = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
       if (!isVisible) setIsVisible(true);
+
+      const dx = e.clientX - lastPos.current.x;
+      const dy = e.clientY - lastPos.current.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+
+      if (dist > 1.5) {
+        const theta = Math.atan2(dy, dx) * (180 / Math.PI);
+        setAngle(theta);
+        const stretch = Math.min(1 + dist / 25, 2.2);
+        setSpeedScale(stretch);
+      }
+
+      lastPos.current = { x: e.clientX, y: e.clientY };
     };
+
+    const settleLoop = () => {
+      setSpeedScale((prev) => {
+        if (prev <= 1.01) return 1;
+        return prev + (1 - prev) * 0.15;
+      });
+      animationFrameId = requestAnimationFrame(settleLoop);
+    };
+    animationFrameId = requestAnimationFrame(settleLoop);
 
     const handleMouseDown = () => setIsClicking(true);
     const handleMouseUp = () => setIsClicking(false);
@@ -51,6 +84,7 @@ export const CustomCursor = () => {
     document.addEventListener('mouseenter', handleMouseEnter);
 
     return () => {
+      cancelAnimationFrame(animationFrameId);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mousemove', checkHoverables);
       window.removeEventListener('mousedown', handleMouseDown);
@@ -64,27 +98,30 @@ export const CustomCursor = () => {
 
   return (
     <div className="pointer-events-none fixed inset-0 z-[9999] overflow-hidden select-none">
-      {/* Outer Spring Trailing Ring */}
+      {/* Elastic Trailing Velocity Ribbon Ring */}
       <motion.div
-        className="fixed top-0 left-0 rounded-full border-[1.5px] border-primary/50 pointer-events-none"
+        className="fixed top-0 left-0 rounded-full border-[1.2px] border-primary/50 pointer-events-none transform-gpu will-change-transform"
         style={{
           x: ringX,
           y: ringY,
           translateX: '-50%',
           translateY: '-50%',
+          rotate: `${angle}deg`,
+          scaleX: isHovered ? 1 : speedScale,
+          scaleY: isHovered ? 1 : 1 / Math.max(speedScale * 0.8, 1),
         }}
         animate={{
-          width: isHovered ? 44 : isClicking ? 22 : 30,
-          height: isHovered ? 44 : isClicking ? 22 : 30,
+          width: isHovered ? 44 : isClicking ? 20 : 28,
+          height: isHovered ? 44 : isClicking ? 20 : 28,
           backgroundColor: isHovered ? 'rgba(204, 120, 92, 0.08)' : 'transparent',
           borderColor: isHovered ? 'rgba(204, 120, 92, 0.7)' : 'rgba(204, 120, 92, 0.35)',
         }}
-        transition={{ type: 'spring', damping: 20, stiffness: 300, mass: 0.1 }}
+        transition={{ type: 'spring', damping: 22, stiffness: 320, mass: 0.08 }}
       />
 
       {/* Precision Center Dot */}
       <motion.div
-        className="fixed top-0 left-0 rounded-full bg-primary pointer-events-none"
+        className="fixed top-0 left-0 rounded-full bg-primary pointer-events-none transform-gpu"
         style={{
           x: dotX,
           y: dotY,
@@ -96,7 +133,7 @@ export const CustomCursor = () => {
           height: isHovered ? 6 : isClicking ? 3 : 5,
           opacity: isHovered ? 0.9 : 1,
         }}
-        transition={{ type: 'spring', damping: 30, stiffness: 400 }}
+        transition={{ type: 'spring', damping: 30, stiffness: 420 }}
       />
     </div>
   );
