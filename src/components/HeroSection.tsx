@@ -20,7 +20,7 @@ const TelemetryDashboard = () => {
   const runSimulation = () => {
     setIsSimulating(true);
     setSimTokens([]);
-    const tokens = ['[PROMPT]', 'retrieve_chunks()', '→', 'FAISS: 12ms', '→', 'Re-rank (0.94)', '→', 'LLM_Inference', '→', '200 OK (58ms)'];
+    const tokens = ['[PROMPT]', 'retrieve_chunks()', '->', 'FAISS: 12ms', '->', 'Re-rank (0.94)', '->', 'LLM_Inference', '->', '200 OK (58ms)'];
     tokens.forEach((token, idx) => {
       setTimeout(() => {
         setSimTokens((prev) => [...prev, token]);
@@ -252,7 +252,7 @@ export const HeroSection = () => {
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-                className="font-serif-display text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] lg:leading-[0.98] select-none tracking-tight text-foreground"
+                className="font-serif-display text-3.5xl xs:text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] lg:leading-[0.98] select-none tracking-tight text-foreground break-words"
               >
                 <span className="block">
                   <WaveText
@@ -290,21 +290,21 @@ export const HeroSection = () => {
               transition={{ duration: 0.5, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
               className="grid grid-cols-3 border-[0.5px] border-border bg-card/40 divide-x divide-border/60 shadow-none rounded-lg overflow-hidden max-w-lg sm:max-w-xl lg:max-w-2xl mx-auto lg:mx-0 select-none"
             >
-              <div className="px-2.5 py-2.5 sm:px-5 sm:py-3 text-center">
-                <div className="text-lg sm:text-xl font-serif-display text-foreground md:text-2xl font-normal">
+              <div className="px-2 py-2.5 sm:px-5 sm:py-3 text-center">
+                <div className="text-base sm:text-xl font-serif-display text-foreground md:text-2xl font-normal">
                   <NumberTicker value={10} suffix="+" />
                 </div>
-                <div className="mt-0.5 text-[9px] sm:text-[9px] font-mono tracking-wider uppercase text-muted-foreground font-medium">Products Built</div>
+                <div className="mt-0.5 text-[8px] sm:text-[9px] font-mono tracking-wider uppercase text-muted-foreground font-medium">Products Built</div>
               </div>
-              <div className="px-2.5 py-2.5 sm:px-5 sm:py-3 text-center">
-                <div className="text-lg sm:text-xl font-serif-display text-foreground md:text-2xl font-normal">
+              <div className="px-2 py-2.5 sm:px-5 sm:py-3 text-center">
+                <div className="text-base sm:text-xl font-serif-display text-foreground md:text-2xl font-normal">
                   <NumberTicker value={6} />
                 </div>
-                <div className="mt-0.5 text-[9px] sm:text-[9px] font-mono tracking-wider uppercase text-muted-foreground font-medium">Live Demos</div>
+                <div className="mt-0.5 text-[8px] sm:text-[9px] font-mono tracking-wider uppercase text-muted-foreground font-medium">Live Demos</div>
               </div>
-              <div className="px-2.5 py-2.5 sm:px-5 sm:py-3 text-center">
-                <div className="text-lg sm:text-xl font-serif-display text-foreground md:text-2xl font-normal">IEEE</div>
-                <div className="mt-0.5 text-[9px] sm:text-[9px] font-mono tracking-wider uppercase text-muted-foreground font-medium">Published</div>
+              <div className="px-2 py-2.5 sm:px-5 sm:py-3 text-center">
+                <div className="text-base sm:text-xl font-serif-display text-foreground md:text-2xl font-normal">IEEE</div>
+                <div className="mt-0.5 text-[8px] sm:text-[9px] font-mono tracking-wider uppercase text-muted-foreground font-medium">Published</div>
               </div>
             </motion.div>
 
@@ -312,7 +312,7 @@ export const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="flex w-full flex-col items-center gap-4 pt-2 sm:w-auto sm:flex-row lg:items-start justify-center lg:justify-start"
+              className="flex w-full flex-col sm:flex-row flex-wrap items-center gap-3 pt-2 lg:items-start justify-center lg:justify-start"
             >
               <div className="w-full sm:w-auto">
                 <Magnetic strength={0.4} strengthY={0.48} radius={140}>

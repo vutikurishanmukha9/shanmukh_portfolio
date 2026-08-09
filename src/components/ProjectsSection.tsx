@@ -1,45 +1,33 @@
 import { useMemo, useState } from 'react';
-import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 import {
   ArrowUpRight,
+  BarChart3,
   Brain,
-  Check,
   CheckCircle2,
   Cloud,
-  Database,
+  Code2,
   Eye,
   Github,
   Globe,
   Layers3,
-  ScanFace,
-  Zap,
-  Terminal,
   X,
-  Network,
-  Server,
-  Layers,
-  Cpu,
-  ArrowRight,
   type LucideIcon,
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Button } from '@/components/ui/button';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
-import { BorderBeam } from '@/components/ui/BorderBeam';
-import { SpotlightCard } from '@/components/ui/SpotlightCard';
-import { TiltCard } from '@/components/ui/TiltCard';
-import { TextScramble } from '@/components/ui/TextScramble';
-import { ProjectModal, type ProjectData } from '@/components/ProjectModal';
 import { cn } from '@/lib/utils';
 import { useSkillFilter } from '@/context/SkillFilterContext';
-import { Link } from 'react-router-dom';
 
 type ProjectCategory = 'AI/ML' | 'Cloud' | 'Web App' | 'Computer Vision' | 'Data Analysis' | 'Other';
-type PreviewType = 'report' | 'signals' | 'community' | 'molecule' | 'prompt' | 'rag' | 'health' | 'gesture' | 'attendance' | 'analytics' | 'terminal';
+type ProjectTone = 'blue' | 'violet' | 'rose' | 'emerald' | 'amber' | 'slate';
 
 type Project = {
   title: string;
   description: string;
   impact: string;
+  soloBuild: string;
   metrics: string[];
   tech: string[];
   category: ProjectCategory;
@@ -49,807 +37,407 @@ type Project = {
   demoLabel?: string;
   caseStudy?: string;
   featured?: boolean;
-  previewType: PreviewType;
+  tone: ProjectTone;
 };
 
-const categoryConfig: Record<ProjectCategory, { icon: LucideIcon; color: string; label: string }> = {
-  'AI/ML': { icon: Brain, color: 'text-violet-500', label: 'Artificial Intelligence' },
-  Cloud: { icon: Cloud, color: 'text-sky-500', label: 'Cloud Architecture' },
-  'Web App': { icon: Globe, color: 'text-primary', label: 'Web Development' },
-  'Computer Vision': { icon: Eye, color: 'text-emerald-500', label: 'Computer Vision' },
-  'Data Analysis': { icon: Brain, color: 'text-amber-500', label: 'Data Science' },
-  Other: { icon: Layers3, color: 'text-muted-foreground', label: 'Various Engineering' },
+const categoryConfig: Record<ProjectCategory, { icon: LucideIcon; color: string }> = {
+  'AI/ML': { icon: Brain, color: 'text-violet-500' },
+  Cloud: { icon: Cloud, color: 'text-sky-500' },
+  'Web App': { icon: Globe, color: 'text-primary' },
+  'Computer Vision': { icon: Eye, color: 'text-emerald-500' },
+  'Data Analysis': { icon: BarChart3, color: 'text-amber-500' },
+  Other: { icon: Layers3, color: 'text-muted-foreground' },
+};
+
+const toneClasses: Record<ProjectTone, { bg: string; mark: string; border: string }> = {
+  blue: {
+    bg: 'from-sky-500/12 via-background to-background',
+    mark: 'bg-sky-500',
+    border: 'group-hover:border-sky-500/35',
+  },
+  violet: {
+    bg: 'from-violet-500/12 via-background to-background',
+    mark: 'bg-violet-500',
+    border: 'group-hover:border-violet-500/35',
+  },
+  rose: {
+    bg: 'from-rose-500/12 via-background to-background',
+    mark: 'bg-rose-500',
+    border: 'group-hover:border-rose-500/35',
+  },
+  emerald: {
+    bg: 'from-emerald-500/12 via-background to-background',
+    mark: 'bg-emerald-500',
+    border: 'group-hover:border-emerald-500/35',
+  },
+  amber: {
+    bg: 'from-amber-500/12 via-background to-background',
+    mark: 'bg-amber-500',
+    border: 'group-hover:border-amber-500/35',
+  },
+  slate: {
+    bg: 'from-slate-500/10 via-background to-background',
+    mark: 'bg-slate-500',
+    border: 'group-hover:border-slate-500/35',
+  },
 };
 
 const projects: Project[] = [
   {
     title: 'Context-Ly',
-    description: 'Open-source Context Intelligence Engine and CLI that acts as a persistent memory layer for LLMs to prevent token waste.',
-    impact: 'Architected a Python CLI with static analysis to automatically discover team conventions and package codebase context for AI.',
-    metrics: ['AST parsing', '100% test coverage', 'PyPI Package'],
+    description: 'Open-source Context Intelligence Engine and CLI that works as a persistent memory layer for LLM-assisted development.',
+    impact: 'Helps AI tools understand project conventions faster, reducing repeated context setup and wasted prompts.',
+    soloBuild: 'Solo open-source build',
+    metrics: ['AST parsing', '100% tests', 'PyPI package'],
     tech: ['Python', 'Typer', 'Rich', 'Pytest', 'PyYAML'],
     category: 'AI/ML',
     focus: 'Developer Tools',
     github: 'https://github.com/vutikurishanmukha9/contextly',
     demo: 'https://pypi.org/project/contextly/',
-    demoLabel: 'View',
+    demoLabel: 'View Package',
     caseStudy: '/project/contextly',
     featured: true,
-    previewType: 'terminal',
+    tone: 'violet',
   },
   {
     title: 'GetReport',
-    description: 'Full-stack reporting platform that turns raw datasets into PDF reports with fast Polars processing and AI-assisted semantic querying.',
-    impact: 'Built a complete data-to-report workflow for uploading files, exploring data, and generating polished reports.',
-    metrics: ['PDF reports', 'RAG querying', 'Polars pipeline'],
+    description: 'Full-stack reporting platform that turns raw datasets into PDF reports with Polars processing and AI-assisted querying.',
+    impact: 'Combines upload, analysis, semantic exploration, and report generation into one end-to-end workflow.',
+    soloBuild: 'Solo full-stack build',
+    metrics: ['PDF reports', 'RAG queries', 'Polars engine'],
     tech: ['FastAPI', 'React', 'Polars', 'Redis', 'OpenAI', 'Docker'],
     category: 'Web App',
     focus: 'Data Platform',
     github: 'https://github.com/vutikurishanmukha9/GetReport',
     demo: 'https://get-report.vercel.app',
     featured: true,
-    previewType: 'report',
+    tone: 'blue',
   },
   {
     title: 'Candle-Light',
-    description: 'AI-powered market pattern analysis experience with multi-model fallback and low-latency recognition flows.',
-    impact: 'Created a visual AI workflow for reading market patterns and presenting signals in a cleaner product experience.',
-    metrics: ['Pattern analysis', 'Model fallback', 'Live UI'],
+    description: 'AI-powered market pattern analysis interface with model fallback and low-latency visual signal flows.',
+    impact: 'Turns technical market-pattern recognition into a clearer AI product experience.',
+    soloBuild: 'Solo AI product build',
+    metrics: ['Pattern analysis', 'Fallback logic', 'Live UI'],
     tech: ['React', 'TailwindCSS', 'Machine Learning', 'OAuth'],
     category: 'AI/ML',
     focus: 'AI Pipelines',
     github: 'https://github.com/vutikurishanmukha9/Candle-Light',
     demo: 'https://candle-light-kappa.vercel.app',
     featured: true,
-    previewType: 'signals',
+    tone: 'rose',
   },
   {
     title: 'HeartOut',
-    description: 'Anonymous storytelling platform with role-based access control, JWT authentication, and a scalable MongoDB content model.',
-    impact: 'Shipped a secure community-style product foundation with authentication, content flows, and backend structure.',
-    metrics: ['JWT auth', 'RBAC', 'MongoDB schema'],
+    description: 'Anonymous storytelling platform with JWT authentication, role-based access, and a scalable MongoDB content model.',
+    impact: 'Builds the foundation for a secure community product with publishing and moderation-ready architecture.',
+    soloBuild: 'Solo product build',
+    metrics: ['JWT auth', 'RBAC', 'MongoDB'],
     tech: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT'],
     category: 'Web App',
     focus: 'Backend Systems',
     github: 'https://github.com/vutikurishanmukha9/HeartOut',
     demo: 'https://heart-out.vercel.app/',
     featured: true,
-    previewType: 'community',
+    tone: 'rose',
   },
   {
     title: 'Ele-Visualize',
     description: 'Interactive 3D molecule visualization engine using WebGL and MediaPipe hand tracking for gesture-led exploration.',
-    impact: 'Designed a touchless 3D learning prototype that turns hand movement into molecule interaction.',
+    impact: 'Transforms hand movement into touchless 3D interaction for a STEM learning use case.',
+    soloBuild: 'Solo interaction build',
     metrics: ['3D WebGL', 'Hand tracking', 'STEM UX'],
     tech: ['React', 'Three.js', 'MediaPipe', 'WebGL'],
     category: 'Computer Vision',
     focus: '3D Interaction',
     github: 'https://github.com/vutikurishanmukha9/Ele-Visualize',
     demo: 'https://ele-visualize.vercel.app/',
-    previewType: 'molecule',
+    tone: 'emerald',
   },
   {
     title: 'PromptBuddy',
     description: 'Prompt optimization workspace with reusable templates and intelligent slot filling for faster AI workflows.',
-    impact: 'Created a productivity tool that makes prompt reuse, structure, and iteration easier for everyday AI work.',
+    impact: 'Makes prompt reuse, structure, and iteration easier for regular AI work.',
+    soloBuild: 'Solo SaaS-style build',
     metrics: ['Templates', 'Prompt slots', 'Fast workflow'],
     tech: ['React', 'TypeScript', 'Vite', 'TailwindCSS'],
     category: 'Web App',
     focus: 'SaaS Product',
     github: 'https://github.com/vutikurishanmukha9/PromptBuddy',
     demo: 'https://prompt-buddy-64y2.vercel.app/',
-    previewType: 'prompt',
+    tone: 'blue',
   },
   {
     title: 'Jarvis PDF Chatbot',
     description: 'Document intelligence app with vector retrieval pipelines and provider fallback for reliable PDF question answering.',
-    impact: 'Built a RAG pipeline that turns static PDFs into searchable knowledge with conversational retrieval.',
-    metrics: ['FAISS retrieval', 'PDF Q&A', 'Provider fallback'],
+    impact: 'Turns static PDFs into searchable knowledge through a practical RAG pipeline.',
+    soloBuild: 'Solo AI systems build',
+    metrics: ['FAISS', 'PDF Q&A', 'Fallbacks'],
     tech: ['Python', 'LangChain', 'Streamlit', 'OpenAI', 'FAISS'],
     category: 'AI/ML',
     focus: 'RAG Systems',
     github: 'https://github.com/vutikurishanmukha9/Jarvis',
-    previewType: 'rag',
+    tone: 'violet',
   },
   {
     title: 'AI Health ChatBot',
     description: 'Diagnostic assistant prototype using NLP models for symptom intake and guided medical consultation flows.',
-    impact: 'Created a healthcare conversation prototype that organizes symptom input into a guided assistant experience.',
-    metrics: ['NLP flow', 'Symptom intake', 'Assistant UI'],
+    impact: 'Organizes symptom input into a clearer healthcare assistant experience.',
+    soloBuild: 'Solo AI prototype',
+    metrics: ['NLP flow', 'Symptoms', 'Assistant UI'],
     tech: ['Python', 'NLP', 'TensorFlow', 'Flask', 'React'],
     category: 'AI/ML',
     focus: 'Healthcare AI',
     github: 'https://github.com/vutikurishanmukha9/OUR-D-at-YOUR-D',
     demo: 'https://odatyd.netlify.app/',
-    previewType: 'health',
+    tone: 'rose',
   },
   {
     title: 'Touchless Keyboard',
     description: 'Gesture-based text input system using OpenCV and MediaPipe for low-latency keystroke detection.',
-    impact: 'Built a hands-free input prototype focused on gesture detection, responsiveness, and accessibility-minded control.',
-    metrics: ['OpenCV', 'MediaPipe', 'Gesture input'],
+    impact: 'Explores hands-free input for accessibility-minded control and computer-vision interaction.',
+    soloBuild: 'Solo computer vision build',
+    metrics: ['OpenCV', 'MediaPipe', 'Gestures'],
     tech: ['Python', 'OpenCV', 'MediaPipe', 'Machine Learning'],
     category: 'Computer Vision',
     focus: 'CV Systems',
     github: 'https://github.com/vutikurishanmukha9/Touchless-Keyboard',
-    previewType: 'gesture',
+    tone: 'emerald',
   },
   {
     title: 'Automated Attendance',
     description: 'Facial recognition attendance pipeline with real-time matching and cloud database synchronization.',
-    impact: 'Engineered a recognition workflow for identifying users, recording attendance, and syncing data.',
-    metrics: ['Face matching', 'AWS sync', 'MySQL storage'],
+    impact: 'Identifies users, records attendance, and syncs data through a complete recognition workflow.',
+    soloBuild: 'Solo CV pipeline build',
+    metrics: ['Face match', 'AWS sync', 'MySQL'],
     tech: ['Python', 'OpenCV', 'AWS', 'MySQL', 'React'],
     category: 'Computer Vision',
     focus: 'CV Pipeline',
     github: 'https://github.com/vutikurishanmukha9/Automated-Attendance-System',
-    previewType: 'attendance',
+    tone: 'emerald',
+  },
+  {
+    title: 'Employee Data Analysis',
+    description: 'EDA workflow for cleaning, visualizing, and interpreting HR datasets to reveal retention and workforce trends.',
+    impact: 'Converts messy HR data into clear analysis views and business-readable insights.',
+    soloBuild: 'Solo analytics project',
+    metrics: ['EDA', 'Retention', 'Reports'],
+    tech: ['Python', 'Pandas', 'Matplotlib', 'Seaborn', 'Jupyter'],
+    category: 'Data Analysis',
+    focus: 'Data Insights',
+    github: 'https://github.com/vutikurishanmukha9/Employee_Data_Analysis',
+    tone: 'amber',
   },
 ];
 
-const categories: Array<ProjectCategory | 'All'> = ['All', 'Web App', 'AI/ML', 'Computer Vision', 'Cloud'];
+const categories: Array<ProjectCategory | 'All'> = ['All', 'Web App', 'AI/ML', 'Computer Vision', 'Data Analysis', 'Cloud'];
 
-// SVG Network Topology Map for AWS Infrastructure
-const AwsTopologyMap = () => {
-  const [hoveredNode, setHoveredNode] = useState<string | null>(null);
-
-  const nodes = [
-    { id: 'client', label: 'Vite React', type: 'CLIENT_UI', cx: 40, cy: 60, icon: Globe, details: 'React SPA Client / Netlify CDN / HTTPS Routing' },
-    { id: 'gateway', label: 'FastAPI', type: 'API_GATEWAY', cx: 120, cy: 60, icon: Server, details: 'FastAPI CORS Gate / JWT Authentication / AES-256' },
-    { id: 'broker', label: 'Redis Broker', type: 'TASK_BROKER', cx: 200, cy: 30, icon: Layers, details: 'Celery Broker / Memory-Cache / Pub-Sub Streaming' },
-    { id: 'worker', label: 'Celery Node', type: 'ASYNC_WORKER', cx: 280, cy: 30, icon: Cpu, details: 'Decoupled Worker Nodes / Polars Parsing / PDF Generation' },
-    { id: 's3', label: 'AWS S3', type: 'DATA_LAKE', cx: 360, cy: 30, icon: Cloud, details: 'AWS Object Bucket / Deployed Assets Storage' },
-    { id: 'db', label: 'Postgres / FAISS', type: 'DATA_STORE', cx: 200, cy: 90, icon: Database, details: 'Vector Store Databases / User Credentials Index' },
-    { id: 'llm', label: 'LLM providers', type: 'COGNITIVE_API', cx: 360, cy: 90, icon: Brain, details: 'OpenAI, Anthropic & Gemini Decoupled Router / Fallback' },
-  ];
-
-  const links = [
-    { from: 'client', to: 'gateway', label: 'REST / SSE' },
-    { from: 'gateway', to: 'broker', label: 'Celery Task' },
-    { from: 'broker', to: 'worker', label: 'Task Pull' },
-    { from: 'worker', to: 's3', label: 'Upload' },
-    { from: 'gateway', to: 'db', label: 'SQL query' },
-    { from: 'gateway', to: 'llm', label: 'API request' },
-  ];
-
-  const activeNodeInfo = nodes.find(node => node.id === hoveredNode);
-
-  return (
-    <div className="border-[0.5px] border-border bg-card/45 backdrop-blur-md rounded-lg p-5 mb-8 select-none">
-      <div className="flex items-center justify-between border-b-[0.5px] border-border/40 pb-3 mb-4 font-mono text-[10px]">
-        <div className="flex items-center gap-2">
-          <Network className="w-4 h-4 text-primary" />
-          <span className="font-semibold text-foreground tracking-wider">AWS_INFRASTRUCTURE_BLUEPRINT // AP-SOUTH-1</span>
-        </div>
-        <span className="text-[8px] bg-emerald-500/10 text-emerald-600 border border-emerald-500/25 px-1.5 py-0.5 rounded-sm font-semibold animate-pulse">
-          SIMULATOR STATUS: ACTIVE
-        </span>
-      </div>
-
-      <div className="grid lg:grid-cols-[2.5fr_1fr] gap-6 items-center">
-        
-        {/* SVG Topology Diagram */}
-        <div className="hidden md:flex relative border-[0.5px] border-border/60 bg-background/35 rounded-md p-4 items-center justify-center overflow-hidden">
-          <svg className="w-full h-auto max-w-[480px] text-muted-foreground/35" viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AWS Infrastructure topology diagram showing connections between Client UI, API Gateway, Redis Broker, Celery Node, AWS S3, Vector Database, and LLM Router">
-            
-            {/* Draw Links/Connection Tracks */}
-            {links.map((link, i) => {
-              const fromNode = nodes.find(n => n.id === link.from)!;
-              const toNode = nodes.find(n => n.id === link.to)!;
-              const isActive = hoveredNode === link.from || hoveredNode === link.to;
-
-              return (
-                <g key={i}>
-                  <line 
-                    x1={fromNode.cx} 
-                    y1={fromNode.cy} 
-                    x2={toNode.cx} 
-                    y2={toNode.cy} 
-                    stroke={isActive ? 'hsl(var(--primary))' : 'currentColor'} 
-                    strokeWidth={isActive ? '0.75' : '0.4'}
-                    strokeDasharray="1.5 1.5"
-                    className="transition-colors duration-200"
-                  />
-                  {isActive && (
-                    <motion.circle
-                      r="1.2"
-                      fill="hsl(var(--primary))"
-                      animate={{
-                        cx: [fromNode.cx, toNode.cx],
-                        cy: [fromNode.cy, toNode.cy],
-                      }}
-                      transition={{
-                        repeat: Infinity,
-                        duration: 1.5,
-                        ease: "linear",
-                      }}
-                    />
-                  )}
-                </g>
-              );
-            })}
-
-            {/* Draw Interactive Nodes */}
-            {nodes.map((node) => {
-              const Icon = node.icon;
-              const isActive = hoveredNode === node.id;
-
-              return (
-                <g 
-                  key={node.id} 
-                  className="cursor-pointer group"
-                  onMouseEnter={() => setHoveredNode(node.id)}
-                  onMouseLeave={() => setHoveredNode(null)}
-                  onClick={() => setHoveredNode(hoveredNode === node.id ? null : node.id)}
-                >
-                  <circle 
-                    cx={node.cx} 
-                    cy={node.cy} 
-                    r="8.5" 
-                    fill="hsl(var(--card))" 
-                    stroke={isActive ? 'hsl(var(--primary))' : 'hsl(var(--border))'} 
-                    strokeWidth={isActive ? '1.2' : '0.5'}
-                    className="transition-colors duration-200"
-                  />
-                  <foreignObject x={node.cx - 4.5} y={node.cy - 4.5} width="9" height="9">
-                    <div className="flex items-center justify-center h-full w-full">
-                      <Icon className={cn("w-3.5 h-3.5", isActive ? "text-primary" : "text-muted-foreground/80")} />
-                    </div>
-                  </foreignObject>
-                  <text 
-                    x={node.cx} 
-                    y={node.cy + 14} 
-                    textAnchor="middle" 
-                    fontSize="4.5" 
-                    fontFamily="monospace" 
-                    className={cn("fill-muted-foreground font-medium", isActive && "fill-foreground font-bold")}
-                  >
-                    {node.label}
-                  </text>
-                </g>
-              );
-            })}
-
-          </svg>
-        </div>
-
-        {/* Mobile Tech Stack Fallback */}
-        <div className="md:hidden block border-[0.5px] border-border/60 bg-background/35 rounded-md p-4 font-mono text-[11px]">
-          <span className="text-[9px] uppercase tracking-widest text-muted-foreground/60 mb-2.5 block font-semibold">Tech Stack Architecture</span>
-          <div className="space-y-2 text-muted-foreground">
-            {nodes.map(node => {
-              const Icon = node.icon;
-              return (
-                <div key={node.id} className="flex items-start gap-2 py-1.5 border-b-[0.5px] border-border/10 last:border-0 text-left">
-                  <Icon className="w-3.5 h-3.5 text-primary mt-0.5 shrink-0" />
-                  <div>
-                    <span className="text-foreground font-semibold">{node.label}</span>
-                    <span className="mx-1.5 opacity-40">//</span>
-                    <span className="opacity-80">{node.details}</span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Node Live Details Console */}
-        <div className="border-[0.5px] border-border/85 bg-background/50 rounded-md p-4 font-mono text-[9px] text-muted-foreground min-h-[120px] flex flex-col justify-between">
-          <AnimatePresence mode="wait">
-            {activeNodeInfo ? (
-              <motion.div
-                key={activeNodeInfo.id}
-                initial={{ opacity: 0, y: 5 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -5 }}
-                transition={{ duration: 0.15 }}
-                className="space-y-2.5"
-              >
-                <div className="flex justify-between items-center border-b-[0.5px] border-border/30 pb-1.5">
-                  <span className="text-foreground font-semibold uppercase">{activeNodeInfo.type}</span>
-                  <span className="text-primary font-bold">READY</span>
-                </div>
-                <div className="space-y-1">
-                  <div className="text-[10px] text-foreground font-semibold">{activeNodeInfo.label}</div>
-                  <div className="leading-relaxed opacity-85 text-justify">{activeNodeInfo.details}</div>
-                </div>
-              </motion.div>
-            ) : (
-              <div className="space-y-2.5">
-                <div className="flex justify-between items-center border-b-[0.5px] border-border/30 pb-1.5">
-                  <span className="text-foreground/85 font-semibold">INFRASTRUCTURE_LEDGER</span>
-                  <span className="text-muted-foreground/60">[STANDBY]</span>
-                </div>
-                <p className="leading-relaxed opacity-75">
-                  Hover or tap any node in the AWS topology map to inspect individual network status variables, port routes, and data pipelines in real-time.
-                </p>
-              </div>
-            )}
-          </AnimatePresence>
-
-          <div className="border-t-[0.5px] border-border/30 pt-1.5 flex justify-between text-[8px] opacity-70 mt-3 select-none">
-            <span>PING: {hoveredNode ? '12.4 ms' : 'OP_IST'}</span>
-            <span>SECURE GATEWAY</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  );
+const projectListVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.055,
+      delayChildren: 0.04,
+    },
+  },
 };
 
-const PreviewPanel = ({ project, compact = false }: { project: Project; compact?: boolean }) => {
-  const previewContent: Record<PreviewType, React.ReactNode> = {
-    report: (
-      <div className="flex flex-col justify-between h-full font-mono text-[9px] text-muted-foreground">
-        <div className="flex items-center justify-between border-b-[0.5px] border-border/60 pb-2">
-          <span className="font-semibold text-foreground">POLARS_DATAFRAME</span>
-          <span className="opacity-60">shape: (1024, 8)</span>
-        </div>
-        <div className="space-y-1 my-2">
-          <div className="grid grid-cols-3 opacity-95 border-b-[0.5px] border-border/20 pb-1 font-semibold">
-            <span>index_id</span>
-            <span>metric_val</span>
-            <span className="text-right">status</span>
-          </div>
-          <div className="grid grid-cols-3 opacity-70">
-            <span>#0001</span>
-            <span>0.842</span>
-            <span className="text-right text-emerald-500 font-semibold">VALID</span>
-          </div>
-          <div className="grid grid-cols-3 opacity-70">
-            <span>#0002</span>
-            <span>0.912</span>
-            <span className="text-right text-emerald-500 font-semibold">VALID</span>
-          </div>
-          <div className="grid grid-cols-3 opacity-70">
-            <span>#0003</span>
-            <span>0.048</span>
-            <span className="text-right text-red-500 font-semibold">WARN</span>
-          </div>
-        </div>
-        <div className="border-t-[0.5px] border-border/60 pt-2 flex justify-between items-center text-[8px] opacity-60">
-          <span>PARSING COMPLETE</span>
-          <span>94.8 ms</span>
-        </div>
-      </div>
-    ),
-    signals: (
-      <div className="flex flex-col justify-between h-full font-mono text-[9px] text-muted-foreground">
-        <div className="flex items-center justify-between border-b-[0.5px] border-border/60 pb-2">
-          <span className="font-semibold text-foreground">CANDLESTICK_METRIC</span>
-          <span className="text-emerald-500 font-semibold">BREAKOUT BUY</span>
-        </div>
-        <div className="flex items-end justify-between h-16 px-2 my-2 relative">
-          <div className="absolute inset-x-0 top-1/2 border-t-[0.5px] border-border/20 pointer-events-none" />
-          <div className="flex flex-col items-center justify-end h-full">
-            <div className="w-[1px] h-3 bg-muted-foreground/40" />
-            <div className="w-2.5 h-4 bg-red-500/20 border border-red-500/40 rounded-sm" />
-            <div className="w-[1px] h-2 bg-muted-foreground/40" />
-          </div>
-          <div className="flex flex-col items-center justify-end h-full">
-            <div className="w-[1px] h-2 bg-muted-foreground/40" />
-            <div className="w-2.5 h-3 bg-red-500/20 border border-red-500/40 rounded-sm" />
-            <div className="w-[1px] h-3 bg-muted-foreground/40" />
-          </div>
-          <div className="flex flex-col items-center justify-end h-full">
-            <div className="w-[1px] h-4 bg-muted-foreground/40" />
-            <div className="w-2.5 h-6 bg-emerald-500/20 border border-emerald-500/40 rounded-sm" />
-            <div className="w-[1px] h-3 bg-muted-foreground/40" />
-          </div>
-          <div className="flex flex-col items-center justify-end h-full">
-            <div className="w-[1px] h-3 bg-muted-foreground/40" />
-            <div className="w-2.5 h-9 bg-emerald-500/20 border border-emerald-500/40 rounded-sm" />
-            <div className="w-[1px] h-4 bg-muted-foreground/40" />
-          </div>
-        </div>
-        <div className="border-t-[0.5px] border-border/60 pt-2 text-[8px] opacity-60 text-right">
-          CONFIDENCE: 98.42%
-        </div>
-      </div>
-    ),
-    community: (
-      <div className="flex flex-col justify-between h-full font-mono text-[9px] text-muted-foreground">
-        <div className="flex items-center justify-between border-b-[0.5px] border-border/60 pb-2">
-          <span className="font-semibold text-foreground">JWT_AUTH_RECORDS</span>
-          <span className="opacity-60 text-[8px]">MODEL: USER_MEMBERS</span>
-        </div>
-        <div className="space-y-1.5 my-2">
-          <div className="flex items-center justify-between bg-background/60 border-[0.5px] border-border/40 p-1 rounded">
-            <span>usr_a89c</span>
-            <span className="text-[8px] bg-emerald-500/10 text-emerald-600 px-1.5 border border-emerald-500/25 rounded-sm">JWT_VERIFIED</span>
-          </div>
-          <div className="flex items-center justify-between bg-background/60 border-[0.5px] border-border/40 p-1 rounded">
-            <span>usr_224b</span>
-            <span className="text-[8px] bg-emerald-500/10 text-emerald-600 px-1.5 border border-emerald-500/25 rounded-sm">JWT_VERIFIED</span>
-          </div>
-        </div>
-        <div className="border-t-[0.5px] border-border/60 pt-2 text-[8px] opacity-60 flex justify-between">
-          <span>ROLE: ADMIN_LEVEL</span>
-          <span>EXP: 3600S</span>
-        </div>
-      </div>
-    ),
-    molecule: (
-      <div className="flex flex-col justify-between h-full font-mono text-[9px] text-muted-foreground">
-        <div className="flex items-center justify-between border-b-[0.5px] border-border/60 pb-2">
-          <span className="font-semibold text-foreground">3D_GL_MATRICES</span>
-          <span className="opacity-60">Fingertip tracked</span>
-        </div>
-        <div className="relative h-16 my-2 flex items-center justify-center">
-          <svg className="w-12 h-12 text-primary/80" viewBox="0 0 40 40" role="img" aria-label="3D projection graph showing fingertip tracked matrices">
-            <line x1="20" y1="8" x2="32" y2="16" stroke="currentColor" strokeWidth="0.5" strokeDasharray="1 1" />
-            <line x1="32" y1="16" x2="28" y2="30" stroke="currentColor" strokeWidth="0.5" strokeDasharray="1 1" />
-            <line x1="28" y1="30" x2="12" y2="30" stroke="currentColor" strokeWidth="0.5" strokeDasharray="1 1" />
-            <line x1="12" y1="30" x2="8" y2="16" stroke="currentColor" strokeWidth="0.5" strokeDasharray="1 1" />
-            <line x1="8" y1="16" x2="20" y2="8" stroke="currentColor" strokeWidth="0.5" strokeDasharray="1 1" />
-            
-            <circle cx="20" cy="8" r="1.5" fill="currentColor" />
-            <circle cx="32" cy="16" r="1.5" fill="currentColor" />
-            <circle cx="28" cy="30" r="1.5" fill="currentColor" />
-            <circle cx="12" cy="30" r="1.5" fill="currentColor" />
-            <circle cx="8" cy="16" r="1.5" fill="currentColor" />
-          </svg>
-          <div className="absolute top-0 right-0 text-[7px] opacity-40 text-right leading-tight">
-            pitch: 12.4°<br />yaw: -48.2°
-          </div>
-        </div>
-        <div className="border-t-[0.5px] border-border/60 pt-2 text-[8px] opacity-60 flex justify-between">
-          <span>INTERACTION_SYS: MEDIAPIPE</span>
-          <span>fps: 60</span>
-        </div>
-      </div>
-    ),
-    prompt: (
-      <div className="flex flex-col justify-between h-full font-mono text-[9px] text-muted-foreground">
-        <div className="flex items-center justify-between border-b-[0.5px] border-border/60 pb-2">
-          <span className="font-semibold text-foreground">PROMPT_SLOTS_COMPILER</span>
-          <span className="opacity-60">Slots Staged</span>
-        </div>
-        <div className="bg-background/60 border-[0.5px] border-border/40 p-2 rounded my-2 text-[8px] leading-relaxed">
-          <span className="text-primary font-semibold">const</span> system = <span className="text-foreground">"Draft an email to <span className="text-primary">{'{client_name}'}</span> about <span className="text-primary">{'{topic}'}</span>."</span>
-        </div>
-        <div className="border-t-[0.5px] border-border/60 pt-2 text-[8px] opacity-60 flex justify-between">
-          <span>PARSING_SUCCESS</span>
-          <span>slots: 2</span>
-        </div>
-      </div>
-    ),
-    rag: (
-      <div className="flex flex-col justify-between h-full font-mono text-[9px] text-muted-foreground">
-        <div className="flex items-center justify-between border-b-[0.5px] border-border/60 pb-2">
-          <span className="font-semibold text-foreground">RETRIEVAL_CHUNKING_PIPELINE</span>
-          <span className="opacity-60">FAISS store</span>
-        </div>
-        <div className="my-2.5 flex justify-between items-center text-[7.5px] gap-1.5">
-          <div className="flex-1 bg-background/50 border-[0.5px] border-border/40 rounded py-1 px-0.5 text-center truncate">
-            <span>Doc.pdf</span>
-          </div>
-          <span className="opacity-40">→</span>
-          <div className="flex-1 bg-background/50 border-[0.5px] border-border/40 rounded py-1 px-0.5 text-center truncate">
-            <span>Chunks [512]</span>
-          </div>
-          <span className="opacity-40">→</span>
-          <div className="flex-1 bg-background/50 border-[0.5px] border-border/40 rounded py-1 px-0.5 text-center truncate">
-            <span className="text-primary font-bold">faiss_idx</span>
-          </div>
-        </div>
-        <div className="border-t-[0.5px] border-border/60 pt-2 text-[8px] opacity-60 flex justify-between">
-          <span>TOP_K: 4</span>
-          <span>COSINE_SIM: 0.8922</span>
-        </div>
-      </div>
-    ),
-    health: (
-      <div className="flex flex-col justify-between h-full font-mono text-[9px] text-muted-foreground">
-        <div className="flex items-center justify-between border-b-[0.5px] border-border/60 pb-2">
-          <span className="font-semibold text-foreground">DIAGNOSTIC_FLOW_INTELLIGENCE</span>
-          <span className="opacity-60 text-[8px]">NLP_INGESTION</span>
-        </div>
-        <div className="space-y-1.5 my-2 text-[8px]">
-          <div className="text-right">
-            <span className="inline-block bg-primary/10 border border-primary/20 rounded px-2 py-0.5 text-primary">"Frequent migraines and dizziness"</span>
-          </div>
-          <div className="text-left">
-            <span className="inline-block bg-background/60 border border-border/40 rounded px-2 py-0.5 text-muted-foreground">Match: Migraine (88.4%)</span>
-          </div>
-        </div>
-        <div className="border-t-[0.5px] border-border/60 pt-2 text-[8px] opacity-60 flex justify-between">
-          <span>CONV_TURNS: 4</span>
-          <span>PROBABILITY_STAGED</span>
-        </div>
-      </div>
-    ),
-    gesture: (
-      <div className="flex flex-col justify-between h-full font-mono text-[9px] text-muted-foreground">
-        <div className="flex items-center justify-between border-b-[0.5px] border-border/60 pb-2">
-          <span className="font-semibold text-foreground">TOUCHLESS_GESTURE_INPUT</span>
-          <span className="opacity-60">OpenCV stream</span>
-        </div>
-        <div className="relative h-14 my-2 border-[0.5px] border-border/30 rounded bg-background/40 overflow-hidden flex items-center justify-center">
-          <div className="absolute top-1.5 left-1.5 border-l border-t border-primary/40 w-2 h-2" />
-          <div className="absolute top-1.5 right-1.5 border-r border-t border-primary/40 w-2 h-2" />
-          <div className="absolute bottom-1.5 left-1.5 border-l border-b border-primary/40 w-2 h-2" />
-          <div className="absolute bottom-1.5 right-1.5 border-r border-b border-primary/40 w-2 h-2" />
-          <span className="text-[7.5px] text-primary/80 animate-pulse font-semibold">PINCH_GESTURE // ENTER_KEY</span>
-        </div>
-        <div className="border-t-[0.5px] border-border/60 pt-2 text-[8px] opacity-60 flex justify-between">
-          <span>latency: 14.2ms</span>
-          <span>FPS: 30</span>
-        </div>
-      </div>
-    ),
-    attendance: (
-      <div className="flex flex-col justify-between h-full font-mono text-[9px] text-muted-foreground">
-        <div className="flex items-center justify-between border-b-[0.5px] border-border/60 pb-2">
-          <span className="font-semibold text-foreground">FACIAL_RECOG_PIPELINE</span>
-          <span className="opacity-60">AWS Sync</span>
-        </div>
-        <div className="my-2.5 flex items-center justify-center gap-3">
-          <div className="relative w-10 h-10 border border-border rounded flex items-center justify-center bg-background/50">
-            <div className="absolute inset-0.5 border border-primary/30 rounded-sm" />
-            <ScanFace className="w-5 h-5 text-primary/75" />
-          </div>
-          <div className="text-[7.5px] space-y-0.5 text-muted-foreground leading-tight">
-            <div>CONF: <span className="text-foreground font-semibold">99.82%</span></div>
-            <div>STATUS: <span className="text-emerald-500 font-semibold">SYNCHRONIZED</span></div>
-          </div>
-        </div>
-        <div className="border-t-[0.5px] border-border/60 pt-2 text-[8px] opacity-60 flex justify-between">
-          <span>INDEXED: 104</span>
-          <span>LATENCY: 0.18s</span>
-        </div>
-      </div>
-    ),
-    analytics: (
-      <div className="flex flex-col justify-between h-full font-mono text-[9px] text-muted-foreground">
-        <div className="flex items-center justify-between border-b-[0.5px] border-border/60 pb-2">
-          <span className="font-semibold text-foreground">EDA_HR_ANALYTICS</span>
-          <span className="opacity-60">Jupyter Workspace</span>
-        </div>
-        <div className="my-3 flex items-end justify-between h-10 relative px-2">
-          <div className="absolute inset-0 grid grid-rows-2 pointer-events-none opacity-5">
-            <div className="border-b border-foreground" />
-            <div className="border-b border-foreground" />
-          </div>
-          <div className="h-[20%] w-3 bg-muted-foreground/30 border-[0.5px] border-border/40 rounded-t-sm" />
-          <div className="h-[45%] w-3 bg-muted-foreground/30 border-[0.5px] border-border/40 rounded-t-sm" />
-          <div className="h-[75%] w-3 bg-primary/70 border-[0.5px] border-primary/40 rounded-t-sm" />
-          <div className="h-[90%] w-3 bg-primary border-[0.5px] border-primary/40 rounded-t-sm" />
-          <div className="h-[60%] w-3 bg-muted-foreground/30 border-[0.5px] border-border/40 rounded-t-sm" />
-        </div>
-        <div className="border-t-[0.5px] border-border/60 pt-2 text-[8px] opacity-60 flex justify-between">
-          <span>METRIC: ATTRITION</span>
-          <span>CORR: -0.68</span>
-        </div>
-      </div>
-    ),
-    terminal: (
-      <div className="flex flex-col justify-between h-full font-mono text-[9px] text-muted-foreground">
-        <div className="flex items-center justify-between border-b-[0.5px] border-border/60 pb-2">
-          <span className="font-semibold text-foreground">CONTEXT_LY_CLI</span>
-          <span className="opacity-60 text-[8px]">v1.0.0</span>
-        </div>
-        <div className="space-y-1.5 my-2">
-          <div className="text-left text-[8px] leading-relaxed">
-            <span className="text-emerald-500 font-semibold">$</span> <span className="text-primary font-semibold">contextly</span> analyze
-          </div>
-          <div className="bg-background/60 border-[0.5px] border-border/40 p-1.5 rounded space-y-1 text-[7.5px]">
-            <div className="flex items-center gap-1.5">
-              <Check className="h-2.5 w-2.5 text-emerald-500" />
-              <span className="text-muted-foreground">Scanned 124 files</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <Check className="h-2.5 w-2.5 text-emerald-500" />
-              <span className="text-muted-foreground">Identified: React, Tailwind</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <Check className="h-2.5 w-2.5 text-emerald-500" />
-              <span className="text-muted-foreground">Generated PROJECT_CONTEXT.md</span>
-            </div>
-          </div>
-        </div>
-        <div className="border-t-[0.5px] border-border/60 pt-2 text-[8px] opacity-60 flex justify-between">
-          <span>TOKENS_SAVED: 45K</span>
-          <span className="text-emerald-500 animate-pulse font-semibold">SUCCESS</span>
-        </div>
-      </div>
-    ),
-  };
-
-  return (
-    <div
-      className={cn(
-        'relative overflow-hidden rounded border-[0.5px] border-border/60 bg-card p-4 text-foreground shadow-none select-none',
-        compact ? 'min-h-48' : 'min-h-52',
-      )}
-    >
-      <div className="relative h-full">{previewContent[project.previewType]}</div>
-    </div>
-  );
+const projectCardVariants = {
+  hidden: { opacity: 0, y: 18, filter: 'blur(8px)' },
+  show: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 0.42, ease: [0.16, 1, 0.3, 1] },
+  },
+  exit: {
+    opacity: 0,
+    y: 8,
+    filter: 'blur(6px)',
+    transition: { duration: 0.18, ease: [0.16, 1, 0.3, 1] },
+  },
 };
 
-const ProjectCard = ({ project, index, variant = 'card', onInspect }: { project: Project; index: number; variant?: 'hero' | 'card'; onInspect?: (project: Project) => void }) => {
+const ProductMark = ({ project, featured = false }: { project: Project; featured?: boolean }) => {
   const visual = categoryConfig[project.category];
-  const IconComponent = visual.icon;
-  const primaryTech = project.tech.slice(0, 4);
-  const isHero = variant === 'hero';
-
-  const { selectedSkill } = useSkillFilter();
-
-  const isMatchingSkillActive = useMemo(() => {
-    return selectedSkill && project.tech.some((tech) => tech.toLowerCase().includes(selectedSkill.toLowerCase()));
-  }, [selectedSkill, project.tech]);
+  const Icon = visual.icon;
+  const tone = toneClasses[project.tone];
 
   return (
-    <SpotlightCard
-      className="h-full rounded-lg"
-      spotlightColor="rgba(204, 120, 92, 0.09)"
-    >
-      <motion.article
-        layout
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        whileHover={{ y: -4 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.35, delay: index * 0.04, ease: [0.16, 1, 0.3, 1] }}
-        className={cn(
-          'group relative overflow-hidden rounded-lg border bg-card/45 p-3.5 shadow-none backdrop-blur-md hover-lift-minimal flex flex-col justify-between h-full transition-all duration-300',
-          isHero ? 'grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:p-5' : 'flex h-full flex-col gap-4',
-          isMatchingSkillActive 
-            ? 'border-primary/50 shadow-[0_2px_10px_hsl(var(--primary)/0.04)] bg-primary/2' 
-            : 'border-border/80 bg-card/40'
-        )}
-      >
-        {/* Animated Dark Laser Border Beam on hover */}
-        <BorderBeam variant="gradient" duration={3.2} borderRadius={8} />
-      {/* Dynamic Telemetry Connections inside matching card */}
-      {isMatchingSkillActive && (
-        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-          <svg className="w-full h-full text-primary/30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <motion.path 
-              d="M 16 0 L 16 35 L 50 35" 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="0.85" 
-              strokeDasharray="3 3"
-              animate={{ strokeDashoffset: [0, -20] }}
-              transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
-            />
-            <motion.circle
-              r="1.5"
-              fill="currentColor"
-              className="text-primary"
-              animate={{
-                cx: [16, 16, 50],
-                cy: [0, 35, 35],
-              }}
-              transition={{
-                repeat: Infinity,
-                duration: 1.5,
-                ease: "linear",
-              }}
-            />
-          </svg>
-        </div>
+    <motion.div
+      whileHover={{ y: -2 }}
+      transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+      className={cn(
+        'relative overflow-hidden rounded-md border-[0.5px] border-border bg-gradient-to-br p-4',
+        featured ? 'min-h-72' : 'min-h-56',
+        tone.bg
       )}
-
-      <div className="flex flex-col gap-4 h-full justify-between relative z-10">
-        <div>
-          <PreviewPanel project={project} compact={!isHero} />
+    >
+      <motion.div
+        aria-hidden="true"
+        className={cn('absolute -right-10 -top-10 h-28 w-28 rounded-full opacity-10 blur-2xl', tone.mark)}
+        animate={{ scale: [1, 1.08, 1], opacity: [0.08, 0.15, 0.08] }}
+        transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <div className="relative flex items-start justify-between gap-4">
+        <motion.div
+          className={cn('flex h-10 w-10 items-center justify-center rounded-md text-white shadow-sm', tone.mark)}
+          whileHover={{ rotate: -4, scale: 1.04 }}
+          transition={{ duration: 0.18 }}
+        >
+          <Icon className="h-5 w-5" />
+        </motion.div>
+        <div className="rounded-full border-[0.5px] border-border bg-background/70 px-2.5 py-1 text-[9px] font-mono uppercase tracking-widest text-muted-foreground">
+          {project.focus}
         </div>
+      </div>
 
-        <div className="flex flex-col flex-1 justify-between mt-2">
-          <div>
-            <div className="mb-3 flex flex-wrap items-center gap-1.5">
-              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded border-[0.5px] border-border bg-background text-[9px] font-mono uppercase tracking-wider text-muted-foreground shadow-none">
-                <IconComponent className="h-3 w-3 text-primary/70" />
-                {project.category}
-              </span>
-            </div>
+      <div className="relative mt-10 space-y-2">
+        <motion.div
+          className="h-2 w-2/3 rounded-full bg-foreground/15"
+          initial={{ scaleX: 0, transformOrigin: 'left' }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.55, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        />
+        <motion.div
+          className="h-2 w-1/2 rounded-full bg-foreground/10"
+          initial={{ scaleX: 0, transformOrigin: 'left' }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.55, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+        />
+      </div>
 
-            <div className="mb-3">
-              <p className="mb-1 text-[9px] font-mono uppercase tracking-[0.2em] text-muted-foreground/80">{project.focus}</p>
-              <h3 className={cn('font-serif-display font-medium tracking-tight text-foreground', isHero ? 'text-2xl md:text-3.5xl' : 'text-xl')}>
-                <TextScramble text={project.title} />
-              </h3>
-            </div>
+      <div className="relative mt-6 grid grid-cols-3 gap-2">
+        {project.metrics.map((metric) => (
+          <motion.div
+            key={metric}
+            className="rounded-md border-[0.5px] border-border bg-background/60 px-2 py-2"
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className={cn('mb-2 h-1.5 w-6 rounded-full', tone.mark)} />
+            <p className="truncate text-[10px] font-medium text-foreground">{metric}</p>
+          </motion.div>
+        ))}
+      </div>
+    </motion.div>
+  );
+};
 
-            <p className="text-muted-foreground text-xs leading-relaxed mb-4">
-              {project.description}
-            </p>
+const ProjectCard = ({ project, index, featured = false }: { project: Project; index: number; featured?: boolean }) => {
+  const visual = categoryConfig[project.category];
+  const Icon = visual.icon;
+  const primaryTech = project.tech.slice(0, featured ? 5 : 4);
+
+  return (
+    <motion.article
+      layout
+      variants={projectCardVariants}
+      initial="hidden"
+      whileInView="show"
+      exit="exit"
+      viewport={{ once: true, margin: '-60px' }}
+      whileHover={{ y: -6 }}
+      transition={{ duration: 0.32, delay: Math.min(index * 0.025, 0.12), ease: [0.16, 1, 0.3, 1] }}
+      className={cn(
+        'group h-full rounded-lg border-[0.5px] border-border bg-card/65 p-3 shadow-none transition-colors duration-200 hover:bg-card',
+        toneClasses[project.tone].border,
+        featured && 'grid gap-5 md:grid-cols-[0.9fr_1.1fr] md:p-4'
+      )}
+    >
+      <ProductMark project={project} featured={featured} />
+
+      <div className="flex h-full flex-col px-1 py-1">
+        <div>
+          <div className="mb-3 flex flex-wrap items-center gap-2">
+            <motion.span
+              className="inline-flex items-center gap-1.5 rounded-full border-[0.5px] border-border bg-background px-2.5 py-1 text-[9px] font-mono uppercase tracking-widest text-muted-foreground"
+              whileHover={{ y: -1 }}
+            >
+              <Icon className={cn('h-3 w-3', visual.color)} />
+              {project.category}
+            </motion.span>
+            <motion.span
+              className="inline-flex items-center gap-1.5 rounded-full border-[0.5px] border-emerald-500/25 bg-emerald-500/5 px-2.5 py-1 text-[9px] font-mono uppercase tracking-widest text-emerald-600"
+              whileHover={{ y: -1 }}
+            >
+              <CheckCircle2 className="h-3 w-3" />
+              {project.soloBuild}
+            </motion.span>
           </div>
 
-          <div>
-            <div className="mb-4 rounded bg-muted/10 border-[0.5px] border-border/60 p-3.5 shadow-none">
-              <div className="mb-1.5 flex items-center gap-1.5 text-[9px] font-mono uppercase tracking-wider text-foreground font-semibold">
-                <Zap className="h-3 w-3 text-primary" />
-                Impact summary
-              </div>
-              <p className="text-xs leading-relaxed text-muted-foreground">{project.impact}</p>
-            </div>
+          <h3 className={cn('font-serif-display font-medium tracking-tight text-foreground', featured ? 'text-3xl md:text-4xl' : 'text-2xl')}>
+            {project.title}
+          </h3>
+          <p className={cn('mt-3 text-muted-foreground', featured ? 'text-sm leading-7' : 'text-xs leading-6')}>
+            {project.description}
+          </p>
 
-            <div className="mb-4 grid gap-1.5 grid-cols-3">
-              {project.metrics.map((metric) => (
-                <div key={metric} className="rounded border-[0.5px] border-border/80 bg-background/50 px-2 py-2 text-center text-[10px] font-mono font-medium text-foreground">
-                  {metric}
-                </div>
-              ))}
-            </div>
+          <motion.div
+            className="mt-5 rounded-md border-[0.5px] border-border/80 bg-background/45 p-3"
+            whileHover={{ backgroundColor: 'hsl(var(--background) / 0.78)' }}
+            transition={{ duration: 0.18 }}
+          >
+            <p className="mb-1.5 text-[9px] font-mono uppercase tracking-widest text-foreground">Why it matters</p>
+            <p className="text-xs leading-6 text-muted-foreground">{project.impact}</p>
+          </motion.div>
+        </div>
 
-            <div className="border-t-[0.5px] border-border/60 pt-4 flex flex-col gap-3">
-              <div>
-                <h4 className="mb-2 flex items-center gap-1 text-[9px] font-mono uppercase tracking-widest text-muted-foreground/80">
-                  <Terminal className="h-2.5 w-2.5" />
-                  Primary Stack
-                </h4>
-                <div className="flex flex-wrap gap-1">
-                  {project.tech.map((tech) => {
-                    const isSelected = selectedSkill && tech.toLowerCase().includes(selectedSkill.toLowerCase());
-                    return (
-                      <span 
-                        key={tech} 
-                        className={cn(
-                          "rounded px-2 py-0.5 border text-[10px] font-mono transition-colors duration-200",
-                          isSelected 
-                            ? "border-primary bg-primary/10 text-primary font-semibold" 
-                            : "border-border/80 bg-background text-muted-foreground"
-                        )}
-                      >
-                        {tech}
-                      </span>
-                    );
-                  })}
-                </div>
-              </div>
+        <div className="mt-5 border-t-[0.5px] border-border/60 pt-4">
+          <div className="mb-4 flex flex-wrap gap-1.5">
+            {primaryTech.map((tech) => (
+              <motion.span
+                key={tech}
+                className="rounded border-[0.5px] border-border bg-background px-2 py-1 text-[10px] font-mono text-muted-foreground"
+                whileHover={{ y: -1, color: 'hsl(var(--foreground))' }}
+              >
+                {tech}
+              </motion.span>
+            ))}
+            {project.tech.length > primaryTech.length && (
+              <span className="rounded border-[0.5px] border-border bg-muted/40 px-2 py-1 text-[10px] font-mono text-muted-foreground">
+                +{project.tech.length - primaryTech.length}
+              </span>
+            )}
+          </div>
 
-              <div className="flex flex-wrap items-center gap-2 pt-1">
-                {project.caseStudy && (
-                  <Button size="sm" className="rounded-full h-8 px-4 text-[10px] font-mono uppercase tracking-wider bg-primary text-primary-foreground hover:bg-primary/90" asChild>
-                    <Link to={project.caseStudy}>
-                      View Details
-                      <ArrowUpRight className="h-3.5 w-3.5 ml-1" />
-                    </Link>
-                  </Button>
-                )}
-
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onClick={() => onInspect?.(project)}
-                  className="rounded-full h-8 px-3 text-[10px] font-mono uppercase tracking-wider border-border/80 text-muted-foreground hover:text-foreground"
-                >
-                  <Eye className="h-3 w-3 mr-1 text-primary" />
-                  Inspect
-                </Button>
-
-                {project.demo && (
-                  <Button variant={project.caseStudy ? "outline" : "default"} size="sm" className={cn("rounded-full h-8 px-4 text-[10px] font-mono uppercase tracking-wider", project.caseStudy ? "bg-background" : "")} asChild>
-                    <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                      {project.demoLabel || 'Live Demo'}
-                      <ArrowUpRight className="h-3.5 w-3.5 ml-1" />
-                    </a>
-                  </Button>
-                )}
-                <Button variant="outline" size="sm" className="rounded-full h-8 px-4 text-[10px] font-mono uppercase tracking-wider bg-background" asChild>
-                  <a href={project.github} target="_blank" rel="noopener noreferrer">
-                    <Github className="h-3.5 w-3.5 mr-1" />
-                    Code
-                  </a>
-                </Button>
-              </div>
-            </div>
+          <div className="flex flex-wrap items-center gap-2">
+            {project.caseStudy && (
+              <Button size="sm" className="h-8 rounded-full px-4 text-[10px] font-mono uppercase tracking-wider" asChild>
+                <Link to={project.caseStudy}>
+                  Details
+                  <ArrowUpRight className="ml-1 h-3.5 w-3.5" />
+                </Link>
+              </Button>
+            )}
+            {project.demo && (
+              <Button variant={project.caseStudy ? 'outline' : 'default'} size="sm" className="h-8 rounded-full px-4 text-[10px] font-mono uppercase tracking-wider" asChild>
+                <a href={project.demo} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.title} live demo`}>
+                  {project.demoLabel || 'Live Demo'}
+                  <ArrowUpRight className="ml-1 h-3.5 w-3.5" />
+                </a>
+              </Button>
+            )}
+            <Button variant="outline" size="sm" className="h-8 rounded-full bg-background px-4 text-[10px] font-mono uppercase tracking-wider" asChild>
+              <a href={project.github} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.title} GitHub repository`}>
+                <Github className="mr-1 h-3.5 w-3.5" />
+                Code
+              </a>
+            </Button>
           </div>
         </div>
       </div>
     </motion.article>
-    </SpotlightCard>
   );
 };
 
 export const ProjectsSection = () => {
   const [selectedCategory, setSelectedCategory] = useState<ProjectCategory | 'All'>('All');
-  const [activeModalProject, setActiveModalProject] = useState<ProjectData | null>(null);
   const { selectedSkill, setSelectedSkill } = useSkillFilter();
 
   const filteredProjects = useMemo(() => {
@@ -864,66 +452,34 @@ export const ProjectsSection = () => {
   const standardProjects = filteredProjects.filter((project) => project !== heroProject);
 
   return (
-    <SectionWrapper id="projects" className="relative overflow-hidden bg-background py-16 border-b-[0.5px] border-border/40">
+    <SectionWrapper id="projects" className="relative overflow-hidden border-b-[0.5px] border-border/40 bg-background py-20">
       <div className="container relative z-10 mx-auto px-4 lg:px-8">
-        
-        {/* Section Header */}
-        <div className="mb-12 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
-          <div className="max-w-3xl">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="mb-4 inline-flex items-center gap-2 rounded-full border-[0.5px] border-border/80 bg-card px-3 py-1 shadow-none"
-            >
-              <Layers3 className="h-3 w-3 text-primary" />
-              <span className="text-[10px] font-mono tracking-widest text-muted-foreground uppercase">Work</span>
-            </motion.div>
-            <motion.h2
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.05 }}
-              className="font-serif-display text-4xl font-normal tracking-tight text-foreground md:text-5xl select-none"
-            >
-              Engineering Output
-            </motion.h2>
-            <p className="mt-4 max-w-xl text-muted-foreground text-sm leading-relaxed">
-              A curated catalog of fully realized, deployed engineering products demonstrating full-stack integration and operational performance.
-            </p>
-          </div>
-
-          <div className="border-[0.5px] border-border/85 bg-card/60 backdrop-blur-md p-4 rounded-lg shadow-none">
-            <div className="grid grid-cols-3 gap-6 text-center divide-x divide-border/60">
-              <div className="px-3">
-                <div className="text-xl font-serif-display text-foreground font-normal">{projects.length}+</div>
-                <div className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground mt-0.5">Builds</div>
-              </div>
-              <div className="px-3">
-                <div className="text-xl font-serif-display text-foreground font-normal">6</div>
-                <div className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground mt-0.5">Live</div>
-              </div>
-              <div className="px-3">
-                <div className="text-xl font-serif-display text-foreground font-normal">4</div>
-                <div className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground mt-0.5">Domains</div>
-              </div>
-            </div>
-          </div>
+        <div className="mb-10 max-w-3xl">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-4 inline-flex items-center gap-2 rounded-full border-[0.5px] border-border/80 bg-card px-3 py-1"
+          >
+            <Code2 className="h-3 w-3 text-primary" />
+            <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">Selected Work</span>
+          </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.05 }}
+            className="font-serif-display text-4xl font-normal tracking-tight text-foreground md:text-5xl"
+          >
+            Solo-built projects, easy to scan.
+          </motion.h2>
+          <p className="mt-4 max-w-xl text-sm leading-7 text-muted-foreground">
+            A focused view of shipped work: what it does, why it matters, the stack behind it, and where to view the code or live product.
+          </p>
         </div>
 
-        {/* Dynamic AWS Topology Map Panel */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <AwsTopologyMap />
-        </motion.div>
-
-        {/* Sliding Pill-in-Pill Category Filters */}
-        <div className="w-full mb-8 flex flex-col items-center justify-center gap-4 sm:flex-row sm:justify-center sm:items-center select-none">
-          <div className="flex border-[0.5px] border-border/60 bg-muted/40 p-0.5 rounded-full w-fit mx-auto">
+        <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex max-w-full flex-wrap gap-1.5 rounded-full border-[0.5px] border-border/70 bg-muted/35 p-1">
             {categories.map((category) => {
               const isSelected = selectedCategory === category;
               return (
@@ -931,18 +487,18 @@ export const ProjectsSection = () => {
                   key={category}
                   onClick={() => setSelectedCategory(category)}
                   className={cn(
-                    'relative px-3.5 py-1.5 text-[9px] font-mono tracking-widest uppercase transition-colors duration-200 z-10',
-                    isSelected ? 'text-foreground font-semibold' : 'text-muted-foreground hover:text-foreground'
+                    'relative rounded-full px-3.5 py-1.5 text-[10px] font-mono uppercase tracking-wider transition-colors',
+                    isSelected ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
                   )}
                 >
                   {isSelected && (
-                    <motion.div
-                      layoutId="projects-category-pill"
-                      className="absolute inset-0 rounded-full bg-card border-[0.5px] border-border/60 shadow-[0_1px_3px_rgba(0,0,0,0.05)]"
-                      transition={{ type: "tween", ease: [0.16, 1, 0.3, 1], duration: 0.2 }}
+                    <motion.span
+                      layoutId="projects-active-filter"
+                      className="absolute inset-0 rounded-full border-[0.5px] border-border bg-card shadow-sm"
+                      transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
                     />
                   )}
-                  <span className="relative z-20">{category}</span>
+                  <span className="relative z-10">{category}</span>
                 </button>
               );
             })}
@@ -951,7 +507,7 @@ export const ProjectsSection = () => {
           {selectedSkill && (
             <button
               onClick={() => setSelectedSkill(null)}
-              className="inline-flex items-center justify-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-[9px] font-mono tracking-widest uppercase text-primary transition-colors hover:bg-primary/10"
+              className="inline-flex w-fit items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-[10px] font-mono uppercase tracking-wider text-primary hover:bg-primary/10"
             >
               Skill: {selectedSkill}
               <X className="h-3 w-3" />
@@ -959,53 +515,31 @@ export const ProjectsSection = () => {
           )}
         </div>
 
-        <AnimatePresence mode="popLayout">
-          {filteredProjects.length > 0 ? (
-            <motion.div layout className="space-y-6">
-              {/* Filtered project list */}
-              <motion.div layout className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {filteredProjects.map((project, i) => (
-                  <ProjectCard
-                    key={project.title}
-                    project={project}
-                    index={i}
-                    onInspect={(p) => {
-                      setActiveModalProject({
-                        id: p.title,
-                        title: p.title,
-                        category: p.category,
-                        description: p.description,
-                        longDescription: p.impact,
-                        tags: p.tech,
-                        githubUrl: p.github,
-                        liveUrl: p.demo,
-                        caseStudyUrl: p.caseStudy,
-                        metrics: p.metrics.map(m => ({ label: 'METRIC', value: m })),
-                      });
-                    }}
-                  />
-                ))}
+        {filteredProjects.length > 0 && heroProject ? (
+          <motion.div
+            key={`${selectedCategory}-${selectedSkill ?? 'all'}`}
+            variants={projectListVariants}
+            initial="hidden"
+            animate="show"
+            className="space-y-6"
+          >
+            <ProjectCard project={heroProject} index={0} featured />
+            {standardProjects.length > 0 && (
+              <motion.div layout className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+                <AnimatePresence mode="popLayout">
+                  {standardProjects.map((project, index) => (
+                    <ProjectCard key={project.title} project={project} index={index + 1} />
+                  ))}
+                </AnimatePresence>
               </motion.div>
-            </motion.div>
-          ) : (
-            <motion.div
-              layout
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.25 }}
-              className="border-[0.5px] border-border/80 bg-card p-10 text-center rounded-lg shadow-none"
-            >
-              <p className="text-sm font-semibold text-foreground font-mono">NO OUTCOMES MATCH QUERY</p>
-              <p className="mt-2 text-xs text-muted-foreground leading-relaxed">Clear active skills filter or adjust catalog categories.</p>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        <ProjectModal
-          project={activeModalProject}
-          onClose={() => setActiveModalProject(null)}
-        />
+            )}
+          </motion.div>
+        ) : (
+          <div className="rounded-lg border-[0.5px] border-border/80 bg-card p-10 text-center">
+            <p className="text-sm font-semibold text-foreground">No projects match this filter.</p>
+            <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Clear the active skill filter or choose another category.</p>
+          </div>
+        )}
       </div>
     </SectionWrapper>
   );

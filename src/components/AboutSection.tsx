@@ -89,7 +89,7 @@ export const AboutSection = () => {
               <button
                 onClick={() => setActiveTab('narrative')}
                 className={cn(
-                  "flex-1 px-4 py-3 text-[10px] sm:text-[9px] font-mono tracking-widest uppercase transition-colors duration-200 border-r-[0.5px] border-border/80 text-center relative",
+                  "flex-1 px-2.5 sm:px-4 py-3 text-[9px] font-mono tracking-wider sm:tracking-widest uppercase transition-colors duration-200 border-r-[0.5px] border-border/80 text-center relative truncate",
                   activeTab === 'narrative' 
                     ? "text-foreground font-bold bg-background/80" 
                     : "text-muted-foreground hover:text-foreground hover:bg-muted/10"
@@ -98,13 +98,13 @@ export const AboutSection = () => {
                 {activeTab === 'narrative' && (
                   <motion.div layoutId="about-active-tab-indicator" className="absolute bottom-0 inset-x-0 h-[1.5px] bg-primary" />
                 )}
-                01 // NARRATIVE_DOSSIER
+                <span className="hidden md:inline">01 // </span>DOSSIER
               </button>
               
               <button
                 onClick={() => setActiveTab('telemetry')}
                 className={cn(
-                  "flex-1 px-4 py-3 text-[10px] sm:text-[9px] font-mono tracking-widest uppercase transition-colors duration-200 border-r-[0.5px] border-border/80 text-center relative",
+                  "flex-1 px-2.5 sm:px-4 py-3 text-[9px] font-mono tracking-wider sm:tracking-widest uppercase transition-colors duration-200 border-r-[0.5px] border-border/80 text-center relative truncate",
                   activeTab === 'telemetry' 
                     ? "text-foreground font-bold bg-background/80" 
                     : "text-muted-foreground hover:text-foreground hover:bg-muted/10"
@@ -113,13 +113,13 @@ export const AboutSection = () => {
                 {activeTab === 'telemetry' && (
                   <motion.div layoutId="about-active-tab-indicator" className="absolute bottom-0 inset-x-0 h-[1.5px] bg-primary" />
                 )}
-                02 // PIPELINE_TELEMETRY
+                <span className="hidden md:inline">02 // </span>TELEMETRY
               </button>
               
               <button
                 onClick={() => setActiveTab('academic')}
                 className={cn(
-                  "flex-1 px-4 py-3 text-[10px] sm:text-[9px] font-mono tracking-widest uppercase transition-colors duration-200 text-center relative",
+                  "flex-1 px-2.5 sm:px-4 py-3 text-[9px] font-mono tracking-wider sm:tracking-widest uppercase transition-colors duration-200 text-center relative truncate",
                   activeTab === 'academic' 
                     ? "text-foreground font-bold bg-background/80" 
                     : "text-muted-foreground hover:text-foreground hover:bg-muted/10"
@@ -128,7 +128,7 @@ export const AboutSection = () => {
                 {activeTab === 'academic' && (
                   <motion.div layoutId="about-active-tab-indicator" className="absolute bottom-0 inset-x-0 h-[1.5px] bg-primary" />
                 )}
-                03 // ACADEMIC_RIGOR
+                <span className="hidden md:inline">03 // </span>ACADEMICS
               </button>
             </div>
 

@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { motion, useInView, type TargetAndTransition, type Transition } from 'framer-motion';
+import { motion, useInView, type MarginType, type TargetAndTransition, type Transition } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 export interface SplitTextProps {
@@ -14,7 +14,7 @@ export interface SplitTextProps {
   animate?: TargetAndTransition;
   transition?: Transition;
   threshold?: number;
-  rootMargin?: string;
+  rootMargin?: MarginType;
   textAlign?: 'left' | 'center' | 'right' | 'justify';
   onLetterAnimationComplete?: () => void;
   triggerOnHover?: boolean;
@@ -41,7 +41,7 @@ export const SplitText: React.FC<SplitTextProps> = ({
   const isInView = useInView(containerRef, {
     once: true,
     amount: threshold,
-    margin: rootMargin as any,
+    margin: rootMargin,
   });
 
   const [isHovered, setIsHovered] = useState(false);

@@ -5,6 +5,53 @@ import { SectionWrapper } from '@/components/ui/section-wrapper';
 import { Magnetic } from '@/components/ui/Magnetic';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
+import type { LucideIcon } from 'lucide-react';
+
+const ContactCard = ({ contact }: { contact: { icon: LucideIcon; label: string; value: string; href: string } }) => {
+  const Icon = contact.icon;
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigator.clipboard.writeText(contact.value);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div className="group flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 rounded-lg border-[0.5px] border-border bg-background/40 hover:bg-background/80 transition-colors duration-200 shadow-none">
+      <div className="flex items-center gap-3.5 min-w-0">
+        <div className="w-9 h-9 shrink-0 rounded-full bg-muted/60 flex items-center justify-center group-hover:bg-primary/10 transition-colors duration-200">
+          <Icon className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+        </div>
+        <div className="min-w-0">
+          <p className="text-[10px] sm:text-[9px] font-mono tracking-widest text-muted-foreground uppercase mb-0.5">{contact.label}</p>
+          <a
+            href={contact.href}
+            className="text-xs font-mono text-foreground hover:text-primary transition-colors duration-200 break-all"
+          >
+            {contact.value}
+          </a>
+        </div>
+      </div>
+
+      <motion.button
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={handleCopy}
+        className={cn(
+          "px-3 py-1.5 rounded-full text-[9px] font-mono uppercase tracking-wider border-[0.5px] transition-all flex items-center gap-1.5 self-end sm:self-auto shrink-0",
+          copied 
+            ? "bg-emerald-500/10 text-emerald-600 border-emerald-500/30 font-semibold"
+            : "bg-background/80 text-muted-foreground hover:text-foreground border-border hover:border-primary/40"
+        )}
+      >
+        {copied ? <Check className="h-3 w-3 text-emerald-600" /> : <Copy className="h-3 w-3 text-primary" />}
+        <span>{copied ? "COPIED" : "COPY"}</span>
+      </motion.button>
+    </div>
+  );
+};
 
 export const ContactSection = () => {
   const contactInfo = [
@@ -87,54 +134,9 @@ export const ContactSection = () => {
 
                 {/* Contact Details */}
                 <div className="space-y-3 mb-8">
-                  {contactInfo.map((contact, index) => {
-                      const Icon = contact.icon;
-                      const [copied, setCopied] = useState(false);
-
-                      const handleCopy = (e: React.MouseEvent) => {
-                        e.preventDefault();
-                        navigator.clipboard.writeText(contact.value);
-                        setCopied(true);
-                        setTimeout(() => setCopied(false), 2000);
-                      };
-
-                      return (
-                          <div
-                              key={index}
-                              className="group flex items-center justify-between gap-4 p-4 rounded border-[0.5px] border-border bg-background/40 hover:bg-background/80 transition-colors duration-200 shadow-none"
-                          >
-                              <div className="flex items-center gap-4">
-                                <div className="w-9 h-9 rounded bg-muted/60 flex items-center justify-center group-hover:bg-primary/10 transition-colors duration-200">
-                                    <Icon className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
-                                </div>
-                                <div>
-                                    <p className="text-[10px] sm:text-[9px] font-mono tracking-widest text-muted-foreground uppercase mb-0.5">{contact.label}</p>
-                                    <a
-                                        href={contact.href}
-                                        className="text-xs font-mono text-foreground hover:text-primary transition-colors duration-200 break-all"
-                                    >
-                                        {contact.value}
-                                    </a>
-                                </div>
-                              </div>
-
-                              <motion.button
-                                whileHover={{ scale: 1.08 }}
-                                whileTap={{ scale: 0.92 }}
-                                onClick={handleCopy}
-                                className={cn(
-                                  "px-2.5 py-1 rounded text-[9px] font-mono uppercase tracking-wider border-[0.5px] transition-all flex items-center gap-1",
-                                  copied 
-                                    ? "bg-emerald-500/10 text-emerald-600 border-emerald-500/30 font-semibold"
-                                    : "bg-background/80 text-muted-foreground hover:text-foreground border-border"
-                                )}
-                              >
-                                {copied ? <Check className="h-3 w-3 text-emerald-600 animate-in zoom-in-50" /> : <Copy className="h-3 w-3 text-primary" />}
-                                <span>{copied ? "COPIED" : "COPY"}</span>
-                              </motion.button>
-                          </div>
-                      )
-                  })}
+                  {contactInfo.map((contact, index) => (
+                    <ContactCard key={index} contact={contact} />
+                  ))}
                 </div>
               </div>
 
