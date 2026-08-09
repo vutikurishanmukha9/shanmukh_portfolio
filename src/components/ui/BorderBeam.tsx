@@ -8,6 +8,7 @@ interface BorderBeamProps {
   borderRadius?: number;
   color?: string;
   variant?: 'dark' | 'primary' | 'gradient';
+  alwaysVisible?: boolean;
 }
 
 export const BorderBeam: React.FC<BorderBeamProps> = ({
@@ -16,13 +17,15 @@ export const BorderBeam: React.FC<BorderBeamProps> = ({
   borderWidth = 1.2,
   borderRadius = 8,
   variant = 'dark',
+  alwaysVisible = false,
 }) => {
   const gradientId = React.useId();
 
   return (
     <div
       className={cn(
-        'pointer-events-none absolute inset-0 rounded-[inherit] overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20',
+        'pointer-events-none absolute inset-0 rounded-[inherit] overflow-hidden transition-opacity duration-300 z-20',
+        alwaysVisible ? 'opacity-70 group-hover:opacity-100' : 'opacity-0 group-hover:opacity-100',
         className
       )}
       aria-hidden="true"

@@ -224,22 +224,26 @@ export const HeroSection = () => {
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-                className="font-serif-display text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] lg:leading-[0.98] select-none tracking-tight text-foreground flex flex-col items-center lg:items-start"
+                className="font-serif-display text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] lg:leading-[0.98] select-none tracking-tight text-foreground"
               >
-                <WaveText
-                  text="Vutikuri"
-                  className="text-foreground"
-                  jumpHeight={-16}
-                  staggerDuration={0.045}
-                  onHoverStart={() => playClick(950, 0.025, 'sine')}
-                />
-                <WaveText
-                  text="Shanmukha"
-                  className="text-primary"
-                  jumpHeight={-16}
-                  staggerDuration={0.045}
-                  onHoverStart={() => playClick(1100, 0.025, 'sine')}
-                />
+                <span className="block">
+                  <WaveText
+                    text="Vutikuri"
+                    className="text-foreground"
+                    jumpHeight={-18}
+                    staggerDuration={0.04}
+                    onHoverStart={() => playClick(950, 0.02, 'sine')}
+                  />
+                </span>
+                <span className="block text-primary">
+                  <WaveText
+                    text="Shanmukha"
+                    className="text-primary"
+                    jumpHeight={-18}
+                    staggerDuration={0.04}
+                    onHoverStart={() => playClick(1100, 0.02, 'sine')}
+                  />
+                </span>
               </motion.h1>
             </div>
 

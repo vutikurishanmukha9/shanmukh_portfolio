@@ -94,7 +94,7 @@ export const Navigation = () => {
           )}
         >
           {/* Animated Moving Gradient Border on hover / interaction */}
-          <BorderBeam variant="gradient" duration={4} borderRadius={9999} />
+          <BorderBeam variant="gradient" duration={3.5} borderRadius={9999} alwaysVisible={true} />
 
           {/* Brand - Mobile only */}
           <a
@@ -127,20 +127,27 @@ export const Navigation = () => {
               const Icon = item.icon;
 
               return (
-                <div key={item.href} className="relative flex items-center justify-center">
-                  {/* Floating Micro-Tooltip Reveal above item on hover */}
+                <div 
+                  key={item.href} 
+                  className="relative flex items-center justify-center"
+                  onMouseEnter={() => {
+                    setHoveredHash(item.href);
+                    playClick(950, 0.015, 'sine');
+                  }}
+                >
+                  {/* Floating Micro-Tooltip Reveal BELOW item - Never Gets Cut Off */}
                   <AnimatePresence>
                     {isHovered && (
                       <motion.div
-                        initial={{ opacity: 0, y: 4, scale: 0.88 }}
-                        animate={{ opacity: 1, y: -36, scale: 1 }}
-                        exit={{ opacity: 0, y: 2, scale: 0.9 }}
-                        transition={{ type: "spring", stiffness: 420, damping: 24 }}
-                        className="absolute left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-md bg-foreground text-background text-[9px] font-mono uppercase tracking-wider shadow-lg pointer-events-none whitespace-nowrap z-30 flex flex-col items-center"
+                        initial={{ opacity: 0, y: -6, scale: 0.85 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -4, scale: 0.85 }}
+                        transition={{ type: "spring", stiffness: 450, damping: 25 }}
+                        className="absolute top-full mt-3.5 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-md bg-foreground text-background text-[10px] font-mono uppercase tracking-wider shadow-2xl pointer-events-none whitespace-nowrap z-50 flex flex-col items-center"
                       >
+                        {/* Caret arrow pointing upward to the icon */}
+                        <div className="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-foreground absolute bottom-full left-1/2 -translate-x-1/2" />
                         <span>{item.label}</span>
-                        {/* Tooltip downward caret arrow */}
-                        <div className="w-0 h-0 border-x-4 border-x-transparent border-t-4 border-t-foreground absolute top-full left-1/2 -translate-x-1/2" />
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -148,42 +155,48 @@ export const Navigation = () => {
                   <a
                     href={item.href}
                     onClick={(e) => handleScrollTo(e, item.href)}
-                    onMouseEnter={() => setHoveredHash(item.href)}
-                    className={cn(
-                      "relative flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-mono tracking-wider uppercase transition-colors duration-200 rounded-full select-none",
-                      isActive
-                        ? "text-primary-foreground dark:text-primary font-semibold"
-                        : "text-muted-foreground hover:text-foreground"
-                    )}
+                    className="relative w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-full select-none"
+                    aria-label={item.label}
                   >
                     {/* Sliding Active Pill Capsule Indicator */}
                     {isHighlighted && (
                       <motion.div
                         layoutId="navbar-dock-pill"
                         className={cn(
-                          "absolute inset-0 rounded-full shadow-sm",
+                          "absolute inset-0 rounded-full",
                           isActive
-                            ? "bg-foreground dark:bg-primary/20 dark:border-[0.5px] dark:border-primary/40"
-                            : "bg-muted/70 border-[0.5px] border-border/60"
+                            ? "bg-foreground text-background dark:bg-primary shadow-[0_2px_12px_rgba(0,0,0,0.18)]"
+                            : "bg-muted/80 border-[0.5px] border-border/80"
                         )}
                         transition={{
                           type: "spring",
-                          stiffness: 380,
+                          stiffness: 400,
                           damping: 28,
-                          mass: 0.8,
+                          mass: 0.75,
                         }}
                       />
                     )}
 
-                    {/* Icon + Label with Spring Scale */}
+                    {/* Icon with Spring Magnification Hover Physics */}
                     <motion.div
-                      whileHover={{ scale: 1.08, y: -0.5 }}
-                      whileTap={{ scale: 0.94 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                      className="relative z-10 flex items-center gap-1.5"
+                      animate={{
+                        scale: isHovered ? 1.25 : 1,
+                        y: isHovered ? -3 : 0,
+                      }}
+                      whileTap={{ scale: 0.88 }}
+                      transition={{ type: "spring", stiffness: 420, damping: 22 }}
+                      className="relative z-10 flex items-center justify-center"
                     >
-                      <Icon className={cn("h-3.5 w-3.5 transition-colors", isActive ? "text-primary-foreground dark:text-primary" : "text-muted-foreground group-hover:text-foreground")} />
-                      <span className="hidden lg:inline text-[11px]">{item.label}</span>
+                      <Icon 
+                        className={cn(
+                          "h-4 w-4 transition-colors duration-200", 
+                          isActive && isHighlighted
+                            ? "text-background dark:text-primary-foreground stroke-[2.2]" 
+                            : isHovered
+                              ? "text-foreground stroke-[2]"
+                              : "text-muted-foreground stroke-[1.75]"
+                        )} 
+                      />
                     </motion.div>
                   </a>
                 </div>
@@ -203,7 +216,7 @@ export const Navigation = () => {
                 playClick(800, 0.04, 'sine');
                 setIsResumeOpen(true);
               }}
-              className="h-7 text-[10px] font-mono uppercase tracking-wider px-2.5 rounded-full border-primary/30 text-primary hover:bg-primary/10 transition-all active:scale-95"
+              className="h-8 text-[10px] font-mono uppercase tracking-wider px-3 rounded-full border-primary/30 text-primary hover:bg-primary/10 transition-all active:scale-95"
             >
               CV
             </Button>
