@@ -48,7 +48,7 @@ To ensure production-grade engineering standards, all unused aesthetic assets, l
 
 *   **Core Framework:** React 18 + TypeScript
 *   **Build Pipeline:** Vite
-*   **Styling Engine:** TailwindCSS 3.4 + Custom Vanilla CSS Utilities
+*   **Styling Engine:** TailwindCSS 3.4 + Radix UI Primitives + Custom Vanilla CSS Utilities
 *   **Animation System:** Framer Motion 12 (configured with high-restraint cubic-bezier transition curves)
 *   **Iconography:** Lucide React
 *   **GitHub Integration:** `react-github-calendar`
