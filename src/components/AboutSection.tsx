@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { Brain, Cpu, Database, CheckCircle2, FileText, ArrowRight, ShieldCheck, Terminal, Cpu as Processor } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
+import { SplitText } from '@/components/ui/SplitText';
 import { cn } from '@/lib/utils';
 
 type TabType = 'narrative' | 'telemetry' | 'academic';
@@ -45,11 +46,11 @@ export const AboutSection = () => {
               <div className="space-y-2">
                 <h3 className="text-sm font-mono uppercase tracking-widest text-muted-foreground/80">IDENTITY</h3>
                 <h2 className="text-3xl md:text-4xl font-serif-display font-medium text-foreground tracking-tight leading-tight select-none">
-                  Hey, I’m Shanmukh.
+                  <SplitText text="Hey, I’m Shanmukh." delay={0.1} stagger={0.03} />
                 </h2>
-                <p className="text-sm font-mono text-primary font-semibold tracking-wide">
-                  I build AI products that actually ship.
-                </p>
+                <div className="text-sm font-mono text-primary font-semibold tracking-wide">
+                  <SplitText text="I build AI products that actually ship." delay={0.2} stagger={0.02} />
+                </div>
               </div>
             </div>
 

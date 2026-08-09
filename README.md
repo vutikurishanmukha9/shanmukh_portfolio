@@ -24,7 +24,7 @@ The portfolio is structured around a precise design split, drawing inspiration f
 To maintain strict visual restraint and establish credibility, the typography is partitioned into three distinct layers:
 *   **Cormorant Garamond (Classical Serif):** Restricted strictly to main headers, publication papers, and section leads to convey a human-crafted editorial tone.
 *   **JetBrains Mono (Technical Monospace):** Used for terminal logs, metrics, active statuses, dates, skills tags, and telemetry data labels.
-*   **Inter (Neo-Grotesque Sans):** Reserved exclusively for high-readability body copy and descriptive paragraphs.
+*   **Inter (Neo-Grotesque Sans):** Reserved exclusively for high-readability body copy, progressive text reveals, and descriptive paragraphs.
 
 ### 2. Systems Telemetry Console Panel
 The landing hero replaces static image placeholders with a fully interactive Systems Telemetry Console Panel. This component simulates active infrastructure telemetry, including:

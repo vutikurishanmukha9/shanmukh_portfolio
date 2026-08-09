@@ -7,6 +7,7 @@ import { SpotlightCard } from '@/components/ui/SpotlightCard';
 import { WaveText } from '@/components/ui/WaveText';
 import { TiltCard } from '@/components/ui/TiltCard';
 import { SpotlightGrid } from '@/components/ui/SpotlightGrid';
+import { SplitText } from '@/components/ui/SplitText';
 import { useSound } from '@/hooks/useSound';
 import { ArrowUpRight, ChevronDown, Github, Linkedin, Mail, FileText, Play, CheckCircle2 } from 'lucide-react';
 import { ResumeModal } from '@/components/ResumeModal';
@@ -274,14 +275,14 @@ export const HeroSection = () => {
               </motion.h1>
             </div>
 
-            <motion.p 
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="mx-auto max-w-2xl text-sm sm:text-base leading-relaxed text-muted-foreground md:text-lg lg:mx-0 font-normal"
-            >
-              I build production-minded AI, cloud, and data products with clean interfaces, scalable backends, and measurable user value.
-            </motion.p>
+            <div className="mx-auto max-w-2xl text-sm sm:text-base leading-relaxed text-muted-foreground md:text-lg lg:mx-0 font-normal">
+              <SplitText
+                text="I build production-minded AI, cloud, and data products with clean interfaces, scalable backends, and measurable user value."
+                delay={0.15}
+                stagger={0.012}
+                duration={0.45}
+              />
+            </div>
 
             <motion.div
               initial={{ opacity: 0, y: 15 }}
