@@ -4,6 +4,7 @@ import { SectionWrapper } from '@/components/ui/section-wrapper';
 import { ExternalLink, FileText, Copy, Check } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useSound } from '@/hooks/useSound';
+import { TextScramble } from '@/components/ui/TextScramble';
 import { cn } from '@/lib/utils';
 
 interface LaTeXPaperPreviewProps {
@@ -231,7 +232,7 @@ export const PublicationsSection = () => {
                   <div className="space-y-4 lg:col-span-5">
                     <div className="space-y-2">
                       <h3 className="text-lg md:text-xl font-serif-display font-medium text-foreground leading-snug">
-                        {pub.title}
+                        <TextScramble text={pub.title} />
                       </h3>
                       <p className="text-[11px] font-mono text-muted-foreground uppercase tracking-wider">
                         BY {pub.authors}

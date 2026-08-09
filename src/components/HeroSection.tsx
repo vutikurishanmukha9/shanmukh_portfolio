@@ -5,6 +5,8 @@ import { Magnetic } from '@/components/ui/Magnetic';
 import { NumberTicker } from '@/components/ui/NumberTicker';
 import { SpotlightCard } from '@/components/ui/SpotlightCard';
 import { WaveText } from '@/components/ui/WaveText';
+import { TiltCard } from '@/components/ui/TiltCard';
+import { SpotlightGrid } from '@/components/ui/SpotlightGrid';
 import { useSound } from '@/hooks/useSound';
 import { ArrowUpRight, ChevronDown, Github, Linkedin, Mail, FileText, Play, CheckCircle2 } from 'lucide-react';
 import { ResumeModal } from '@/components/ResumeModal';
@@ -95,29 +97,53 @@ const TelemetryDashboard = () => {
                 {isSimulating ? 'STREAMING...' : 'RUN QUERY'}
               </button>
             </div>
-            <div className="p-2.5 rounded bg-background/50 border-[0.5px] border-border/60 min-h-[92px] text-[10px] flex flex-wrap gap-1.5 items-center">
-              {simTokens.length > 0 ? (
-                simTokens.map((tok, i) => (
-                  <motion.span
-                    key={i}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className={
-                      tok.includes('OK')
-                        ? 'text-emerald-500 font-bold px-1.5 py-0.5 rounded bg-emerald-500/10'
-                        : tok.includes('FAISS')
-                        ? 'text-primary font-bold px-1.5 py-0.5 rounded bg-primary/10'
-                        : 'text-foreground'
-                    }
-                  >
-                    {tok}
-                  </motion.span>
-                ))
-              ) : (
-                <span className="text-muted-foreground/60 italic text-[10px]">
-                  Click [RUN QUERY] to simulate real-time neural retrieval pipeline...
-                </span>
-              )}
+            {/* Interactive Neural Token Flow Visualizer */}
+            <div className="p-2.5 rounded bg-background/50 border-[0.5px] border-border/60 min-h-[96px] text-[10px] flex flex-col justify-between relative overflow-hidden">
+              {/* Connecting Neural Pulse Line */}
+              <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 10 20 C 80 10, 160 70, 280 40 S 360 20, 440 60" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="3 3" />
+                {isSimulating && (
+                  <motion.circle
+                    r="3"
+                    fill="hsl(var(--primary))"
+                    animate={{
+                      cx: [10, 120, 240, 360, 440],
+                      cy: [20, 25, 50, 30, 60],
+                    }}
+                    transition={{ repeat: Infinity, duration: 1.6, ease: "linear" }}
+                  />
+                )}
+              </svg>
+
+              <div className="flex flex-wrap gap-1.5 items-center relative z-10">
+                {simTokens.length > 0 ? (
+                  simTokens.map((tok, i) => (
+                    <motion.span
+                      key={i}
+                      initial={{ opacity: 0, scale: 0.8, y: 4 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      className={
+                        tok.includes('OK')
+                          ? 'text-emerald-500 font-bold px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20'
+                          : tok.includes('FAISS')
+                          ? 'text-primary font-bold px-1.5 py-0.5 rounded bg-primary/10 border border-primary/20'
+                          : 'text-foreground'
+                      }
+                    >
+                      {tok}
+                    </motion.span>
+                  ))
+                ) : (
+                  <span className="text-muted-foreground/60 italic text-[10px] py-1">
+                    Click [RUN QUERY] to simulate real-time neural retrieval pipeline...
+                  </span>
+                )}
+              </div>
+
+              <div className="flex items-center justify-between text-[9px] text-muted-foreground/60 pt-2 border-t-[0.5px] border-border/30 relative z-10">
+                <span>FAISS_STORE // 1.2M VECTORS</span>
+                <span className="text-primary font-semibold">COSINE_SIMILARITY: 0.942</span>
+              </div>
             </div>
           </div>
         )}
@@ -200,8 +226,9 @@ export const HeroSection = () => {
   return (
     <section id="home" className="relative min-h-screen overflow-hidden pt-32 pb-14">
       <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} />
-      {/* Remove glowing gradient colors. Retain very high restraint clean backgrounds */}
+      {/* Background canvas and magnetic cursor dot grid */}
       <div className="absolute inset-0 -z-10 bg-background" />
+      <SpotlightGrid dotColor="rgba(20, 20, 19, 0.06)" spotlightColor="rgba(204, 120, 92, 0.15)" spotlightRadius={180} />
 
       <div className="container mx-auto px-4 relative z-10 w-full">
         <div className="grid min-h-[calc(100vh-10rem)] items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
@@ -357,7 +384,9 @@ export const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
             className="w-full max-w-md lg:max-w-lg mx-auto"
           >
-            <TelemetryDashboard />
+            <TiltCard maxTilt={5} glareOpacity={0.07}>
+              <TelemetryDashboard />
+            </TiltCard>
           </motion.div>
         </div>
         

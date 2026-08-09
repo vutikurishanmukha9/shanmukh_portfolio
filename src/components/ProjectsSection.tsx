@@ -26,6 +26,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
 import { BorderBeam } from '@/components/ui/BorderBeam';
 import { SpotlightCard } from '@/components/ui/SpotlightCard';
+import { TiltCard } from '@/components/ui/TiltCard';
+import { TextScramble } from '@/components/ui/TextScramble';
 import { ProjectModal, type ProjectData } from '@/components/ProjectModal';
 import { cn } from '@/lib/utils';
 import { useSkillFilter } from '@/context/SkillFilterContext';
@@ -749,7 +751,7 @@ const ProjectCard = ({ project, index, variant = 'card', onInspect }: { project:
             <div className="mb-3">
               <p className="mb-1 text-[9px] font-mono uppercase tracking-[0.2em] text-muted-foreground/80">{project.focus}</p>
               <h3 className={cn('font-serif-display font-medium tracking-tight text-foreground', isHero ? 'text-2xl md:text-3.5xl' : 'text-xl')}>
-                {project.title}
+                <TextScramble text={project.title} />
               </h3>
             </div>
 

@@ -34,7 +34,7 @@ The landing hero replaces static image placeholders with a fully interactive Sys
 *   **Service Status Logs & RAG Simulator:** Responsive rows listing runtime statuses and interactive token inference benchmarks.
 
 ### 3. Telemetry Project Silhouettes
-Rather than generic cards, projects are represented as ten interactive flat-dashboard wireframes with fluid layout transitions, perimeter laser beam effects, spring physics, dynamic telemetry indicators, and continuous capsule geometry. These silhouettes depict specialized engineering layouts such as neural network token layers, RAG chunking maps, financial candlestick charts, and coordinate index fields.
+Rather than generic cards, projects are represented as ten interactive flat-dashboard wireframes with fluid layout transitions, perimeter laser beam effects, spring physics, dynamic telemetry indicators, interactive neural token routing, and continuous capsule geometry. These silhouettes depict specialized engineering layouts such as neural network token layers, RAG chunking maps, financial candlestick charts, and coordinate index fields.
 
 ### 4. Rule-Separated Tabular Lists
 All timelines, career journey items, certifications, and IEEE publications are structured as clean, rule-separated list tables (`border-[0.5px] border-border`) with responsive swipe containers for dense mobile viewports. This provides high information density and structural clarity reminiscent of academic and technical documentation.

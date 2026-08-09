@@ -15,6 +15,8 @@ import {
   Terminal,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { ScrollVelocitySkew } from '@/components/ui/ScrollVelocitySkew';
+import { TextScramble } from '@/components/ui/TextScramble';
 
 // ─── Case Study Data ──────────────────────────────────────────────────
 
@@ -268,7 +270,7 @@ const CaseStudyCard = ({ study, index }: { study: CaseStudy; index: number }) =>
             </div>
 
             <h3 className="font-serif-display text-xl md:text-2xl font-medium tracking-tight text-foreground mb-2">
-              {study.title}
+              <TextScramble text={study.title} />
             </h3>
             <p className="text-muted-foreground text-xs leading-relaxed mb-4">
               {study.subtitle}
@@ -421,12 +423,12 @@ export const CaseStudiesSection = () => {
           </div>
         </div>
 
-        {/* Case Study Cards */}
-        <div className="space-y-6">
+        {/* Case Study Cards with Scroll Momentum Inertia Skew */}
+        <ScrollVelocitySkew maxSkew={1.4} className="space-y-6">
           {caseStudies.map((study, i) => (
             <CaseStudyCard key={study.id} study={study} index={i} />
           ))}
-        </div>
+        </ScrollVelocitySkew>
 
       </div>
     </SectionWrapper>
