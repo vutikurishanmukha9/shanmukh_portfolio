@@ -44,22 +44,35 @@ export const Navigation = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 30);
-      const sections = navItems.map(item => item.href.substring(1));
 
-      for (const sectionId of sections) {
-        const element = document.getElementById(sectionId);
+      // Use viewport center point to determine which section is "current"
+      const viewportCenter = window.innerHeight * 0.4;
+      let found = false;
+
+      // Iterate sections in reverse so bottom sections get priority when overlapping
+      const sections = navItems.map(item => item.href.substring(1));
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const element = document.getElementById(sections[i]);
         if (element) {
           const rect = element.getBoundingClientRect();
-          if (rect.top <= 300 && rect.bottom >= 300) {
-            setActiveHash(`#${sectionId}`);
+          if (rect.top <= viewportCenter && rect.bottom > viewportCenter) {
+            setActiveHash(`#${sections[i]}`);
+            found = true;
             break;
           }
         }
       }
+
+      // If at the very top, default to #home
+      if (!found && window.scrollY < 100) {
+        setActiveHash("#home");
+      }
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    // Run immediately on mount
     handleScroll();
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -70,15 +83,9 @@ export const Navigation = () => {
     const element = document.getElementById(targetId);
 
     if (element) {
-      const headerOffset = 90;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
+      // Use Lenis scrollTo for consistent smooth scroll behavior
+      scrollTo(element, -90);
     } else {
-      // If element not on current page, redirect to root hash
       window.location.href = `/${href}`;
     }
 
@@ -91,9 +98,9 @@ export const Navigation = () => {
   return (
     <>
       <motion.header
-        initial={{ y: -100, opacity: 0 }}
+        initial={{ y: -30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
         className="w-full flex justify-center px-4 pointer-events-none z-50 py-3"
       >
         <div
