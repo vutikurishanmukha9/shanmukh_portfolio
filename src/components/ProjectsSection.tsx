@@ -308,10 +308,16 @@ const LuxuryProjectCard: React.FC<{
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        'group relative rounded-2xl border-[0.5px] border-border/80 bg-card/60 p-2.5 transition-all duration-300 hover:border-primary/40 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] overflow-hidden',
+        'group relative rounded-2xl border-[0.5px] border-border/80 bg-card/60 p-2.5 transition-all duration-300 hover:border-primary/50 hover:shadow-[0_12px_36px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 overflow-hidden',
         featured && 'md:col-span-2 xl:col-span-3 bg-gradient-to-br from-card via-card/90 to-background'
       )}
     >
+      {/* Apple / VisionOS Specular Top Highlight Ray */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent transition-all duration-500 group-hover:via-primary/80 group-hover:h-[1.5px] z-20" />
+
+      {/* Ambient Directional Light Bloom */}
+      <div className="pointer-events-none absolute -top-14 left-1/2 -translate-x-1/2 w-3/4 h-14 bg-gradient-to-b from-primary/20 via-primary/5 to-transparent blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
+
       {/* Dynamic Cursor Spotlight Shader */}
       {mousePos && (
         <div
@@ -324,9 +330,12 @@ const LuxuryProjectCard: React.FC<{
 
       {/* Inner Machined Hardware Core */}
       <div className={cn(
-        'relative z-10 rounded-xl border-[0.5px] border-border/60 bg-background/70 p-4 sm:p-5 flex flex-col justify-between h-full backdrop-blur-sm',
+        'relative z-10 rounded-xl border-[0.5px] border-border/60 bg-background/70 p-4 sm:p-5 flex flex-col justify-between h-full backdrop-blur-sm overflow-hidden',
         featured && 'grid grid-cols-1 lg:grid-cols-12 gap-6 items-center p-6'
       )}>
+        {/* Inner Chamfer Specular Sheen */}
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-foreground/15 dark:via-white/15 to-transparent transition-all duration-300 group-hover:via-primary/40 z-20" />
+
         {/* Visual Mockup Container */}
         <div className={cn('w-full', featured ? 'lg:col-span-6' : 'mb-4')}>
           {renderProjectMockup(project.title, project.category)}

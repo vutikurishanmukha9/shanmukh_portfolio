@@ -67,7 +67,9 @@ export const ProjectMatrixView: React.FC<ProjectMatrixViewProps> = ({
       </div>
 
       {/* Engineering Table Matrix */}
-      <div className="w-full rounded-xl border-[0.5px] border-border/80 bg-card/40 backdrop-blur-md overflow-x-auto shadow-sm">
+      <div className="relative w-full rounded-xl border-[0.5px] border-border/80 bg-card/40 backdrop-blur-md overflow-x-auto shadow-sm">
+        {/* Specular Top Edge */}
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/30 dark:via-white/15 to-transparent z-20" />
         <table className="w-full text-left text-xs font-mono border-collapse min-w-[700px]">
           <thead>
             <tr className="border-b border-border/60 bg-muted/20 text-[9px] uppercase tracking-widest text-muted-foreground">
