@@ -140,9 +140,15 @@ export const CertificationsSection = () => {
           </motion.p>
         </div>
 
-        {/* Cohere-Inspired Tabular Rows with 3D Flip Badges */}
-        <div className="max-w-4xl mx-auto border-[0.5px] border-border bg-card/60 backdrop-blur-md rounded-lg overflow-hidden shadow-none">
-          <div className="divide-y divide-border/60">
+        {/* Apple-Grade Specular Hardware Enclosure with 3D Flip Badges */}
+        <div className="relative max-w-4xl mx-auto border-[0.5px] border-border/80 bg-card/60 backdrop-blur-md rounded-xl overflow-hidden shadow-none group">
+          {/* Apple / VisionOS Specular Top Highlight Ray */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent transition-all duration-500 group-hover:via-primary/80 group-hover:h-[1.5px] z-20" />
+
+          {/* Ambient Directional Light Bloom */}
+          <div className="pointer-events-none absolute -top-14 left-1/2 -translate-x-1/2 w-3/4 h-14 bg-gradient-to-b from-primary/15 via-primary/5 to-transparent blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
+
+          <div className="relative z-10 divide-y divide-border/60">
             {certifications.map((cert, index) => {
               const isHovered = hoveredIdx === index;
               return (

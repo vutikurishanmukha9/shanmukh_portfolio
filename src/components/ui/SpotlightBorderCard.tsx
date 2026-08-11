@@ -61,7 +61,9 @@ export const SpotlightBorderCard: React.FC<SpotlightBorderCardProps> = ({
       )}
 
       {/* Card Inner Content Body */}
-      <div className="relative w-full h-full rounded-[calc(0.5rem-1px)] bg-card/75 backdrop-blur-md z-10 flex flex-col justify-between">
+      <div className="relative w-full h-full rounded-[calc(0.5rem-1px)] bg-card/75 backdrop-blur-md z-10 flex flex-col justify-between overflow-hidden">
+        {/* Apple / VisionOS Specular Top Highlight Ray */}
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/35 dark:via-white/18 to-transparent transition-all duration-500 group-hover:via-primary/70 group-hover:h-[1.5px] z-20" />
         {children}
       </div>
     </div>

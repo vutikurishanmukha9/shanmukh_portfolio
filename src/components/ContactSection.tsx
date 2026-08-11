@@ -124,8 +124,14 @@ export const ContactSection = () => {
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="h-full"
           >
-            <div className="border-[0.5px] border-border bg-card/60 backdrop-blur-md rounded-lg p-6 md:p-8 shadow-none h-full flex flex-col justify-between">
-              <div>
+            <div className="relative border-[0.5px] border-border/80 bg-card/60 backdrop-blur-md rounded-xl p-6 md:p-8 shadow-none h-full flex flex-col justify-between overflow-hidden group">
+              {/* Apple / VisionOS Specular Top Highlight Ray */}
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent transition-all duration-500 group-hover:via-primary/80 group-hover:h-[1.5px] z-20" />
+
+              {/* Ambient Directional Light Bloom */}
+              <div className="pointer-events-none absolute -top-14 left-1/2 -translate-x-1/2 w-3/4 h-14 bg-gradient-to-b from-primary/15 via-primary/5 to-transparent blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
+
+              <div className="relative z-10">
                 <h3 className="text-xl font-serif-display font-medium text-foreground mb-3 tracking-tight">Let's Connect</h3>
                 <p className="text-muted-foreground text-xs leading-relaxed mb-8">
                   I am always motivated to discuss technical opportunities, innovative cloud architectures, and potential open-source collaborations.
@@ -141,7 +147,7 @@ export const ContactSection = () => {
               </div>
 
               {/* Social Links */}
-              <div>
+              <div className="relative z-10">
                 <p className="text-[10px] sm:text-[9px] font-mono tracking-widest text-muted-foreground uppercase mb-3">Social Profiles</p>
                 <div className="flex gap-2">
                   {socialLinks.map((social) => {
@@ -174,11 +180,19 @@ export const ContactSection = () => {
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col h-full"
           >
-            <div className="border-[0.5px] border-border bg-card/60 backdrop-blur-md rounded-lg p-6 md:p-8 shadow-none h-full"> 
-                <h3 className="text-xl font-serif-display font-medium text-foreground mb-6 tracking-tight border-b-[0.5px] border-border/40 pb-4">
-                  Send a Message
-                </h3>
-                <ContactForm />
+            <div className="relative border-[0.5px] border-border/80 bg-card/60 backdrop-blur-md rounded-xl p-6 md:p-8 shadow-none h-full overflow-hidden group"> 
+                {/* Apple / VisionOS Specular Top Highlight Ray */}
+                <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent transition-all duration-500 group-hover:via-primary/80 group-hover:h-[1.5px] z-20" />
+
+                {/* Ambient Directional Light Bloom */}
+                <div className="pointer-events-none absolute -top-14 left-1/2 -translate-x-1/2 w-3/4 h-14 bg-gradient-to-b from-primary/15 via-primary/5 to-transparent blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
+
+                <div className="relative z-10">
+                  <h3 className="text-xl font-serif-display font-medium text-foreground mb-6 tracking-tight border-b-[0.5px] border-border/40 pb-4">
+                    Send a Message
+                  </h3>
+                  <ContactForm />
+                </div>
             </div>
           </motion.div>
         </div>

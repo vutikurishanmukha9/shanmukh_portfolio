@@ -98,9 +98,11 @@
     @apply flex p-1 bg-muted/40 rounded-full border border-border/80 relative;
   }
 
-  /* Elegant monospaced labels (Cohere Inspired) */
+  /* Elegant monospaced labels (Cohere & Apple Inspired) with Tabular Numerics */
   .font-technical-mono {
     font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
     @apply text-xs uppercase tracking-[0.15em] font-medium text-muted-foreground;
   }
 

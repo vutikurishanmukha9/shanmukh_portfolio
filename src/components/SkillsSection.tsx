@@ -172,7 +172,10 @@ export const SkillsSection = () => {
         </div>
 
         {/* Interactive End-to-End Pipeline Bus Simulator */}
-        <div className="max-w-5xl mx-auto mb-12 p-4 md:p-6 rounded-xl border-[0.5px] border-border/80 bg-card/40 backdrop-blur-md">
+        <div className="relative max-w-5xl mx-auto mb-12 p-4 md:p-6 rounded-xl border-[0.5px] border-border/80 bg-card/40 backdrop-blur-md overflow-hidden group">
+          {/* Apple / VisionOS Specular Top Highlight Ray */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent transition-all duration-500 group-hover:via-primary/80 group-hover:h-[1.5px] z-20" />
+          
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6 pb-4 border-b-[0.5px] border-border/40">
             <div className="flex items-center gap-2.5">
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />

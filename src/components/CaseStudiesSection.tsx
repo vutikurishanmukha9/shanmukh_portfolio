@@ -249,13 +249,16 @@ const CaseStudyCard = ({ study, index }: { study: CaseStudy; index: number }) =>
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.45, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-      className="group relative border-[0.5px] border-border/80 bg-card/45 backdrop-blur-md rounded-lg overflow-hidden hover-lift-minimal"
+      className="group relative border-[0.5px] border-border/80 bg-card/45 backdrop-blur-md rounded-xl overflow-hidden hover-lift-minimal transition-all duration-300 hover:border-primary/50 hover:shadow-[0_12px_36px_rgba(0,0,0,0.08)]"
     >
-      {/* Animated Dark Laser Border Beam on hover */}
-      <BorderBeam variant="dark" duration={3.8} borderRadius={8} />
+      {/* Apple / VisionOS Specular Top Highlight Ray */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent transition-all duration-500 group-hover:via-primary/80 group-hover:h-[1.5px] z-20" />
+
+      {/* Ambient Directional Light Bloom */}
+      <div className="pointer-events-none absolute -top-14 left-1/2 -translate-x-1/2 w-3/4 h-14 bg-gradient-to-b from-primary/20 via-primary/5 to-transparent blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
 
       {/* Top: Preview + Content side-by-side on lg */}
-      <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-0">
+      <div className="relative z-10 grid lg:grid-cols-[0.95fr_1.05fr] gap-0">
         {/* Preview Panel with View Mode Switch */}
         <div className="border-b-[0.5px] lg:border-b-0 lg:border-r-[0.5px] border-border/60 p-5 flex flex-col justify-between min-h-[260px] bg-card/30">
           <div className="flex items-center justify-between mb-3 pb-2 border-b-[0.5px] border-border/40">
