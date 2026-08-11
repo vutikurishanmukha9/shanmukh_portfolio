@@ -1,11 +1,12 @@
 import { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
-import { ExternalLink, FileText, Copy, Check } from 'lucide-react';
+import { ExternalLink, FileText, Copy, Check, Layers, Cpu } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useSound } from '@/hooks/useSound';
 import { TextScramble } from '@/components/ui/TextScramble';
 import { CitationKnowledgeGraph } from '@/components/ui/CitationKnowledgeGraph';
+import { CircuitBlueprintModal } from '@/components/ui/CircuitBlueprintModal';
 import { cn } from '@/lib/utils';
 
 interface LaTeXPaperPreviewProps {
@@ -198,6 +199,7 @@ const LaTeXPaperPreview = ({ url }: { url: string }) => {
 export const PublicationsSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [copiedFormat, setCopiedFormat] = useState<string | null>(null);
+  const [isBlueprintOpen, setIsBlueprintOpen] = useState(false);
   const { toast } = useToast();
   const { playClick } = useSound();
 
@@ -263,70 +265,71 @@ export const PublicationsSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="mt-3 text-muted-foreground text-xs max-w-md mx-auto leading-relaxed"
+            className="text-muted-foreground mt-3 text-sm font-normal max-w-lg mx-auto leading-relaxed"
           >
-            Academic research contributions specializing in IoT integrations, cloud telemetry, and automation.
+            Peer-reviewed research exploring embedded systems, ambient RF energy harvesting, and autonomous intelligent edge architectures.
           </motion.p>
         </div>
 
-        {/* Tabular Publication View */}
-        <div className="max-w-6xl mx-auto border-[0.5px] border-border bg-card/60 backdrop-blur-md rounded-lg overflow-hidden shadow-none">
-          <div className="divide-y divide-border/60">
-            {publications.map((pub, index) => (
+        {/* Publications Dossier Grid */}
+        <div className="max-w-5xl mx-auto space-y-6">
+          <div className="grid grid-cols-1 gap-6">
+            {publications.map((pub, idx) => (
               <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 15 }}
+                key={pub.title}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
-                className="p-4 sm:p-6 md:p-8 flex flex-col gap-6 hover:bg-background/20 transition-colors duration-200"
+                transition={{ duration: 0.45, delay: idx * 0.1 }}
+                className="group relative rounded-xl border-[0.5px] border-border/80 bg-card p-6 md:p-8 transition-colors duration-200 hover:border-border"
               >
-                {/* Meta Row (Type, Journal, Year) */}
-                <div className="flex flex-wrap items-center justify-between gap-4 border-b-[0.5px] border-border/40 pb-4">
-                  <div className="flex flex-wrap items-center gap-3">
-                    <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-background border-[0.5px] border-border text-[10px] sm:text-[9px] font-mono text-muted-foreground uppercase tracking-wider">
-                      <FileText className="h-3 w-3 text-primary" />
-                      {pub.type}
-                    </span>
-                    {pub.featured && (
-                      <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-primary/10 border-[0.5px] border-primary/20 text-[10px] sm:text-[9px] font-mono text-primary uppercase tracking-wider">
-                        FEATURED
-                      </span>
-                    )}
-                  </div>
-                  <div className="flex items-center gap-4 text-[10px] font-mono uppercase tracking-wider text-muted-foreground">
-                    <span>{pub.journal}</span>
-                    <span>•</span>
-                    <span>{pub.year}</span>
-                  </div>
-                </div>
- 
-                {/* Main Content Details Grid - Expanded 3-Column Layout */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
                   
-                  {/* Left Column: Title, Authors, Description (5 Columns) */}
-                  <div className="space-y-4 lg:col-span-5">
-                    <div className="space-y-2">
-                      <h3 className="text-lg md:text-xl font-serif-display font-medium text-foreground leading-snug">
-                        <TextScramble text={pub.title} />
-                      </h3>
-                      <p className="text-[11px] font-mono text-muted-foreground uppercase tracking-wider">
-                        BY {pub.authors}
-                      </p>
+                  {/* Left Column: Metadata and Abstract details (5 Columns) */}
+                  <div className="lg:col-span-5 space-y-4">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[9px] font-mono uppercase tracking-wider bg-primary/10 text-primary border-[0.5px] border-primary/20">
+                        {pub.journal}
+                      </span>
+                      <span className="text-[10px] font-mono text-muted-foreground">
+                        {pub.year} • {pub.type}
+                      </span>
                     </div>
-                    
-                    <p className="text-muted-foreground text-xs leading-relaxed">
+
+                    <h3 className="text-xl md:text-2xl font-serif-display font-medium tracking-tight text-foreground leading-snug">
+                      {pub.title}
+                    </h3>
+
+                    <p className="text-xs font-mono text-muted-foreground/80">
+                      {pub.authors}
+                    </p>
+
+                    <p className="text-xs text-muted-foreground leading-relaxed">
                       {pub.description}
                     </p>
 
-                    <div className="pt-2 flex flex-wrap items-center gap-3">
+                    <div className="pt-2 flex flex-wrap items-center gap-2.5">
+                      <motion.button
+                        whileHover={{ scale: 1.04, y: -1 }}
+                        whileTap={{ scale: 0.95 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                        onClick={() => {
+                          playClick(800, 0.04, 'sine');
+                          setIsBlueprintOpen(true);
+                        }}
+                        className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-wider px-3 py-1 rounded-full border border-cyan-500/40 bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 hover:bg-cyan-500/20 transition-colors shadow-sm font-semibold"
+                      >
+                        <Cpu className="h-3 w-3 text-cyan-500" />
+                        <span>INSPECT CAD BLUEPRINT</span>
+                      </motion.button>
+
                       <a
                         href={pub.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-primary hover:text-primary/80 transition-colors"
+                        className="inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider text-primary hover:text-primary/80 transition-colors px-2 py-0.5"
                       >
-                        [ VIEW ON IEEE XPLORE ]
+                        [ IEEE XPLORE ]
                         <ExternalLink className="h-3 w-3" />
                       </a>
 
@@ -421,6 +424,12 @@ export const PublicationsSection = () => {
 
         </div>
       </div>
+
+      {/* A4 CAD Circuit & Intelligence Layer Blueprint Modal */}
+      <CircuitBlueprintModal
+        isOpen={isBlueprintOpen}
+        onClose={() => setIsBlueprintOpen(false)}
+      />
     </SectionWrapper>
   );
 };
