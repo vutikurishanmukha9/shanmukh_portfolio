@@ -140,46 +140,46 @@ export const CircuitBlueprintModal: React.FC<CircuitBlueprintModalProps> = ({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 15 }}
           transition={{ type: 'spring', damping: 26, stiffness: 280 }}
-          className="relative z-50 w-full max-w-6xl max-h-[95vh] bg-[#071322] border-[0.5px] border-cyan-500/40 rounded-xl shadow-[0_0_60px_rgba(6,182,212,0.15)] flex flex-col overflow-hidden text-cyan-50"
+          className="relative z-50 w-full max-w-6xl max-h-[92dvh] bg-[#071322] border-[0.5px] border-cyan-500/40 rounded-xl shadow-[0_0_60px_rgba(6,182,212,0.15)] flex flex-col overflow-hidden text-cyan-50"
         >
           {/* Top Bar / CAD Header */}
-          <div className="px-5 py-3.5 border-b-[0.5px] border-cyan-500/30 bg-[#050e1a] flex flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center gap-3">
-              <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse" />
-              <div>
-                <h3 className="text-xs sm:text-sm font-mono uppercase tracking-widest text-cyan-300 font-bold">
-                  PROJECT BLUEPRINT // SYSTEM BLOCK DIAGRAM
+          <div className="px-3.5 sm:px-5 py-3 border-b-[0.5px] border-cyan-500/30 bg-[#050e1a] flex flex-wrap items-center justify-between gap-2.5">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shrink-0" />
+              <div className="min-w-0">
+                <h3 className="text-xs sm:text-sm font-mono uppercase tracking-widest text-cyan-300 font-bold truncate">
+                  PROJECT BLUEPRINT // SYSTEM DIAGRAM
                 </h3>
-                <p className="text-[9px] font-mono text-cyan-400/60">
-                  AUTOMATIC ENVIRONMENT MONITORING & CONTROL WITH INTELLIGENCE LAYER • REV 1.0 (A4)
+                <p className="text-[8px] sm:text-[9px] font-mono text-cyan-400/60 truncate">
+                  AUTO ENVIRONMENT MONITORING & CONTROL • REV 1.0 (A4)
                 </p>
               </div>
             </div>
 
             {/* Controls */}
-            <div className="flex items-center gap-1.5">
-              <div className="flex items-center bg-cyan-950/60 border border-cyan-500/30 rounded-lg p-0.5 mr-2">
+            <div className="flex items-center gap-1 shrink-0 ml-auto">
+              <div className="flex items-center bg-cyan-950/60 border border-cyan-500/30 rounded-lg p-0.5 mr-1">
                 <button
                   onClick={handleZoomOut}
                   title="Zoom Out"
-                  className="p-1.5 rounded text-cyan-300 hover:text-white hover:bg-cyan-800/40 transition-colors"
+                  className="p-1 rounded text-cyan-300 hover:text-white hover:bg-cyan-800/40 transition-colors"
                 >
                   <ZoomOut className="w-3.5 h-3.5" />
                 </button>
-                <span className="px-2 text-[10px] font-mono text-cyan-200">
+                <span className="px-1.5 text-[9px] font-mono text-cyan-200">
                   {Math.round(zoom * 100)}%
                 </span>
                 <button
                   onClick={handleZoomIn}
                   title="Zoom In"
-                  className="p-1.5 rounded text-cyan-300 hover:text-white hover:bg-cyan-800/40 transition-colors"
+                  className="p-1 rounded text-cyan-300 hover:text-white hover:bg-cyan-800/40 transition-colors"
                 >
                   <ZoomIn className="w-3.5 h-3.5" />
                 </button>
                 <button
                   onClick={handleResetZoom}
                   title="Reset Zoom"
-                  className="p-1.5 rounded text-cyan-400 hover:text-white hover:bg-cyan-800/40 transition-colors border-l border-cyan-500/20 ml-0.5"
+                  className="p-1 rounded text-cyan-400 hover:text-white hover:bg-cyan-800/40 transition-colors border-l border-cyan-500/20 ml-0.5 hidden sm:inline-block"
                 >
                   <RotateCcw className="w-3 h-3" />
                 </button>
@@ -198,7 +198,7 @@ export const CircuitBlueprintModal: React.FC<CircuitBlueprintModalProps> = ({
               <a
                 href="/ieee-blueprint.jpg"
                 download="IEEE_System_Intelligence_Blueprint.jpg"
-                className="p-1.5 rounded-lg text-cyan-300 hover:text-white bg-cyan-950/60 border border-cyan-500/30 hover:bg-cyan-800/40 transition-colors"
+                className="p-1.5 rounded-lg text-cyan-300 hover:text-white bg-cyan-950/60 border border-cyan-500/30 hover:bg-cyan-800/40 transition-colors hidden sm:inline-flex"
                 title="Download Blueprint Image"
               >
                 <Download className="w-3.5 h-3.5" />
@@ -206,7 +206,7 @@ export const CircuitBlueprintModal: React.FC<CircuitBlueprintModalProps> = ({
 
               <button
                 onClick={onClose}
-                className="p-1.5 rounded-lg text-cyan-400 hover:text-white bg-cyan-950/60 border border-cyan-500/30 hover:bg-red-500/20 hover:border-red-500/40 transition-colors ml-1"
+                className="p-1.5 rounded-lg text-cyan-400 hover:text-white bg-cyan-950/60 border border-cyan-500/30 hover:bg-red-500/20 hover:border-red-500/40 transition-colors ml-0.5"
                 title="Close Modal"
               >
                 <X className="w-4 h-4" />
@@ -215,10 +215,10 @@ export const CircuitBlueprintModal: React.FC<CircuitBlueprintModalProps> = ({
           </div>
 
           {/* Main Grid: Blueprint Canvas + Subsystem Inspector Sidebar */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 flex-1 overflow-hidden min-h-[500px] max-h-[calc(90vh-120px)]">
+          <div className="grid grid-cols-1 lg:grid-cols-12 flex-1 overflow-y-auto lg:overflow-hidden min-h-0">
             
             {/* Left/Center: Interactive Blueprint Canvas */}
-            <div className="lg:col-span-8 bg-[#040a14] relative overflow-auto p-4 flex items-center justify-center border-b lg:border-b-0 lg:border-r border-cyan-500/20">
+            <div className="lg:col-span-8 bg-[#040a14] relative overflow-auto p-2 sm:p-4 flex items-center justify-center border-b lg:border-b-0 lg:border-r border-cyan-500/20 min-h-[260px] sm:min-h-[380px] lg:min-h-[460px]">
               
               {/* Technical Dot Grid */}
               <div className="absolute inset-0 bg-[radial-gradient(#06b6d4_0.75px,transparent_0.75px)] [background-size:20px_20px] opacity-[0.12] pointer-events-none" />

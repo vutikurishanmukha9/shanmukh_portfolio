@@ -207,7 +207,7 @@ export const SkillsSection = () => {
           </div>
 
           {/* Interactive Pipeline Stages Map */}
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 relative">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3 relative">
             {pipelineStages.map((stage, i) => {
               const Icon = stage.icon;
               const isCurrent = activeHighlightedStage === stage.id;
@@ -221,7 +221,8 @@ export const SkillsSection = () => {
                     setSelectedStage(selectedStage === stage.id ? null : stage.id);
                   }}
                   className={cn(
-                    "group relative p-3.5 rounded-lg border text-left transition-all duration-200 flex flex-col justify-between min-h-[90px] overflow-hidden",
+                    "group relative p-3 sm:p-3.5 rounded-lg border text-left transition-all duration-200 flex flex-col justify-between min-h-[85px] sm:min-h-[90px] overflow-hidden",
+                    i === 4 && "col-span-2 sm:col-span-1",
                     isCurrent
                       ? "border-primary bg-primary/10 shadow-[0_0_20px_rgba(204,120,92,0.15)] ring-1 ring-primary/40"
                       : "border-border/60 bg-background/50 hover:border-border hover:bg-background/80"

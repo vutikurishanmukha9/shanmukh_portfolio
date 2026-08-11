@@ -151,10 +151,10 @@ export const CitationKnowledgeGraph: React.FC = () => {
               {/* Floating Node Label */}
               <span
                 className={cn(
-                  'absolute whitespace-nowrap px-2 py-0.5 rounded text-[8px] font-mono uppercase tracking-wider transition-all pointer-events-none shadow-sm',
+                  'hidden sm:block absolute whitespace-nowrap px-2 py-0.5 rounded text-[8px] font-mono uppercase tracking-wider transition-all pointer-events-none shadow-sm',
                   node.y > 50 ? '-bottom-6' : '-top-6',
                   isActive
-                    ? 'bg-foreground text-background font-bold'
+                    ? 'bg-foreground text-background font-bold !block z-30'
                     : 'bg-card/90 text-muted-foreground border-[0.5px] border-border opacity-75 group-hover:opacity-100'
                 )}
               >
