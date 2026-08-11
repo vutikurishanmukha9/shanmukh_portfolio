@@ -46,13 +46,13 @@ To ensure production-grade engineering standards, all unused aesthetic assets, l
 
 ## Technical Stack
 
-*   **Core Framework:** React 18 + TypeScript
-*   **Build Pipeline:** Vite
-*   **Styling Engine:** TailwindCSS 3.4 + Radix UI Primitives + Custom Vanilla CSS Utilities
-*   **Animation System:** Framer Motion 12 (configured with high-restraint cubic-bezier transition curves)
+*   **React:** React 19 + TypeScript 5.8
+*   **Remix:** Modern Route Architecture & SPA Hydration
+*   **Tailwind CSS:** Utility-first Layout Engine + Radix UI Primitives
+*   **Custom CSS:** CSS Tokens, Hardware-Accelerated Transforms & Precision Fluid Typography
+*   **Motion:** Motion / Framer Motion 12 + Lenis Momentum Kinetic Smooth Scroll
 *   **Iconography:** Lucide React
-*   **GitHub Integration:** `react-github-calendar`
-*   **Contact Telemetry:** Netlify Forms
+*   **Integrations:** GitHub Calendar API + Netlify Telemetry Forms
 
 ---
 

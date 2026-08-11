@@ -17,6 +17,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { SoundToggle } from "@/components/SoundToggle";
 import { useSound } from "@/hooks/useSound";
+import { useLenis } from "@/components/providers/SmoothScrollProvider";
 import { ResumeModal } from "@/components/ResumeModal";
 import { BorderBeam } from "@/components/ui/BorderBeam";
 
@@ -38,6 +39,7 @@ export const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isResumeOpen, setIsResumeOpen] = useState(false);
   const { playClick } = useSound();
+  const { scrollTo } = useLenis();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -64,16 +66,9 @@ export const Navigation = () => {
   const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     playClick(850, 0.03, 'sine');
-    const element = document.querySelector(href);
-    if (element) {
-      const offset = 100;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-      window.scrollTo({ top: offsetPosition, behavior: "smooth" });
-      setActiveHash(href);
-      setIsMobileMenuOpen(false);
-    }
+    scrollTo(href, -80);
+    setActiveHash(href);
+    setIsMobileMenuOpen(false);
   };
 
   const currentHighlighted = hoveredHash || activeHash;

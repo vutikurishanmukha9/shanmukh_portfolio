@@ -5,6 +5,7 @@ import { ExternalLink, FileText, Copy, Check } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useSound } from '@/hooks/useSound';
 import { TextScramble } from '@/components/ui/TextScramble';
+import { CitationKnowledgeGraph } from '@/components/ui/CitationKnowledgeGraph';
 import { cn } from '@/lib/utils';
 
 interface LaTeXPaperPreviewProps {
@@ -406,6 +407,18 @@ export const PublicationsSection = () => {
               </motion.div>
             ))}
           </div>
+
+          {/* Interactive Citation & Research Domain Knowledge Graph */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, delay: 0.2 }}
+            className="mt-8"
+          >
+            <CitationKnowledgeGraph />
+          </motion.div>
+
         </div>
       </div>
     </SectionWrapper>

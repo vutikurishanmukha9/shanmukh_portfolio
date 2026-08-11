@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { SkillFilterProvider } from "@/context/SkillFilterContext";
+import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 import { BackgroundCanvas } from "@/components/ui/background-canvas";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { ActiveSkillFilterDock } from "@/components/ActiveSkillFilterDock";
@@ -21,7 +22,8 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider>
       <SkillFilterProvider>
-        <TooltipProvider>
+        <SmoothScrollProvider>
+          <TooltipProvider>
           <CustomCursor />
           <BackgroundCanvas />
           <ScrollProgress />
@@ -39,6 +41,7 @@ const App = () => (
             </Routes>
           </BrowserRouter>
         </TooltipProvider>
+        </SmoothScrollProvider>
       </SkillFilterProvider>
     </ThemeProvider>
   </QueryClientProvider>

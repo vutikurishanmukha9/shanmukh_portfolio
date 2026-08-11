@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Code, Database, Cloud, Brain, BarChart3, Cpu, Palette, Hammer, Shield, Layers, LineChart, PieChart } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Code, Database, Cloud, Brain, BarChart3, Cpu, Palette, Hammer, Shield, Layers, LineChart, PieChart, Play, RotateCcw, Activity, Zap } from 'lucide-react';
 import { useSkillFilter } from '@/context/SkillFilterContext';
 import { useSound } from '@/hooks/useSound';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -9,11 +9,11 @@ import { SpotlightBorderCard } from '@/components/ui/SpotlightBorderCard';
 import { cn } from '@/lib/utils';
 
 const pipelineStages = [
-  { id: 'ingest', label: 'Ingest', icon: Database },
-  { id: 'process', label: 'Process', icon: Cpu },
-  { id: 'store', label: 'Store', icon: Cloud },
-  { id: 'analyze', label: 'Analyze', icon: Brain },
-  { id: 'visualize', label: 'Visualize', icon: Palette },
+  { id: 'ingest', label: '01 // Ingest', sub: 'ETL & Stream', icon: Database, delay: 0 },
+  { id: 'process', label: '02 // Process', sub: 'Compute & Clean', icon: Cpu, delay: 0.2 },
+  { id: 'store', label: '03 // Store', sub: 'Warehouse & DB', icon: Cloud, delay: 0.4 },
+  { id: 'analyze', label: '04 // Analyze', sub: 'ML & Statistics', icon: Brain, delay: 0.6 },
+  { id: 'visualize', label: '05 // Visualize', sub: 'BI & Delivery', icon: Palette, delay: 0.8 },
 ];
 
 const skillCategories = [
@@ -91,8 +91,10 @@ const skillCounts: Record<string, number> = {
 
 export const SkillsSection = () => {
   const [selectedStage, setSelectedStage] = useState<string | null>(null);
+  const [isSimulating, setIsSimulating] = useState(false);
+  const [simActiveStageIndex, setSimActiveStageIndex] = useState<number | null>(null);
   const { selectedSkill, setSelectedSkill } = useSkillFilter();
-  const { playFilter } = useSound();
+  const { playFilter, playClick } = useSound();
 
   const handleSkillClick = (skill: string) => {
     playFilter();
@@ -104,8 +106,35 @@ export const SkillsSection = () => {
     }
   };
 
-  const filteredCategories = selectedStage
-    ? skillCategories.filter(cat => cat.stage === selectedStage)
+  const handleRunSimulation = () => {
+    if (isSimulating) return;
+    setIsSimulating(true);
+    playClick(1050, 0.05, 'triangle');
+    
+    // Step through each stage
+    const stages = ['ingest', 'process', 'store', 'analyze', 'visualize'];
+    stages.forEach((stage, idx) => {
+      setTimeout(() => {
+        setSimActiveStageIndex(idx);
+        setSelectedStage(stage);
+        playClick(800 + idx * 120, 0.03, 'sine');
+      }, idx * 750);
+    });
+
+    setTimeout(() => {
+      setIsSimulating(false);
+      setSimActiveStageIndex(null);
+      setSelectedStage(null);
+      playClick(1400, 0.06, 'sine');
+    }, stages.length * 750 + 400);
+  };
+
+  const activeHighlightedStage = isSimulating && simActiveStageIndex !== null 
+    ? pipelineStages[simActiveStageIndex]?.id 
+    : selectedStage;
+
+  const filteredCategories = activeHighlightedStage
+    ? skillCategories.filter(cat => cat.stage === activeHighlightedStage)
     : skillCategories;
 
   return (
@@ -113,7 +142,7 @@ export const SkillsSection = () => {
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
 
         {/* Header */}
-        <div className="text-center mb-12 max-w-2xl mx-auto">
+        <div className="text-center mb-10 max-w-2xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -138,52 +167,109 @@ export const SkillsSection = () => {
             transition={{ delay: 0.1 }}
             className="mt-4 text-muted-foreground text-sm max-w-xl mx-auto leading-relaxed"
           >
-            Select a skill to filter projects. Clicking will dynamically highlight matching engineering outcomes.
+            Select a skill or run the pipeline simulator to trace end-to-end data processing from extraction to production delivery.
           </motion.p>
         </div>
 
-        {/* Cal.com Pill Filters */}
-        <div className="flex justify-center mb-16 select-none">
-          <div className="inline-flex p-1 bg-muted/65 border-[0.5px] border-border/60 rounded-full items-center relative flex-wrap gap-y-1 justify-center max-w-full">
+        {/* Interactive End-to-End Pipeline Bus Simulator */}
+        <div className="max-w-5xl mx-auto mb-12 p-4 md:p-6 rounded-xl border-[0.5px] border-border/80 bg-card/40 backdrop-blur-md">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6 pb-4 border-b-[0.5px] border-border/40">
+            <div className="flex items-center gap-2.5">
+              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+              <span className="text-xs font-mono tracking-widest uppercase text-foreground font-semibold">
+                End-to-End Systems Pipeline
+              </span>
+              <span className="text-[9px] font-mono text-muted-foreground hidden sm:inline">// 5 STAGE ACTIVE TRACE</span>
+            </div>
+            
             <button
-              onClick={() => setSelectedStage(null)}
+              onClick={handleRunSimulation}
+              disabled={isSimulating}
               className={cn(
-                "relative px-4 py-1.5 text-[9px] font-mono tracking-widest uppercase transition-colors duration-200 z-10",
-                selectedStage === null ? "text-foreground font-semibold" : "text-muted-foreground hover:text-foreground"
+                "inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-200 shadow-sm active:scale-95",
+                isSimulating
+                  ? "bg-primary/20 text-primary border border-primary/40 cursor-wait animate-pulse"
+                  : "bg-foreground text-background hover:bg-foreground/90"
               )}
             >
-              {selectedStage === null && (
-                <motion.div
-                  layoutId="skills-filter-pill"
-                  className="absolute inset-0 rounded-full bg-card border-[0.5px] border-border/50 shadow-[0_1px_3px_rgba(0,0,0,0.05)]"
-                  transition={{ type: "tween", ease: [0.16, 1, 0.3, 1], duration: 0.2 }}
-                />
+              {isSimulating ? (
+                <>
+                  <Activity className="w-3.5 h-3.5 animate-spin" />
+                  <span>Tracing Pipeline...</span>
+                </>
+              ) : (
+                <>
+                  <Play className="w-3 h-3 fill-current" />
+                  <span>Simulate Pipeline Flow</span>
+                </>
               )}
-              <span className="relative z-20">All Categories</span>
             </button>
-            {pipelineStages.map((stage) => {
-              const isSelected = selectedStage === stage.id;
+          </div>
+
+          {/* Interactive Pipeline Stages Map */}
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 relative">
+            {pipelineStages.map((stage, i) => {
+              const Icon = stage.icon;
+              const isCurrent = activeHighlightedStage === stage.id;
+              
               return (
                 <button
                   key={stage.id}
-                  onClick={() => setSelectedStage(stage.id)}
+                  onClick={() => {
+                    if (isSimulating) return;
+                    playClick(900 + i * 80, 0.02, 'sine');
+                    setSelectedStage(selectedStage === stage.id ? null : stage.id);
+                  }}
                   className={cn(
-                    "relative px-4 py-1.5 text-[9px] font-mono tracking-widest uppercase transition-colors duration-200 z-10",
-                    isSelected ? "text-foreground font-semibold" : "text-muted-foreground hover:text-foreground"
+                    "group relative p-3.5 rounded-lg border text-left transition-all duration-200 flex flex-col justify-between min-h-[90px] overflow-hidden",
+                    isCurrent
+                      ? "border-primary bg-primary/10 shadow-[0_0_20px_rgba(204,120,92,0.15)] ring-1 ring-primary/40"
+                      : "border-border/60 bg-background/50 hover:border-border hover:bg-background/80"
                   )}
                 >
-                  {isSelected && (
+                  {/* Active traveling top progress line */}
+                  {isCurrent && (
                     <motion.div
-                      layoutId="skills-filter-pill"
-                      className="absolute inset-0 rounded-full bg-card border-[0.5px] border-border/50 shadow-[0_1px_3px_rgba(0,0,0,0.05)]"
-                      transition={{ type: "tween", ease: [0.16, 1, 0.3, 1], duration: 0.2 }}
+                      layoutId="active-stage-line"
+                      className="absolute top-0 inset-x-0 h-0.5 bg-primary"
+                      transition={{ duration: 0.2 }}
                     />
                   )}
-                  <span className="relative z-20">{stage.label}</span>
+
+                  <div className="flex items-center justify-between mb-2">
+                    <Icon className={cn("w-4 h-4 transition-colors", isCurrent ? "text-primary" : "text-muted-foreground group-hover:text-foreground")} />
+                    {isCurrent && (
+                      <span className="text-[8px] font-mono font-bold text-primary px-1.5 py-0.5 rounded bg-primary/15 uppercase">
+                        ACTIVE
+                      </span>
+                    )}
+                  </div>
+
+                  <div>
+                    <div className={cn("text-xs font-mono font-semibold transition-colors", isCurrent ? "text-foreground" : "text-muted-foreground group-hover:text-foreground")}>
+                      {stage.label}
+                    </div>
+                    <div className="text-[9px] font-mono text-muted-foreground/70 mt-0.5">
+                      {stage.sub}
+                    </div>
+                  </div>
                 </button>
               );
             })}
           </div>
+
+          {/* Reset / All Categories toggle */}
+          {selectedStage && !isSimulating && (
+            <div className="mt-4 pt-3 border-t-[0.5px] border-border/30 flex justify-end">
+              <button
+                onClick={() => setSelectedStage(null)}
+                className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase text-muted-foreground hover:text-foreground tracking-wider transition-colors"
+              >
+                <RotateCcw className="w-3 h-3" />
+                Reset Pipeline View
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Categories Grid */}

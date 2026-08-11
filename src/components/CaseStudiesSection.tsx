@@ -13,10 +13,12 @@ import {
   Layers3,
   CheckCircle2,
   Terminal,
+  Split,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ScrollVelocitySkew } from '@/components/ui/ScrollVelocitySkew';
 import { TextScramble } from '@/components/ui/TextScramble';
+import { DataDiffSlider } from '@/components/ui/DataDiffSlider';
 
 // ─── Case Study Data ──────────────────────────────────────────────────
 
@@ -239,6 +241,7 @@ const tabLabels: { key: TabKey; label: string }[] = [
 
 const CaseStudyCard = ({ study, index }: { study: CaseStudy; index: number }) => {
   const [activeTab, setActiveTab] = useState<TabKey>('bottleneck');
+  const [viewMode, setViewMode] = useState<'dashboard' | 'diff'>('dashboard');
 
   return (
     <motion.article
@@ -252,10 +255,45 @@ const CaseStudyCard = ({ study, index }: { study: CaseStudy; index: number }) =>
       <BorderBeam variant="dark" duration={3.8} borderRadius={8} />
 
       {/* Top: Preview + Content side-by-side on lg */}
-      <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-0">
-        {/* Preview Panel */}
-        <div className="border-b-[0.5px] lg:border-b-0 lg:border-r-[0.5px] border-border/60 p-5 flex flex-col justify-between min-h-[220px]">
-          {previewComponents[study.previewType]}
+      <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-0">
+        {/* Preview Panel with View Mode Switch */}
+        <div className="border-b-[0.5px] lg:border-b-0 lg:border-r-[0.5px] border-border/60 p-5 flex flex-col justify-between min-h-[260px] bg-card/30">
+          <div className="flex items-center justify-between mb-3 pb-2 border-b-[0.5px] border-border/40">
+            <span className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground">INSPECTOR</span>
+            <div className="flex bg-muted/50 p-0.5 rounded-full border-[0.5px] border-border/60">
+              <button
+                onClick={() => setViewMode('dashboard')}
+                className={cn(
+                  "px-2.5 py-0.5 text-[8px] font-mono uppercase tracking-wider rounded-full transition-colors",
+                  viewMode === 'dashboard' ? "bg-card text-foreground font-bold shadow-sm" : "text-muted-foreground hover:text-foreground"
+                )}
+              >
+                BI Metric
+              </button>
+              <button
+                onClick={() => setViewMode('diff')}
+                className={cn(
+                  "px-2.5 py-0.5 text-[8px] font-mono uppercase tracking-wider rounded-full transition-colors flex items-center gap-1",
+                  viewMode === 'diff' ? "bg-primary text-primary-foreground font-bold shadow-sm" : "text-muted-foreground hover:text-foreground"
+                )}
+              >
+                <Split className="w-2.5 h-2.5" />
+                Data Diff
+              </button>
+            </div>
+          </div>
+
+          <div className="flex-1 flex items-center justify-center">
+            {viewMode === 'dashboard' ? (
+              <div className="w-full">
+                {previewComponents[study.previewType]}
+              </div>
+            ) : (
+              <div className="w-full">
+                <DataDiffSlider caseStudyId={study.previewType} />
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Content Panel */}
