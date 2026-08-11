@@ -111,11 +111,10 @@ export default function ProjectContextLy() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 + i * 0.05 }}
-                  className="group relative border-[0.5px] border-border/60 bg-background/50 hover:bg-card/80 transition-colors duration-300 rounded-lg p-5 overflow-hidden"
+                  className="group relative border-[0.5px] border-border/80 bg-card/60 hover:bg-card hover:border-primary/40 transition-all duration-200 rounded-xl p-5"
                 >
-                  <div className="absolute top-0 left-0 w-1 h-full bg-primary/20 group-hover:bg-primary transition-colors duration-300" />
                   <div className="flex items-start gap-4">
-                    <div className="mt-1 bg-background border-[0.5px] border-border/80 p-1.5 rounded text-primary/80 group-hover:text-primary transition-colors">
+                    <div className="mt-1 bg-background border-[0.5px] border-border/80 p-2 rounded-lg text-primary/80 group-hover:text-primary transition-colors shadow-sm">
                       <cmd.icon className="w-4 h-4" />
                     </div>
                     <div>
