@@ -66,7 +66,22 @@ export const Navigation = () => {
   const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     playClick(850, 0.03, 'sine');
-    scrollTo(href, -80);
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+
+    if (element) {
+      const headerOffset = 90;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+    } else {
+      // If element not on current page, redirect to root hash
+      window.location.href = `/${href}`;
+    }
+
     setActiveHash(href);
     setIsMobileMenuOpen(false);
   };
@@ -95,13 +110,13 @@ export const Navigation = () => {
           <a
             href="#home"
             onClick={(e) => handleScrollTo(e, '#home')}
-            className="px-3.5 py-1 font-serif-display text-lg tracking-tight text-foreground hover:text-primary transition-colors md:hidden relative z-10"
+            className="px-3.5 py-1 font-serif-display text-lg tracking-tight text-foreground hover:text-primary transition-colors md:hidden relative z-30"
           >
             VS<span className="text-primary">.</span>
           </a>
 
           {/* Mobile Toggle */}
-          <div className="md:hidden pr-1 relative z-10">
+          <div className="md:hidden pr-1 relative z-30">
             <Button
               variant="ghost"
               size="icon"
@@ -114,7 +129,7 @@ export const Navigation = () => {
           </div>
 
           {/* Desktop Animated Floating Dock Navigation */}
-          <nav className="hidden md:flex items-center gap-1 relative z-10 p-0.5">
+          <nav className="hidden md:flex items-center gap-1 relative z-30 p-0.5">
             {navItems.map((item) => {
               const isActive = activeHash === item.href;
               const isHovered = hoveredHash === item.href;

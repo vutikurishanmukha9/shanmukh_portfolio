@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Cpu, Database, Cloud, Zap, ArrowRight, ShieldCheck, Github, ExternalLink, Activity, Network } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -36,7 +37,12 @@ export const ProjectBlueprintDrawer: React.FC<ProjectBlueprintDrawerProps> = ({
   onClose,
 }) => {
   const { playClick } = useSound();
+  const [mounted, setMounted] = useState(false);
   const lastProjectRef = useRef<BlueprintProject | null>(project);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   if (project) {
     lastProjectRef.current = project;
@@ -54,39 +60,51 @@ export const ProjectBlueprintDrawer: React.FC<ProjectBlueprintDrawerProps> = ({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
-  const handleClose = (e?: React.MouseEvent) => {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
+  const handleClose = () => {
+    try {
+      playClick(700, 0.03, 'sine');
+    } catch (err) {
+      // ignore audio context errors
     }
-    playClick(700, 0.03, 'sine');
     onClose();
   };
 
-  return (
-    <AnimatePresence>
-      {isOpen && displayProject && (
-        <div className="fixed inset-0 z-[100] overflow-hidden flex justify-end">
-          {/* Backdrop blur */}
+  if (!mounted || typeof document === 'undefined') return null;
+
+  return createPortal(
+    <AnimatePresence mode="wait">
+      {isOpen && displayProject ? (
+        <motion.div
+          key="blueprint-modal-container"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="fixed inset-0 z-[999999] flex justify-end overflow-hidden"
+        >
+          {/* Full Screen Backdrop Blur */}
           <motion.div
+            key="blueprint-backdrop"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
             onClick={handleClose}
-            className="fixed inset-0 bg-background/80 backdrop-blur-sm transition-opacity cursor-pointer"
+            className="fixed inset-0 bg-background/85 backdrop-blur-md cursor-pointer z-0"
           />
 
-          {/* Slide-over Drawer */}
+          {/* Slide-over Drawer Panel */}
           <motion.div
+            key="blueprint-drawer-panel"
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 28, stiffness: 280 }}
-            className="relative z-50 w-full max-w-2xl bg-card border-l-[0.5px] border-border shadow-2xl h-full flex flex-col justify-between overflow-y-auto"
+            className="relative z-10 w-full max-w-2xl bg-card border-l-[0.5px] border-border shadow-[0_0_80px_rgba(0,0,0,0.35)] h-full flex flex-col justify-between overflow-y-auto"
           >
             {/* Drawer Header */}
-            <div className="p-6 md:p-8 border-b-[0.5px] border-border/80 flex items-start justify-between bg-muted/20">
-              <div className="space-y-1.5 max-w-lg">
+            <div className="sticky top-0 z-30 p-5 sm:p-7 border-b-[0.5px] border-border/80 flex items-start justify-between bg-card/95 backdrop-blur-xl">
+              <div className="space-y-1.5 max-w-[80%]">
                 <div className="flex items-center gap-2">
                   <span className="px-2.5 py-0.5 rounded-full border-[0.5px] border-primary/30 bg-primary/10 text-primary text-[9px] font-mono uppercase tracking-widest font-semibold flex items-center gap-1.5">
                     <Network className="w-3 h-3" />
@@ -101,20 +119,24 @@ export const ProjectBlueprintDrawer: React.FC<ProjectBlueprintDrawerProps> = ({
                 </p>
               </div>
 
-              {/* Explicit High-Contrast Close Button */}
+              {/* Close Button */}
               <button
                 type="button"
-                onClick={handleClose}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  handleClose();
+                }}
                 aria-label="Close Blueprint"
-                className="p-2 rounded-full hover:bg-muted/80 text-muted-foreground hover:text-foreground border-[0.5px] border-border transition-colors cursor-pointer shrink-0 ml-4 z-50 bg-background/60 shadow-sm"
+                className="p-2.5 rounded-full hover:bg-muted text-foreground border border-border transition-all hover:scale-105 active:scale-95 cursor-pointer shrink-0 shadow-sm bg-background relative z-50"
               >
-                <X className="w-4 h-4" />
+                <X className="w-4 h-4 text-foreground" />
                 <span className="sr-only">Close Blueprint</span>
               </button>
             </div>
 
             {/* Drawer Body */}
-            <div className="p-6 md:p-8 space-y-8 flex-1">
+            <div className="p-5 sm:p-7 space-y-8 flex-1">
               
               {/* Interactive Node Topology Flow */}
               <div className="space-y-3">
@@ -212,7 +234,7 @@ export const ProjectBlueprintDrawer: React.FC<ProjectBlueprintDrawerProps> = ({
             </div>
 
             {/* Drawer Footer Actions */}
-            <div className="p-6 border-t-[0.5px] border-border/80 bg-muted/30 flex flex-wrap items-center justify-between gap-3">
+            <div className="p-5 sm:p-6 border-t-[0.5px] border-border/80 bg-muted/30 flex flex-wrap items-center justify-between gap-3">
               <span className="text-[9px] font-mono text-muted-foreground">
                 BLUEPRINT_ID // #{displayProject.title.substring(0, 4).toUpperCase()}-SYS
               </span>
@@ -238,8 +260,9 @@ export const ProjectBlueprintDrawer: React.FC<ProjectBlueprintDrawerProps> = ({
             </div>
 
           </motion.div>
-        </div>
-      )}
-    </AnimatePresence>
+        </motion.div>
+      ) : null}
+    </AnimatePresence>,
+    document.body
   );
 };

@@ -24,13 +24,13 @@ export const BorderBeam: React.FC<BorderBeamProps> = ({
   return (
     <div
       className={cn(
-        'pointer-events-none absolute inset-0 rounded-[inherit] overflow-hidden transition-opacity duration-300 z-20',
+        'pointer-events-none absolute inset-0 rounded-[inherit] overflow-hidden transition-opacity duration-300 z-0',
         alwaysVisible ? 'opacity-70 group-hover:opacity-100' : 'opacity-0 group-hover:opacity-100',
         className
       )}
       aria-hidden="true"
     >
-      <svg className="absolute inset-0 w-full h-full overflow-visible" xmlns="http://www.w3.org/2000/svg">
+      <svg className="absolute inset-0 w-full h-full overflow-visible pointer-events-none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
             {variant === 'primary' ? (

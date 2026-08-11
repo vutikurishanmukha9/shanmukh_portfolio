@@ -12,15 +12,15 @@ export const PageLoader = () => {
             return;
         }
 
-        // Start fade out after content likely loaded
+        // Start fade out quickly after mount
         const fadeTimer = setTimeout(() => {
             setFadeOut(true);
-        }, 1500);
+        }, 600);
 
         // Remove loader after fade animation
         const removeTimer = setTimeout(() => {
             setLoading(false);
-        }, 2000);
+        }, 900);
 
         return () => {
             clearTimeout(fadeTimer);
@@ -32,8 +32,9 @@ export const PageLoader = () => {
 
     return (
         <div
-            className={`fixed inset-0 z-[100] bg-background flex items-center justify-center transition-opacity duration-500 ${fadeOut ? 'opacity-0' : 'opacity-100'
-                }`}
+            className={`fixed inset-0 z-[100] bg-background flex items-center justify-center transition-opacity duration-300 ${
+                fadeOut ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'
+            }`}
         >
             <div className="flex flex-col items-center gap-6">
                 {/* Animated Logo */}
