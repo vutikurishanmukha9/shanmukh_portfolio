@@ -55,7 +55,6 @@
     font-family: var(--font-primary);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    scroll-behavior: smooth;
     overflow-x: clip; /* Avoid visual bugs or horizontal scrollbars */
   }
 
@@ -201,26 +200,5 @@ gptengineer-brand-container,
   pointer-events: none !important;
   width: 0 !important;
   height: 0 !important;
-}
-
-/* ─── Lenis Smooth Scroll Engine Core ─── */
-html.lenis, html.lenis body {
-  height: auto;
-}
-
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
-
-.lenis.lenis-scrolling iframe {
-  pointer-events: none;
 }
 
