@@ -73,6 +73,15 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        highlight: {
+          "0%": { backgroundColor: "transparent" },
+          "100%": { backgroundColor: "var(--highlight)" },
+        },
+        flash: {
+          "0%": { backgroundColor: "hsl(var(--card))" },
+          "50%": { backgroundColor: "var(--highlight)" },
+          "100%": { backgroundColor: "hsl(var(--card))" },
+        },
         "accordion-down": {
           from: {
             height: "0",
@@ -91,6 +100,8 @@ export default {
         },
       },
       animation: {
+        highlight: "highlight 0.6s ease forwards",
+        flash: "flash 0.6s ease forwards",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
