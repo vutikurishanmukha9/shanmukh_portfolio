@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { SkillFilterProvider } from "@/context/SkillFilterContext";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
+import { HapticProvider } from "@/components/providers/HapticProvider";
 import { BackgroundCanvas } from "@/components/ui/background-canvas";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { ActiveSkillFilterDock } from "@/components/ActiveSkillFilterDock";
@@ -21,28 +22,30 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider>
-      <SkillFilterProvider>
-        <SmoothScrollProvider>
-          <TooltipProvider>
-          <CustomCursor />
-          <BackgroundCanvas />
-          <ScrollProgress />
-          <ActiveSkillFilterDock />
-          <Toaster />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/case-study/unicorn" element={<CaseStudyUnicorn />} />
-              <Route path="/case-study/adidas" element={<CaseStudyAdidas />} />
-              <Route path="/case-study/sales" element={<CaseStudySalesReport />} />
-              <Route path="/case-study/sales-report" element={<CaseStudySalesReport />} /> {/* Redirect/alias for safety */}
-              <Route path="/project/contextly" element={<ProjectContextLy />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
-        </SmoothScrollProvider>
-      </SkillFilterProvider>
+      <HapticProvider>
+        <SkillFilterProvider>
+          <SmoothScrollProvider>
+            <TooltipProvider>
+            <CustomCursor />
+            <BackgroundCanvas />
+            <ScrollProgress />
+            <ActiveSkillFilterDock />
+            <Toaster />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/case-study/unicorn" element={<CaseStudyUnicorn />} />
+                <Route path="/case-study/adidas" element={<CaseStudyAdidas />} />
+                <Route path="/case-study/sales" element={<CaseStudySalesReport />} />
+                <Route path="/case-study/sales-report" element={<CaseStudySalesReport />} /> {/* Redirect/alias for safety */}
+                <Route path="/project/contextly" element={<ProjectContextLy />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </TooltipProvider>
+          </SmoothScrollProvider>
+        </SkillFilterProvider>
+      </HapticProvider>
     </ThemeProvider>
   </QueryClientProvider>
 );
