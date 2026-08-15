@@ -11,8 +11,7 @@ import {
   FolderGit2, 
   BarChart3, 
   Award, 
-  Mail,
-  FlaskConical,
+  Mail 
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -29,7 +28,6 @@ const navItems = [
   { label: "Career", href: "#career", icon: Briefcase },
   { label: "Work", href: "#projects", icon: FolderGit2 },
   { label: "Case Studies", href: "#case-studies", icon: BarChart3 },
-  { label: "Sandbox", href: "#sandbox", icon: FlaskConical },
   { label: "Certifications", href: "#certifications", icon: Award },
   { label: "Contact", href: "#contact", icon: Mail },
 ];
