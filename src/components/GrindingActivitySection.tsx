@@ -15,9 +15,6 @@ export const GrindingActivitySection = () => {
     const { playClick } = useSound();
     const GITHUB_USERNAME = 'vutikurishanmukha9';
     const [viewMode, setViewMode] = useState<'calendar' | 'matrix'>('calendar');
-    const [matrixText, setMatrixText] = useState('SHANMUKH');
-
-    const matrixPresets = ['SHANMUKH', 'CODE', 'GRIND', '21ST', 'AI'];
 
     return (
         <SectionWrapper id="activity" className="py-16 bg-background border-b-[0.5px] border-border/40">
@@ -165,47 +162,11 @@ export const GrindingActivitySection = () => {
                                         animate={{ opacity: 1, y: 0 }}
                                         exit={{ opacity: 0, y: -6 }}
                                         transition={{ duration: 0.2 }}
-                                        className="flex flex-col items-center gap-6 py-2"
+                                        className="flex flex-col items-center justify-center py-4"
                                     >
-                                        {/* Preset Words Selector */}
-                                        <div className="flex flex-wrap items-center justify-center gap-2">
-                                            <span className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground mr-1">
-                                                Matrix Word:
-                                            </span>
-                                            {matrixPresets.map((word) => (
-                                                <button
-                                                    key={word}
-                                                    onClick={() => {
-                                                        playClick(1000, 0.02, 'sine');
-                                                        setMatrixText(word);
-                                                    }}
-                                                    className={cn(
-                                                        "px-2.5 py-0.5 rounded-full text-[10px] font-mono uppercase border transition-all active:scale-95",
-                                                        matrixText === word
-                                                            ? "bg-primary/15 text-primary border-primary/40 font-bold"
-                                                            : "bg-background/40 text-muted-foreground border-border hover:text-foreground"
-                                                    )}
-                                                >
-                                                    {word}
-                                                </button>
-                                            ))}
-                                        </div>
-
-                                        {/* Commits Grid Interactive Canvas */}
+                                        {/* Commits Grid Canvas exclusively for SHANMUKH */}
                                         <div className="w-full flex justify-center overflow-x-auto py-2">
-                                            <CommitsGrid text={matrixText} />
-                                        </div>
-
-                                        {/* Custom Input */}
-                                        <div className="flex items-center gap-2 w-full max-w-xs">
-                                            <input
-                                                type="text"
-                                                maxLength={8}
-                                                value={matrixText}
-                                                onChange={(e) => setMatrixText(e.target.value)}
-                                                placeholder="Custom text..."
-                                                className="w-full px-3 py-1 text-xs font-mono uppercase rounded-lg border-[0.5px] border-border bg-background/60 text-center text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-primary/50"
-                                            />
+                                            <CommitsGrid text="SHANMUKH" />
                                         </div>
                                     </motion.div>
                                 )}
