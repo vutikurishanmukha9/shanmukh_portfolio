@@ -22,6 +22,9 @@ const ProjectsSection = lazy(() =>
 const CaseStudiesSection = lazy(() =>
   import('@/components/CaseStudiesSection').then((module) => ({ default: module.CaseStudiesSection }))
 );
+const InteractiveEngineeringSandbox = lazy(() =>
+  import('@/components/InteractiveEngineeringSandbox').then((module) => ({ default: module.InteractiveEngineeringSandbox }))
+);
 const CertificationsSection = lazy(() =>
   import('@/components/CertificationsSection').then((module) => ({ default: module.CertificationsSection }))
 );
@@ -67,6 +70,7 @@ const Index = () => {
           <CareerJourneySection />
           <ProjectsSection />
           <CaseStudiesSection />
+          <InteractiveEngineeringSandbox />
           <CertificationsSection />
           <PublicationsSection />
           <ContactSection />
