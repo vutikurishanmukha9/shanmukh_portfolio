@@ -14,7 +14,7 @@ export const GrindingActivitySection = () => {
     const { theme } = useTheme();
     const { playClick } = useSound();
     const GITHUB_USERNAME = 'vutikurishanmukha9';
-    const [viewMode, setViewMode] = useState<'calendar' | 'matrix'>('calendar');
+    const [viewMode, setViewMode] = useState<'matrix' | 'calendar'>('matrix');
 
     return (
         <SectionWrapper id="activity" className="py-16 bg-background border-b-[0.5px] border-border/40">
@@ -165,8 +165,8 @@ export const GrindingActivitySection = () => {
                                         className="flex flex-col items-center justify-center py-4"
                                     >
                                         {/* Commits Grid Canvas exclusively for SHANMUKH */}
-                                        <div className="w-full flex justify-center overflow-x-auto py-2">
-                                            <CommitsGrid text="SHANMUKH" />
+                                        <div className="w-full flex justify-center py-2">
+                                            <CommitsGrid text="SHANMUKH" embedded={true} />
                                         </div>
                                     </motion.div>
                                 )}
