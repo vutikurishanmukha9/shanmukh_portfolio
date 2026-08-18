@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
@@ -9,8 +9,6 @@ import {
   BarChart3,
   TrendingUp,
   Activity,
-  Zap,
-  Clock,
   DollarSign,
   ShoppingBag,
   ArrowUpRight,
@@ -115,20 +113,6 @@ const monthlyRevenueTrend = [
   { month: 'December', rev2020: '$8,026,527', rev2021: '$77,815,430', yoy: '+869.5%' },
 ];
 
-const topSpikes = [
-  { date: '2021-06-17', sales: '$10,239,903', change: '+8,955%', note: 'Promo Launch Spike' },
-  { date: '2021-12-19', sales: '$3,859,805', change: '+7,217%', note: 'Holiday Peak' },
-  { date: '2021-12-02', sales: '$4,579,102', change: '+3,241%', note: 'December Promo' },
-  { date: '2021-07-05', sales: '$4,594,907', change: '+2,576%', note: 'July 4th Spike' },
-  { date: '2021-11-03', sales: '$3,353,526', change: '+2,414%', note: 'Pre-Black Friday' },
-];
-
-const topDrops = [
-  { date: '2021-12-18', sales: '$52,752', change: '-98.7%', note: 'Operational Closure' },
-  { date: '2021-11-25', sales: '$102,264', change: '-97.4%', note: 'Thanksgiving Day' },
-  { date: '2021-12-24', sales: '$190,885', change: '-96.8%', note: 'Christmas Eve' },
-];
-
 const womensComparison = [
   { category: "Women's Street Footwear", sales: "$128,002,813", profit: "$45,095,827", margin: "35.2%" },
   { category: "Women's Athletic Footwear", sales: "$106,631,896", profit: "$38,975,785", margin: "36.6%" },
@@ -142,7 +126,7 @@ const mensDeepDive = [
 
 // ─── Helpers ──────────────────────────────────────────────────────────
 
-const Divider = (props: React.HTMLAttributes<HTMLDivElement>) => (
+const Divider = () => (
   <div className="flex items-center gap-3 my-8 select-none">
     <div className="flex-1 border-t-[0.5px] border-border/60" />
     <div className="w-1.5 h-1.5 rotate-45 border-[0.5px] border-border/80 bg-card" />
@@ -450,8 +434,8 @@ const CaseStudyAdidas = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border/30 text-xs font-mono">
-                  {channelProductTop10.map((d, idx) => (
-                    <tr key={`${d.category}-${d.method}-${idx}`} className="hover:bg-muted/10 transition-colors">
+                  {channelProductTop10.map((d) => (
+                    <tr key={`${d.category}-${d.method}`} className="hover:bg-muted/10 transition-colors">
                       <td className="py-2 px-4 font-serif-display font-semibold text-foreground">{d.category}</td>
                       <td className="py-2 px-4 text-muted-foreground">{d.method}</td>
                       <td className="py-2 px-4 text-right text-primary font-bold">{d.profit}</td>

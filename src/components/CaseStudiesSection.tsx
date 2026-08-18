@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
-import { BorderBeam } from '@/components/ui/BorderBeam';
 import { cn } from '@/lib/utils';
 import {
   BarChart3,
@@ -10,8 +9,6 @@ import {
   ArrowUpRight,
   TrendingUp,
   Database,
-  Layers3,
-  CheckCircle2,
   Terminal,
   Split,
 } from 'lucide-react';
@@ -207,8 +204,8 @@ const SalesPreview = () => (
         { t: 'Y6', h: '16%', c: 'bg-emerald-500/60' },
         { t: 'Y7', h: '10%', c: 'bg-emerald-500/40' },
         { t: 'Y8', h: '6%', c: 'bg-emerald-500/20' },
-      ].map((bar, i) => (
-        <div key={i} className="flex flex-col items-center justify-end h-full gap-1.5 flex-1">
+      ].map((bar) => (
+        <div key={bar.t} className="flex flex-col items-center justify-end h-full gap-1.5 flex-1">
           <div
             className={cn('w-full max-w-[14px] rounded-t-md border-[0.5px] border-border/40 transition-all duration-300 hover:scale-y-110 origin-bottom', bar.c)}
             style={{ height: bar.h }}
@@ -224,11 +221,11 @@ const SalesPreview = () => (
   </div>
 );
 
-const previewComponents: Record<CaseStudy['previewType'], React.ReactNode> = {
+const previewComponents = {
   unicorn: <UnicornPreview />,
   adidas: <AdidasPreview />,
   sales: <SalesPreview />,
-};
+} satisfies Record<CaseStudy['previewType'], React.ReactNode>;
 
 // ─── Case Study Card ──────────────────────────────────────────────────
 
@@ -249,10 +246,10 @@ const CaseStudyCard = ({ study, index }: { study: CaseStudy; index: number }) =>
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.45, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-      className="group relative border-[0.5px] border-border/80 bg-card/45 backdrop-blur-md rounded-xl overflow-hidden hover-lift-minimal transition-all duration-300 hover:border-primary/50 hover:shadow-[0_12px_36px_rgba(0,0,0,0.08)]"
+      className="group relative border-[0.5px] border-border/80 bg-card/45 backdrop-blur-md rounded-xl overflow-hidden hover-lift-minimal transition-colors duration-300 hover:border-primary/50 hover:shadow-[0_12px_36px_rgba(0,0,0,0.08)]"
     >
       {/* Apple / VisionOS Specular Top Highlight Ray */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent transition-all duration-500 group-hover:via-primary/80 group-hover:h-[1.5px] z-20" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent transition-opacity duration-500 group-hover:via-primary/80 group-hover:h-[1.5px] z-20" />
 
       {/* Ambient Directional Light Bloom */}
       <div className="pointer-events-none absolute -top-14 left-1/2 -translate-x-1/2 w-3/4 h-14 bg-gradient-to-b from-primary/20 via-primary/5 to-transparent blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
@@ -265,6 +262,7 @@ const CaseStudyCard = ({ study, index }: { study: CaseStudy; index: number }) =>
             <span className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground">INSPECTOR</span>
             <div className="flex bg-muted/50 p-0.5 rounded-full border-[0.5px] border-border/60">
               <button
+                type="button"
                 onClick={() => setViewMode('dashboard')}
                 className={cn(
                   "px-2.5 py-0.5 text-[8px] font-mono uppercase tracking-wider rounded-full transition-colors",
@@ -274,6 +272,7 @@ const CaseStudyCard = ({ study, index }: { study: CaseStudy; index: number }) =>
                 BI Metric
               </button>
               <button
+                type="button"
                 onClick={() => setViewMode('diff')}
                 className={cn(
                   "px-2.5 py-0.5 text-[8px] font-mono uppercase tracking-wider rounded-full transition-colors flex items-center gap-1",
@@ -325,6 +324,7 @@ const CaseStudyCard = ({ study, index }: { study: CaseStudy; index: number }) =>
                 const isActive = activeTab === tab.key;
                 return (
                   <button
+                    type="button"
                     key={tab.key}
                     onClick={() => setActiveTab(tab.key)}
                     className={cn(

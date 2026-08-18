@@ -233,7 +233,7 @@ export const Navigation = () => {
                 playClick(800, 0.04, 'sine');
                 setIsResumeOpen(true);
               }}
-              className="h-8 text-[10px] font-mono uppercase tracking-wider px-3 rounded-full border-primary/30 text-primary hover:bg-primary/10 transition-all active:scale-95"
+              className="h-8 text-[10px] font-mono uppercase tracking-wider px-3 rounded-full border-primary/30 text-primary hover:bg-primary/10 transition-colors active:scale-95"
             >
               CV
             </Button>
@@ -250,10 +250,10 @@ export const Navigation = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            animate={{ opacity: 1, backdropFilter: "blur(20px)" }}
-            exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            className="fixed inset-0 z-40 bg-background/80 md:hidden flex flex-col items-center justify-center p-4 supports-[backdrop-filter]:bg-background/60"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-40 bg-background/90 backdrop-blur-xl md:hidden flex flex-col items-center justify-center p-4 supports-[backdrop-filter]:bg-background/80"
           >
             <motion.nav
               initial={{ y: 20, opacity: 0 }}

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode, useMemo } from 'react';
 
 interface SkillFilterContextType {
     selectedSkill: string | null;
@@ -10,8 +10,10 @@ const SkillFilterContext = createContext<SkillFilterContextType | undefined>(und
 export const SkillFilterProvider = ({ children }: { children: ReactNode }) => {
     const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
 
+    const value = useMemo(() => ({ selectedSkill, setSelectedSkill }), [selectedSkill]);
+
     return (
-        <SkillFilterContext.Provider value={{ selectedSkill, setSelectedSkill }}>
+        <SkillFilterContext.Provider value={value}>
             {children}
         </SkillFilterContext.Provider>
     );

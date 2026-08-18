@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Network, Zap, Radio, Cpu, Layers, Sparkles, Activity, FileText } from 'lucide-react';
+import { Zap, Radio, Cpu, Layers, FileText } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface Node {
@@ -102,13 +102,13 @@ export const CitationKnowledgeGraph: React.FC = () => {
 
         <svg className="absolute inset-0 w-full h-full pointer-events-none">
           {/* Render Connections */}
-          {edges.map((edge, idx) => {
+          {edges.map((edge) => {
             const fromNode = nodes.find((n) => n.id === edge.from)!;
             const toNode = nodes.find((n) => n.id === edge.to)!;
             const isConnectedToActive = activeNodeId === edge.from || activeNodeId === edge.to;
 
             return (
-              <g key={idx}>
+              <g key={`${edge.from}-${edge.to}`}>
                 <line
                   x1={`${fromNode.x}%`}
                   y1={`${fromNode.y}%`}

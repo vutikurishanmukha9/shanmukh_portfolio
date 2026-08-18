@@ -9,6 +9,8 @@ interface TiltCardProps extends React.HTMLAttributes<HTMLDivElement> {
   glareOpacity?: number;
 }
 
+const springConfig = { damping: 20, stiffness: 200, mass: 0.5 };
+
 export const TiltCard: React.FC<TiltCardProps> = ({
   children,
   className,
@@ -22,7 +24,6 @@ export const TiltCard: React.FC<TiltCardProps> = ({
   const x = useMotionValue(0.5);
   const y = useMotionValue(0.5);
 
-  const springConfig = { damping: 20, stiffness: 200, mass: 0.5 };
   const smoothX = useSpring(x, springConfig);
   const smoothY = useSpring(y, springConfig);
 

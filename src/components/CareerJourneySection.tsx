@@ -12,38 +12,38 @@ type Experience = {
     current: boolean;
 };
 
+const experiences: Experience[] = [
+    {
+        title: 'Cloud Engineering Intern',
+        company: 'Brain O Vision',
+        location: 'Remote',
+        period: 'June 2024 – Aug 2024',
+        description: 'Worked on cloud infrastructure projects, designed cloud deployment architectures, and gained hands-on expertise with AWS services.',
+        skills: ['Cloud Computing', 'Python', 'AWS', 'Automation'],
+        current: false,
+    },
+    {
+        title: 'Cloud Computing Engineering Intern',
+        company: 'EXCELr EdTech',
+        location: 'Remote',
+        period: 'Dec 2024 – Apr 2025',
+        description: 'Assisted in deploying cloud-native architectures, configured CI/CD deployment logic, and automated container orchestration pipelines.',
+        skills: ['AWS', 'Cloud Architecture', 'DevOps', 'Docker'],
+        current: false,
+    },
+    {
+        title: 'Data Analytics Intern',
+        company: 'Codegnan IT Solutions',
+        location: 'Hyderabad',
+        period: 'June 2025 – Feb 2026',
+        description: 'Mastered advanced data analytics workflows under Sr. Data Science Lead Mr. Puneet Kansal and translated them into production-ready solutions. Built and deployed a dynamic Exploratory Data Analysis dashboard on Global Unicorn Companies using Power BI, and engineered multi-region sales analytics reports to drive business decisions.',
+        skills: ['Python', 'MySQL', 'Power BI', 'Statistics', 'EDA', 'Excel', 'Snowflake'],
+        current: false,
+    },
+];
+
 export const CareerJourneySection = () => {
     const containerRef = useRef<HTMLDivElement>(null);
-
-    const experiences: Experience[] = [
-        {
-            title: 'Cloud Engineering Intern',
-            company: 'Brain O Vision',
-            location: 'Remote',
-            period: 'June 2024 – Aug 2024',
-            description: 'Worked on cloud infrastructure projects, designed cloud deployment architectures, and gained hands-on expertise with AWS services.',
-            skills: ['Cloud Computing', 'Python', 'AWS', 'Automation'],
-            current: false,
-        },
-        {
-            title: 'Cloud Computing Engineering Intern',
-            company: 'EXCELr EdTech',
-            location: 'Remote',
-            period: 'Dec 2024 – Apr 2025',
-            description: 'Assisted in deploying cloud-native architectures, configured CI/CD deployment logic, and automated container orchestration pipelines.',
-            skills: ['AWS', 'Cloud Architecture', 'DevOps', 'Docker'],
-            current: false,
-        },
-        {
-            title: 'Data Analytics Intern',
-            company: 'Codegnan IT Solutions',
-            location: 'Hyderabad',
-            period: 'June 2025 – Feb 2026',
-            description: 'Mastered advanced data analytics workflows under Sr. Data Science Lead Mr. Puneet Kansal and translated them into production-ready solutions. Built and deployed a dynamic Exploratory Data Analysis dashboard on Global Unicorn Companies using Power BI, and engineered multi-region sales analytics reports to drive business decisions.',
-            skills: ['Python', 'MySQL', 'Power BI', 'Statistics', 'EDA', 'Excel', 'Snowflake'],
-            current: false,
-        },
-    ];
 
     return (
         <SectionWrapper id="career" className="py-16 bg-muted/20 border-b-[0.5px] border-border/40">
@@ -72,7 +72,7 @@ export const CareerJourneySection = () => {
                 {/* Apple-Grade Specular Hardware Enclosure */}
                 <div className="relative max-w-4xl mx-auto border-[0.5px] border-border/80 bg-card/60 backdrop-blur-md rounded-xl overflow-hidden shadow-none group">
                     {/* Apple / VisionOS Specular Top Highlight Ray */}
-                    <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent transition-all duration-500 group-hover:via-primary/80 group-hover:h-[1.5px] z-20" />
+                    <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent transition-opacity duration-500 group-hover:via-primary/80 group-hover:h-[1.5px] z-20" />
 
                     {/* Ambient Directional Light Bloom */}
                     <div className="pointer-events-none absolute -top-14 left-1/2 -translate-x-1/2 w-3/4 h-14 bg-gradient-to-b from-primary/15 via-primary/5 to-transparent blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
@@ -80,7 +80,7 @@ export const CareerJourneySection = () => {
                     <div className="relative z-10 divide-y divide-border/60">
                         {experiences.map((exp, index) => (
                             <motion.div
-                                key={index}
+                                key={`${exp.title}-${exp.company}`}
                                 initial={{ opacity: 0, y: 15 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
@@ -112,9 +112,9 @@ export const CareerJourneySection = () => {
 
                                 {/* Right: Skills Tags */}
                                 <div className="flex flex-wrap gap-1 md:justify-end w-full">
-                                    {exp.skills.map((skill, i) => (
+                                    {exp.skills.map((skill) => (
                                         <span
-                                            key={i}
+                                            key={skill}
                                             className="px-2 py-0.5 rounded bg-background/50 border-[0.5px] border-border/80 text-[9px] font-mono text-muted-foreground"
                                         >
                                             {skill}

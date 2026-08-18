@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { Brain, Cpu, Database, CheckCircle2, FileText, ArrowRight, ShieldCheck, Terminal, Cpu as Processor } from 'lucide-react';
+import { Database, CheckCircle2, FileText, ArrowRight, ShieldCheck, Terminal, Cpu as Processor } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
 import { SplitText } from '@/components/ui/SplitText';
@@ -7,17 +7,17 @@ import { cn } from '@/lib/utils';
 
 type TabType = 'narrative' | 'telemetry' | 'academic';
 
+const specLedger = [
+  { label: 'ACADEMIC_ORIGIN', val: 'B.TECH IN ECE' },
+  { label: 'PRODUCTION_CAP', val: '10+ SHIPPED PRODUCTS' },
+  { label: 'INTEGRITY_COV', val: '541+ CI/CD TESTS' },
+  { label: 'RESEARCH_RIGOR', val: 'IEEE EAIC 2025' },
+  { label: 'ENGINE_STATUS', val: 'ACTIVE // READY TO SHIP' },
+];
+
 export const AboutSection = () => {
   const [activeTab, setActiveTab] = useState<TabType>('narrative');
   const containerRef = useRef<HTMLDivElement>(null);
-
-  const specLedger = [
-    { label: 'ACADEMIC_ORIGIN', val: 'B.TECH IN ECE' },
-    { label: 'PRODUCTION_CAP', val: '10+ SHIPPED PRODUCTS' },
-    { label: 'INTEGRITY_COV', val: '541+ CI/CD TESTS' },
-    { label: 'RESEARCH_RIGOR', val: 'IEEE EAIC 2025' },
-    { label: 'ENGINE_STATUS', val: 'ACTIVE // READY TO SHIP' },
-  ];
 
   return (
     <SectionWrapper id="about" className="py-16 bg-muted/20 border-y-[0.5px] border-border/40 overflow-hidden">
@@ -61,7 +61,7 @@ export const AboutSection = () => {
               </h4>
               <div className="divide-y divide-border/40">
                 {specLedger.map((spec, i) => (
-                  <div key={i} className="py-2.5 flex justify-between items-center text-[10px] font-mono">
+                  <div key={spec.label} className="py-2.5 flex justify-between items-center text-[10px] font-mono">
                     <span className="text-muted-foreground/80 flex items-center gap-1.5">
                       <span className="text-[8px] opacity-45">0{i+1}.</span>
                       {spec.label}
@@ -87,6 +87,7 @@ export const AboutSection = () => {
             {/* Console Tab Bar */}
             <div className="flex border-b-[0.5px] border-border/80 bg-muted/30 select-none">
               <button
+                type="button"
                 onClick={() => setActiveTab('narrative')}
                 className={cn(
                   "flex-1 px-2.5 sm:px-4 py-3 text-[9px] font-mono tracking-wider sm:tracking-widest uppercase transition-colors duration-200 border-r-[0.5px] border-border/80 text-center relative truncate",
@@ -102,6 +103,7 @@ export const AboutSection = () => {
               </button>
               
               <button
+                type="button"
                 onClick={() => setActiveTab('telemetry')}
                 className={cn(
                   "flex-1 px-2.5 sm:px-4 py-3 text-[9px] font-mono tracking-wider sm:tracking-widest uppercase transition-colors duration-200 border-r-[0.5px] border-border/80 text-center relative truncate",
@@ -117,6 +119,7 @@ export const AboutSection = () => {
               </button>
               
               <button
+                type="button"
                 onClick={() => setActiveTab('academic')}
                 className={cn(
                   "flex-1 px-2.5 sm:px-4 py-3 text-[9px] font-mono tracking-wider sm:tracking-widest uppercase transition-colors duration-200 text-center relative truncate",

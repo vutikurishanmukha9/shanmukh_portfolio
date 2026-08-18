@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 
 interface SpotlightCardProps extends React.HTMLAttributes<HTMLDivElement> {

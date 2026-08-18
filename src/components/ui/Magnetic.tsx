@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback, useEffect } from 'react';
+import React, { useRef, useCallback, useEffect } from 'react';
 import { motion, useSpring } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
@@ -10,6 +10,8 @@ interface MagneticProps {
   radius?: number; // Proximity attraction radius in pixels
 }
 
+const springConfig = { damping: 14, stiffness: 160, mass: 0.1 };
+
 export const Magnetic: React.FC<MagneticProps> = ({
   children,
   className,
@@ -19,7 +21,6 @@ export const Magnetic: React.FC<MagneticProps> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const springConfig = { damping: 14, stiffness: 160, mass: 0.1 };
   const smoothX = useSpring(0, springConfig);
   const smoothY = useSpring(0, springConfig);
 
@@ -67,7 +68,7 @@ export const Magnetic: React.FC<MagneticProps> = ({
     >
       <motion.div
         style={{ x: smoothX, y: smoothY }}
-        className="w-full h-full will-change-transform"
+        className="w-full h-full"
       >
         {children}
       </motion.div>

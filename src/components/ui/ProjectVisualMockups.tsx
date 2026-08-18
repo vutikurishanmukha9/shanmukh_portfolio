@@ -1,28 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import {
-  Terminal,
-  Play,
   CheckCircle2,
   FileText,
   Activity,
-  TrendingUp,
   ShieldCheck,
-  Lock,
   Atom,
   Hand,
   Sparkles,
   Cpu,
   BarChart2,
   Eye,
-  Layers,
-  Zap,
   Database,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 // 1. Context-Ly CLI / AST Terminal Sandbox
-export const ContextLyMockup: React.FC<{ isHovered?: boolean }> = ({ isHovered }) => {
+export const ContextLyMockup: React.FC<{ isHovered?: boolean }> = () => {
   const [activeTab, setActiveTab] = useState<'cli' | 'ast'>('cli');
 
   return (
@@ -39,12 +33,14 @@ export const ContextLyMockup: React.FC<{ isHovered?: boolean }> = ({ isHovered }
         </div>
         <div className="flex items-center gap-1 bg-violet-950/40 p-0.5 rounded border border-violet-500/20 text-[8px]">
           <button
+            type="button"
             onClick={() => setActiveTab('cli')}
             className={cn('px-1.5 py-0.5 rounded transition-colors', activeTab === 'cli' ? 'bg-violet-600 text-white font-bold' : 'text-violet-400')}
           >
             EXEC
           </button>
           <button
+            type="button"
             onClick={() => setActiveTab('ast')}
             className={cn('px-1.5 py-0.5 rounded transition-colors', activeTab === 'ast' ? 'bg-violet-600 text-white font-bold' : 'text-violet-400')}
           >
@@ -118,10 +114,10 @@ export const GetReportMockup: React.FC = () => {
           </div>
           <div className="w-full h-1.5 rounded-full bg-sky-950 overflow-hidden">
             <motion.div
-              initial={{ width: '0%' }}
-              animate={{ width: '100%' }}
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
               transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-              className="h-full bg-gradient-to-r from-sky-500 to-emerald-400 rounded-full"
+              className="h-full w-full origin-left bg-gradient-to-r from-sky-500 to-emerald-400 rounded-full"
             />
           </div>
         </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useCallback } from 'react';
+import React, { createContext, useEffect, useCallback } from 'react';
 import { useSound } from '@/hooks/useSound';
 
 export type HapticType = 'light' | 'selection' | 'medium' | 'heavy' | 'success' | 'warning';
@@ -23,7 +23,7 @@ export const HapticProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const triggerHaptic = useCallback(
     (type: HapticType = 'light') => {
       // 1. Device Hardware Vibration (Mobile, Trackpads, Android)
-      if (typeof window !== 'undefined' && 'navigator' in window && navigator.vibrate) {
+      if (Boolean(globalThis.window) && 'navigator' in window && navigator.vibrate) {
         try {
           switch (type) {
             case 'light':
@@ -90,7 +90,7 @@ export const HapticProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
     // 1. On Pointer Down on Any Interactive Element
     const handlePointerDown = (e: MouseEvent | TouchEvent) => {
-      const target = e.target as HTMLElement | null;
+      const target = e.target instanceof HTMLElement ? e.target : null;
       if (!target) return;
 
       const interactive = target.closest(
@@ -104,7 +104,7 @@ export const HapticProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
     // 2. Micro-Haptic Tick on Hovering Interactive Elements (Debounced)
     const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement | null;
+      const target = e.target instanceof HTMLElement ? e.target : null;
       if (!target) return;
 
       const now = Date.now();
@@ -131,36 +131,22 @@ export const HapticProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     };
   }, [triggerHaptic, isMuted, playClick]);
 
+  const value = React.useMemo(
+    () => ({
+      triggerHaptic,
+      light,
+      selection,
+      medium,
+      heavy,
+      success,
+      warning,
+    }),
+    [triggerHaptic, light, selection, medium, heavy, success, warning]
+  );
+
   return (
-    <HapticContext.Provider
-      value={{
-        triggerHaptic,
-        light,
-        selection,
-        medium,
-        heavy,
-        success,
-        warning,
-      }}
-    >
+    <HapticContext.Provider value={value}>
       {children}
     </HapticContext.Provider>
   );
-};
-
-export const useHaptics = () => {
-  const context = useContext(HapticContext);
-  if (!context) {
-    // Fallback if used outside provider
-    return {
-      triggerHaptic: () => {},
-      light: () => {},
-      selection: () => {},
-      medium: () => {},
-      heavy: () => {},
-      success: () => {},
-      warning: () => {},
-    };
-  }
-  return context;
 };

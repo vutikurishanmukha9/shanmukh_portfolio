@@ -39,7 +39,7 @@ export const ContactForm = () => {
       } else {
         throw new Error('Form submission failed');
       }
-    } catch (error) {
+    } catch {
       toast({
         title: 'Error',
         description: 'Failed to send message. Please try again or email me directly.',
@@ -139,7 +139,7 @@ export const ContactForm = () => {
       <Button
         type="submit"
         size="lg"
-        className="w-full h-11 rounded-full bg-foreground text-background shadow-[0_1px_2px_rgba(0,0,0,0.08),0_4px_12px_rgba(0,0,0,0.04)] hover:bg-foreground/90 transition-all font-mono text-[11px] tracking-widest uppercase group active:scale-[0.98]"
+        className="w-full h-11 rounded-full bg-foreground text-background shadow-[0_1px_2px_rgba(0,0,0,0.08),0_4px_12px_rgba(0,0,0,0.04)] hover:bg-foreground/90 transition-colors font-mono text-[11px] tracking-widest uppercase group active:scale-[0.98]"
         disabled={isSubmitting}
       >
         {isSubmitting ? (

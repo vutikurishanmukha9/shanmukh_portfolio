@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { Navigation } from '@/components/Navigation';
-import { NewsTicker, defaultStatusItems } from '@/components/NewsTicker';
+import { NewsTicker } from '@/components/NewsTicker';
 import { HeroSection } from '@/components/HeroSection';
 import { AboutSection } from '@/components/AboutSection';
 import { Footer } from '@/components/Footer';
@@ -48,7 +48,7 @@ const Index = () => {
       <header className="fixed top-0 left-0 right-0 z-50 flex flex-col items-center w-full">
         {/* News Ticker at Top */}
         <div className="w-full relative z-50">
-          <NewsTicker items={defaultStatusItems} speed={20} />
+          <NewsTicker speed={20} />
         </div>
 
         {/* Navigation Wrapper - Pushed down slightly */}

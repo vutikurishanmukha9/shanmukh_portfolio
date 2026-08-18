@@ -40,6 +40,7 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
             onClose();
           }}
           className="fixed inset-0 bg-background/80 backdrop-blur-md"
+          aria-hidden="true"
         />
 
         {/* Modal Content */}
@@ -67,6 +68,7 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
             </div>
 
             <button
+              type="button"
               onClick={() => {
                 playClick(600, 0.03, 'sine');
                 onClose();
@@ -91,8 +93,8 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
             {/* Key Metrics Grid if present */}
             {project.metrics && project.metrics.length > 0 && (
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3">
-                {project.metrics.map((m, i) => (
-                  <div key={i} className="p-2.5 sm:p-3 rounded bg-muted/20 border-[0.5px] border-border/40 font-mono">
+                {project.metrics.map((m) => (
+                  <div key={m.label} className="p-2.5 sm:p-3 rounded bg-muted/20 border-[0.5px] border-border/40 font-mono">
                     <span className="text-[8px] sm:text-[9px] text-muted-foreground uppercase block mb-0.5 sm:mb-1 truncate">{m.label}</span>
                     <span className="text-xs sm:text-sm font-semibold text-primary block truncate">{m.value}</span>
                   </div>
@@ -105,8 +107,8 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
               <div className="space-y-2">
                 <h4 className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">Engineering Highlights</h4>
                 <ul className="space-y-2 text-xs text-muted-foreground">
-                  {project.highlights.map((h, i) => (
-                    <li key={i} className="flex items-start gap-2">
+                  {project.highlights.map((h) => (
+                    <li key={h} className="flex items-start gap-2">
                       <CheckCircle className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />
                       <span>{h}</span>
                     </li>

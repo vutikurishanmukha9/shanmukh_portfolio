@@ -36,10 +36,11 @@ export const NumberTicker = ({
       }, delay * 1000);
       return () => clearTimeout(timer);
     }
+    return undefined;
   }, [motionValue, isInView, delay, value, direction]);
 
   useEffect(() => {
-    return springValue.on('change', (latest) => {
+    const unsubscribe = springValue.on('change', (latest) => {
       if (ref.current) {
         ref.current.textContent = `${prefix}${latest.toLocaleString('en-US', {
           minimumFractionDigits: decimals,
@@ -47,6 +48,9 @@ export const NumberTicker = ({
         })}${suffix}`;
       }
     });
+    return () => {
+      unsubscribe();
+    };
   }, [springValue, prefix, suffix, decimals]);
 
   return (

@@ -2,18 +2,32 @@ import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { useSound } from '@/hooks/useSound';
 
+const DEFAULT_STATUS_ITEMS = [
+    "Open to Opportunities",
+    "Seeking: SDE • ML • Cloud • Data Analyst Roles",
+    "Based in India",
+    "B.Tech in ECE",
+    "10+ Projects Completed",
+    "AWS Certified Cloud Practitioner",
+    "AI/ML Specialist",
+    "vutikurishanmukh17@gmail.com",
+];
+
 interface NewsTickerProps {
-    items: string[];
+    items?: string[];
     speed?: number;
 }
 
-export const NewsTicker = ({ items, speed = 30 }: NewsTickerProps) => {
+export const NewsTicker = ({ items = DEFAULT_STATUS_ITEMS, speed = 30 }: NewsTickerProps) => {
     const [isPaused, setIsPaused] = useState(false);
     const { toast } = useToast();
     const { playClick } = useSound();
 
-    // Duplicate items for seamless infinite scroll (only 2 copies needed)
-    const tickerContent = [...items, ...items];
+    // Duplicate items for seamless infinite scroll with stable IDs
+    const tickerContent = [
+        ...items.map((t) => ({ id: `track1-${t}`, text: t })),
+        ...items.map((t) => ({ id: `track2-${t}`, text: t })),
+    ];
 
     const handleItemClick = (item: string) => {
       playClick(850, 0.04, 'sine');
@@ -34,7 +48,7 @@ export const NewsTicker = ({ items, speed = 30 }: NewsTickerProps) => {
 
     return (
         <div
-            className="w-full overflow-hidden bg-card/90 backdrop-blur-md border-b-[0.5px] border-border/60 transition-all duration-200 select-none"
+            className="w-full overflow-hidden bg-card/90 backdrop-blur-md border-b-[0.5px] border-border/60 transition-colors duration-200 select-none"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
             onTouchStart={() => setIsPaused(true)}
@@ -67,18 +81,19 @@ export const NewsTicker = ({ items, speed = 30 }: NewsTickerProps) => {
                             animationPlayState: isPaused ? 'paused' : 'running',
                         }}
                     >
-                        {tickerContent.map((item, index) => (
-                            <span
-                                key={index}
-                                onClick={() => handleItemClick(item)}
-                                className="inline-flex items-center mx-4 text-[11px] font-mono tracking-widest text-muted-foreground uppercase cursor-pointer hover:text-primary transition-colors duration-200"
+                        {tickerContent.map((item) => (
+                            <button
+                                type="button"
+                                key={item.id}
+                                onClick={() => handleItemClick(item.text)}
+                                className="inline-flex items-center mx-4 text-[11px] font-mono tracking-widest text-muted-foreground uppercase cursor-pointer hover:text-primary transition-colors duration-200 bg-transparent border-0 p-0"
                             >
                                 {/* Clean asterisk separator */}
                                 <span className="text-primary/60 mr-3 text-xs">•</span>
                                 <span>
-                                    {item}
+                                    {item.text}
                                 </span>
-                            </span>
+                            </button>
                         ))}
                     </div>
                 </div>
@@ -101,16 +116,4 @@ export const NewsTicker = ({ items, speed = 30 }: NewsTickerProps) => {
         </div>
     );
 };
-
-// Default status items - concise and impactful
-export const defaultStatusItems = [
-    "Open to Opportunities",
-    "Seeking: SDE • ML • Cloud • Data Analyst Roles",
-    "Based in India",
-    "B.Tech in ECE",
-    "10+ Projects Completed",
-    "AWS Certified Cloud Practitioner",
-    "AI/ML Specialist",
-    "vutikurishanmukh17@gmail.com",
-];
 

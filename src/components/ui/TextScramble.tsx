@@ -22,13 +22,13 @@ export const TextScramble: React.FC<TextScrambleProps> = ({
   as: Component = 'span',
 }) => {
   const [displayText, setDisplayText] = useState(text);
-  const [isScrambling, setIsScrambling] = useState(false);
+  const isScramblingRef = useRef(false);
   const intervalRef = useRef<number | null>(null);
   const { playClick } = useSound();
 
   const scramble = useCallback(() => {
-    if (isScrambling) return;
-    setIsScrambling(true);
+    if (isScramblingRef.current) return;
+    isScramblingRef.current = true;
     playClick(1200, 0.015, 'sine');
 
     let iteration = 0;
@@ -55,10 +55,10 @@ export const TextScramble: React.FC<TextScrambleProps> = ({
       if (iteration >= maxIterations) {
         if (intervalRef.current) clearInterval(intervalRef.current);
         setDisplayText(text);
-        setIsScrambling(false);
+        isScramblingRef.current = false;
       }
     }, speed);
-  }, [text, isScrambling, speed, chars, playClick]);
+  }, [text, speed, chars, playClick]);
 
   useEffect(() => {
     setDisplayText(text);

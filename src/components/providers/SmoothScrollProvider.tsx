@@ -11,29 +11,22 @@ const SmoothScrollContext = createContext<SmoothScrollContextType>({
 export const useLenis = () => useContext(SmoothScrollContext);
 
 export const SmoothScrollProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const scrollTo = (target: string | HTMLElement, offset: number = -80) => {
-    if (typeof target === 'string') {
-      const element = document.querySelector(target);
-      if (element) {
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset + offset;
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth',
-        });
-      }
-    } else if (target instanceof HTMLElement) {
-      const elementPosition = target.getBoundingClientRect().top;
+  const scrollTo = React.useCallback((target: string | HTMLElement, offset: number = -80) => {
+    const element = target instanceof HTMLElement ? target : document.querySelector(target);
+    if (element) {
+      const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset + offset;
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth',
       });
     }
-  };
+  }, []);
+
+  const value = React.useMemo(() => ({ scrollTo }), [scrollTo]);
 
   return (
-    <SmoothScrollContext.Provider value={{ scrollTo }}>
+    <SmoothScrollContext.Provider value={value}>
       {children}
     </SmoothScrollContext.Provider>
   );

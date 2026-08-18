@@ -31,18 +31,25 @@ export const BackgroundCanvas: React.FC = () => {
     if (!ctx) return;
 
     let animationFrameId: number;
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
+    let isRendering = true;
 
-    const isMobile = width < 768;
-    const particleCount = isMobile ? 24 : 52;
+    const setupDimensions = () => {
+      if (!canvas) return;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    setupDimensions();
+
+    const isMobile = window.innerWidth < 768;
+    const particleCount = isMobile ? 24 : 48;
     const connectionDist = isMobile ? 90 : 130;
     const mouseRadius = isMobile ? 120 : 180;
 
     // Initialize particles
     const particles: Particle[] = Array.from({ length: particleCount }, () => ({
-      x: Math.random() * width,
-      y: Math.random() * height,
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
       vx: (Math.random() - 0.5) * 0.45,
       vy: (Math.random() - 0.5) * 0.45,
       radius: Math.random() * 1.5 + 1,
@@ -51,9 +58,7 @@ export const BackgroundCanvas: React.FC = () => {
     }));
 
     const handleResize = () => {
-      if (!canvas) return;
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
+      setupDimensions();
     };
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -66,12 +71,27 @@ export const BackgroundCanvas: React.FC = () => {
       mouseRef.current.active = false;
     };
 
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        isRendering = false;
+        cancelAnimationFrame(animationFrameId);
+      } else {
+        if (!isRendering) {
+          isRendering = true;
+          animationFrameId = requestAnimationFrame(render);
+        }
+      }
+    };
+
     window.addEventListener('resize', handleResize, { passive: true });
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     document.addEventListener('mouseleave', handleMouseLeave, { passive: true });
+    document.addEventListener('visibilitychange', handleVisibilityChange, { passive: true });
 
     // Render loop
     const render = () => {
+      const width = canvas.width;
+      const height = canvas.height;
       ctx.clearRect(0, 0, width, height);
 
       // Smooth mouse lerp
@@ -81,7 +101,6 @@ export const BackgroundCanvas: React.FC = () => {
 
       const isDark = theme === 'dark';
       const particleColor = isDark ? '255, 255, 255' : '20, 20, 20';
-      const primaryColor = isDark ? '52, 211, 153' : '16, 185, 129'; // emerald
 
       // 1. Draw Ambient Cursor Bloom
       if (mouse.active && mouse.x > 0 && mouse.y > 0) {
@@ -160,16 +179,20 @@ export const BackgroundCanvas: React.FC = () => {
         }
       }
 
-      animationFrameId = requestAnimationFrame(render);
+      if (isRendering) {
+        animationFrameId = requestAnimationFrame(render);
+      }
     };
 
     render();
 
     return () => {
+      isRendering = false;
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseleave', handleMouseLeave);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, [theme]);
 

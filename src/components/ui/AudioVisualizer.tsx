@@ -17,7 +17,7 @@ export const AudioVisualizer = ({ className, bars = 5 }: AudioVisualizerProps) =
     >
       {Array.from({ length: bars }).map((_, i) => (
         <motion.span
-          key={i}
+          key={`audio-bar-${i}`}
           animate={
             isMuted
               ? { height: 2, opacity: 0.3 }

@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { motion, useMotionValue, useSpring, useVelocity, useTransform } from 'framer-motion';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 export const CustomCursor = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -8,10 +8,6 @@ export const CustomCursor = () => {
 
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
-
-  // Measure velocities
-  const velocityX = useVelocity(cursorX);
-  const velocityY = useVelocity(cursorY);
 
   // Precision dot follows cursor tightly
   const dotX = useSpring(cursorX, { damping: 38, stiffness: 500, mass: 0.04 });
@@ -68,7 +64,7 @@ export const CustomCursor = () => {
     const handleMouseEnter = () => setIsVisible(true);
 
     const checkHoverables = (e: MouseEvent) => {
-      const target = e.target as HTMLElement | null;
+      const target = e.target instanceof HTMLElement ? e.target : null;
       if (!target) return;
       const isInteractive = Boolean(
         target.closest('a, button, input, textarea, select, [role="button"], .cursor-pointer, .hover-lift-minimal')
@@ -100,7 +96,7 @@ export const CustomCursor = () => {
     <div className="pointer-events-none fixed inset-0 z-[9999] overflow-hidden select-none">
       {/* Elastic Trailing Velocity Ribbon Ring */}
       <motion.div
-        className="fixed top-0 left-0 rounded-full border-[1.2px] border-primary/50 pointer-events-none transform-gpu will-change-transform"
+        className="fixed top-0 left-0 w-7 h-7 rounded-full border-[1.2px] border-primary/50 pointer-events-none transform-gpu"
         style={{
           x: ringX,
           y: ringY,
@@ -111,8 +107,7 @@ export const CustomCursor = () => {
           scaleY: isHovered ? 1 : 1 / Math.max(speedScale * 0.8, 1),
         }}
         animate={{
-          width: isHovered ? 44 : isClicking ? 20 : 28,
-          height: isHovered ? 44 : isClicking ? 20 : 28,
+          scale: isHovered ? 1.57 : isClicking ? 0.71 : 1,
           backgroundColor: isHovered ? 'rgba(204, 120, 92, 0.08)' : 'transparent',
           borderColor: isHovered ? 'rgba(204, 120, 92, 0.7)' : 'rgba(204, 120, 92, 0.35)',
         }}
@@ -121,7 +116,7 @@ export const CustomCursor = () => {
 
       {/* Precision Center Dot */}
       <motion.div
-        className="fixed top-0 left-0 rounded-full bg-primary pointer-events-none transform-gpu"
+        className="fixed top-0 left-0 w-1.5 h-1.5 rounded-full bg-primary pointer-events-none transform-gpu"
         style={{
           x: dotX,
           y: dotY,
@@ -129,8 +124,7 @@ export const CustomCursor = () => {
           translateY: '-50%',
         }}
         animate={{
-          width: isHovered ? 6 : isClicking ? 3 : 5,
-          height: isHovered ? 6 : isClicking ? 3 : 5,
+          scale: isHovered ? 1.2 : isClicking ? 0.6 : 1,
           opacity: isHovered ? 0.9 : 1,
         }}
         transition={{ type: 'spring', damping: 30, stiffness: 420 }}

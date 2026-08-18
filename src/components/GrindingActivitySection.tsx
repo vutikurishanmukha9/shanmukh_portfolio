@@ -1,21 +1,22 @@
 import React from 'react';
 import { GitHubCalendar } from 'react-github-calendar';
-import { Github, ArrowUpRight, GitCommit, Flame, Calendar as CalendarIcon } from 'lucide-react';
+import { Github, ArrowUpRight } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
 import { motion } from 'framer-motion';
 
+const GITHUB_USERNAME = 'vutikurishanmukha9';
+
+// Authentic GitHub Commit Color Grading
+const calendarTheme = {
+    light: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
+    dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
+};
+
 export const GrindingActivitySection = () => {
     const { theme } = useTheme();
-    const GITHUB_USERNAME = 'vutikurishanmukha9';
-
-    // Authentic GitHub Commit Color Grading
-    const calendarTheme = {
-        light: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
-        dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
-    };
 
     return (
         <SectionWrapper id="activity" className="py-16 bg-background border-b-[0.5px] border-border/40">
@@ -61,7 +62,7 @@ export const GrindingActivitySection = () => {
                 >
                     <div className="relative border-[0.5px] border-border/80 bg-card/60 backdrop-blur-md rounded-2xl p-6 sm:p-8 md:p-10 shadow-none overflow-hidden group">
                         {/* Apple / VisionOS Specular Top Highlight Ray */}
-                        <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent transition-all duration-500 group-hover:via-emerald-500/80 group-hover:h-[1.5px] z-20" />
+                        <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent transition-opacity duration-500 group-hover:via-emerald-500/80 group-hover:h-[1.5px] z-20" />
 
                         {/* Ambient Directional Light Bloom */}
                         <div className="pointer-events-none absolute -top-14 left-1/2 -translate-x-1/2 w-3/4 h-14 bg-gradient-to-b from-emerald-500/15 via-emerald-500/5 to-transparent blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
@@ -89,7 +90,7 @@ export const GrindingActivitySection = () => {
                                 href={`https://github.com/${GITHUB_USERNAME}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="px-4 py-2 bg-foreground text-background text-xs font-mono uppercase tracking-wider rounded-full hover:bg-foreground/90 transition-all shadow-xs active:scale-95 flex items-center gap-1.5"
+                                className="px-4 py-2 bg-foreground text-background text-xs font-mono uppercase tracking-wider rounded-full hover:bg-foreground/90 transition-colors shadow-xs active:scale-95 flex items-center gap-1.5"
                             >
                                 <span>GitHub Profile</span>
                                 <ArrowUpRight className="w-3.5 h-3.5" />

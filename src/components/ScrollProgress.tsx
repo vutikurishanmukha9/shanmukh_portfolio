@@ -50,9 +50,10 @@ export const ScrollProgress = () => {
             className="fixed bottom-6 right-6 z-40 pointer-events-auto"
           >
             <button
+              type="button"
               onClick={scrollToTop}
               aria-label="Scroll back to top"
-              className="group flex items-center gap-2 px-3 py-1.5 rounded-full bg-card/95 border-[0.5px] border-border/80 shadow-md backdrop-blur-md hover:border-primary/40 hover:bg-card transition-all duration-200"
+              className="group flex items-center gap-2 px-3 py-1.5 rounded-full bg-card/95 border-[0.5px] border-border/80 shadow-md backdrop-blur-md hover:border-primary/40 hover:bg-card transition-colors duration-200"
             >
               <span className="text-[10px] font-mono text-muted-foreground group-hover:text-foreground transition-colors tracking-tight">
                 {Math.round(scrollPercent)}%

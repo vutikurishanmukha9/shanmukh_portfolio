@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect } from 'react';
+import React, { createContext, useContext, useEffect, useMemo, useCallback } from 'react';
 
 type Theme = 'light';
 
@@ -19,12 +19,14 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     localStorage.removeItem('portfolio-theme');
   }, []);
 
-  const toggleTheme = () => {
+  const toggleTheme = useCallback(() => {
     // Light mode only
-  };
+  }, []);
+
+  const value = useMemo(() => ({ theme, toggleTheme }), [theme, toggleTheme]);
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={value}>
       {children}
     </ThemeContext.Provider>
   );

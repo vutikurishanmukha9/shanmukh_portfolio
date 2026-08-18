@@ -1,10 +1,9 @@
-import { useState, useEffect } from 'react';
-import { Code, Database, Cloud, Brain, BarChart3, Cpu, Palette, Hammer, Shield, Layers, LineChart, PieChart, Play, RotateCcw, Activity, Zap } from 'lucide-react';
+import { useState } from 'react';
+import { Code, Database, Cloud, Brain, Cpu, Palette, Hammer, Shield, Layers, LineChart, PieChart, Play, RotateCcw, Activity } from 'lucide-react';
 import { useSkillFilter } from '@/context/SkillFilterContext';
 import { useSound } from '@/hooks/useSound';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
-import { BorderBeam } from '@/components/ui/BorderBeam';
 import { SpotlightBorderCard } from '@/components/ui/SpotlightBorderCard';
 import { cn } from '@/lib/utils';
 
@@ -73,7 +72,7 @@ const skillCategories = [
   },
 ];
 
-const skillCounts: Record<string, number> = {
+const skillCounts = {
   Python: 6,
   SQL: 5,
   'AWS S3': 4,
@@ -87,7 +86,7 @@ const skillCounts: Record<string, number> = {
   'Data Modeling': 3,
   'System Design': 3,
   'Power BI': 2,
-};
+} satisfies Record<string, number>;
 
 export const SkillsSection = () => {
   const [selectedStage, setSelectedStage] = useState<string | null>(null);
@@ -174,7 +173,7 @@ export const SkillsSection = () => {
         {/* Interactive End-to-End Pipeline Bus Simulator */}
         <div className="relative max-w-5xl mx-auto mb-12 p-4 md:p-6 rounded-xl border-[0.5px] border-border/80 bg-card/40 backdrop-blur-md overflow-hidden group">
           {/* Apple / VisionOS Specular Top Highlight Ray */}
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent transition-all duration-500 group-hover:via-primary/80 group-hover:h-[1.5px] z-20" />
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent transition-opacity duration-500 group-hover:via-primary/80 group-hover:h-[1.5px] z-20" />
           
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6 pb-4 border-b-[0.5px] border-border/40">
             <div className="flex items-center gap-2.5">
@@ -186,6 +185,7 @@ export const SkillsSection = () => {
             </div>
             
             <button
+              type="button"
               onClick={handleRunSimulation}
               disabled={isSimulating}
               className={cn(
@@ -217,6 +217,7 @@ export const SkillsSection = () => {
               
               return (
                 <button
+                  type="button"
                   key={stage.id}
                   onClick={() => {
                     if (isSimulating) return;
@@ -266,6 +267,7 @@ export const SkillsSection = () => {
           {selectedStage && !isSimulating && (
             <div className="mt-4 pt-3 border-t-[0.5px] border-border/30 flex justify-end">
               <button
+                type="button"
                 onClick={() => setSelectedStage(null)}
                 className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase text-muted-foreground hover:text-foreground tracking-wider transition-colors"
               >
@@ -279,7 +281,7 @@ export const SkillsSection = () => {
         {/* Categories Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           <AnimatePresence mode="popLayout">
-            {filteredCategories.map((category, index) => {
+            {filteredCategories.map((category) => {
               const Icon = category.icon;
               return (
                 <motion.div
@@ -324,11 +326,11 @@ export const SkillsSection = () => {
                                 )}
                               >
                                 <span>{skill}</span>
-                                {count && (
+                                {count > 0 ? (
                                   <span className="text-[8px] opacity-70 px-1 py-0.2 bg-muted/60 rounded border-[0.5px] border-border/40">
                                     {count}
                                   </span>
-                                )}
+                                ) : null}
                               </motion.button>
                             );
                           })}

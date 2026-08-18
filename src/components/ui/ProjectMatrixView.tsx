@@ -5,14 +5,10 @@ import {
   Github,
   Network,
   ExternalLink,
-  Layers,
   CheckCircle2,
-  Cpu,
-  BarChart3,
   Search,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
 
 export interface MatrixProject {
@@ -58,6 +54,7 @@ export const ProjectMatrixView: React.FC<ProjectMatrixViewProps> = ({
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search projects by tech, title..."
+            aria-label="Search projects by tech, title, or keywords"
             className="w-full pl-9 pr-3 py-1.5 rounded-lg border-[0.5px] border-border bg-card/80 text-xs font-mono placeholder:text-muted-foreground/60 focus:outline-none focus:border-primary/50 text-foreground"
           />
         </div>
@@ -188,8 +185,14 @@ export const ProjectMatrixView: React.FC<ProjectMatrixViewProps> = ({
                       className="h-7 px-2 text-[9px] font-mono uppercase tracking-wider rounded-md"
                       asChild
                     >
-                      <a href={project.github} target="_blank" rel="noopener noreferrer">
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`View ${project.title} on GitHub`}
+                      >
                         <Github className="w-3.5 h-3.5" />
+                        <span className="sr-only">GitHub</span>
                       </a>
                     </Button>
                   </div>

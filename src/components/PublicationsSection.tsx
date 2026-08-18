@@ -1,17 +1,12 @@
 import { useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
-import { ExternalLink, FileText, Copy, Check, Layers, Cpu } from 'lucide-react';
+import { ExternalLink, Copy, Check, Cpu } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useSound } from '@/hooks/useSound';
-import { TextScramble } from '@/components/ui/TextScramble';
 import { CitationKnowledgeGraph } from '@/components/ui/CitationKnowledgeGraph';
 import { CircuitBlueprintModal } from '@/components/ui/CircuitBlueprintModal';
 import { cn } from '@/lib/utils';
-
-interface LaTeXPaperPreviewProps {
-  url: string;
-}
 
 const LaTeXPaperPreview = ({ url }: { url: string }) => {
   const paperRef = useRef<HTMLAnchorElement>(null);
@@ -63,7 +58,7 @@ const LaTeXPaperPreview = ({ url }: { url: string }) => {
             : '0 4px 12px rgba(20, 20, 19, 0.02)',
         }}
         transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-        className="group relative block aspect-[1/1.41] w-full max-w-[215px] mx-auto bg-card border-[0.5px] border-border/80 p-4 rounded-md overflow-hidden transform-gpu will-change-transform"
+        className="group relative block aspect-[1/1.41] w-full max-w-[215px] mx-auto bg-card border-[0.5px] border-border/80 p-4 rounded-md overflow-hidden transform-gpu"
       >
         {/* Specular Ambient Sheen */}
         {isHovered && (
@@ -196,17 +191,34 @@ const LaTeXPaperPreview = ({ url }: { url: string }) => {
   );
 };
 
+const publications = [
+  {
+    title: 'Optimizing Energy Efficiency in Smart Buildings Through IoT-Driven Occupancy Sensing',
+    authors: 'Vutikuri Shanmukha, et al.',
+    journal: 'IEEE Xplore',
+    year: '2025',
+    description: 'Published a research paper on an IoT-driven occupancy detection system for smart buildings, integrating Arduino, IR, and DHT sensors with cloud connectivity. The framework achieved 96% accuracy, 60ms response time, and significant energy savings through real-time automation and intelligent control.',
+    link: 'https://ieeexplore.ieee.org/document/11101373',
+    type: 'Conference Paper',
+    featured: true,
+    metrics: {
+      accuracy: '96%',
+      responseTime: '60ms',
+      energySavings: '30%',
+    },
+  },
+];
+
 export const PublicationsSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [copiedFormat, setCopiedFormat] = useState<string | null>(null);
   const [isBlueprintOpen, setIsBlueprintOpen] = useState(false);
-  const { toast } = useToast();
   const { playClick } = useSound();
+  const { toast } = useToast();
 
-  const handleCopyCitation = (format: 'BibTeX' | 'APA') => {
-    playClick(900, 0.04, 'sine');
+  const handleCopyCitation = (format: string) => {
     const text = format === 'BibTeX'
-      ? `@inproceedings{shanmukha2025optimizing,\n  title={Optimizing Energy Efficiency in Smart Buildings Through IoT-Driven Occupancy Sensing},\n  author={Vutikuri Shanmukha and others},\n  booktitle={IEEE Conference Proceedings},\n  year={2025},\n  publisher={IEEE}\n}`
+      ? `@article{shanmukha2025iot,\n  author = {Shanmukha, Vutikuri},\n  title = {Optimizing Energy Efficiency in Smart Buildings Through IoT-Driven Occupancy Sensing},\n  journal = {IEEE},\n  year = {2025}\n}`
       : `Shanmukha, V. (2025). Optimizing Energy Efficiency in Smart Buildings Through IoT-Driven Occupancy Sensing. IEEE Conference Proceedings.`;
 
     navigator.clipboard.writeText(text);
@@ -218,24 +230,6 @@ export const PublicationsSection = () => {
       description: `Copied IEEE publication ${format} citation to clipboard.`,
     });
   };
-
-  const publications = [
-    {
-      title: 'Optimizing Energy Efficiency in Smart Buildings Through IoT-Driven Occupancy Sensing',
-      authors: 'Vutikuri Shanmukha, et al.',
-      journal: 'IEEE Xplore',
-      year: '2025',
-      description: 'Published a research paper on an IoT-driven occupancy detection system for smart buildings, integrating Arduino, IR, and DHT sensors with cloud connectivity. The framework achieved 96% accuracy, 60ms response time, and significant energy savings through real-time automation and intelligent control.',
-      link: 'https://ieeexplore.ieee.org/document/11101373',
-      type: 'Conference Paper',
-      featured: true,
-      metrics: {
-        accuracy: '96%',
-        responseTime: '60ms',
-        energySavings: '30%',
-      },
-    },
-  ];
 
   return (
     <SectionWrapper id="publications" className="py-16 bg-muted/10 border-b-[0.5px] border-border/40">

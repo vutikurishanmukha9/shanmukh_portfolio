@@ -2,6 +2,36 @@ import { useEffect, useState } from 'react';
 import { Github, Linkedin, Mail, ExternalLink, ArrowUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
+const quickLinks = [
+  { label: 'Home', href: '#home' },
+  { label: 'About', href: '#about' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Case Studies', href: '#case-studies' },
+  { label: 'Contact', href: '#contact' },
+];
+
+const socialLinks = [
+  { name: 'GitHub', url: 'https://github.com/vutikurishanmukha9', icon: Github },
+  { name: 'LinkedIn', url: 'https://linkedin.com/in/shanmukha-vutikuri', icon: Linkedin },
+  { name: 'Email', url: 'mailto:vutikurishanmukh17@gmail.com', icon: Mail },
+  { name: 'LeetCode', url: 'https://leetcode.com/u/vutikurishanmukh9/', icon: ExternalLink },
+];
+
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+const scrollToSection = (href: string) => {
+  const element = document.querySelector(href);
+  if (element) {
+    const offset = 120;
+    const elementPosition = element.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - offset;
+    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+  }
+};
+
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
   const [time, setTime] = useState({ utc: '--:--:--', ist: '--:--:--' });
@@ -36,36 +66,6 @@ export const Footer = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const quickLinks = [
-    { label: 'Home', href: '#home' },
-    { label: 'About', href: '#about' },
-    { label: 'Skills', href: '#skills' },
-    { label: 'Projects', href: '#projects' },
-    { label: 'Case Studies', href: '#case-studies' },
-    { label: 'Contact', href: '#contact' },
-  ];
-
-  const socialLinks = [
-    { name: 'GitHub', url: 'https://github.com/vutikurishanmukha9', icon: Github },
-    { name: 'LinkedIn', url: 'https://linkedin.com/in/shanmukha-vutikuri', icon: Linkedin },
-    { name: 'Email', url: 'mailto:vutikurishanmukh17@gmail.com', icon: Mail },
-    { name: 'LeetCode', url: 'https://leetcode.com/u/vutikurishanmukh9/', icon: ExternalLink },
-  ];
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      const offset = 120;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-    }
-  };
-
   return (
     <footer className="relative bg-muted/30 border-t-[0.5px] border-border mt-20">
       <div className="container mx-auto px-4 lg:px-8 py-16">
@@ -77,9 +77,9 @@ export const Footer = () => {
               Building intelligent solutions through AI integrations, cloud telemetry, and robust software design.
             </p>
             <div className="flex gap-2 pt-2">
-              {socialLinks.map((social, index) => (
+              {socialLinks.map((social) => (
                 <a
-                  key={index}
+                  key={social.name}
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -96,9 +96,10 @@ export const Footer = () => {
           <div className="space-y-4 md:ml-auto w-full md:max-w-[160px]">
             <h4 className="text-[10px] font-mono tracking-widest text-foreground uppercase border-b-[0.5px] border-border/40 pb-1.5 mb-3">Navigation</h4>
             <nav className="flex flex-col gap-2">
-              {quickLinks.map((link, index) => (
+              {quickLinks.map((link) => (
                 <button
-                  key={index}
+                  type="button"
+                  key={link.href}
                   onClick={() => scrollToSection(link.href)}
                   className="group flex items-center text-xs text-muted-foreground hover:text-primary transition-colors duration-300 w-fit select-none"
                 >

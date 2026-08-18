@@ -32,6 +32,7 @@ export const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
             onClose();
           }}
           className="fixed inset-0 bg-background/80 backdrop-blur-md"
+          aria-hidden="true"
         />
 
         {/* Modal Window */}
@@ -68,6 +69,7 @@ export const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
                 <span className="xs:hidden">PDF</span>
               </Button>
               <button
+                type="button"
                 onClick={() => {
                   playClick(600, 0.03, 'sine');
                   onClose();

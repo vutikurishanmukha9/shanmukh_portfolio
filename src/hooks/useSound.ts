@@ -5,13 +5,19 @@ const AUDIO_MUTE_KEY = 'portfolio_audio_muted';
 // Global shared AudioContext singleton for zero-latency instant playback
 let globalAudioCtx: AudioContext | null = null;
 
+interface CustomAudioWindow extends Window {
+  webkitAudioContext?: typeof AudioContext;
+}
+
 function getAudioContext(): AudioContext | null {
-  if (typeof window === 'undefined') return null;
+  if (!globalThis.window) return null;
   try {
     if (!globalAudioCtx) {
-      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-      if (AudioCtx) {
-        globalAudioCtx = new AudioCtx();
+      // SAFETY: Window in legacy or WebKit browsers may expose webkitAudioContext vendor prefix.
+      const customWindow = window as CustomAudioWindow;
+      const AudioConstructor = window.AudioContext ?? customWindow.webkitAudioContext;
+      if (AudioConstructor) {
+        globalAudioCtx = new AudioConstructor();
       }
     }
     if (globalAudioCtx && globalAudioCtx.state === 'suspended') {
@@ -25,7 +31,7 @@ function getAudioContext(): AudioContext | null {
 
 export function useSound() {
   const [isMuted, setIsMuted] = useState<boolean>(() => {
-    if (typeof window === 'undefined') return true;
+    if (!globalThis.window) return true;
     return localStorage.getItem(AUDIO_MUTE_KEY) === 'true';
   });
 
@@ -43,12 +49,13 @@ export function useSound() {
   }, []);
 
   const toggleMute = useCallback(() => {
-    setIsMuted((prev) => {
-      const next = !prev;
+    setIsMuted((prev) => !prev);
+    const current = Boolean(globalThis.window) && localStorage.getItem(AUDIO_MUTE_KEY) === 'true';
+    const next = !current;
+    if (globalThis.window) {
       localStorage.setItem(AUDIO_MUTE_KEY, String(next));
       window.dispatchEvent(new Event('audio_mute_toggle'));
-      return next;
-    });
+    }
   }, []);
 
   // 1. High-frequency Micro-Haptic Click (for chip hover, buttons)

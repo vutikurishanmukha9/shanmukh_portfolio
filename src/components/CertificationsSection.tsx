@@ -1,17 +1,15 @@
 import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
-import { ShieldCheck, CheckCircle2, Award } from 'lucide-react';
+import { ShieldCheck, Award } from 'lucide-react';
 import { useSound } from '@/hooks/useSound';
 
 interface CredentialBadgeProps {
   id: string;
-  issuer: string;
-  year: string;
   isParentHovered: boolean;
 }
 
-const CredentialFlipBadge = ({ id, issuer, year, isParentHovered }: CredentialBadgeProps) => {
+const CredentialFlipBadge = ({ id, isParentHovered }: CredentialBadgeProps) => {
   return (
     <div className="relative w-32 h-7 select-none" style={{ perspective: 600 }}>
       <motion.div
@@ -49,61 +47,61 @@ const CredentialFlipBadge = ({ id, issuer, year, isParentHovered }: CredentialBa
   );
 };
 
+const certifications = [
+  {
+    title: 'AWS Certified Cloud Practitioner',
+    issuer: 'Amazon Web Services',
+    description: 'Foundational understanding of AWS Cloud concepts, services, security, architecture, and pricing models.',
+    category: 'Cloud Computing',
+    credentialId: 'AWS-CCP-9842',
+    year: '2024',
+  },
+  {
+    title: 'Oracle Certified AI Foundations Associate',
+    issuer: 'Oracle',
+    description: 'Foundational knowledge of machine learning algorithms, deep learning architectures, and generative AI concepts.',
+    category: 'Artificial Intelligence',
+    credentialId: 'ORA-AI-7721',
+    year: '2024',
+  },
+  {
+    title: 'Oracle Certified Foundations Associate',
+    issuer: 'Oracle',
+    description: 'Comprehensive knowledge of Oracle Cloud Infrastructure (OCI) core services, tenancy management, and security.',
+    category: 'Cloud & Database',
+    credentialId: 'ORA-FND-4389',
+    year: '2024',
+  },
+  {
+    title: 'IBM Data Analysis with Python',
+    issuer: 'IBM',
+    description: 'End-to-end data analysis techniques using Python, Pandas dataframes, NumPy arrays, and Scikit-learn models.',
+    category: 'Data Analysis',
+    credentialId: 'IBM-DA-5541',
+    year: '2024',
+  },
+  {
+    title: 'IBM SQL for Data Science',
+    issuer: 'IBM',
+    description: 'Relational database querying, multi-table joins, subqueries, aggregations, and performance optimization.',
+    category: 'Data Science',
+    credentialId: 'IBM-SQL-3219',
+    year: '2024',
+  },
+  {
+    title: 'IBM Python for Data Science',
+    issuer: 'IBM',
+    description: 'Core Python programming fundamentals, data structures, functional paradigms, and computational pipelines.',
+    category: 'Programming',
+    credentialId: 'IBM-PY-8802',
+    year: '2024',
+  },
+];
+
 export const CertificationsSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const { playClick } = useSound();
-
-  const certifications = [
-    {
-      title: 'AWS Certified Cloud Practitioner',
-      issuer: 'Amazon Web Services',
-      description: 'Foundational understanding of AWS Cloud concepts, services, security, architecture, and pricing models.',
-      category: 'Cloud Computing',
-      credentialId: 'AWS-CCP-9842',
-      year: '2024',
-    },
-    {
-      title: 'Oracle Certified AI Foundations Associate',
-      issuer: 'Oracle',
-      description: 'Foundational knowledge of machine learning algorithms, deep learning architectures, and generative AI concepts.',
-      category: 'Artificial Intelligence',
-      credentialId: 'ORA-AI-7721',
-      year: '2024',
-    },
-    {
-      title: 'Oracle Certified Foundations Associate',
-      issuer: 'Oracle',
-      description: 'Comprehensive knowledge of Oracle Cloud Infrastructure (OCI) core services, tenancy management, and security.',
-      category: 'Cloud & Database',
-      credentialId: 'ORA-FND-4389',
-      year: '2024',
-    },
-    {
-      title: 'IBM Data Analysis with Python',
-      issuer: 'IBM',
-      description: 'End-to-end data analysis techniques using Python, Pandas dataframes, NumPy arrays, and Scikit-learn models.',
-      category: 'Data Analysis',
-      credentialId: 'IBM-DA-5541',
-      year: '2024',
-    },
-    {
-      title: 'IBM SQL for Data Science',
-      issuer: 'IBM',
-      description: 'Relational database querying, multi-table joins, subqueries, aggregations, and performance optimization.',
-      category: 'Data Science',
-      credentialId: 'IBM-SQL-3219',
-      year: '2024',
-    },
-    {
-      title: 'IBM Python for Data Science',
-      issuer: 'IBM',
-      description: 'Core Python programming fundamentals, data structures, functional paradigms, and computational pipelines.',
-      category: 'Programming',
-      credentialId: 'IBM-PY-8802',
-      year: '2024',
-    },
-  ];
 
   return (
     <SectionWrapper id="certifications" className="py-16 bg-background border-b-[0.5px] border-border/40">
@@ -143,7 +141,7 @@ export const CertificationsSection = () => {
         {/* Apple-Grade Specular Hardware Enclosure with 3D Flip Badges */}
         <div className="relative max-w-4xl mx-auto border-[0.5px] border-border/80 bg-card/60 backdrop-blur-md rounded-xl overflow-hidden shadow-none group">
           {/* Apple / VisionOS Specular Top Highlight Ray */}
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent transition-all duration-500 group-hover:via-primary/80 group-hover:h-[1.5px] z-20" />
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent transition-opacity duration-500 group-hover:via-primary/80 group-hover:h-[1.5px] z-20" />
 
           {/* Ambient Directional Light Bloom */}
           <div className="pointer-events-none absolute -top-14 left-1/2 -translate-x-1/2 w-3/4 h-14 bg-gradient-to-b from-primary/15 via-primary/5 to-transparent blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
@@ -153,7 +151,7 @@ export const CertificationsSection = () => {
               const isHovered = hoveredIdx === index;
               return (
                 <motion.div
-                  key={index}
+                  key={cert.title}
                   initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   whileHover={{ x: 4 }}
@@ -190,8 +188,6 @@ export const CertificationsSection = () => {
                   <div className="flex flex-wrap gap-1 md:justify-end w-full">
                     <CredentialFlipBadge
                       id={cert.credentialId}
-                      issuer={cert.issuer}
-                      year={cert.year}
                       isParentHovered={isHovered}
                     />
                   </div>

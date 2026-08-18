@@ -7,7 +7,6 @@ import {
   Brain,
   CheckCircle2,
   Cloud,
-  Code2,
   Eye,
   Github,
   Globe,
@@ -16,9 +15,6 @@ import {
   X,
   LayoutGrid,
   ListFilter,
-  Sparkles,
-  Terminal,
-  Activity,
   type LucideIcon,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -61,14 +57,14 @@ interface Project {
   tone: ProjectTone;
 }
 
-const categoryConfig: Record<ProjectCategory, { icon: LucideIcon; color: string; badge: string }> = {
+const categoryConfig = {
   'AI/ML': { icon: Brain, color: 'text-violet-500', badge: 'bg-violet-500/10 text-violet-600 dark:text-violet-400 border-violet-500/20' },
   Cloud: { icon: Cloud, color: 'text-sky-500', badge: 'bg-sky-500/10 text-sky-600 dark:text-sky-400 border-sky-500/20' },
   'Web App': { icon: Globe, color: 'text-rose-500', badge: 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20' },
   'Computer Vision': { icon: Eye, color: 'text-emerald-500', badge: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20' },
   'Data Analysis': { icon: BarChart3, color: 'text-amber-500', badge: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20' },
   Other: { icon: Layers3, color: 'text-muted-foreground', badge: 'bg-muted text-muted-foreground border-border' },
-};
+} satisfies Record<ProjectCategory, { icon: LucideIcon; color: string; badge: string }>;
 
 const projects: Project[] = [
   {
@@ -246,7 +242,7 @@ const projectCardVariants: Variants = {
 };
 
 // Render appropriate visual mockup per project
-const renderProjectMockup = (title: string, category: ProjectCategory) => {
+const renderProjectMockup = (title: string) => {
   switch (title) {
     case 'Context-Ly':
       return <ContextLyMockup />;
@@ -278,10 +274,9 @@ const renderProjectMockup = (title: string, category: ProjectCategory) => {
 // Double-Bezel Hardware Spotlight Card
 const LuxuryProjectCard: React.FC<{
   project: Project;
-  index: number;
   featured?: boolean;
   onInspectBlueprint?: (project: Project) => void;
-}> = ({ project, index, featured = false, onInspectBlueprint }) => {
+}> = ({ project, featured = false, onInspectBlueprint }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(null);
   const { playClick } = useSound();
@@ -308,12 +303,12 @@ const LuxuryProjectCard: React.FC<{
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        'group relative rounded-2xl border-[0.5px] border-border/80 bg-card/60 p-2.5 transition-all duration-300 hover:border-primary/50 hover:shadow-[0_12px_36px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 overflow-hidden',
+        'group relative rounded-2xl border-[0.5px] border-border/80 bg-card/60 p-2.5 transition-[border-color,box-shadow,transform] duration-300 hover:border-primary/50 hover:shadow-[0_12px_36px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 overflow-hidden',
         featured && 'md:col-span-2 xl:col-span-3 bg-gradient-to-br from-card via-card/90 to-background'
       )}
     >
       {/* Apple / VisionOS Specular Top Highlight Ray */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent transition-all duration-500 group-hover:via-primary/80 group-hover:h-[1.5px] z-20" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent transition-opacity duration-500 group-hover:via-primary/80 group-hover:h-[1.5px] z-20" />
 
       {/* Ambient Directional Light Bloom */}
       <div className="pointer-events-none absolute -top-14 left-1/2 -translate-x-1/2 w-3/4 h-14 bg-gradient-to-b from-primary/20 via-primary/5 to-transparent blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
@@ -334,11 +329,11 @@ const LuxuryProjectCard: React.FC<{
         featured && 'grid grid-cols-1 lg:grid-cols-12 gap-6 items-center p-6'
       )}>
         {/* Inner Chamfer Specular Sheen */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-foreground/15 dark:via-white/15 to-transparent transition-all duration-300 group-hover:via-primary/40 z-20" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-foreground/15 dark:via-white/15 to-transparent transition-opacity duration-300 group-hover:via-primary/40 z-20" />
 
         {/* Visual Mockup Container */}
         <div className={cn('w-full', featured ? 'lg:col-span-6' : 'mb-4')}>
-          {renderProjectMockup(project.title, project.category)}
+          {renderProjectMockup(project.title)}
         </div>
 
         {/* Content & Metadata */}
@@ -461,192 +456,192 @@ const LuxuryProjectCard: React.FC<{
   );
 };
 
+// Per-project blueprint data — unique architecture, design decisions, and SLAs for each project
+const blueprintDataMap = {
+  'Context-Ly': {
+    architecture: {
+      client: 'Typer CLI + Rich TUI',
+      gateway: 'YAML Config Loader',
+      backend: 'AST Parser + Tree-sitter',
+      dataStore: '.contextly/ File Cache',
+      throughput: '42 modules/s',
+      latency: '0.42ms parse',
+      reliability: '100% test pass',
+    },
+    designDecisions: [
+      'AST-first parsing with Tree-sitter for language-agnostic code understanding.',
+      'File-based caching in .contextly/ to avoid re-parsing unchanged modules.',
+      'Rich TUI for interactive CLI experience with progress indicators.',
+    ],
+  },
+  'GetReport': {
+    architecture: {
+      client: 'React + Vite SPA',
+      gateway: 'FastAPI Gateway',
+      backend: 'Polars DataFrame Engine',
+      dataStore: 'Redis + SQLite',
+      throughput: '1.2k rows/s',
+      latency: '85ms P99',
+      reliability: '99.9% uptime',
+    },
+    designDecisions: [
+      'Polars over Pandas for 10x faster dataset ingestion on large CSV/Excel files.',
+      'Redis caching layer for repeated RAG queries to reduce OpenAI API costs.',
+      'PDF generation pipeline with async worker queue for non-blocking report builds.',
+    ],
+  },
+  'Candle-Light': {
+    architecture: {
+      client: 'React + TailwindCSS',
+      gateway: 'OAuth 2.0 Gateway',
+      backend: 'ML Pattern Engine',
+      dataStore: 'Real-time Signal Stream',
+      throughput: '500 signals/s',
+      latency: '12ms P99',
+      reliability: '99.5% signal accuracy',
+    },
+    designDecisions: [
+      'Model fallback chain — primary ML model cascades to rule-based heuristics on timeout.',
+      'WebSocket streaming for sub-15ms visual signal delivery to the React frontend.',
+      'OAuth 2.0 session management with secure token rotation.',
+    ],
+  },
+  'HeartOut': {
+    architecture: {
+      client: 'React SPA',
+      gateway: 'Express.js REST API',
+      backend: 'Node.js + JWT Auth',
+      dataStore: 'MongoDB Atlas',
+      throughput: '800 req/s',
+      latency: '22ms P99',
+      reliability: '99.8% uptime',
+    },
+    designDecisions: [
+      'JWT-based authentication with role-based access control (RBAC) for admin/user separation.',
+      'MongoDB document model designed for scalable story publishing with threaded comments.',
+      'Express middleware chain for input sanitization and rate limiting.',
+    ],
+  },
+  'Ele-Visualize': {
+    architecture: {
+      client: 'React + Three.js',
+      gateway: 'WebGL Render Pipeline',
+      backend: 'MediaPipe Hand Tracker',
+      dataStore: 'In-memory Molecule DB',
+      throughput: '60 fps render',
+      latency: '8ms gesture',
+      reliability: '95% gesture accuracy',
+    },
+    designDecisions: [
+      'Three.js scene graph with instanced mesh for efficient molecular rendering.',
+      'MediaPipe hand landmark detection mapped to 3D rotation quaternions.',
+      'WebGL shader optimization for real-time specular highlights on atomic bonds.',
+    ],
+  },
+  'PromptBuddy': {
+    architecture: {
+      client: 'React + Vite + TypeScript',
+      gateway: 'Client-side Router',
+      backend: 'Local Storage Engine',
+      dataStore: 'IndexedDB Templates',
+      throughput: 'Instant render',
+      latency: '<5ms slot fill',
+      reliability: '100% offline',
+    },
+    designDecisions: [
+      'Fully client-side SaaS — zero backend dependency for maximum privacy.',
+      'Template slot system with variable injection for reusable prompt patterns.',
+      'IndexedDB persistence for offline template library with export/import.',
+    ],
+  },
+  'Jarvis PDF Chatbot': {
+    architecture: {
+      client: 'Streamlit Chat UI',
+      gateway: 'LangChain Orchestrator',
+      backend: 'OpenAI + FAISS RAG',
+      dataStore: 'FAISS Vector Index',
+      throughput: '2,847 chunks indexed',
+      latency: '1.2s per query',
+      reliability: '94% retrieval accuracy',
+    },
+    designDecisions: [
+      'FAISS vector store for fast approximate nearest-neighbor search on PDF chunks.',
+      'Provider fallback — OpenAI primary, local embeddings secondary for resilience.',
+      'LangChain document loader pipeline with recursive text splitter for optimal chunk sizes.',
+    ],
+  },
+  'AI Health ChatBot': {
+    architecture: {
+      client: 'React Frontend',
+      gateway: 'Flask REST API',
+      backend: 'TensorFlow NLP Model',
+      dataStore: 'Symptom Knowledge Base',
+      throughput: '200 queries/min',
+      latency: '350ms inference',
+      reliability: '87% diagnostic accuracy',
+    },
+    designDecisions: [
+      'TensorFlow NLP model trained on medical symptom datasets for structured intake.',
+      'Guided conversation flow with branching logic for differential diagnosis.',
+      'React chat interface with real-time typing indicators and confidence scores.',
+    ],
+  },
+  'Touchless Keyboard': {
+    architecture: {
+      client: 'Python GUI (Tkinter)',
+      gateway: 'OpenCV Frame Pipeline',
+      backend: 'MediaPipe Hand Landmarks',
+      dataStore: 'In-memory Key Map',
+      throughput: '30 fps detection',
+      latency: '15ms keystroke',
+      reliability: '92% gesture accuracy',
+    },
+    designDecisions: [
+      'MediaPipe 21-point hand landmark model for precise fingertip detection.',
+      'Debounce logic to prevent rapid double-keystrokes from gesture jitter.',
+      'Virtual keyboard overlay with proximity-based key highlighting.',
+    ],
+  },
+  'Automated Attendance': {
+    architecture: {
+      client: 'React Dashboard',
+      gateway: 'Python Flask API',
+      backend: 'OpenCV Face Recognition',
+      dataStore: 'MySQL + AWS S3',
+      throughput: '15 faces/s',
+      latency: '120ms match',
+      reliability: '97% recognition rate',
+    },
+    designDecisions: [
+      'Face encoding stored as 128-d vectors in MySQL for fast Euclidean distance matching.',
+      'AWS S3 for cloud storage of facial embeddings and attendance logs.',
+      'Real-time video stream processing with OpenCV cascade classifiers.',
+    ],
+  },
+  'Employee Data Analysis': {
+    architecture: {
+      client: 'Jupyter Notebook',
+      gateway: 'Pandas DataFrame',
+      backend: 'Statistical Analysis Engine',
+      dataStore: 'CSV/Excel Datasets',
+      throughput: '15k rows analyzed',
+      latency: '2.1s full EDA',
+      reliability: '0.84 correlation',
+    },
+    designDecisions: [
+      'Seaborn heatmaps for correlation matrix visualization across HR features.',
+      'Pandas pipeline for data cleaning, null handling, and feature engineering.',
+      'Matplotlib multi-plot grids for retention trend analysis across departments.',
+    ],
+  },
+} satisfies Record<string, Omit<BlueprintProject, 'title' | 'tagline' | 'category' | 'techStack' | 'githubUrl' | 'demoUrl'>>;
+
 export const ProjectsSection: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<ProjectCategory | 'All'>('All');
   const [viewMode, setViewMode] = useState<'bento' | 'matrix'>('bento');
   const [activeBlueprintProject, setActiveBlueprintProject] = useState<BlueprintProject | null>(null);
   const { selectedSkill, setSelectedSkill } = useSkillFilter();
   const { playClick } = useSound();
-
-  // Per-project blueprint data — unique architecture, design decisions, and SLAs for each project
-  const blueprintDataMap: Record<string, Omit<BlueprintProject, 'title' | 'tagline' | 'category' | 'techStack' | 'githubUrl' | 'demoUrl'>> = {
-    'Context-Ly': {
-      architecture: {
-        client: 'Typer CLI + Rich TUI',
-        gateway: 'YAML Config Loader',
-        backend: 'AST Parser + Tree-sitter',
-        dataStore: '.contextly/ File Cache',
-        throughput: '42 modules/s',
-        latency: '0.42ms parse',
-        reliability: '100% test pass',
-      },
-      designDecisions: [
-        'AST-first parsing with Tree-sitter for language-agnostic code understanding.',
-        'File-based caching in .contextly/ to avoid re-parsing unchanged modules.',
-        'Rich TUI for interactive CLI experience with progress indicators.',
-      ],
-    },
-    'GetReport': {
-      architecture: {
-        client: 'React + Vite SPA',
-        gateway: 'FastAPI Gateway',
-        backend: 'Polars DataFrame Engine',
-        dataStore: 'Redis + SQLite',
-        throughput: '1.2k rows/s',
-        latency: '85ms P99',
-        reliability: '99.9% uptime',
-      },
-      designDecisions: [
-        'Polars over Pandas for 10x faster dataset ingestion on large CSV/Excel files.',
-        'Redis caching layer for repeated RAG queries to reduce OpenAI API costs.',
-        'PDF generation pipeline with async worker queue for non-blocking report builds.',
-      ],
-    },
-    'Candle-Light': {
-      architecture: {
-        client: 'React + TailwindCSS',
-        gateway: 'OAuth 2.0 Gateway',
-        backend: 'ML Pattern Engine',
-        dataStore: 'Real-time Signal Stream',
-        throughput: '500 signals/s',
-        latency: '12ms P99',
-        reliability: '99.5% signal accuracy',
-      },
-      designDecisions: [
-        'Model fallback chain — primary ML model cascades to rule-based heuristics on timeout.',
-        'WebSocket streaming for sub-15ms visual signal delivery to the React frontend.',
-        'OAuth 2.0 session management with secure token rotation.',
-      ],
-    },
-    'HeartOut': {
-      architecture: {
-        client: 'React SPA',
-        gateway: 'Express.js REST API',
-        backend: 'Node.js + JWT Auth',
-        dataStore: 'MongoDB Atlas',
-        throughput: '800 req/s',
-        latency: '22ms P99',
-        reliability: '99.8% uptime',
-      },
-      designDecisions: [
-        'JWT-based authentication with role-based access control (RBAC) for admin/user separation.',
-        'MongoDB document model designed for scalable story publishing with threaded comments.',
-        'Express middleware chain for input sanitization and rate limiting.',
-      ],
-    },
-    'Ele-Visualize': {
-      architecture: {
-        client: 'React + Three.js',
-        gateway: 'WebGL Render Pipeline',
-        backend: 'MediaPipe Hand Tracker',
-        dataStore: 'In-memory Molecule DB',
-        throughput: '60 fps render',
-        latency: '8ms gesture',
-        reliability: '95% gesture accuracy',
-      },
-      designDecisions: [
-        'Three.js scene graph with instanced mesh for efficient molecular rendering.',
-        'MediaPipe hand landmark detection mapped to 3D rotation quaternions.',
-        'WebGL shader optimization for real-time specular highlights on atomic bonds.',
-      ],
-    },
-    'PromptBuddy': {
-      architecture: {
-        client: 'React + Vite + TypeScript',
-        gateway: 'Client-side Router',
-        backend: 'Local Storage Engine',
-        dataStore: 'IndexedDB Templates',
-        throughput: 'Instant render',
-        latency: '<5ms slot fill',
-        reliability: '100% offline',
-      },
-      designDecisions: [
-        'Fully client-side SaaS — zero backend dependency for maximum privacy.',
-        'Template slot system with variable injection for reusable prompt patterns.',
-        'IndexedDB persistence for offline template library with export/import.',
-      ],
-    },
-    'Jarvis PDF Chatbot': {
-      architecture: {
-        client: 'Streamlit Chat UI',
-        gateway: 'LangChain Orchestrator',
-        backend: 'OpenAI + FAISS RAG',
-        dataStore: 'FAISS Vector Index',
-        throughput: '2,847 chunks indexed',
-        latency: '1.2s per query',
-        reliability: '94% retrieval accuracy',
-      },
-      designDecisions: [
-        'FAISS vector store for fast approximate nearest-neighbor search on PDF chunks.',
-        'Provider fallback — OpenAI primary, local embeddings secondary for resilience.',
-        'LangChain document loader pipeline with recursive text splitter for optimal chunk sizes.',
-      ],
-    },
-    'AI Health ChatBot': {
-      architecture: {
-        client: 'React Frontend',
-        gateway: 'Flask REST API',
-        backend: 'TensorFlow NLP Model',
-        dataStore: 'Symptom Knowledge Base',
-        throughput: '200 queries/min',
-        latency: '350ms inference',
-        reliability: '87% diagnostic accuracy',
-      },
-      designDecisions: [
-        'TensorFlow NLP model trained on medical symptom datasets for structured intake.',
-        'Guided conversation flow with branching logic for differential diagnosis.',
-        'React chat interface with real-time typing indicators and confidence scores.',
-      ],
-    },
-    'Touchless Keyboard': {
-      architecture: {
-        client: 'Python GUI (Tkinter)',
-        gateway: 'OpenCV Frame Pipeline',
-        backend: 'MediaPipe Hand Landmarks',
-        dataStore: 'In-memory Key Map',
-        throughput: '30 fps detection',
-        latency: '15ms keystroke',
-        reliability: '92% gesture accuracy',
-      },
-      designDecisions: [
-        'MediaPipe 21-point hand landmark model for precise fingertip detection.',
-        'Debounce logic to prevent rapid double-keystrokes from gesture jitter.',
-        'Virtual keyboard overlay with proximity-based key highlighting.',
-      ],
-    },
-    'Automated Attendance': {
-      architecture: {
-        client: 'React Dashboard',
-        gateway: 'Python Flask API',
-        backend: 'OpenCV Face Recognition',
-        dataStore: 'MySQL + AWS S3',
-        throughput: '15 faces/s',
-        latency: '120ms match',
-        reliability: '97% recognition rate',
-      },
-      designDecisions: [
-        'Face encoding stored as 128-d vectors in MySQL for fast Euclidean distance matching.',
-        'AWS S3 for cloud storage of facial embeddings and attendance logs.',
-        'Real-time video stream processing with OpenCV cascade classifiers.',
-      ],
-    },
-    'Employee Data Analysis': {
-      architecture: {
-        client: 'Jupyter Notebook',
-        gateway: 'Pandas DataFrame',
-        backend: 'Statistical Analysis Engine',
-        dataStore: 'CSV/Excel Datasets',
-        throughput: '15k rows analyzed',
-        latency: '2.1s full EDA',
-        reliability: '0.84 correlation',
-      },
-      designDecisions: [
-        'Seaborn heatmaps for correlation matrix visualization across HR features.',
-        'Pandas pipeline for data cleaning, null handling, and feature engineering.',
-        'Matplotlib multi-plot grids for retention trend analysis across departments.',
-      ],
-    },
-  };
 
   const handleOpenBlueprint = (p: Project | MatrixProject) => {
     const projectData = blueprintDataMap[p.title] || {
@@ -735,6 +730,7 @@ export const ProjectsSection: React.FC = () => {
 
               return (
                 <button
+                  type="button"
                   key={cat}
                   onClick={() => {
                     playClick(750, 0.03, 'sine');
@@ -759,6 +755,7 @@ export const ProjectsSection: React.FC = () => {
           {/* View Mode Toggle: Bento vs Matrix */}
           <div className="flex items-center gap-1 p-1 bg-card/60 border border-border/80 rounded-xl self-end sm:self-center">
             <button
+              type="button"
               onClick={() => {
                 playClick(800, 0.03, 'sine');
                 setViewMode('bento');
@@ -773,6 +770,7 @@ export const ProjectsSection: React.FC = () => {
               <span className="text-[10px] hidden md:inline">Bento</span>
             </button>
             <button
+              type="button"
               onClick={() => {
                 playClick(800, 0.03, 'sine');
                 setViewMode('matrix');
@@ -793,6 +791,7 @@ export const ProjectsSection: React.FC = () => {
         {selectedSkill && (
           <div className="mb-6 flex items-center gap-2">
             <button
+              type="button"
               onClick={() => setSelectedSkill(null)}
               className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-mono uppercase tracking-wider text-primary hover:bg-primary/20 transition-colors"
             >
@@ -816,7 +815,6 @@ export const ProjectsSection: React.FC = () => {
               {heroProject && (
                 <LuxuryProjectCard
                   project={heroProject}
-                  index={0}
                   featured
                   onInspectBlueprint={handleOpenBlueprint}
                 />
@@ -824,11 +822,10 @@ export const ProjectsSection: React.FC = () => {
 
               {/* Standard Cards */}
               <AnimatePresence mode="popLayout">
-                {standardProjects.map((project, index) => (
+                {standardProjects.map((project) => (
                   <LuxuryProjectCard
                     key={project.title}
                     project={project}
-                    index={index + 1}
                     onInspectBlueprint={handleOpenBlueprint}
                   />
                 ))}

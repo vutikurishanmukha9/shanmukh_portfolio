@@ -228,7 +228,7 @@ const anomalyRecords = [
 
 // ─── Helpers ──────────────────────────────────────────────────────────
 
-const Divider = (props: React.HTMLAttributes<HTMLDivElement>) => (
+const Divider = () => (
   <div className="flex items-center gap-3 my-8 select-none">
     <div className="flex-1 border-t-[0.5px] border-border/60" />
     <div className="w-1.5 h-1.5 rotate-45 border-[0.5px] border-border/80 bg-card" />
@@ -696,6 +696,7 @@ const CaseStudyUnicorn = () => {
                 <select
                   value={decacornFilter}
                   onChange={(e) => setDecacornFilter(e.target.value)}
+                  aria-label="Filter Decacorn Registry by Sector"
                   className="bg-background border-[0.5px] border-border text-[9px] font-mono rounded px-2 py-1 text-foreground focus:outline-none focus:border-primary"
                 >
                   {uniqueIndustries.map((ind) => (

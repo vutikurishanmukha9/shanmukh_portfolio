@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Cpu, Database, Cloud, Zap, ArrowRight, ShieldCheck, Github, ExternalLink, Activity, Network } from 'lucide-react';
+import { X, ShieldCheck, Github, ExternalLink, Activity, Network } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
 import { useSound } from '@/hooks/useSound';
 
 export interface BlueprintProject {
@@ -37,39 +36,39 @@ export const ProjectBlueprintDrawer: React.FC<ProjectBlueprintDrawerProps> = ({
   onClose,
 }) => {
   const { playClick } = useSound();
-  const [mounted, setMounted] = useState(false);
   const lastProjectRef = useRef<BlueprintProject | null>(project);
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    if (project) {
+      lastProjectRef.current = project;
+    }
+  }, [project]);
 
-  if (project) {
-    lastProjectRef.current = project;
-  }
+  const displayProject = project ?? lastProjectRef.current;
 
-  const displayProject = project || lastProjectRef.current;
+  const onCloseRef = useRef(onClose);
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  });
+
+  const handleClose = useCallback(() => {
+    playClick(700, 0.03, 'sine');
+    onCloseRef.current();
+  }, [playClick]);
 
   useEffect(() => {
+    if (!isOpen) return undefined;
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) {
-        onClose();
+      if (e.key === 'Escape') {
+        playClick(700, 0.03, 'sine');
+        onCloseRef.current();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose]);
+  }, [isOpen, playClick]);
 
-  const handleClose = () => {
-    try {
-      playClick(700, 0.03, 'sine');
-    } catch (err) {
-      // ignore audio context errors
-    }
-    onClose();
-  };
-
-  if (!mounted || typeof document === 'undefined') return null;
+  if (globalThis.document === undefined) return null;
 
   return createPortal(
     <AnimatePresence mode="wait">
@@ -81,6 +80,9 @@ export const ProjectBlueprintDrawer: React.FC<ProjectBlueprintDrawerProps> = ({
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
           className="fixed inset-0 z-[999999] flex justify-end overflow-hidden"
+          role="dialog"
+          aria-modal="true"
+          aria-label={displayProject.title}
         >
           {/* Full Screen Backdrop Blur */}
           <motion.div
@@ -91,6 +93,7 @@ export const ProjectBlueprintDrawer: React.FC<ProjectBlueprintDrawerProps> = ({
             transition={{ duration: 0.2 }}
             onClick={handleClose}
             className="fixed inset-0 bg-background/85 backdrop-blur-md cursor-pointer z-0"
+            aria-hidden="true"
           />
 
           {/* Slide-over Drawer Panel */}
@@ -128,7 +131,7 @@ export const ProjectBlueprintDrawer: React.FC<ProjectBlueprintDrawerProps> = ({
                   handleClose();
                 }}
                 aria-label="Close Blueprint"
-                className="p-2.5 rounded-full hover:bg-muted text-foreground border border-border transition-all hover:scale-105 active:scale-95 cursor-pointer shrink-0 shadow-sm bg-background relative z-50"
+                className="p-2.5 rounded-full hover:bg-muted text-foreground border border-border transition-[transform,background-color] hover:scale-105 active:scale-95 cursor-pointer shrink-0 shadow-sm bg-background relative z-50"
               >
                 <X className="w-4 h-4 text-foreground" />
                 <span className="sr-only">Close Blueprint</span>
@@ -208,8 +211,8 @@ export const ProjectBlueprintDrawer: React.FC<ProjectBlueprintDrawerProps> = ({
                   SYSTEM DESIGN DECISIONS & TRADE-OFFS
                 </h4>
                 <div className="space-y-2.5">
-                  {displayProject.designDecisions.map((decision, i) => (
-                    <div key={i} className="p-3 rounded-lg border-[0.5px] border-border/60 bg-muted/20 flex items-start gap-2.5 text-xs font-mono text-muted-foreground leading-relaxed">
+                  {displayProject.designDecisions.map((decision) => (
+                    <div key={decision} className="p-3 rounded-lg border-[0.5px] border-border/60 bg-muted/20 flex items-start gap-2.5 text-xs font-mono text-muted-foreground leading-relaxed">
                       <ShieldCheck className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                       <span>{decision}</span>
                     </div>

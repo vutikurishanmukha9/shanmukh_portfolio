@@ -12,11 +12,8 @@ import {
   Radio,
   Layers,
   Database,
-  Activity,
   CheckCircle2,
-  ExternalLink,
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 interface CircuitBlueprintModalProps {
@@ -132,6 +129,7 @@ export const CircuitBlueprintModal: React.FC<CircuitBlueprintModalProps> = ({
           exit={{ opacity: 0 }}
           onClick={onClose}
           className="fixed inset-0 bg-[#040914]/90 backdrop-blur-md transition-opacity"
+          aria-hidden="true"
         />
 
         {/* Modal Window */}
@@ -160,6 +158,7 @@ export const CircuitBlueprintModal: React.FC<CircuitBlueprintModalProps> = ({
             <div className="flex items-center gap-1 shrink-0 ml-auto">
               <div className="flex items-center bg-cyan-950/60 border border-cyan-500/30 rounded-lg p-0.5 mr-1">
                 <button
+                  type="button"
                   onClick={handleZoomOut}
                   title="Zoom Out"
                   className="p-1 rounded text-cyan-300 hover:text-white hover:bg-cyan-800/40 transition-colors"
@@ -170,6 +169,7 @@ export const CircuitBlueprintModal: React.FC<CircuitBlueprintModalProps> = ({
                   {Math.round(zoom * 100)}%
                 </span>
                 <button
+                  type="button"
                   onClick={handleZoomIn}
                   title="Zoom In"
                   className="p-1 rounded text-cyan-300 hover:text-white hover:bg-cyan-800/40 transition-colors"
@@ -177,6 +177,7 @@ export const CircuitBlueprintModal: React.FC<CircuitBlueprintModalProps> = ({
                   <ZoomIn className="w-3.5 h-3.5" />
                 </button>
                 <button
+                  type="button"
                   onClick={handleResetZoom}
                   title="Reset Zoom"
                   className="p-1 rounded text-cyan-400 hover:text-white hover:bg-cyan-800/40 transition-colors border-l border-cyan-500/20 ml-0.5 hidden sm:inline-block"
@@ -205,6 +206,7 @@ export const CircuitBlueprintModal: React.FC<CircuitBlueprintModalProps> = ({
               </a>
 
               <button
+                type="button"
                 onClick={onClose}
                 className="p-1.5 rounded-lg text-cyan-400 hover:text-white bg-cyan-950/60 border border-cyan-500/30 hover:bg-red-500/20 hover:border-red-500/40 transition-colors ml-0.5"
                 title="Close Modal"
@@ -242,6 +244,7 @@ export const CircuitBlueprintModal: React.FC<CircuitBlueprintModalProps> = ({
 
                   return (
                     <button
+                      type="button"
                       key={spot.id}
                       onClick={() => setActiveHotspotId(spot.id)}
                       style={{ left: `${spot.x}%`, top: `${spot.y}%` }}
@@ -272,6 +275,7 @@ export const CircuitBlueprintModal: React.FC<CircuitBlueprintModalProps> = ({
                   <div className="flex flex-wrap gap-1">
                     {hotspots.map((h) => (
                       <button
+                        type="button"
                         key={h.id}
                         onClick={() => setActiveHotspotId(h.id)}
                         className={cn(
@@ -311,8 +315,8 @@ export const CircuitBlueprintModal: React.FC<CircuitBlueprintModalProps> = ({
                     </h4>
 
                     <div className="space-y-2 pt-1 font-mono text-[10px] text-cyan-100/80">
-                      {activeHotspot.specs.map((spec, i) => (
-                        <div key={i} className="flex items-start gap-2">
+                      {activeHotspot.specs.map((spec) => (
+                        <div key={spec} className="flex items-start gap-2">
                           <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 shrink-0 mt-0.5" />
                           <span className="leading-relaxed">{spec}</span>
                         </div>

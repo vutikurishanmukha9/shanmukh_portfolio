@@ -9,18 +9,40 @@ import { TiltCard } from '@/components/ui/TiltCard';
 import { SpotlightGrid } from '@/components/ui/SpotlightGrid';
 import { SplitText } from '@/components/ui/SplitText';
 import { useSound } from '@/hooks/useSound';
-import { ArrowUpRight, ChevronDown, Github, Linkedin, Mail, FileText, Play, CheckCircle2 } from 'lucide-react';
+import { ArrowUpRight, ChevronDown, Github, Linkedin, Mail, FileText, Play } from 'lucide-react';
 import { ResumeModal } from '@/components/ResumeModal';
+
+interface SimToken {
+  id: string;
+  text: string;
+}
+
+const heroSocialLinks = [
+  { url: 'https://github.com/vutikurishanmukha9', icon: Github, label: 'GitHub' },
+  { url: 'https://linkedin.com/in/shanmukha-vutikuri', icon: Linkedin, label: 'LinkedIn' },
+  { url: 'mailto:vutikurishanmukh17@gmail.com', icon: Mail, label: 'Email' },
+];
 
 const TelemetryDashboard = () => {
   const [activeTab, setActiveTab] = useState<'status' | 'rag'>('status');
   const [isSimulating, setIsSimulating] = useState(false);
-  const [simTokens, setSimTokens] = useState<string[]>([]);
+  const [simTokens, setSimTokens] = useState<SimToken[]>([]);
 
   const runSimulation = () => {
     setIsSimulating(true);
     setSimTokens([]);
-    const tokens = ['[PROMPT]', 'retrieve_chunks()', '->', 'FAISS: 12ms', '->', 'Re-rank (0.94)', '->', 'LLM_Inference', '->', '200 OK (58ms)'];
+    const tokens: SimToken[] = [
+      { id: 'prompt', text: '[PROMPT]' },
+      { id: 'retrieve', text: 'retrieve_chunks()' },
+      { id: 'arrow-1', text: '->' },
+      { id: 'faiss', text: 'FAISS: 12ms' },
+      { id: 'arrow-2', text: '->' },
+      { id: 'rerank', text: 'Re-rank (0.94)' },
+      { id: 'arrow-3', text: '->' },
+      { id: 'llm', text: 'LLM_Inference' },
+      { id: 'arrow-4', text: '->' },
+      { id: 'ok', text: '200 OK (58ms)' },
+    ];
     tokens.forEach((token, idx) => {
       setTimeout(() => {
         setSimTokens((prev) => [...prev, token]);
@@ -44,6 +66,7 @@ const TelemetryDashboard = () => {
           </div>
           <div className="flex items-center gap-1 bg-muted/50 p-0.5 rounded-md border-[0.5px] border-border/60">
             <button
+              type="button"
               onClick={() => setActiveTab('status')}
               className={`px-2 py-0.5 rounded text-[8px] uppercase tracking-widest transition-colors ${
                 activeTab === 'status' ? 'bg-card text-foreground font-bold shadow-xs' : 'text-muted-foreground hover:text-foreground'
@@ -52,6 +75,7 @@ const TelemetryDashboard = () => {
               STATUS
             </button>
             <button
+              type="button"
               onClick={() => setActiveTab('rag')}
               className={`px-2 py-0.5 rounded text-[8px] uppercase tracking-widest transition-colors ${
                 activeTab === 'rag' ? 'bg-card text-foreground font-bold shadow-xs' : 'text-muted-foreground hover:text-foreground'
@@ -90,6 +114,7 @@ const TelemetryDashboard = () => {
             <div className="flex items-center justify-between">
               <span className="text-[10px] text-muted-foreground uppercase tracking-widest">Query Playground</span>
               <button
+                type="button"
                 onClick={runSimulation}
                 disabled={isSimulating}
                 className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-primary/10 border-[0.5px] border-primary/30 text-primary text-[9px] font-mono uppercase tracking-wider hover:bg-primary/20 transition-colors disabled:opacity-50"
@@ -118,20 +143,20 @@ const TelemetryDashboard = () => {
 
               <div className="flex flex-wrap gap-1.5 items-center relative z-10">
                 {simTokens.length > 0 ? (
-                  simTokens.map((tok, i) => (
+                  simTokens.map((tok) => (
                     <motion.span
-                      key={i}
+                      key={tok.id}
                       initial={{ opacity: 0, scale: 0.8, y: 4 }}
                       animate={{ opacity: 1, scale: 1, y: 0 }}
                       className={
-                        tok.includes('OK')
+                        tok.text.includes('OK')
                           ? 'text-emerald-500 font-bold px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20'
-                          : tok.includes('FAISS')
+                          : tok.text.includes('FAISS')
                           ? 'text-primary font-bold px-1.5 py-0.5 rounded bg-primary/10 border border-primary/20'
                           : 'text-foreground'
                       }
                     >
-                      {tok}
+                      {tok.text}
                     </motion.span>
                   ))
                 ) : (
@@ -319,7 +344,7 @@ export const HeroSection = () => {
                   <Button
                     size="lg"
                     onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-                    className="group h-11 w-full rounded-full bg-foreground pl-6 pr-2.5 text-xs font-mono tracking-wider uppercase text-background hover:bg-foreground/90 transition-all sm:w-auto flex items-center justify-between gap-3 shadow-sm active:scale-[0.98]"
+                    className="group h-11 w-full rounded-full bg-foreground pl-6 pr-2.5 text-xs font-mono tracking-wider uppercase text-background hover:bg-foreground/90 transition-colors sm:w-auto flex items-center justify-between gap-3 shadow-sm active:scale-[0.98]"
                   >
                     <span>View Product Work</span>
                     <span className="w-6 h-6 rounded-full bg-background/20 text-background flex items-center justify-center transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
@@ -334,7 +359,7 @@ export const HeroSection = () => {
                     variant="outline"
                     size="lg"
                     onClick={() => setIsResumeOpen(true)}
-                    className="h-11 w-full rounded-full bg-background border-[0.5px] border-primary/30 text-primary px-6 text-xs font-mono tracking-wider uppercase sm:w-auto hover:bg-primary/10 transition-all active:scale-[0.98]"
+                    className="h-11 w-full rounded-full bg-background border-[0.5px] border-primary/30 text-primary px-6 text-xs font-mono tracking-wider uppercase sm:w-auto hover:bg-primary/10 transition-colors active:scale-[0.98]"
                   >
                     <FileText className="h-3.5 w-3.5 mr-1.5" />
                     View Resume
@@ -347,7 +372,7 @@ export const HeroSection = () => {
                     variant="outline"
                     size="lg"
                     onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                    className="h-11 w-full rounded-full bg-background border-[0.5px] border-border/80 px-6 text-xs font-mono tracking-wider uppercase sm:w-auto hover:bg-muted transition-all active:scale-[0.98]"
+                    className="h-11 w-full rounded-full bg-background border-[0.5px] border-border/80 px-6 text-xs font-mono tracking-wider uppercase sm:w-auto hover:bg-muted transition-colors active:scale-[0.98]"
                   >
                     Contact Me
                   </Button>
@@ -355,14 +380,10 @@ export const HeroSection = () => {
               </div>
               
               <div className="flex items-center gap-2 mt-2 sm:mt-0">
-                {[
-                  ['https://github.com/vutikurishanmukha9', Github, 'GitHub'],
-                  ['https://linkedin.com/in/shanmukha-vutikuri', Linkedin, 'LinkedIn'],
-                  ['mailto:vutikurishanmukh17@gmail.com', Mail, 'Email']
-                ].map(([url, Icon, label]) => (
+                {heroSocialLinks.map(({ url, icon: Icon, label }) => (
                   <motion.a 
-                    key={url as string}
-                    href={url as string} 
+                    key={url}
+                    href={url} 
                     target="_blank" 
                     rel="noreferrer"
                     whileHover={{ y: -2, scale: 1.1 }}
@@ -371,7 +392,7 @@ export const HeroSection = () => {
                     className="p-2.5 rounded-full hover:bg-muted text-muted-foreground hover:text-foreground border-[0.5px] border-transparent hover:border-border/60 transition-[border-color,color,background-color] duration-200"
                   >
                     <Icon className="h-4.5 w-4.5" />
-                    <span className="sr-only">{label as string}</span>
+                    <span className="sr-only">{label}</span>
                   </motion.a>
                 ))}
               </div>
@@ -392,18 +413,19 @@ export const HeroSection = () => {
         </div>
         
         {/* Scroll Indicator */}
-        <motion.div
-           initial={{ opacity: 0 }}
-           animate={{ opacity: 1 }}
-           transition={{ delay: 0.6, duration: 0.6 }}
-           className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 cursor-pointer z-20 text-muted-foreground hover:text-foreground transition-colors"
-           onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+        <motion.button
+          type="button"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6, duration: 0.6 }}
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 cursor-pointer z-20 text-muted-foreground hover:text-foreground transition-colors bg-transparent border-0 p-0"
+          onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+          aria-label="Scroll to explore about section"
         >
           <span className="text-[11px] sm:text-[9px] font-mono tracking-[0.25em] uppercase">Scroll to explore</span>
           <ChevronDown className="animate-bounce w-4 h-4 text-primary/80 mt-0.5" />
-        </motion.div>
+        </motion.button>
       </div>
     </section>
   );
 };
-

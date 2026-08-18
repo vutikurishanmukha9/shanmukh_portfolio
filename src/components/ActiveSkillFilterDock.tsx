@@ -42,6 +42,7 @@ export const ActiveSkillFilterDock = () => {
             <div className="w-[0.5px] h-4 bg-border/80 mx-1" />
 
             <button
+              type="button"
               onClick={handleJumpToProjects}
               className="flex items-center gap-1 px-2.5 py-1 text-[11px] font-mono text-foreground hover:text-primary transition-colors"
             >
@@ -50,6 +51,7 @@ export const ActiveSkillFilterDock = () => {
             </button>
 
             <button
+              type="button"
               onClick={handleClear}
               aria-label="Clear skill filter"
               className="p-1 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"

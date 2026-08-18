@@ -1,15 +1,64 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { motion } from 'framer-motion';
-import { Sparkles, FileSpreadsheet, CheckCircle2, Split, Database, ArrowRight } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { FileSpreadsheet, CheckCircle2, Split } from 'lucide-react';
 
 interface DataDiffSliderProps {
   caseStudyId: 'unicorn' | 'adidas' | 'sales';
 }
 
+const diffData = {
+  unicorn: {
+    rawTitle: "RAW UNPROCESSED INPUT (CSV / WEBSCRAPE)",
+    rawSnippet: [
+      `"Company","Valuation ($B)","Date Joined","Country","City","Industry","Select Investors"`,
+      `"ByteDance","$140","4/7/2017","China","Beijing","Artificial intelligence","Sequoia Capital China, SIG Asia Investments..."`,
+      `"SpaceX","$100","12/1/2012","United States","Hawthorne","Other","Founders Fund, Draper Fisher Jurvetson..."`,
+      `"SHEIN","$100","7/3/2018","China","Shenzhen","E-commerce & direct-to-consumer","Tiger Global Management, Sequoia Capital..."`,
+      `"Stripe","$95","1/23/2014","United States","San Francisco","Fintech","Khosla Ventures, Lowercase Capital..."`,
+    ],
+    cleanTitle: "STAR-SCHEMA MODEL & DAX AGGREGATES",
+    cleanSnippet: [
+      `[DIM_COMPANY]: ID, Name, HQ_Region (North America / Asia / Europe)`,
+      `[FACT_FUNDING]: Total_Valuation = $3,711B | Capital_Raised = $591.8B`,
+      `[DAX_MEASURE]: Capital_Efficiency = DIVIDE([Total_Valuation], [Total_Funding], 0) => 6.27x`,
+      `[DAX_MEASURE]: Years_To_Unicorn = DATEDIFF(Joined_Date, Founded_Date, YEAR) => Avg 7.0 Yrs`,
+      `[INSIGHT]: 520 Unicorns (48.4%) formed during 2021 surge with 5x capital velocity`,
+    ],
+  },
+  adidas: {
+    rawTitle: "RAW TRANSACTION LOGS (15 UNSTRUCTURED COLS)",
+    rawSnippet: [
+      `Retailer,Retailer ID,Invoice Date,Region,State,City,Product,Price per Unit,Units Sold,Total Sales,Operating Profit`,
+      `Foot Locker,1185732,1/1/2020,Northeast,New York,New York,Men's Street Footwear,$50,1200,$600000,$300000`,
+      `Foot Locker,1185732,1/2/2020,Northeast,New York,New York,Men's Athletic Footwear,$50,1000,$500000,$150000`,
+      `Sports Direct,1197831,1/3/2020,South,Texas,Houston,Women's Apparel,$40,850,$340000,$136000`,
+    ],
+    cleanTitle: "EXECUTIVE PROFITABILITY & CHANNEL BI",
+    cleanSnippet: [
+      `[REVENUE]: Total $899.9M Gross Sales | $332.1M Net Operating Profit`,
+      `[MARGIN BREAKDOWN]: Online Channel (46.4% Margin) vs In-Store (35.6% Margin)`,
+      `[STATISTICAL ANOMALY]: Daily spikes > 2 Standard Deviations isolated via NumPy`,
+      `[REGIONAL BI]: West Region dominates at 30% Market Share with +294.2% YoY Growth`,
+    ],
+  },
+  sales: {
+    rawTitle: "RAW REGIONAL INVOICES (UNINDEXED CSV)",
+    rawSnippet: [
+      `InvoiceID,CustID,Region,ProductGroup,GrossAmt,DiscountPct,TaxAmt,NetTotal,ReturnFlag`,
+      `INV-8821,C-901,EMEA,Hardware,$12400.00,0.15,$1054.00,$11594.00,0`,
+      `INV-8822,C-402,APAC,Enterprise SaaS,$45000.00,0.05,$3825.00,$46575.00,0`,
+    ],
+    cleanTitle: "CLEANED ANALYTICS CUBE & RETENTION BI",
+    cleanSnippet: [
+      `[CUBE_METRICS]: Gross Revenue: $14.2M | Net Realized: $12.8M`,
+      `[RETENTION DAX]: Cohort NRR: 118% | Churn Probability: < 2.4%`,
+      `[DIMENSION HIERARCHY]: Enterprise Tier accounts for 68% of Net Expansion`,
+    ],
+  }
+} as const;
+
 export const DataDiffSlider: React.FC<DataDiffSliderProps> = ({ caseStudyId }) => {
   const [sliderPos, setSliderPos] = useState(50); // percentage 0 - 100
-  const [isDragging, setIsDragging] = useState(false);
+  const isDraggingRef = useRef(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleMove = useCallback((clientX: number) => {
@@ -25,59 +74,16 @@ export const DataDiffSlider: React.FC<DataDiffSliderProps> = ({ caseStudyId }) =
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (isDragging || e.buttons === 1) {
+    if (isDraggingRef.current || e.buttons === 1) {
       handleMove(e.clientX);
     }
   };
 
-  const diffData = {
-    unicorn: {
-      rawTitle: "RAW UNPROCESSED INPUT (CSV / WEBSCRAPE)",
-      rawSnippet: [
-        `"Company","Valuation ($B)","Date Joined","Country","City","Industry","Select Investors"`,
-        `"ByteDance","$140","4/7/2017","China","Beijing","Artificial intelligence","Sequoia Capital China, SIG Asia Investments..."`,
-        `"SpaceX","$100","12/1/2012","United States","Hawthorne","Other","Founders Fund, Draper Fisher Jurvetson..."`,
-        `"SHEIN","$100","7/3/2018","China","Shenzhen","E-commerce & direct-to-consumer","Tiger Global Management, Sequoia Capital..."`,
-        `"Stripe","$95","1/23/2014","United States","San Francisco","Fintech","Khosla Ventures, Lowercase Capital..."`,
-      ],
-      cleanTitle: "STAR-SCHEMA MODEL & DAX AGGREGATES",
-      cleanSnippet: [
-        `[DIM_COMPANY]: ID, Name, HQ_Region (North America / Asia / Europe)`,
-        `[FACT_FUNDING]: Total_Valuation = $3,711B | Capital_Raised = $591.8B`,
-        `[DAX_MEASURE]: Capital_Efficiency = DIVIDE([Total_Valuation], [Total_Funding], 0) => 6.27x`,
-        `[DAX_MEASURE]: Years_To_Unicorn = DATEDIFF(Joined_Date, Founded_Date, YEAR) => Avg 7.0 Yrs`,
-        `[INSIGHT]: 520 Unicorns (48.4%) formed during 2021 surge with 5x capital velocity`,
-      ],
-    },
-    adidas: {
-      rawTitle: "RAW TRANSACTION LOGS (15 UNSTRUCTURED COLS)",
-      rawSnippet: [
-        `Retailer,Retailer ID,Invoice Date,Region,State,City,Product,Price per Unit,Units Sold,Total Sales,Operating Profit`,
-        `Foot Locker,1185732,1/1/2020,Northeast,New York,New York,Men's Street Footwear,$50,1200,$600000,$300000`,
-        `Foot Locker,1185732,1/2/2020,Northeast,New York,New York,Men's Athletic Footwear,$50,1000,$500000,$150000`,
-        `Sports Direct,1197831,1/3/2020,South,Texas,Houston,Women's Apparel,$40,850,$340000,$136000`,
-      ],
-      cleanTitle: "EXECUTIVE PROFITABILITY & CHANNEL BI",
-      cleanSnippet: [
-        `[REVENUE]: Total $899.9M Gross Sales | $332.1M Net Operating Profit`,
-        `[MARGIN BREAKDOWN]: Online Channel (46.4% Margin) vs In-Store (35.6% Margin)`,
-        `[STATISTICAL ANOMALY]: Daily spikes > 2 Standard Deviations isolated via NumPy`,
-        `[REGIONAL BI]: West Region dominates at 30% Market Share with +294.2% YoY Growth`,
-      ],
-    },
-    sales: {
-      rawTitle: "RAW REGIONAL INVOICES (UNINDEXED CSV)",
-      rawSnippet: [
-        `InvoiceID,CustID,Region,ProductGroup,GrossAmt,DiscountPct,TaxAmt,NetTotal,ReturnFlag`,
-        `INV-8821,C-901,EMEA,Hardware,$12400.00,0.15,$1054.00,$11594.00,0`,
-        `INV-8822,C-402,APAC,Enterprise SaaS,$45000.00,0.05,$3825.00,$46575.00,0`,
-      ],
-      cleanTitle: "CLEANED ANALYTICS CUBE & RETENTION BI",
-      cleanSnippet: [
-        `[CUBE_METRICS]: Gross Revenue: $14.2M | Net Realized: $12.8M`,
-        `[RETENTION DAX]: Cohort NRR: 118% | Churn Probability: < 2.4%`,
-        `[DIMENSION HIERARCHY]: Enterprise Tier accounts for 68% of Net Expansion`,
-      ],
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowLeft') {
+      setSliderPos((prev) => Math.max(10, prev - 5));
+    } else if (e.key === 'ArrowRight') {
+      setSliderPos((prev) => Math.min(90, prev + 5));
     }
   };
 
@@ -99,11 +105,18 @@ export const DataDiffSlider: React.FC<DataDiffSliderProps> = ({ caseStudyId }) =
 
       <div
         ref={containerRef}
+        role="slider"
+        tabIndex={0}
+        aria-label="Data comparison slider"
+        aria-valuenow={Math.round(sliderPos)}
+        aria-valuemin={10}
+        aria-valuemax={90}
+        onKeyDown={handleKeyDown}
         onMouseMove={handleMouseMove}
         onTouchMove={handleTouchMove}
-        onMouseDown={() => setIsDragging(true)}
-        onMouseUp={() => setIsDragging(false)}
-        className="relative h-64 sm:h-56 w-full rounded-lg border-[0.5px] border-border/80 overflow-hidden bg-muted/20 font-mono text-[10px] sm:text-[11px] cursor-ew-resize shadow-none"
+        onMouseDown={() => { isDraggingRef.current = true; }}
+        onMouseUp={() => { isDraggingRef.current = false; }}
+        className="relative h-64 sm:h-56 w-full rounded-lg border-[0.5px] border-border/80 overflow-hidden bg-muted/20 font-mono text-[10px] sm:text-[11px] cursor-ew-resize shadow-none focus:outline-hidden focus:ring-1 focus:ring-primary"
       >
         {/* Right Side: Cleaned Transformed BI (Full Width Background) */}
         <div className="absolute inset-0 p-4 bg-primary/5 text-foreground flex flex-col justify-between overflow-hidden">
@@ -113,8 +126,8 @@ export const DataDiffSlider: React.FC<DataDiffSliderProps> = ({ caseStudyId }) =
               <span className="px-1.5 py-0.5 rounded bg-primary/15 text-primary text-[8px]">PROCESSED</span>
             </div>
             <div className="space-y-1.5 text-foreground/90 font-mono leading-relaxed">
-              {current.cleanSnippet.map((line, idx) => (
-                <div key={idx} className="flex items-start gap-2">
+              {current.cleanSnippet.map((line) => (
+                <div key={line} className="flex items-start gap-2">
                   <span className="text-primary font-bold">✓</span>
                   <span className="truncate">{line}</span>
                 </div>
@@ -138,8 +151,8 @@ export const DataDiffSlider: React.FC<DataDiffSliderProps> = ({ caseStudyId }) =
               <span className="px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-600 text-[8px]">RAW CSV</span>
             </div>
             <div className="space-y-1 text-muted-foreground/80 font-mono text-[9px] leading-relaxed overflow-x-hidden">
-              {current.rawSnippet.map((line, idx) => (
-                <div key={idx} className="truncate opacity-75 font-mono">
+              {current.rawSnippet.map((line) => (
+                <div key={line} className="truncate opacity-75 font-mono">
                   {line}
                 </div>
               ))}

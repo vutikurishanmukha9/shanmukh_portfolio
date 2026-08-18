@@ -53,34 +53,34 @@ const ContactCard = ({ contact }: { contact: { icon: LucideIcon; label: string; 
   );
 };
 
+const contactInfo = [
+  {
+    icon: Mail,
+    label: 'Email',
+    value: 'vutikurishanmukh17@gmail.com',
+    href: 'mailto:vutikurishanmukh17@gmail.com',
+  },
+];
+
+const socialLinks = [
+  {
+    name: 'GitHub',
+    url: 'https://github.com/vutikurishanmukha9',
+    icon: Github,
+  },
+  {
+    name: 'LinkedIn',
+    url: 'https://linkedin.com/in/shanmukha-vutikuri',
+    icon: Linkedin,
+  },
+  {
+    name: 'LeetCode',
+    url: 'https://leetcode.com/u/vutikurishanmukh9/',
+    icon: ExternalLink,
+  },
+];
+
 export const ContactSection = () => {
-  const contactInfo = [
-    {
-      icon: Mail,
-      label: 'Email',
-      value: 'vutikurishanmukh17@gmail.com',
-      href: 'mailto:vutikurishanmukh17@gmail.com',
-    },
-  ];
-
-  const socialLinks = [
-    {
-      name: 'GitHub',
-      url: 'https://github.com/vutikurishanmukha9',
-      icon: Github,
-    },
-    {
-      name: 'LinkedIn',
-      url: 'https://linkedin.com/in/shanmukha-vutikuri',
-      icon: Linkedin,
-    },
-    {
-      name: 'LeetCode',
-      url: 'https://leetcode.com/u/vutikurishanmukh9/',
-      icon: ExternalLink,
-    },
-  ];
-
   return (
     <SectionWrapper id="contact" className="py-16 bg-background border-t-[0.5px] border-border/40">
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
@@ -126,7 +126,7 @@ export const ContactSection = () => {
           >
             <div className="relative border-[0.5px] border-border/80 bg-card/60 backdrop-blur-md rounded-xl p-6 md:p-8 shadow-none h-full flex flex-col justify-between overflow-hidden group">
               {/* Apple / VisionOS Specular Top Highlight Ray */}
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent transition-all duration-500 group-hover:via-primary/80 group-hover:h-[1.5px] z-20" />
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent transition-opacity duration-500 group-hover:via-primary/80 group-hover:h-[1.5px] z-20" />
 
               {/* Ambient Directional Light Bloom */}
               <div className="pointer-events-none absolute -top-14 left-1/2 -translate-x-1/2 w-3/4 h-14 bg-gradient-to-b from-primary/15 via-primary/5 to-transparent blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
@@ -140,8 +140,8 @@ export const ContactSection = () => {
 
                 {/* Contact Details */}
                 <div className="space-y-3 mb-8">
-                  {contactInfo.map((contact, index) => (
-                    <ContactCard key={index} contact={contact} />
+                  {contactInfo.map((contact) => (
+                    <ContactCard key={contact.platform} contact={contact} />
                   ))}
                 </div>
               </div>
@@ -182,7 +182,7 @@ export const ContactSection = () => {
           >
             <div className="relative border-[0.5px] border-border/80 bg-card/60 backdrop-blur-md rounded-xl p-6 md:p-8 shadow-none h-full overflow-hidden group"> 
                 {/* Apple / VisionOS Specular Top Highlight Ray */}
-                <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent transition-all duration-500 group-hover:via-primary/80 group-hover:h-[1.5px] z-20" />
+                <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent transition-opacity duration-500 group-hover:via-primary/80 group-hover:h-[1.5px] z-20" />
 
                 {/* Ambient Directional Light Bloom */}
                 <div className="pointer-events-none absolute -top-14 left-1/2 -translate-x-1/2 w-3/4 h-14 bg-gradient-to-b from-primary/15 via-primary/5 to-transparent blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
