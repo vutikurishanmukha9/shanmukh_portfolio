@@ -8,8 +8,8 @@ const ALEX_BRUSH = fontPaths.alexBrush;
 // Optimized viewBox with safe padding for flourish sweep
 const SIGNATURE_VIEWBOX = "-28 15 1185 180";
 
-// Automated periodic replay interval (120 seconds = 2 minutes)
-const AUTO_REPLAY_INTERVAL_MS = 120_000;
+// Automated periodic replay interval (60 seconds = 1 minute)
+const AUTO_REPLAY_INTERVAL_MS = 60_000;
 
 // Continuous, overlapping timing curves for seamless 60/120fps motion
 const ANIMATION_TIMING = {
@@ -30,8 +30,8 @@ export const SignatureSignoff: React.FC = () => {
   const shouldAnimate = shouldReduceMotion || isInView;
 
   /* ─────────────────────────────────────────────────────────────
-   * Automated 120-Second Signature Replay Cycle
-   * Automatically redraws the signature every 120 seconds
+   * Automated 60-Second Signature Replay Cycle
+   * Automatically redraws the signature every 60 seconds
    * when the signature is visible in viewport.
    * ────────────────────────────────────────────────────────── */
   useEffect(() => {
@@ -70,7 +70,7 @@ export const SignatureSignoff: React.FC = () => {
 
           <div className="inline-flex items-center gap-1.5 text-[9.5px] sm:text-[10px] font-mono text-muted-foreground/80 bg-background/50 border-[0.5px] border-border/60 px-2.5 py-1 rounded-full">
             <Timer className="w-3 h-3 text-primary inline" />
-            <span>AUTO-CYCLE // 120s</span>
+            <span>AUTO-CYCLE // 60s</span>
           </div>
         </div>
 
