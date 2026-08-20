@@ -22,6 +22,7 @@ export default {
       fontFamily: {
         sans: ['var(--font-primary)'],
         display: ['var(--font-display)'],
+        signature: ['var(--font-signature)', 'Caveat', 'cursive'],
       },
       colors: {
         border: "hsl(var(--border))",

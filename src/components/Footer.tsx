@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Github, Linkedin, Mail, ExternalLink, ArrowUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { SignatureSignoff } from '@/components/ui/SignatureSignoff';
 
 const quickLinks = [
   { label: 'Home', href: '#home' },
@@ -69,6 +70,9 @@ export const Footer = () => {
   return (
     <footer className="relative bg-muted/30 border-t-[0.5px] border-border mt-20">
       <div className="container mx-auto px-4 lg:px-8 py-16">
+        {/* Author Signature & Authentication Signoff */}
+        <SignatureSignoff />
+
         <div className="grid md:grid-cols-3 gap-12 md:gap-8 mb-12">
           {/* Brand */}
           <div className="space-y-4">
