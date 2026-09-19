@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Terminal, CheckCircle2, Zap, Brain, Layers, Cpu } from 'lucide-react';
+import { ArrowLeft, Terminal, CheckCircle2, Brain, Layers, Cpu } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 
 const commands = [
@@ -18,7 +18,7 @@ const commands = [
   {
     cmd: 'contextly discover',
     desc: 'Runs the Pattern Discovery Engine. Statically analyzes the codebase using heuristics to identify unwritten team conventions.',
-    icon: Zap,
+    icon: Cpu,
   },
   {
     cmd: 'contextly learn --auto',

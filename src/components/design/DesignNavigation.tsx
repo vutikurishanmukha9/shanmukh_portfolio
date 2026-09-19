@@ -12,8 +12,7 @@ import {
   Sliders, 
   Compass, 
   Cpu, 
-  Layers,
-  Sparkles
+  Layers
 } from 'lucide-react';
 import { SoundToggle } from '@/components/SoundToggle';
 import { useSound } from '@/hooks/useSound';
@@ -286,7 +285,7 @@ export const DesignNavigation: React.FC = () => {
             {/* Top Sheet Telemetry */}
             <div className="flex items-center justify-between pb-3 border-b border-white/10 text-xs text-white/50 font-medium">
               <span className="flex items-center gap-1.5 text-white/70">
-                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                <span className="w-2 h-2 rounded-full bg-amber-400" />
                 <span>Navigation & Sections</span>
               </span>
               <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">

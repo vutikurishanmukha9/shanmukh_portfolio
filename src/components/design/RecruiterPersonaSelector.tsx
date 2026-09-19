@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Briefcase, 
   Layers, 
-  Sparkles, 
   Cpu, 
   TrendingUp, 
   CheckCircle2, 

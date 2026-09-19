@@ -8,7 +8,7 @@ import {
   Download,
   Maximize2,
   Cpu,
-  Zap,
+  Activity,
   Radio,
   Layers,
   Database,
@@ -60,7 +60,7 @@ const hotspots: Hotspot[] = [
     ],
     x: 39,
     y: 74,
-    icon: Zap,
+    icon: Activity,
   },
   {
     id: 'sensors',

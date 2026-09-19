@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Zap, Radio, Cpu, Layers, FileText } from 'lucide-react';
+import { Activity, Radio, Cpu, Layers, FileText } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface Node {
@@ -41,7 +41,7 @@ const nodes: Node[] = [
     category: 'Circuit Architecture',
     x: 80,
     y: 26,
-    icon: Zap,
+    icon: Activity,
     description: 'Auto-tuning LC network topologies compensating for varying coupling coefficients under spatial displacement.',
     metric: 'Eff: 88.4% Peak',
   },

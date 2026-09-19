@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, CheckCircle2, ShieldCheck, Layers, Terminal, Activity, Box, Sparkles } from 'lucide-react';
+import { ArrowRight, CheckCircle2, ShieldCheck, Layers, Terminal, Activity, Box } from 'lucide-react';
 import { useSound } from '@/hooks/useSound';
 import FluidOrb from '@/components/ui/fluid-orb';
 import { DesignWorkstationCanvas } from './DesignWorkstationCanvas';
@@ -89,7 +89,7 @@ export const ProductHero: React.FC = () => {
             {/* Interactive Ambient Fluid Orb Shader Palette Switcher */}
             <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-[#111218]/90 border border-white/10 text-[10px] font-mono text-white/70">
               <span className="flex items-center gap-1 text-white/50 uppercase tracking-widest text-[9.5px]">
-                <Sparkles className="w-2.5 h-2.5 text-cyan-400" />
+                <Box className="w-2.5 h-2.5 text-cyan-400" />
                 <span>FLUID ORB</span>
               </span>
               <div className="flex items-center gap-1.5 pl-1.5 border-l border-white/10">

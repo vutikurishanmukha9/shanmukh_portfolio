@@ -179,70 +179,76 @@ export const DesignSystemStash: React.FC = () => {
   const currentComp = STASH_COMPONENTS.find((c) => c.id === selectedCompId) || filteredComponents[0] || STASH_COMPONENTS[0];
 
   return (
-    <section id="design-stash" className="relative scroll-mt-32 pt-8 sm:pt-12 pb-12 sm:pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto select-none">
+    <section id="design-stash" className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-6 sm:py-10 select-none scroll-mt-24">
       
-      {/* Ambient Emerald Radial Glow Highlight */}
-      <div className="pointer-events-none absolute -top-24 inset-x-0 flex items-center justify-center overflow-hidden z-0">
-        <div className="w-[1000px] h-[400px] bg-gradient-to-b from-emerald-500/15 via-teal-500/5 to-transparent blur-3xl rounded-full opacity-75" />
-      </div>
-
       {/* Section Header */}
-      <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 border-b border-white/10 pb-6">
-        <div className="space-y-2">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[10.5px] font-mono tracking-widest text-emerald-300 uppercase shadow-[0_0_16px_rgba(52,211,153,0.15)] tabular-nums">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
-            <Code2 className="w-3.5 h-3.5 text-emerald-400" />
-            <span>FREE &amp; OPEN SOURCE // {STASH_COMPONENTS.length} READY-TO-USE COMPONENTS</span>
+      <div className="flex flex-wrap items-end justify-between border-b-3 border-[#0A0A0A] pb-4 mb-6 sm:mb-8 gap-4">
+        <div className="space-y-1">
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 bg-[#FFD84D] border border-[#0A0A0A]" />
+            <span className="font-mono text-xs font-bold tracking-widest uppercase text-[#0A0A0A]">
+              04 / COMPONENT ARSENAL // {STASH_COMPONENTS.length}+ READY-TO-USE PIECES
+            </span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-jakarta font-semibold tracking-[-0.03em] text-[#f7f8f8]">
-            Component <span className="font-instrument italic font-normal tracking-normal text-white/95">Library</span> &amp; Systems Stash
+          <h2 className="font-['Space_Grotesk'] text-4xl sm:text-6xl font-black text-[#0A0A0A] uppercase tracking-tight">
+            COMPONENT STASH
           </h2>
         </div>
 
-        <p className="text-xs sm:text-sm text-white/60 max-w-lg leading-relaxed font-sans">
-          A free collection of <span className="font-mono tabular-nums text-white/80">{STASH_COMPONENTS.length}</span> interactive React components, animated effects, and design tokens. Test them live, view the code, and copy them directly into your project.
-        </p>
+        <div className="flex items-center gap-3">
+          <div className="hidden sm:block text-right">
+            <span className="font-mono text-[10px] font-bold text-[#0A0A0A]/60 block uppercase">
+              LIVING REPOSITORY
+            </span>
+            <span className="font-['Space_Grotesk'] font-bold text-sm text-[#0A0A0A] uppercase">
+              RARE UI · SHADERS · TOKENS
+            </span>
+          </div>
+          <span className="px-3 py-1 bg-[#FFD84D] border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] font-mono text-xs font-bold uppercase text-[#0A0A0A]">
+            {STASH_COMPONENTS.length} ITEMS LIVE
+          </span>
+        </div>
       </div>
 
       {/* Main Mode Navigation Tabs (Components | Tokens & Variables | Tech Stack & Tools) */}
-      <div className="relative z-10 flex items-center gap-2 mb-6 overflow-x-auto no-scrollbar pb-1">
+      <div className="flex items-center gap-2 mb-6 overflow-x-auto no-scrollbar pb-1">
         <button
           type="button"
           onClick={() => switchTab('components')}
-          className={`px-4 py-2 rounded-xl text-xs font-mono transition-all duration-200 cursor-pointer border flex items-center gap-2 shrink-0 ${
+          className={`px-4 py-2 text-xs font-mono font-bold uppercase border-2 transition-all cursor-pointer flex items-center gap-2 shrink-0 ${
             activeTab === 'components'
-              ? 'bg-white text-black border-white font-semibold shadow-sm'
-              : 'bg-white/[0.03] hover:bg-white/[0.07] text-white/70 hover:text-white border-white/10'
+              ? 'bg-[#FFD84D] text-[#0A0A0A] border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A]'
+              : 'bg-[#FFFFFF] text-[#0A0A0A] border-[#0A0A0A]/40 hover:border-[#0A0A0A]'
           }`}
         >
           <Box className="w-3.5 h-3.5" />
-          <span>Components <span className="tabular-nums">({STASH_COMPONENTS.length})</span></span>
+          <span>COMPONENTS ({STASH_COMPONENTS.length})</span>
         </button>
 
         <button
           type="button"
           onClick={() => switchTab('tokens')}
-          className={`px-4 py-2 rounded-xl text-xs font-mono transition-all duration-200 cursor-pointer border flex items-center gap-2 shrink-0 ${
+          className={`px-4 py-2 text-xs font-mono font-bold uppercase border-2 transition-all cursor-pointer flex items-center gap-2 shrink-0 ${
             activeTab === 'tokens'
-              ? 'bg-white text-black border-white font-semibold shadow-sm'
-              : 'bg-white/[0.03] hover:bg-white/[0.07] text-white/70 hover:text-white border-white/10'
+              ? 'bg-[#FFD84D] text-[#0A0A0A] border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A]'
+              : 'bg-[#FFFFFF] text-[#0A0A0A] border-[#0A0A0A]/40 hover:border-[#0A0A0A]'
           }`}
         >
           <Palette className="w-3.5 h-3.5" />
-          <span>Design Tokens &amp; Variables</span>
+          <span>TOKENS &amp; VARIABLES</span>
         </button>
 
         <button
           type="button"
           onClick={() => switchTab('stack')}
-          className={`px-4 py-2 rounded-xl text-xs font-mono transition-all duration-200 cursor-pointer border flex items-center gap-2 shrink-0 ${
+          className={`px-4 py-2 text-xs font-mono font-bold uppercase border-2 transition-all cursor-pointer flex items-center gap-2 shrink-0 ${
             activeTab === 'stack'
-              ? 'bg-white text-black border-white font-semibold shadow-sm'
-              : 'bg-white/[0.03] hover:bg-white/[0.07] text-white/70 hover:text-white border-white/10'
+              ? 'bg-[#FFD84D] text-[#0A0A0A] border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A]'
+              : 'bg-[#FFFFFF] text-[#0A0A0A] border-[#0A0A0A]/40 hover:border-[#0A0A0A]'
           }`}
         >
           <Layers className="w-3.5 h-3.5" />
-          <span>Tech Stack &amp; Tools</span>
+          <span>TECH STACK &amp; TOOLS</span>
         </button>
       </div>
 
@@ -253,19 +259,19 @@ export const DesignSystemStash: React.FC = () => {
         <div className="space-y-4">
           
           {/* Subcategory Filter Pills & Live Search Bar */}
-          <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
+          <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 bg-[#FFFFFF] border-2 border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] p-2 sm:p-3">
             <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1 text-xs font-mono">
               {[
-                { key: 'all', label: `All (${STASH_COMPONENTS.length})` },
-                { key: 'Rare UI & Shaders', label: `Rare UI & Shaders (${STASH_COMPONENTS.filter(c => c.category === 'Rare UI & Shaders').length})` },
-                { key: 'React Bits & Creative', label: `Animations & Effects (${STASH_COMPONENTS.filter(c => c.category === 'React Bits & Creative').length})` },
-                { key: 'Surfaces & Cards', label: `Cards & Surfaces (${STASH_COMPONENTS.filter(c => c.category === 'Surfaces & Cards').length})` },
-                { key: 'Controls & Navigation', label: `Buttons & Nav (${STASH_COMPONENTS.filter(c => c.category === 'Controls & Navigation').length})` },
-                { key: 'Haptics & Motion', label: `Interactive Motion (${STASH_COMPONENTS.filter(c => c.category === 'Haptics & Motion').length})` },
-                { key: 'Data & Telemetry', label: `Stats & Counters (${STASH_COMPONENTS.filter(c => c.category === 'Data & Telemetry').length})` },
-                { key: 'Feedback & Overlays', label: `Modals & Popups (${STASH_COMPONENTS.filter(c => c.category === 'Feedback & Overlays').length})` },
-                { key: 'Developer & System Tools', label: `Developer Tools (${STASH_COMPONENTS.filter(c => c.category === 'Developer & System Tools').length})` },
-                { key: 'Hooks & Utilities', label: `React Hooks (${STASH_COMPONENTS.filter(c => c.category === 'Hooks & Utilities').length})` },
+                { key: 'all', label: `ALL (${STASH_COMPONENTS.length})` },
+                { key: 'Rare UI & Shaders', label: `RARE UI & SHADERS (${STASH_COMPONENTS.filter(c => c.category === 'Rare UI & Shaders').length})` },
+                { key: 'React Bits & Creative', label: `EFFECTS (${STASH_COMPONENTS.filter(c => c.category === 'React Bits & Creative').length})` },
+                { key: 'Surfaces & Cards', label: `CARDS (${STASH_COMPONENTS.filter(c => c.category === 'Surfaces & Cards').length})` },
+                { key: 'Controls & Navigation', label: `BUTTONS & NAV (${STASH_COMPONENTS.filter(c => c.category === 'Controls & Navigation').length})` },
+                { key: 'Haptics & Motion', label: `MOTION (${STASH_COMPONENTS.filter(c => c.category === 'Haptics & Motion').length})` },
+                { key: 'Data & Telemetry', label: `DATA & TELEMETRY (${STASH_COMPONENTS.filter(c => c.category === 'Data & Telemetry').length})` },
+                { key: 'Feedback & Overlays', label: `OVERLAYS (${STASH_COMPONENTS.filter(c => c.category === 'Feedback & Overlays').length})` },
+                { key: 'Developer & System Tools', label: `DEV TOOLS (${STASH_COMPONENTS.filter(c => c.category === 'Developer & System Tools').length})` },
+                { key: 'Hooks & Utilities', label: `HOOKS (${STASH_COMPONENTS.filter(c => c.category === 'Hooks & Utilities').length})` },
               ].map(f => (
                 <button
                   key={f.key}
@@ -278,10 +284,10 @@ export const DesignSystemStash: React.FC = () => {
                       if (firstInCat) setSelectedCompId(firstInCat.id);
                     }
                   }}
-                  className={`px-3 py-1 rounded-lg border transition-colors cursor-pointer shrink-0 ${
+                  className={`px-2.5 py-1 font-mono text-[11px] font-bold uppercase border-2 transition-all cursor-pointer shrink-0 ${
                     activeCategoryFilter === f.key
-                      ? 'bg-white/15 text-white border-white/30 font-medium'
-                      : 'bg-white/[0.02] text-white/50 hover:text-white border-white/5'
+                      ? 'bg-[#0A0A0A] text-[#E3E6E8] border-[#0A0A0A] shadow-[1px_1px_0px_#0A0A0A]'
+                      : 'bg-[#FFFFFF] text-[#0A0A0A] border-[#0A0A0A]/30 hover:border-[#0A0A0A]'
                   }`}
                 >
                   {f.label}
@@ -290,20 +296,20 @@ export const DesignSystemStash: React.FC = () => {
             </div>
 
             {/* Quick Search inside Stash */}
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-black/50 border border-white/10 text-xs font-mono w-full lg:w-64 shrink-0">
-              <Search className="w-3.5 h-3.5 text-white/40" />
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-[#FFFFFF] border-2 border-[#0A0A0A] text-xs font-mono w-full lg:w-72 shrink-0">
+              <Search className="w-3.5 h-3.5 text-[#0A0A0A]/60" />
               <input
                 type="text"
                 value={componentSearchQuery}
                 onChange={(e) => setComponentSearchQuery(e.target.value)}
-                placeholder={`Search ${STASH_COMPONENTS.length} components...`}
-                className="bg-transparent text-white placeholder:text-white/30 focus:outline-none w-full text-xs font-mono"
+                placeholder={`SEARCH ${STASH_COMPONENTS.length} COMPONENTS...`}
+                className="bg-transparent text-[#0A0A0A] placeholder:text-[#0A0A0A]/40 focus:outline-none w-full text-xs font-mono font-bold uppercase"
               />
               {componentSearchQuery && (
                 <button 
                   type="button" 
                   onClick={() => setComponentSearchQuery('')}
-                  className="text-white/40 hover:text-white text-[10px]"
+                  className="text-[#0A0A0A]/60 hover:text-[#0A0A0A] text-xs font-bold cursor-pointer"
                 >
                   ✕
                 </button>
@@ -315,10 +321,10 @@ export const DesignSystemStash: React.FC = () => {
           <div className="grid lg:grid-cols-12 gap-5 items-start">
             
             {/* Left: Component List Selector */}
-            <div className="lg:col-span-5 space-y-2 max-h-[680px] overflow-y-auto pr-1">
+            <div className="lg:col-span-5 space-y-2 max-h-[720px] overflow-y-auto pr-1">
               {filteredComponents.length === 0 ? (
-                <div className="p-8 rounded-xl border border-white/5 text-center font-mono text-xs text-white/40">
-                  No components match "{componentSearchQuery}"
+                <div className="p-8 bg-[#FFFFFF] border-2 border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] text-center font-mono text-xs text-[#0A0A0A]/60 uppercase font-bold">
+                  NO COMPONENTS MATCH "{componentSearchQuery}"
                 </div>
               ) : (
                 filteredComponents.map((comp) => {
@@ -331,26 +337,31 @@ export const DesignSystemStash: React.FC = () => {
                         playClick(900, 0.02, 'triangle');
                         setSelectedCompId(comp.id);
                       }}
-                      className={`p-3 rounded-xl border transition-all duration-150 cursor-pointer text-left flex items-start justify-between gap-3 ${
+                      className={`p-3 border-2 border-[#0A0A0A] transition-all duration-150 cursor-pointer text-left flex items-start justify-between gap-3 ${
                         isSelected
-                          ? 'bg-white/10 border-white/30 shadow-md'
-                          : 'bg-white/[0.02] hover:bg-white/[0.05] border-white/5 text-white/70 hover:text-white'
+                          ? 'bg-[#FFD84D] shadow-[4px_4px_0px_#0A0A0A] translate-x-1'
+                          : 'bg-[#FFFFFF] hover:bg-[#F3F4F6] shadow-[2px_2px_0px_#0A0A0A]'
                       }`}
                     >
                       <div className="flex items-start gap-3">
-                        <div className={`p-2 rounded-lg ${isSelected ? 'bg-white text-black' : 'bg-white/5 text-white/80'}`}>
+                        <div className={`p-2 border border-[#0A0A0A] shrink-0 ${isSelected ? 'bg-[#0A0A0A] text-[#FFD84D]' : 'bg-[#E3E6E8] text-[#0A0A0A]'}`}>
                           <IconComponent className="w-4 h-4" />
                         </div>
-                        <div className="space-y-0.5">
-                          <span className="text-xs font-medium text-white tracking-tight block">
+                        <div className="space-y-0.5 min-w-0">
+                          <div className="flex items-center gap-1.5 flex-wrap">
+                            <span className="text-[9px] font-mono font-bold uppercase text-[#0A0A0A]/60">
+                              [{comp.category}]
+                            </span>
+                          </div>
+                          <span className="font-['Space_Grotesk'] font-bold text-xs uppercase text-[#0A0A0A] block truncate">
                             {comp.name}
                           </span>
-                          <p className="text-[11px] text-white/50 line-clamp-1 font-sans">
+                          <p className="text-[11px] font-mono text-[#0A0A0A]/70 line-clamp-1">
                             {comp.description}
                           </p>
                         </div>
                       </div>
-                      <ChevronRight className={`w-3.5 h-3.5 mt-1 shrink-0 ${isSelected ? 'text-white' : 'text-white/20'}`} />
+                      <ChevronRight className={`w-3.5 h-3.5 mt-2 shrink-0 ${isSelected ? 'text-[#0A0A0A]' : 'text-[#0A0A0A]/30'}`} />
                     </div>
                   );
                 })
@@ -359,34 +370,36 @@ export const DesignSystemStash: React.FC = () => {
 
             {/* Right: Component Preview & Code Copier */}
             <div className="lg:col-span-7">
-              <div className="rounded-2xl bg-[#0c0d12] border border-white/10 p-5 sm:p-7 space-y-5 shadow-2xl">
+              <div className="bg-[#FFFFFF] border-3 border-[#0A0A0A] shadow-[6px_6px_0px_#0A0A0A] sm:shadow-[8px_8px_0px_#0A0A0A] p-4 sm:p-6 space-y-4">
                 
                 {/* Header & Controls */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-white/10">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b-2 border-[#0A0A0A]">
                   <div className="space-y-0.5">
-                    <span className="text-[10px] font-mono tracking-widest text-amber-400 uppercase">
-                      {currentComp.category}
+                    <span className="text-[10px] font-mono font-bold tracking-widest text-[#0A0A0A]/60 uppercase block">
+                      [{currentComp.category}]
                     </span>
-                    <h3 className="text-lg font-jakarta font-semibold tracking-tight text-white">
+                    <h3 className="font-['Space_Grotesk'] text-xl sm:text-2xl font-black uppercase text-[#0A0A0A] tracking-tight">
                       {currentComp.name}
                     </h3>
                   </div>
 
                   <div className="flex flex-wrap items-center gap-2">
                     {/* Preview / Code Toggle */}
-                    <div className="flex items-center gap-1 bg-black/60 p-0.5 rounded-lg border border-white/10 text-xs font-mono">
+                    <div className="flex items-center gap-1 bg-[#E3E6E8] p-1 border-2 border-[#0A0A0A]">
                       <button
                         type="button"
                         onClick={() => {
                           playClick(750, 0.02, 'sine');
                           setViewMode('preview');
                         }}
-                        className={`px-3 py-1 rounded-md transition-colors cursor-pointer flex items-center gap-1.5 ${
-                          viewMode === 'preview' ? 'bg-white text-black font-semibold' : 'text-white/60 hover:text-white'
+                        className={`px-2.5 py-1 text-xs font-mono font-bold uppercase border transition-all cursor-pointer flex items-center gap-1.5 ${
+                          viewMode === 'preview'
+                            ? 'bg-[#FFD84D] text-[#0A0A0A] border-[#0A0A0A] shadow-[1px_1px_0px_#0A0A0A]'
+                            : 'bg-transparent text-[#0A0A0A]/70 border-transparent hover:text-[#0A0A0A]'
                         }`}
                       >
-                        <Eye className="w-3 h-3" />
-                        <span>Preview</span>
+                        <Eye className="w-3.5 h-3.5" />
+                        <span>PREVIEW</span>
                       </button>
 
                       <button
@@ -395,12 +408,14 @@ export const DesignSystemStash: React.FC = () => {
                           playClick(850, 0.02, 'sine');
                           setViewMode('code');
                         }}
-                        className={`px-3 py-1 rounded-md transition-colors cursor-pointer flex items-center gap-1.5 ${
-                          viewMode === 'code' ? 'bg-white text-black font-semibold' : 'text-white/60 hover:text-white'
+                        className={`px-2.5 py-1 text-xs font-mono font-bold uppercase border transition-all cursor-pointer flex items-center gap-1.5 ${
+                          viewMode === 'code'
+                            ? 'bg-[#FFD84D] text-[#0A0A0A] border-[#0A0A0A] shadow-[1px_1px_0px_#0A0A0A]'
+                            : 'bg-transparent text-[#0A0A0A]/70 border-transparent hover:text-[#0A0A0A]'
                         }`}
                       >
-                        <Code2 className="w-3 h-3" />
-                        <span>TSX Code</span>
+                        <Code2 className="w-3.5 h-3.5" />
+                        <span>CODE</span>
                       </button>
                     </div>
 
@@ -414,18 +429,18 @@ export const DesignSystemStash: React.FC = () => {
                           setCopiedCli(true);
                           setTimeout(() => setCopiedCli(false), 2000);
                         }}
-                        className="px-3.5 py-1.5 rounded-lg bg-amber-400/10 hover:bg-amber-400/20 text-amber-300 border border-amber-400/30 font-mono text-xs transition-colors cursor-pointer flex items-center gap-1.5"
+                        className="px-3 py-1.5 bg-[#FFFFFF] hover:bg-[#FFD84D] text-[#0A0A0A] border-2 border-[#0A0A0A] font-mono text-xs font-bold uppercase shadow-[2px_2px_0px_#0A0A0A] transition-all cursor-pointer flex items-center gap-1.5"
                         title="Copy npx shadcn CLI install command"
                       >
                         {copiedCli ? (
                           <>
-                            <Check className="w-3.5 h-3.5 text-amber-300" />
-                            <span className="font-semibold">CLI Copied!</span>
+                            <Check className="w-3.5 h-3.5 text-[#0A0A0A]" />
+                            <span>COPIED!</span>
                           </>
                         ) : (
                           <>
                             <Terminal className="w-3.5 h-3.5" />
-                            <span>shadcn CLI</span>
+                            <span>CLI</span>
                           </>
                         )}
                       </button>
@@ -435,17 +450,17 @@ export const DesignSystemStash: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => handleCopyCode(currentComp.id, currentComp.codeSnippet)}
-                      className="px-3.5 py-1.5 rounded-lg bg-white/10 hover:bg-white text-white hover:text-black font-mono text-xs transition-colors cursor-pointer flex items-center gap-1.5"
+                      className="px-3 py-1.5 bg-[#0A0A0A] text-[#E3E6E8] hover:bg-[#FFD84D] hover:text-[#0A0A0A] border-2 border-[#0A0A0A] font-mono text-xs font-bold uppercase shadow-[2px_2px_0px_#0A0A0A] transition-all cursor-pointer flex items-center gap-1.5"
                     >
                       {copiedId === currentComp.id ? (
                         <>
-                          <Check className="w-3.5 h-3.5 text-emerald-400" />
-                          <span className="text-emerald-400 font-semibold">Copied!</span>
+                          <Check className="w-3.5 h-3.5 text-[#63D6A0]" />
+                          <span>COPIED!</span>
                         </>
                       ) : (
                         <>
                           <Copy className="w-3.5 h-3.5" />
-                          <span>Copy TSX</span>
+                          <span>COPY TSX</span>
                         </>
                       )}
                     </button>
@@ -453,17 +468,17 @@ export const DesignSystemStash: React.FC = () => {
                 </div>
 
                 {/* Description */}
-                <p className="text-xs sm:text-sm text-white/70 leading-relaxed font-sans">
+                <p className="text-xs sm:text-sm text-[#0A0A0A]/80 font-mono leading-relaxed">
                   {currentComp.description}
                 </p>
 
                 {/* shadcn CLI installation affordance */}
                 {currentComp.shadcnCommand && (
-                  <div className="flex items-center justify-between gap-3 px-3.5 py-2 rounded-xl bg-black/70 border border-amber-400/20 text-xs font-mono">
-                    <div className="flex items-center gap-2 text-amber-300/90 overflow-x-auto no-scrollbar">
-                      <Terminal className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                      <span className="text-white/40 shrink-0">$</span>
-                      <code className="select-text whitespace-nowrap">{currentComp.shadcnCommand}</code>
+                  <div className="flex items-center justify-between gap-3 px-3.5 py-2 bg-[#0A0A0A] text-[#E3E6E8] border-2 border-[#0A0A0A] text-xs font-mono">
+                    <div className="flex items-center gap-2 text-[#FFD84D] overflow-x-auto no-scrollbar">
+                      <Terminal className="w-3.5 h-3.5 text-[#FFD84D] shrink-0" />
+                      <span className="text-[#E3E6E8]/40 shrink-0">$</span>
+                      <code className="select-text whitespace-nowrap text-[#E3E6E8]">{currentComp.shadcnCommand}</code>
                     </div>
                     <button
                       type="button"
@@ -473,21 +488,21 @@ export const DesignSystemStash: React.FC = () => {
                         setCopiedCli(true);
                         setTimeout(() => setCopiedCli(false), 2000);
                       }}
-                      className="px-2.5 py-1 rounded-lg bg-amber-400/10 hover:bg-amber-400/20 text-amber-300 text-[10px] font-mono shrink-0 transition-colors cursor-pointer"
+                      className="px-2 py-0.5 bg-[#FFD84D] text-[#0A0A0A] hover:bg-[#F7CE38] text-[10px] font-mono font-bold uppercase shrink-0 transition-colors cursor-pointer border border-[#0A0A0A]"
                     >
-                      {copiedCli ? 'Copied' : 'Copy'}
+                      {copiedCli ? 'COPIED' : 'COPY'}
                     </button>
                   </div>
                 )}
 
                 {/* Active Stage (Preview or Code) */}
-                <div className="rounded-xl overflow-hidden border border-white/10 bg-[#07080b]">
+                <div className="border-2 border-[#0A0A0A] bg-[#0A0A0A] overflow-hidden shadow-[inset_0_2px_8px_rgba(0,0,0,0.5)]">
                   {viewMode === 'preview' ? (
-                    <div className="p-6 sm:p-8 flex items-center justify-center min-h-[260px]">
+                    <div className="p-4 sm:p-6 flex items-center justify-center min-h-[280px]">
                       {currentComp.previewComponent}
                     </div>
                   ) : (
-                    <div className="p-4 overflow-x-auto max-h-[400px] text-[11px] font-mono leading-relaxed text-white/80 select-text">
+                    <div className="p-4 overflow-x-auto max-h-[420px] text-[11px] font-mono leading-relaxed text-[#E3E6E8] select-text">
                       <pre>
                         <code>{currentComp.codeSnippet}</code>
                       </pre>
@@ -496,9 +511,9 @@ export const DesignSystemStash: React.FC = () => {
                 </div>
 
                 {/* Bottom Spec Tip */}
-                <div className="flex items-center justify-between text-[10.5px] font-mono text-white/40 pt-1">
-                  <span>DEPENDENCY: REACT 19 + TAILWIND CSS</span>
-                  <span className="text-emerald-400">100% PRODUCTION TESTED</span>
+                <div className="flex flex-wrap items-center justify-between text-[10px] font-mono text-[#0A0A0A]/60 pt-1 border-t border-[#0A0A0A]/20">
+                  <span className="font-bold">DEPENDENCY: REACT 19 + TAILWIND CSS</span>
+                  <span className="font-bold text-[#0A0A0A]">✓ PRODUCTION TESTED &amp; READY</span>
                 </div>
 
               </div>
@@ -513,13 +528,13 @@ export const DesignSystemStash: React.FC = () => {
       {/* ========================================================================= */}
       {activeTab === 'tokens' && (
         <div className="space-y-6">
-          <div className="p-6 sm:p-8 rounded-2xl bg-[#0c0d12] border border-white/10 space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-white/10">
+          <div className="p-6 sm:p-8 bg-[#FFFFFF] border-3 border-[#0A0A0A] shadow-[6px_6px_0px_#0A0A0A] space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b-2 border-[#0A0A0A]">
               <div className="space-y-0.5">
-                <span className="text-[10px] font-mono tracking-widest text-amber-400 uppercase">
-                  DESIGN SYSTEM // COLOR &amp; FONT VARIABLES
+                <span className="text-[10px] font-mono font-bold tracking-widest text-[#0A0A0A]/60 uppercase block">
+                  DESIGN SYSTEM // TOKENS
                 </span>
-                <h3 className="text-xl font-jakarta font-semibold tracking-tight text-white">
+                <h3 className="font-['Space_Grotesk'] text-2xl font-black uppercase text-[#0A0A0A] tracking-tight">
                   CSS Color &amp; Typography Variables
                 </h3>
               </div>
@@ -528,46 +543,37 @@ export const DesignSystemStash: React.FC = () => {
                 type="button"
                 onClick={() => handleCopyCode('css-tokens', `:root {
   /* Canvas & Ground Surfaces */
-  --surface-canvas: #050608;
-  --surface-card: #0b0c10;
-  --surface-elevated: #0f1015;
-  --surface-overlay: rgba(15, 16, 22, 0.85);
-  --border-hairline: rgba(255, 255, 255, 0.1);
-  --border-focus: #5e6ad2;
-
-  /* Typography Colors */
-  --ink-primary: #f7f8f8;
-  --ink-muted: #d0d6e0;
-  --ink-subtle: #8a8f98;
+  --surface-canvas: #E3E6E8;
+  --surface-card: #FFFFFF;
+  --surface-ink: #0A0A0A;
+  --border-structural: #0A0A0A;
 
   /* Accent Signatures */
-  --accent-linear: #5e6ad2;
-  --accent-emerald: #34d399;
-  --accent-amber: #f59e0b;
-  --accent-rose: #f43f5e;
+  --accent-yellow: #FFD84D;
+  --accent-mint: #63D6A0;
+  --accent-blue: #5B8CFF;
+  --accent-coral: #FF6B57;
 
   /* Typography Scale */
-  --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
-  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
   --font-display: 'Space Grotesk', sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-mono: 'JetBrains Mono', monospace;
 
   /* Motion & Spring Dynamics */
-  --spring-stiffness: 450;
-  --spring-damping: 35;
-  --ease-mechanical: cubic-bezier(0.16, 1, 0.3, 1);
+  --spring-stiffness: 400;
+  --spring-damping: 25;
 }`)}
-                className="px-3.5 py-1.5 rounded-lg bg-white/10 hover:bg-white text-white hover:text-black font-mono text-xs transition-colors cursor-pointer flex items-center gap-1.5 self-start sm:self-center"
+                className="px-3.5 py-1.5 bg-[#FFD84D] hover:bg-[#F7CE38] text-[#0A0A0A] border-2 border-[#0A0A0A] font-mono text-xs font-bold uppercase shadow-[2px_2px_0px_#0A0A0A] transition-all cursor-pointer flex items-center gap-1.5 self-start sm:self-center"
               >
                 {copiedId === 'css-tokens' ? (
                   <>
-                    <Check className="w-3.5 h-3.5 text-emerald-400" />
-                    <span className="text-emerald-400 font-semibold">Copied CSS!</span>
+                    <Check className="w-3.5 h-3.5 text-[#0A0A0A]" />
+                    <span>COPIED CSS!</span>
                   </>
                 ) : (
                   <>
                     <Copy className="w-3.5 h-3.5" />
-                    <span>Copy Complete CSS Variables</span>
+                    <span>COPY ALL CSS VARIABLES</span>
                   </>
                 )}
               </button>
@@ -576,30 +582,30 @@ export const DesignSystemStash: React.FC = () => {
             {/* Token Grid */}
             <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
               {[
-                { name: '--surface-canvas', val: '#050608', desc: 'Linear Void Canvas Background' },
-                { name: '--surface-card', val: '#0b0c10', desc: 'Machined Double-Bezel Panel' },
-                { name: '--surface-elevated', val: '#0f1015', desc: 'Floating Window Chrome' },
-                { name: '--border-hairline', val: 'rgba(255, 255, 255, 0.1)', desc: '1px Crisp Divider' },
-                { name: '--accent-linear', val: '#5e6ad2', desc: 'Linear Signature Lavender' },
-                { name: '--accent-emerald', val: '#34d399', desc: 'WCAG AAA Success Token' },
-                { name: '--accent-amber', val: '#f59e0b', desc: 'High-Visibility Attention Gold' },
-                { name: '--accent-rose', val: '#f43f5e', desc: 'Critical Failure / Friction Red' },
-                { name: '--ease-mechanical', val: 'cubic-bezier(0.16, 1, 0.3, 1)', desc: 'Sub-16ms Spring Curve' },
+                { name: '--surface-canvas', val: '#E3E6E8', desc: 'Cool Architectural Concrete Ground' },
+                { name: '--surface-card', val: '#FFFFFF', desc: 'Tactile White Panel Surface' },
+                { name: '--surface-ink', val: '#0A0A0A', desc: 'Primary Structural Ink Anchor' },
+                { name: '--border-structural', val: '#0A0A0A', desc: '2px/3px Structural Heavy Border' },
+                { name: '--accent-yellow', val: '#FFD84D', desc: 'Signal Yellow Focus Accent' },
+                { name: '--accent-mint', val: '#63D6A0', desc: 'Verified Status Mint Token' },
+                { name: '--accent-blue', val: '#5B8CFF', desc: 'Blueprint Data Electric Blue' },
+                { name: '--accent-coral', val: '#FF6B57', desc: 'Drafting Redline Coral Marker' },
+                { name: '--ease-tactile', val: 'cubic-bezier(0.16, 1, 0.3, 1)', desc: '180ms Spring Kinematics' },
               ].map((token) => (
-                <div key={token.name} className="p-3.5 rounded-xl bg-black/60 border border-white/5 space-y-1.5 font-mono">
+                <div key={token.name} className="p-3.5 bg-[#F8F9FA] border-2 border-[#0A0A0A] shadow-[2px_2px_0px_#0A0A0A] space-y-1.5 font-mono">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-purple-400 truncate pr-2">{token.name}</span>
-                    <span className="text-white font-semibold shrink-0">{token.val}</span>
+                    <span className="text-[#0A0A0A] font-bold truncate pr-2">{token.name}</span>
+                    <span className="text-[#0A0A0A] font-bold shrink-0 bg-[#E3E6E8] px-1 border border-[#0A0A0A]">{token.val}</span>
                   </div>
-                  <span className="text-[10px] text-white/50 block font-sans">{token.desc}</span>
+                  <span className="text-[10px] text-[#0A0A0A]/60 block font-sans">{token.desc}</span>
                 </div>
               ))}
             </div>
 
             {/* Tailwind Configuration Template */}
-            <div className="p-4 rounded-xl bg-[#07080b] border border-white/10 space-y-2">
-              <div className="flex items-center justify-between text-xs font-mono text-white/60 pb-2 border-b border-white/10">
-                <span className="text-amber-400 font-semibold">tailwind.config.ts Preset</span>
+            <div className="p-4 bg-[#0A0A0A] text-[#E3E6E8] border-2 border-[#0A0A0A] space-y-2">
+              <div className="flex items-center justify-between text-xs font-mono pb-2 border-b border-white/20">
+                <span className="text-[#FFD84D] font-bold uppercase">tailwind.config.ts Preset</span>
                 <button 
                   type="button"
                   onClick={() => handleCopyCode('tw-config', `// tailwind.config.ts preset
@@ -607,32 +613,32 @@ export default {
   theme: {
     extend: {
       colors: {
-        canvas: '#050608',
-        card: '#0b0c10',
-        elevated: '#0f1015',
-        linear: '#5e6ad2',
+        concrete: '#E3E6E8',
+        ink: '#0A0A0A',
+        yellow: '#FFD84D',
+        coral: '#FF6B57',
+        mint: '#63D6A0',
       },
       fontFamily: {
-        sans: ['Plus Jakarta Sans', 'sans-serif'],
-        serif: ['Instrument Serif', 'serif'],
+        sans: ['Inter', 'sans-serif'],
         grotesk: ['Space Grotesk', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
       },
     },
   },
 };`)}
-                  className="hover:text-white text-[11px] flex items-center gap-1 cursor-pointer"
+                  className="hover:text-[#FFD84D] text-[11px] font-bold uppercase flex items-center gap-1 cursor-pointer"
                 >
                   <Copy className="w-3 h-3" />
-                  <span>Copy Preset</span>
+                  <span>COPY PRESET</span>
                 </button>
               </div>
-              <pre className="text-[11px] font-mono text-white/70 overflow-x-auto select-text">
+              <pre className="text-[11px] font-mono text-[#E3E6E8]/80 overflow-x-auto select-text">
                 <code>{`export default {
   theme: {
     extend: {
-      colors: { canvas: '#050608', card: '#0b0c10', elevated: '#0f1015', linear: '#5e6ad2' },
-      fontFamily: { sans: ['Plus Jakarta Sans'], serif: ['Instrument Serif'], grotesk: ['Space Grotesk'], mono: ['JetBrains Mono'] }
+      colors: { concrete: '#E3E6E8', ink: '#0A0A0A', yellow: '#FFD84D', coral: '#FF6B57', mint: '#63D6A0' },
+      fontFamily: { sans: ['Inter'], grotesk: ['Space Grotesk'], mono: ['JetBrains Mono'] }
     }
   }
 };`}</code>
@@ -655,27 +661,27 @@ export default {
               tag: 'FRAMEWORK'
             },
             {
-              title: 'Tailwind CSS v3/v4 Utilities',
+              title: 'Tailwind CSS Utilities',
               category: 'CSS Framework',
-              desc: 'Utility-first styling with responsive layouts and dark mode support.',
+              desc: 'Strict design-token-backed styling with responsive layouts and hard geometry.',
               tag: 'STYLING'
             },
             {
               title: 'Framer Motion Spring Kinematics',
               category: 'Animation Library',
-              desc: 'Smooth, natural physics-based motion for buttons, dialogs, and transitions.',
+              desc: 'Physical, tactile spring-driven motion with zero floaty slop.',
               tag: 'MOTION'
             },
             {
               title: 'Web Audio API Clicks',
               category: 'Sound Effects',
-              desc: 'Subtle, pleasant clicks and haptic audio generated directly in the browser.',
+              desc: 'Subtle mechanical click sounds generated natively in the browser.',
               tag: 'AUDIO'
             },
             {
-              title: 'Curated Typography Quad',
+              title: 'Curated Typography Hierarchy',
               category: 'Typography & Fonts',
-              desc: 'Plus Jakarta Sans, Instrument Serif, Space Grotesk, and JetBrains Mono.',
+              desc: 'Space Grotesk, Inter, and JetBrains Mono aligned to an 8px grid.',
               tag: 'TYPOGRAPHY'
             },
             {
@@ -691,9 +697,9 @@ export default {
               tag: 'LINTING'
             },
             {
-              title: 'Lucide Icons Clean Vector Set',
+              title: 'Lucide Clean Vector System',
               category: 'Clean Icon System',
-              desc: 'Consistent 24px vector icons with clear line weights and optical balance.',
+              desc: 'Consistent vector iconography with strict geometric stroke weights.',
               tag: 'ICONS'
             },
             {
@@ -705,19 +711,19 @@ export default {
           ].map((item) => (
             <div
               key={item.title}
-              className="p-5 rounded-2xl bg-[#0c0d12] border border-white/10 hover:border-white/20 transition-all duration-300 space-y-2 group"
+              className="p-5 bg-[#FFFFFF] border-3 border-[#0A0A0A] shadow-[4px_4px_0px_#0A0A0A] hover:shadow-[6px_6px_0px_#0A0A0A] transition-all space-y-2 group"
             >
               <div className="flex items-center justify-between">
-                <span className="text-[9.5px] font-mono tracking-widest text-amber-400 uppercase">
+                <span className="px-2 py-0.5 bg-[#FFD84D] border border-[#0A0A0A] text-[9.5px] font-mono font-bold tracking-widest text-[#0A0A0A] uppercase">
                   {item.tag}
                 </span>
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                <span className="w-2 h-2 bg-[#63D6A0] border border-[#0A0A0A]" />
               </div>
-              <h4 className="text-sm sm:text-base font-jakarta font-semibold tracking-tight text-white group-hover:text-amber-400 transition-colors">
+              <h4 className="font-['Space_Grotesk'] text-base font-black uppercase tracking-tight text-[#0A0A0A] group-hover:text-[#5B8CFF] transition-colors">
                 {item.title}
               </h4>
-              <span className="text-[11px] font-mono text-white/50 block">{item.category}</span>
-              <p className="text-xs text-white/65 font-sans leading-relaxed pt-1">
+              <span className="text-[10px] font-mono text-[#0A0A0A]/60 block font-bold uppercase">{item.category}</span>
+              <p className="text-xs text-[#0A0A0A]/80 font-mono leading-relaxed pt-1">
                 {item.desc}
               </p>
             </div>

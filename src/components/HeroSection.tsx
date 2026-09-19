@@ -167,8 +167,8 @@ const TelemetryDashboard = () => {
 
               {/* Stepped Digital Telemetry Histogram / Oscilloscope */}
               <div className="space-y-1.5">
-                <div className="flex flex-wrap items-center justify-between gap-1 text-[10px] font-head font-bold uppercase tracking-wide">
-                  <span className="leading-tight">Stepped Digital Telemetry</span>
+                <div className="flex items-center justify-between text-[10px] font-head font-bold uppercase tracking-wide">
+                  <span>Stepped Digital Telemetry Histogram</span>
                   <span className="text-black bg-primary px-1.5 py-0.2 border border-black text-[9px] font-bold font-mono">
                     SAMPLE: 100Hz
                   </span>
@@ -368,7 +368,7 @@ const TelemetryDashboard = () => {
             <span className="flex size-5 shrink-0 items-center justify-center border-2 border-black bg-primary font-bold text-black text-xs shadow-none">
               $
             </span>
-            <code className="min-w-0 truncate text-foreground font-semibold text-[10px] sm:text-[11px]">
+            <code className="min-w-0 truncate text-foreground font-semibold text-[11px]">
               curl -s https://api.vutikuri.dev/v1/telemetry | jq .status
             </code>
           </div>
@@ -402,7 +402,7 @@ export const HeroSection = () => {
   const { playClick } = useSound();
 
   return (
-    <section id="home" className="relative overflow-hidden pt-24 sm:pt-28 pb-12 sm:pb-16 bg-background">
+    <section id="home" className="relative min-h-screen overflow-hidden pt-28 sm:pt-32 pb-12 sm:pb-16 bg-background">
       <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} />
 
       {/* Background Subtle Technical Grid */}
@@ -415,7 +415,7 @@ export const HeroSection = () => {
       />
 
       <div className="container mx-auto px-4 relative z-10 w-full">
-        <div className="grid items-center gap-8 lg:gap-10 lg:grid-cols-[1.1fr_0.9fr] min-h-[calc(100svh-6rem)] lg:min-h-[calc(100vh-8rem)]">
+        <div className="grid min-h-[calc(100vh-10rem)] items-center gap-8 lg:gap-10 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="max-w-3xl space-y-5 sm:space-y-6 text-center lg:text-left flex flex-col justify-center">
 
             {/* Status Sticker Badge */}
@@ -556,7 +556,7 @@ export const HeroSection = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="w-full max-w-sm sm:max-w-md lg:max-w-lg mx-auto"
+            className="w-full max-w-md lg:max-w-lg mx-auto"
           >
             <TelemetryDashboard />
           </motion.div>

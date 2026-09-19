@@ -7,7 +7,6 @@ import {
   Check, 
   Code2, 
   RefreshCw, 
-  Sparkles,
   Layers,
   Box,
   Eye

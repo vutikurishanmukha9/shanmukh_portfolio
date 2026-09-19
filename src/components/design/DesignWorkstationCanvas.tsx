@@ -6,7 +6,7 @@ import {
   Code2, 
   ShieldCheck, 
   Maximize2,
-  Sparkles,
+  Activity,
   Copy,
   Check
 } from 'lucide-react';
@@ -133,7 +133,7 @@ export const DesignWorkstationCanvas: React.FC<DesignWorkstationCanvasProps> = (
               }`}
               title="Rare UI WebGL Fluid Orb"
             >
-              <Sparkles className="w-3 h-3" />
+              <Activity className="w-3 h-3" />
               <span>Fluid Orb</span>
             </button>
           </div>

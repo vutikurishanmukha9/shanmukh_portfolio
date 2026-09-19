@@ -1,52 +1,56 @@
 import React, { useEffect } from 'react';
-import { DesignNavigation } from '@/components/design/DesignNavigation';
-import { ProductHero } from '@/components/design/ProductHero';
-import { DesignProcessTimeline } from '@/components/design/DesignProcessTimeline';
-import { ProjectsGrid } from '@/components/design/ProjectsGrid';
-import { CraftLab } from '@/components/design/CraftLab';
-import { DesignPhilosophy } from '@/components/design/DesignPhilosophy';
-import { ToolingGrid } from '@/components/design/ToolingGrid';
+import { StudioNavigation } from '@/components/design/studio/StudioNavigation';
+import { StudioHero } from '@/components/design/studio/StudioHero';
+import { StudioCrossTicker } from '@/components/design/studio/StudioCrossTicker';
+import { StudioManifesto } from '@/components/design/studio/StudioManifesto';
+import { StudioProjects } from '@/components/design/studio/StudioProjects';
+import { StudioLab } from '@/components/design/studio/StudioLab';
+import { StudioDesignXCode } from '@/components/design/studio/StudioDesignXCode';
 import { DesignSystemStash } from '@/components/design/DesignSystemStash';
-import { DesignFooter } from '@/components/design/DesignFooter';
-import { DesignerCommandPalette } from '@/components/design/DesignerCommandPalette';
+import { StudioDesignSystem } from '@/components/design/studio/StudioDesignSystem';
+import { StudioDesignDesk } from '@/components/design/studio/StudioDesignDesk';
+import { StudioAbout } from '@/components/design/studio/StudioAbout';
+import { StudioFooter } from '@/components/design/studio/StudioFooter';
 
 const ProductDesigner: React.FC = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
-    document.title = 'Vutikuri Shanmukha — Product & Interaction Designer';
+    document.title = 'Shanmukh World';
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-[#050608] text-[#f7f8f8] selection:bg-white/20 selection:text-white font-sans antialiased overflow-x-hidden">
-      {/* Subtle Hairline Grid Matrix (Linear & Raycast Aesthetic) */}
-      <div 
+    <div className="relative min-h-screen bg-[#E3E6E8] text-[#0A0A0A] selection:bg-[#FFD84D] selection:text-[#0A0A0A] font-['Inter'] antialiased overflow-x-hidden">
+      
+      {/* Editorial Graph Paper Subtle Matrix Backdrop */}
+      <div
         className="fixed inset-0 pointer-events-none z-0 opacity-[0.035]"
         style={{
-          backgroundImage: 'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)',
-          backgroundSize: '3.5rem 3.5rem'
+          backgroundImage:
+            'linear-gradient(to right, #0A0A0A 1px, transparent 1px), linear-gradient(to bottom, #0A0A0A 1px, transparent 1px)',
+          backgroundSize: '2.5rem 2.5rem',
         }}
       />
 
-      {/* Floating Header Dock */}
-      <DesignNavigation />
+      {/* Floating Editorial Navigation Dock */}
+      <StudioNavigation />
 
-      {/* Global Cmd+K Command Palette */}
-      <DesignerCommandPalette />
-
-      {/* Main Page Flow with Cohesive Editorial Spacing */}
-      <main className="relative z-10 space-y-4 sm:space-y-6">
-        <ProductHero />
-        <DesignProcessTimeline />
-        <ProjectsGrid />
-        <CraftLab />
-        <DesignPhilosophy />
-        <ToolingGrid />
+      {/* Main Studio Composition Flow with Tight Editorial Rhythm */}
+      <main className="relative z-10">
+        <StudioHero />
+        <StudioCrossTicker />
+        <StudioManifesto />
+        <StudioProjects />
+        <StudioLab />
+        <StudioDesignXCode />
         <DesignSystemStash />
+        <StudioDesignSystem />
+        <StudioDesignDesk />
+        <StudioAbout />
       </main>
 
-      {/* Luxury Dark Mode Footer with Cursive Signature Signoff */}
+      {/* Studio Signoff Footer */}
       <div className="relative z-10 mt-6 sm:mt-8">
-        <DesignFooter />
+        <StudioFooter />
       </div>
     </div>
   );

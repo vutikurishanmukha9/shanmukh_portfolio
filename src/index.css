@@ -279,6 +279,32 @@ body::after {
   animation: border-beam 3.5s linear infinite;
 }
 
+@keyframes studio-ticker {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
+
+@keyframes studio-ticker-reverse {
+  0% {
+    transform: translateX(-33.333%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-studio-ticker {
+  animation: studio-ticker 25s linear infinite;
+}
+
+.animate-studio-ticker-reverse {
+  animation: studio-ticker-reverse 28s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

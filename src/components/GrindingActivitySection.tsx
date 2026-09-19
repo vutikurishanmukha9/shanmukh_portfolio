@@ -92,8 +92,8 @@ export const GrindingActivitySection = () => {
                         </div>
                         
                         {/* Live GitHub Calendar Tracker */}
-                        <div className="relative z-10 -mx-4 sm:mx-0 overflow-x-auto pb-3 pt-2 hide-scrollbar">
-                            <div className="min-w-[680px] sm:min-w-[780px] px-4 sm:px-0 text-foreground flex justify-center">
+                        <div className="relative z-10 overflow-x-auto pb-4 pt-2 hide-scrollbar">
+                            <div className="min-w-[780px] text-foreground flex justify-center">
                                 <GitHubCalendar
                                     username={GITHUB_USERNAME}
                                     year="last"

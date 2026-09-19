@@ -9,7 +9,6 @@ import {
   BarChart3,
   TrendingUp,
   Globe,
-  Zap,
   Clock,
   DollarSign,
   Building2,
@@ -622,7 +621,7 @@ const CaseStudyUnicorn = () => {
           <Divider />
 
           {/* ── 4. THE 2021 SURGE ANOMALY ── */}
-          <SectionHeading icon={Zap} label="4. The 2021 Explosion Anomaly" />
+          <SectionHeading icon={TrendingUp} label="4. The 2021 Explosion Anomaly" />
           
           <div className="border-[0.5px] border-amber-500/20 bg-amber-500/5 rounded-lg p-6 mb-8">
             <h4 className="font-serif-display text-xl text-foreground font-normal mb-3">520 Unicorns Created in a Single Calendar Year</h4>

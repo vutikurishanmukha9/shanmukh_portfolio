@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Navigation } from '@/components/Navigation';
 import { NewsTicker } from '@/components/NewsTicker';
 import { HeroSection } from '@/components/HeroSection';
@@ -39,6 +39,9 @@ const SectionFallback = () => (
 );
 
 const Index = () => {
+  useEffect(() => {
+    document.title = 'Shanmukh World';
+  }, []);
 
   return (
     <div className="min-h-screen bg-background flex flex-col overflow-x-hidden">
