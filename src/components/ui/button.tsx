@@ -5,32 +5,48 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-xs font-mono uppercase tracking-wider select-none transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.97] [&_svg]:pointer-events-none [&_svg]:size-3.5 [&_svg]:shrink-0",
+  cn(
+    "group/button font-head font-medium inline-flex cursor-pointer items-center justify-center gap-2 rounded-none whitespace-nowrap select-none transition-all duration-200",
+    "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-60",
+    "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black aria-invalid:border-destructive",
+    "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+  ),
   {
     variants: {
       variant: {
-        default: "bg-foreground text-background shadow-[0_1px_2px_rgba(0,0,0,0.08),0_4px_12px_rgba(0,0,0,0.04)] hover:bg-foreground/90 active:scale-[0.97]",
-        primary: "bg-primary text-primary-foreground shadow-[0_1px_2px_rgba(204,120,92,0.15),0_4px_12px_rgba(204,120,92,0.12)] hover:bg-primary/90 active:scale-[0.97]",
-        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-sm active:scale-[0.97]",
-        outline: "border-[0.5px] border-border/80 bg-background/60 backdrop-blur-md text-foreground shadow-[0_1px_2px_rgba(0,0,0,0.03)] hover:bg-muted/80 hover:border-foreground/20 active:scale-[0.97]",
-        secondary: "bg-muted/70 backdrop-blur-md text-foreground border-[0.5px] border-border/60 hover:bg-muted active:scale-[0.97]",
-        ghost: "hover:bg-muted/70 text-muted-foreground hover:text-foreground active:scale-[0.96]",
-        link: "text-primary underline-offset-4 hover:underline",
-        glass: "bg-card/40 backdrop-blur-xl border-[0.5px] border-border/80 text-foreground shadow-[0_4px_16px_rgba(0,0,0,0.04)] hover:bg-card/70 hover:border-foreground/25 active:scale-[0.97]",
+        default:
+          "border-2 border-black bg-primary text-primary-foreground shadow-md transition duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-primary-hover hover:shadow-lg active:translate-x-1 active:translate-y-1 active:shadow-none",
+        primary:
+          "border-2 border-black bg-primary text-primary-foreground shadow-md transition duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-primary-hover hover:shadow-lg active:translate-x-1 active:translate-y-1 active:shadow-none",
+        secondary:
+          "border-2 border-black bg-secondary text-secondary-foreground shadow-md transition duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-neutral-800 hover:shadow-lg active:translate-x-1 active:translate-y-1 active:shadow-none",
+        destructive:
+          "border-2 border-black bg-destructive text-destructive-foreground shadow-md transition duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-destructive/90 hover:shadow-lg active:translate-x-1 active:translate-y-1 active:shadow-none",
+        outline:
+          "border-2 border-black bg-card text-foreground shadow-md transition duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-accent hover:shadow-lg active:translate-x-1 active:translate-y-1 active:shadow-none",
+        ghost:
+          "border-2 border-transparent bg-transparent text-foreground hover:border-black hover:bg-accent transition duration-150 active:translate-x-0.5 active:translate-y-0.5",
+        link: "bg-transparent text-primary underline-offset-4 hover:underline",
+        glass:
+          "border-2 border-black bg-card text-foreground shadow-md transition duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-lg active:translate-x-1 active:translate-y-1 active:shadow-none",
       },
       size: {
-        default: "h-10 px-5 py-2",
-        sm: "h-8 rounded-full px-3.5 text-[10px]",
-        lg: "h-11 rounded-full px-6 text-xs",
-        xl: "h-12 rounded-full px-8 text-sm",
-        icon: "h-9 w-9 rounded-full",
+        default: "h-10 px-4 py-2 text-sm",
+        xs: "h-7 px-2.5 py-0.5 text-xs",
+        sm: "h-8 px-3 py-1 text-xs",
+        lg: "h-12 px-6 py-2.5 text-base",
+        xl: "h-14 px-8 py-3 text-lg",
+        icon: "h-10 w-10 p-2",
+        "icon-xs": "h-7 w-7 p-1",
+        "icon-sm": "h-8 w-8 p-1.5",
+        "icon-lg": "h-12 w-12 p-3",
       },
     },
     defaultVariants: {
       variant: "default",
       size: "default",
     },
-  },
+  }
 );
 
 export interface ButtonProps
@@ -42,9 +58,18 @@ export interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
-    return <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />;
-  },
+    return (
+      <Comp
+        data-slot="button"
+        data-variant={variant}
+        data-size={size}
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        {...props}
+      />
+    );
+  }
 );
 Button.displayName = "Button";
 
-export { Button };
+export { Button, buttonVariants };

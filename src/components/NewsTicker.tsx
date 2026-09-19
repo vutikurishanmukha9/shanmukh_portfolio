@@ -48,31 +48,26 @@ export const NewsTicker = ({ items = DEFAULT_STATUS_ITEMS, speed = 30 }: NewsTic
 
     return (
         <div
-            className="w-full overflow-hidden bg-card/90 backdrop-blur-md border-b-[0.5px] border-border/60 transition-colors duration-200 select-none"
+            className="w-full overflow-hidden bg-primary text-black border-b-2 border-black transition-colors duration-200 select-none"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
             onTouchStart={() => setIsPaused(true)}
             onTouchEnd={() => setIsPaused(false)}
         >
-            <div className="py-1.5 relative flex items-center h-8">
+            <div className="py-1 relative flex items-center h-7.5 sm:h-8">
                 {/* LIVE Badge */}
-                <div className="flex-shrink-0 hidden sm:flex items-center gap-2 px-4 border-r-[0.5px] border-border/60 bg-card z-20 h-full">
-                    <span className="relative flex h-1.5 w-1.5">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span>
+                <div className="flex-shrink-0 hidden sm:flex items-center gap-1.5 px-3 border-r-2 border-black bg-black text-white z-20 h-full">
+                    <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
                     </span>
-                    <span className="text-[10px] font-mono font-bold tracking-widest text-red-500">
-                        [ LIVE_TELEMETRY ]
+                    <span className="text-[10px] font-head font-bold tracking-wider uppercase text-white">
+                        LIVE BULLETIN
                     </span>
                 </div>
 
                 {/* Scrolling content container */}
                 <div className="flex-1 overflow-hidden relative h-full flex items-center">
-                    {/* Left fade */}
-                    <div className="absolute left-0 top-0 bottom-0 w-8 z-10 pointer-events-none bg-gradient-to-r from-card to-transparent" />
-                    {/* Right fade */}
-                    <div className="absolute right-0 top-0 bottom-0 w-8 z-10 pointer-events-none bg-gradient-to-l from-card to-transparent" />
-
                     {/* Scrolling content */}
                     <div
                         className="ticker-track flex whitespace-nowrap"
@@ -86,10 +81,11 @@ export const NewsTicker = ({ items = DEFAULT_STATUS_ITEMS, speed = 30 }: NewsTic
                                 type="button"
                                 key={item.id}
                                 onClick={() => handleItemClick(item.text)}
-                                className="inline-flex items-center mx-4 text-[11px] font-mono tracking-widest text-muted-foreground uppercase cursor-pointer hover:text-primary transition-colors duration-200 bg-transparent border-0 p-0"
+                                className="inline-flex items-center mx-4 text-xs font-head font-bold tracking-wide uppercase text-black cursor-pointer hover:underline decoration-2 underline-offset-2 transition-colors duration-200 bg-transparent border-0 p-0"
                             >
-                                {/* Clean asterisk separator */}
-                                <span className="text-primary/60 mr-3 text-xs">•</span>
+                                <span className="inline-flex size-4 items-center justify-center border border-black bg-black text-white text-[9px] mr-2.5">
+                                    ★
+                                </span>
                                 <span>
                                     {item.text}
                                 </span>

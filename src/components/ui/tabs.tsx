@@ -10,8 +10,9 @@ const TabsList = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <TabsPrimitive.List
     ref={ref}
+    data-slot="tabs-list"
     className={cn(
-      "inline-flex h-9 items-center justify-center rounded-full bg-muted/60 p-1 text-muted-foreground border-[0.5px] border-border/80",
+      "inline-flex h-auto items-center justify-center rounded-none border-2 border-black bg-card p-1 text-muted-foreground shadow-sm",
       className
     )}
     {...props}
@@ -25,8 +26,9 @@ const TabsTrigger = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <TabsPrimitive.Trigger
     ref={ref}
+    data-slot="tabs-trigger"
     className={cn(
-      "inline-flex items-center justify-center whitespace-nowrap rounded-full px-3.5 py-1 text-[10px] font-mono uppercase tracking-wider transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-xs data-[state=active]:border-[0.5px] data-[state=active]:border-border/60",
+      "relative inline-flex items-center justify-center gap-1.5 rounded-none border-2 border-transparent px-3 py-1.5 text-xs font-head font-medium uppercase tracking-wide text-muted-foreground transition-all duration-150 select-none hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black disabled:pointer-events-none disabled:opacity-50 data-[state=active]:border-black data-[state=active]:bg-primary data-[state=active]:text-black data-[state=active]:shadow-xs",
       className
     )}
     {...props}
@@ -40,8 +42,9 @@ const TabsContent = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <TabsPrimitive.Content
     ref={ref}
+    data-slot="tabs-content"
     className={cn(
-      "mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+      "mt-3 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black",
       className
     )}
     {...props}
@@ -50,3 +53,4 @@ const TabsContent = React.forwardRef<
 TabsContent.displayName = TabsPrimitive.Content.displayName;
 
 export { Tabs, TabsList, TabsTrigger, TabsContent };
+

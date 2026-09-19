@@ -138,41 +138,41 @@ export const CircuitBlueprintModal: React.FC<CircuitBlueprintModalProps> = ({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 15 }}
           transition={{ type: 'spring', damping: 26, stiffness: 280 }}
-          className="relative z-50 w-full max-w-6xl max-h-[92dvh] bg-[#071322] border-[0.5px] border-cyan-500/40 rounded-xl shadow-[0_0_60px_rgba(6,182,212,0.15)] flex flex-col overflow-hidden text-cyan-50"
+          className="relative z-50 w-full max-w-6xl max-h-[92dvh] bg-card border-2 border-black rounded-none shadow-[8px_8px_0px_#000] flex flex-col overflow-hidden text-foreground"
         >
           {/* Top Bar / CAD Header */}
-          <div className="px-3.5 sm:px-5 py-3 border-b-[0.5px] border-cyan-500/30 bg-[#050e1a] flex flex-wrap items-center justify-between gap-2.5">
+          <div className="px-3.5 sm:px-5 py-3 border-b-2 border-black bg-primary flex flex-wrap items-center justify-between gap-2.5 text-black">
             <div className="flex items-center gap-2.5 min-w-0">
-              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shrink-0" />
+              <span className="w-2.5 h-2.5 rounded-full bg-black animate-pulse shrink-0" />
               <div className="min-w-0">
-                <h3 className="text-xs sm:text-sm font-mono uppercase tracking-widest text-cyan-300 font-bold truncate">
-                  PROJECT BLUEPRINT // SYSTEM DIAGRAM
+                <h3 className="text-xs sm:text-sm font-head uppercase tracking-widest text-black font-bold truncate">
+                  PROJECT BLUEPRINT // SYSTEM SCHEMATIC
                 </h3>
-                <p className="text-[8px] sm:text-[9px] font-mono text-cyan-400/60 truncate">
+                <p className="text-[9px] font-mono text-black/80 font-bold truncate">
                   AUTO ENVIRONMENT MONITORING & CONTROL • REV 1.0 (A4)
                 </p>
               </div>
             </div>
 
             {/* Controls */}
-            <div className="flex items-center gap-1 shrink-0 ml-auto">
-              <div className="flex items-center bg-cyan-950/60 border border-cyan-500/30 rounded-lg p-0.5 mr-1">
+            <div className="flex items-center gap-1.5 shrink-0 ml-auto">
+              <div className="flex items-center bg-card border-2 border-black rounded-none p-0.5 shadow-xs mr-1">
                 <button
                   type="button"
                   onClick={handleZoomOut}
                   title="Zoom Out"
-                  className="p-1 rounded text-cyan-300 hover:text-white hover:bg-cyan-800/40 transition-colors"
+                  className="p-1 rounded-none text-black hover:bg-muted transition-colors cursor-pointer"
                 >
                   <ZoomOut className="w-3.5 h-3.5" />
                 </button>
-                <span className="px-1.5 text-[9px] font-mono text-cyan-200">
+                <span className="px-1.5 text-[10px] font-mono font-bold text-black">
                   {Math.round(zoom * 100)}%
                 </span>
                 <button
                   type="button"
                   onClick={handleZoomIn}
                   title="Zoom In"
-                  className="p-1 rounded text-cyan-300 hover:text-white hover:bg-cyan-800/40 transition-colors"
+                  className="p-1 rounded-none text-black hover:bg-muted transition-colors cursor-pointer"
                 >
                   <ZoomIn className="w-3.5 h-3.5" />
                 </button>
@@ -180,7 +180,7 @@ export const CircuitBlueprintModal: React.FC<CircuitBlueprintModalProps> = ({
                   type="button"
                   onClick={handleResetZoom}
                   title="Reset Zoom"
-                  className="p-1 rounded text-cyan-400 hover:text-white hover:bg-cyan-800/40 transition-colors border-l border-cyan-500/20 ml-0.5 hidden sm:inline-block"
+                  className="p-1 rounded-none text-black hover:bg-muted transition-colors border-l-2 border-black ml-0.5 hidden sm:inline-block cursor-pointer"
                 >
                   <RotateCcw className="w-3 h-3" />
                 </button>
@@ -190,7 +190,7 @@ export const CircuitBlueprintModal: React.FC<CircuitBlueprintModalProps> = ({
                 href="/ieee-blueprint.jpg"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-1.5 rounded-lg text-cyan-300 hover:text-white bg-cyan-950/60 border border-cyan-500/30 hover:bg-cyan-800/40 transition-colors"
+                className="p-1.5 rounded-none text-black bg-card border-2 border-black hover:bg-muted transition-colors shadow-xs"
                 title="Open Raw High-Res Image"
               >
                 <Maximize2 className="w-3.5 h-3.5" />
@@ -199,7 +199,7 @@ export const CircuitBlueprintModal: React.FC<CircuitBlueprintModalProps> = ({
               <a
                 href="/ieee-blueprint.jpg"
                 download="IEEE_System_Intelligence_Blueprint.jpg"
-                className="p-1.5 rounded-lg text-cyan-300 hover:text-white bg-cyan-950/60 border border-cyan-500/30 hover:bg-cyan-800/40 transition-colors hidden sm:inline-flex"
+                className="p-1.5 rounded-none text-black bg-card border-2 border-black hover:bg-muted transition-colors shadow-xs hidden sm:inline-flex"
                 title="Download Blueprint Image"
               >
                 <Download className="w-3.5 h-3.5" />
@@ -208,7 +208,7 @@ export const CircuitBlueprintModal: React.FC<CircuitBlueprintModalProps> = ({
               <button
                 type="button"
                 onClick={onClose}
-                className="p-1.5 rounded-lg text-cyan-400 hover:text-white bg-cyan-950/60 border border-cyan-500/30 hover:bg-red-500/20 hover:border-red-500/40 transition-colors ml-0.5"
+                className="p-1.5 rounded-none text-white bg-black hover:bg-red-600 border-2 border-black transition-colors ml-0.5 cursor-pointer shadow-xs"
                 title="Close Modal"
               >
                 <X className="w-4 h-4" />
@@ -220,16 +220,22 @@ export const CircuitBlueprintModal: React.FC<CircuitBlueprintModalProps> = ({
           <div className="grid grid-cols-1 lg:grid-cols-12 flex-1 overflow-y-auto lg:overflow-hidden min-h-0">
             
             {/* Left/Center: Interactive Blueprint Canvas */}
-            <div className="lg:col-span-8 bg-[#040a14] relative overflow-auto p-2 sm:p-4 flex items-center justify-center border-b lg:border-b-0 lg:border-r border-cyan-500/20 min-h-[260px] sm:min-h-[380px] lg:min-h-[460px]">
+            <div className="lg:col-span-8 bg-muted/20 relative overflow-auto p-2 sm:p-4 flex items-center justify-center border-b-2 lg:border-b-0 lg:border-r-2 border-black min-h-[260px] sm:min-h-[380px] lg:min-h-[460px]">
               
               {/* Technical Dot Grid */}
-              <div className="absolute inset-0 bg-[radial-gradient(#06b6d4_0.75px,transparent_0.75px)] [background-size:20px_20px] opacity-[0.12] pointer-events-none" />
+              <div 
+                className="absolute inset-0 opacity-15 pointer-events-none" 
+                style={{ 
+                  backgroundImage: 'linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)',
+                  backgroundSize: '1.25rem 1.25rem'
+                }} 
+              />
 
               {/* Scalable Blueprint Image Container */}
               <motion.div
                 animate={{ scale: zoom }}
                 transition={{ duration: 0.2 }}
-                className="relative max-w-full rounded-lg shadow-2xl overflow-hidden border-[0.5px] border-cyan-500/30 bg-[#071322] transform-gpu origin-center"
+                className="relative max-w-full rounded-none shadow-[6px_6px_0px_#000] overflow-hidden border-2 border-black bg-white transform-gpu origin-center"
               >
                 <img
                   src="/ieee-blueprint.jpg"
@@ -249,10 +255,10 @@ export const CircuitBlueprintModal: React.FC<CircuitBlueprintModalProps> = ({
                       onClick={() => setActiveHotspotId(spot.id)}
                       style={{ left: `${spot.x}%`, top: `${spot.y}%` }}
                       className={cn(
-                        "absolute -translate-x-1/2 -translate-y-1/2 p-2 rounded-full border transition-all duration-300 flex items-center justify-center cursor-pointer shadow-lg group z-30",
+                        "absolute -translate-x-1/2 -translate-y-1/2 p-2 rounded-none border-2 border-black transition-all duration-200 flex items-center justify-center cursor-pointer shadow-xs group z-30",
                         isSelected
-                          ? "bg-cyan-400 text-slate-950 border-white ring-4 ring-cyan-400/40 scale-125 animate-pulse"
-                          : "bg-[#0b2440]/90 text-cyan-300 border-cyan-400/60 hover:bg-cyan-500 hover:text-black hover:scale-110"
+                          ? "bg-primary text-black scale-125 font-bold shadow-[3px_3px_0_0_#000]"
+                          : "bg-card text-black hover:bg-primary hover:scale-110"
                       )}
                       title={spot.title}
                     >
@@ -264,25 +270,25 @@ export const CircuitBlueprintModal: React.FC<CircuitBlueprintModalProps> = ({
             </div>
 
             {/* Right: Subsystem Inspector & Technical Ledger */}
-            <div className="lg:col-span-4 bg-[#050e1a] p-5 flex flex-col justify-between overflow-y-auto space-y-6">
+            <div className="lg:col-span-4 bg-card p-5 flex flex-col justify-between overflow-y-auto space-y-6">
               
               <div className="space-y-4">
                 {/* Hotspot Switcher Tabs */}
                 <div className="space-y-1.5">
-                  <span className="text-[9px] font-mono uppercase tracking-widest text-cyan-400/60 block">
+                  <span className="text-[10px] font-head font-bold uppercase tracking-widest text-muted-foreground block">
                     SUBSYSTEM SELECTOR // HOTSPOTS
                   </span>
-                  <div className="flex flex-wrap gap-1">
+                  <div className="flex flex-wrap gap-1.5">
                     {hotspots.map((h) => (
                       <button
                         type="button"
                         key={h.id}
                         onClick={() => setActiveHotspotId(h.id)}
                         className={cn(
-                          "px-2.5 py-1 rounded text-[9px] font-mono uppercase tracking-wider transition-colors border",
+                          "px-2.5 py-1 rounded-none text-[9px] font-head font-bold uppercase tracking-wider transition-colors border-2 border-black shadow-xs cursor-pointer active:translate-x-0.5 active:translate-y-0.5",
                           activeHotspotId === h.id
-                            ? "bg-cyan-400 text-slate-950 border-cyan-300 font-bold shadow-sm"
-                            : "bg-cyan-950/40 text-cyan-300/80 border-cyan-500/20 hover:border-cyan-400/60 hover:text-white"
+                            ? "bg-primary text-black shadow-[2px_2px_0_0_#000]"
+                            : "bg-card text-foreground hover:bg-muted"
                         )}
                       >
                         {h.category.split(' ')[0]}
@@ -299,25 +305,25 @@ export const CircuitBlueprintModal: React.FC<CircuitBlueprintModalProps> = ({
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -6 }}
                     transition={{ duration: 0.15 }}
-                    className="p-4 rounded-lg border border-cyan-500/30 bg-[#07172b] space-y-3"
+                    className="p-4 rounded-none border-2 border-black bg-muted/40 shadow-xs space-y-3"
                   >
-                    <div className="flex items-center justify-between pb-2 border-b border-cyan-500/20">
-                      <span className="text-[8px] font-mono uppercase tracking-widest text-cyan-400 font-semibold">
+                    <div className="flex items-center justify-between pb-2 border-b-2 border-black">
+                      <span className="text-[9px] font-head font-bold uppercase tracking-widest text-foreground">
                         {activeHotspot.category}
                       </span>
-                      <span className="text-[8px] font-mono px-1.5 py-0.2 rounded bg-cyan-400/15 text-cyan-300 uppercase">
+                      <span className="text-[9px] font-head font-bold px-1.5 py-0.5 bg-primary text-black border border-black uppercase">
                         VERIFIED SPEC
                       </span>
                     </div>
 
-                    <h4 className="text-base font-serif-display font-medium text-white tracking-tight leading-snug">
+                    <h4 className="text-base font-head font-bold text-foreground tracking-tight leading-snug uppercase">
                       {activeHotspot.title}
                     </h4>
 
-                    <div className="space-y-2 pt-1 font-mono text-[10px] text-cyan-100/80">
+                    <div className="space-y-2 pt-1 font-mono text-xs text-foreground">
                       {activeHotspot.specs.map((spec) => (
                         <div key={spec} className="flex items-start gap-2">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 shrink-0 mt-0.5" />
+                          <CheckCircle2 className="w-3.5 h-3.5 text-black shrink-0 mt-0.5" />
                           <span className="leading-relaxed">{spec}</span>
                         </div>
                       ))}
@@ -327,22 +333,22 @@ export const CircuitBlueprintModal: React.FC<CircuitBlueprintModalProps> = ({
               </div>
 
               {/* Title Block CAD Ledger */}
-              <div className="border-t border-cyan-500/20 pt-4 space-y-2 font-mono text-[9px] text-cyan-400/70">
-                <div className="flex justify-between border-b border-cyan-500/10 pb-1">
-                  <span>PROJECT:</span>
-                  <span className="text-cyan-200 font-semibold">AUTO MONITORING & CONTROL</span>
+              <div className="border-t-2 border-black pt-4 space-y-2 font-mono text-[10px] text-foreground">
+                <div className="flex justify-between border-b border-black/20 pb-1">
+                  <span className="text-muted-foreground font-bold">PROJECT:</span>
+                  <span className="font-bold">AUTO MONITORING & CONTROL</span>
                 </div>
-                <div className="flex justify-between border-b border-cyan-500/10 pb-1">
-                  <span>CONTROLLER:</span>
-                  <span className="text-cyan-200 font-semibold">ARDUINO UNO (ATmega328P)</span>
+                <div className="flex justify-between border-b border-black/20 pb-1">
+                  <span className="text-muted-foreground font-bold">CONTROLLER:</span>
+                  <span className="font-bold">ARDUINO UNO (ATmega328P)</span>
                 </div>
-                <div className="flex justify-between border-b border-cyan-500/10 pb-1">
-                  <span>DRAWN BY:</span>
-                  <span className="text-cyan-200 font-semibold">ENGINEER // 10-05-2024</span>
+                <div className="flex justify-between border-b border-black/20 pb-1">
+                  <span className="text-muted-foreground font-bold">DRAWN BY:</span>
+                  <span className="font-bold">ENGINEER // 10-05-2024</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>SCALE / SIZE:</span>
-                  <span className="text-cyan-200 font-semibold">NTS // A4 (210x297 mm)</span>
+                  <span className="text-muted-foreground font-bold">SCALE / SIZE:</span>
+                  <span className="font-bold">NTS // A4 (210x297 mm)</span>
                 </div>
               </div>
 
@@ -351,9 +357,9 @@ export const CircuitBlueprintModal: React.FC<CircuitBlueprintModalProps> = ({
           </div>
 
           {/* Bottom Bar Status */}
-          <div className="px-5 py-2.5 bg-[#030810] border-t border-cyan-500/20 flex flex-wrap items-center justify-between text-[8px] font-mono text-cyan-400/60">
+          <div className="px-5 py-2.5 bg-muted border-t-2 border-black flex flex-wrap items-center justify-between text-[9px] font-mono text-foreground font-bold">
             <span className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-emerald-500 border border-black animate-pulse" />
               CAD ENGINE READY • CLICK HOTSPOTS ON BLUEPRINT TO INSPECT SUBSYSTEMS
             </span>
             <span>IEEE PUBLICATION // 11101373</span>

@@ -82,23 +82,29 @@ export const CitationKnowledgeGraph: React.FC = () => {
   const activeNode = nodes.find((n) => n.id === activeNodeId) || nodes[0];
 
   return (
-    <div className="w-full rounded-xl border-[0.5px] border-border/80 bg-card/40 backdrop-blur-md p-5 md:p-6 space-y-4 select-none">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b-[0.5px] border-border/40">
+    <div className="w-full rounded-none border-2 border-black bg-card shadow-[6px_6px_0px_#000] p-5 md:p-6 space-y-4 select-none">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b-2 border-black">
         <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-          <span className="text-xs font-mono tracking-widest uppercase font-semibold text-foreground">
+          <span className="w-2.5 h-2.5 rounded-full bg-primary border border-black animate-pulse" />
+          <span className="text-xs font-head tracking-widest uppercase font-bold text-foreground">
             Citation & Research Knowledge Graph
           </span>
         </div>
-        <span className="text-[9px] font-mono text-muted-foreground">
-          INTERACTIVE 2D CITATION TOPOLOGY // 5 NODES
+        <span className="text-[10px] font-mono font-bold bg-muted text-foreground border border-black px-2 py-0.5 shadow-xs">
+          2D CITATION TOPOLOGY // 5 NODES
         </span>
       </div>
 
       {/* 2D Interactive SVG Graph Canvas */}
-      <div className="relative h-64 sm:h-72 w-full rounded-lg border-[0.5px] border-border/60 bg-background/60 overflow-hidden">
-        {/* Subtle dot grid background */}
-        <div className="absolute inset-0 bg-[radial-gradient(#cc785c_0.75px,transparent_0.75px)] [background-size:16px_16px] opacity-[0.12]" />
+      <div className="relative h-64 sm:h-72 w-full rounded-none border-2 border-black bg-white overflow-hidden shadow-xs">
+        {/* Subtle grid background */}
+        <div 
+          className="absolute inset-0 opacity-15 pointer-events-none" 
+          style={{ 
+            backgroundImage: 'linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)',
+            backgroundSize: '1.25rem 1.25rem'
+          }} 
+        />
 
         <svg className="absolute inset-0 w-full h-full pointer-events-none">
           {/* Render Connections */}
@@ -114,8 +120,8 @@ export const CitationKnowledgeGraph: React.FC = () => {
                   y1={`${fromNode.y}%`}
                   x2={`${toNode.x}%`}
                   y2={`${toNode.y}%`}
-                  stroke={isConnectedToActive ? 'hsl(var(--primary))' : 'hsl(var(--border))'}
-                  strokeWidth={isConnectedToActive ? 1.8 : 0.75}
+                  stroke={isConnectedToActive ? '#000' : '#888'}
+                  strokeWidth={isConnectedToActive ? 2.5 : 1}
                   strokeDasharray={isConnectedToActive ? '4 2' : 'none'}
                   className={cn('transition-all duration-300', isConnectedToActive && 'animate-pulse')}
                 />
@@ -134,28 +140,28 @@ export const CitationKnowledgeGraph: React.FC = () => {
             <motion.button
               key={node.id}
               onClick={() => setActiveNodeId(node.id)}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.94 }}
               style={{ left: `${node.x}%`, top: `${node.y}%` }}
               className={cn(
-                'absolute -translate-x-1/2 -translate-y-1/2 p-2.5 rounded-full border transition-all duration-200 shadow-sm flex items-center justify-center cursor-pointer group',
+                'absolute -translate-x-1/2 -translate-y-1/2 p-2.5 rounded-none border-2 border-black transition-all duration-200 shadow-xs flex items-center justify-center cursor-pointer group',
                 isActive
-                  ? 'bg-primary text-primary-foreground border-primary ring-4 ring-primary/20 scale-110 z-20'
+                  ? 'bg-primary text-black shadow-[3px_3px_0_0_#000] scale-110 z-20 font-bold'
                   : isCore
-                  ? 'bg-card text-foreground border-primary/50 ring-2 ring-primary/10 z-10'
-                  : 'bg-card text-muted-foreground hover:text-foreground border-border hover:border-primary/40 z-10'
+                  ? 'bg-card text-foreground shadow-xs z-10'
+                  : 'bg-card text-muted-foreground hover:text-foreground hover:bg-muted z-10'
               )}
             >
-              <Icon className={cn('w-4 h-4', isActive ? 'text-primary-foreground' : isCore ? 'text-primary' : 'text-muted-foreground')} />
+              <Icon className={cn('w-4 h-4', isActive ? 'text-black' : isCore ? 'text-black' : 'text-muted-foreground')} />
 
               {/* Floating Node Label */}
               <span
                 className={cn(
-                  'hidden sm:block absolute whitespace-nowrap px-2 py-0.5 rounded text-[8px] font-mono uppercase tracking-wider transition-all pointer-events-none shadow-sm',
+                  'hidden sm:block absolute whitespace-nowrap px-2 py-0.5 rounded-none border border-black text-[9px] font-head font-bold uppercase tracking-wider transition-all pointer-events-none shadow-xs',
                   node.y > 50 ? '-bottom-6' : '-top-6',
                   isActive
-                    ? 'bg-foreground text-background font-bold !block z-30'
-                    : 'bg-card/90 text-muted-foreground border-[0.5px] border-border opacity-75 group-hover:opacity-100'
+                    ? 'bg-black text-white !block z-30'
+                    : 'bg-card text-foreground opacity-90 group-hover:opacity-100'
                 )}
               >
                 {node.label}
@@ -173,23 +179,23 @@ export const CitationKnowledgeGraph: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -4 }}
           transition={{ duration: 0.15 }}
-          className="p-3.5 rounded-lg border-[0.5px] border-border/80 bg-background/50 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono"
+          className="p-3.5 rounded-none border-2 border-black bg-muted/40 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono"
         >
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <span className="text-primary font-bold">{activeNode.label}</span>
-              <span className="text-[8px] px-1.5 py-0.2 rounded bg-muted text-muted-foreground uppercase">
+              <span className="text-foreground font-head font-bold uppercase">{activeNode.label}</span>
+              <span className="text-[9px] font-head font-bold px-1.5 py-0.2 bg-primary text-black border border-black uppercase">
                 {activeNode.category}
               </span>
             </div>
-            <p className="text-[11px] text-muted-foreground leading-relaxed max-w-xl">
+            <p className="text-[11px] text-muted-foreground leading-relaxed max-w-xl font-sans font-medium">
               {activeNode.description}
             </p>
           </div>
 
           <div className="text-right shrink-0">
-            <div className="text-[9px] text-muted-foreground uppercase">RESEARCH SPEC</div>
-            <div className="text-foreground font-semibold font-mono text-[11px]">{activeNode.metric}</div>
+            <div className="text-[9px] text-muted-foreground font-head font-bold uppercase">RESEARCH SPEC</div>
+            <div className="text-foreground font-bold font-mono text-xs bg-card px-2 py-0.5 border border-black shadow-xs">{activeNode.metric}</div>
           </div>
         </motion.div>
       </AnimatePresence>

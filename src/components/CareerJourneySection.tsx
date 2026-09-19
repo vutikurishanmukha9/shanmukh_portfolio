@@ -46,7 +46,7 @@ export const CareerJourneySection = () => {
     const containerRef = useRef<HTMLDivElement>(null);
 
     return (
-        <SectionWrapper id="career" className="py-16 bg-muted/20 border-b-[0.5px] border-border/40">
+        <SectionWrapper id="career" className="py-16 bg-muted/20 border-b-2 border-black">
             <div className="container mx-auto px-4 lg:px-8 relative z-10" ref={containerRef}>
                 {/* Header */}
                 <div className="text-center mb-16 max-w-2xl mx-auto">
@@ -54,30 +54,25 @@ export const CareerJourneySection = () => {
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-card border-[0.5px] border-border/80 shadow-none mb-4"
+                        className="inline-flex items-center gap-2 px-3 py-1 border-2 border-black bg-primary text-black font-head text-xs font-bold uppercase shadow-xs mb-4"
                     >
-                        <span className="text-[10px] font-mono tracking-widest text-muted-foreground uppercase">Experience</span>
+                        <span className="w-2 h-2 rounded-full bg-black animate-pulse" />
+                        <span>Experience</span>
                     </motion.div>
                     <motion.h2
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.05 }}
-                        className="text-4xl md:text-5xl font-serif-display font-medium tracking-tight text-foreground select-none"
+                        className="text-4xl md:text-5xl font-head font-bold tracking-tight text-foreground uppercase select-none"
                     >
                         Career Timeline
                     </motion.h2>
                 </div>
 
-                {/* Apple-Grade Specular Hardware Enclosure */}
-                <div className="relative max-w-4xl mx-auto border-[0.5px] border-border/80 bg-card/60 backdrop-blur-md rounded-xl overflow-hidden shadow-none group">
-                    {/* Apple / VisionOS Specular Top Highlight Ray */}
-                    <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent transition-opacity duration-500 group-hover:via-primary/80 group-hover:h-[1.5px] z-20" />
-
-                    {/* Ambient Directional Light Bloom */}
-                    <div className="pointer-events-none absolute -top-14 left-1/2 -translate-x-1/2 w-3/4 h-14 bg-gradient-to-b from-primary/15 via-primary/5 to-transparent blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
-
-                    <div className="relative z-10 divide-y divide-border/60">
+                {/* Neobrutalist Milestone Ledger Container */}
+                <div className="relative max-w-4xl mx-auto border-2 border-black bg-card rounded-none overflow-hidden shadow-[6px_6px_0px_#000]">
+                    <div className="relative z-10 divide-y-2 divide-black">
                         {experiences.map((exp, index) => (
                             <motion.div
                                 key={`${exp.title}-${exp.company}`}
@@ -85,37 +80,37 @@ export const CareerJourneySection = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.4, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
-                                className="p-6 md:p-8 flex flex-col md:grid md:grid-cols-[1.25fr_2.5fr_1.25fr] gap-6 items-start hover:bg-card/90 transition-colors duration-200"
+                                className="p-4 sm:p-6 md:p-8 flex flex-col md:grid md:grid-cols-[1.3fr_2.5fr_1.2fr] gap-6 items-start hover:bg-primary/5 transition-colors duration-150"
                             >
                                 {/* Left: Period & Location */}
-                                <div className="flex flex-col gap-1">
-                                    <span className="text-[11px] font-mono font-medium tracking-wider text-primary uppercase">
+                                <div className="flex flex-col gap-1.5">
+                                    <span className="text-[11px] font-head font-bold tracking-wider text-black bg-primary px-2 py-0.5 border border-black uppercase shadow-xs inline-block w-fit">
                                         {exp.period}
                                     </span>
-                                    <span className="text-[9px] font-mono tracking-widest uppercase text-muted-foreground">
+                                    <span className="text-[10px] font-mono tracking-wider uppercase text-muted-foreground font-semibold">
                                         {exp.location}
                                     </span>
                                 </div>
 
                                 {/* Middle: Title, Company, Description */}
-                                <div className="space-y-1.5">
-                                    <h3 className="text-base font-serif-display font-medium text-foreground leading-tight">
+                                <div className="space-y-2">
+                                    <h3 className="text-base sm:text-lg font-head font-bold text-foreground leading-tight uppercase">
                                         {exp.title}
                                     </h3>
-                                    <div className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground">
-                                        {exp.company}
+                                    <div className="text-xs font-mono uppercase tracking-wider text-foreground font-bold">
+                                        @{exp.company}
                                     </div>
-                                    <p className="text-muted-foreground text-xs leading-relaxed max-w-xl">
+                                    <p className="text-foreground text-xs leading-relaxed max-w-xl font-normal">
                                         {exp.description}
                                     </p>
                                 </div>
 
                                 {/* Right: Skills Tags */}
-                                <div className="flex flex-wrap gap-1 md:justify-end w-full">
+                                <div className="flex flex-wrap gap-1.5 md:justify-end w-full">
                                     {exp.skills.map((skill) => (
                                         <span
                                             key={skill}
-                                            className="px-2 py-0.5 rounded bg-background/50 border-[0.5px] border-border/80 text-[9px] font-mono text-muted-foreground"
+                                            className="px-2 py-0.5 bg-muted/60 border-2 border-black text-[10px] font-head font-medium text-foreground shadow-xs"
                                         >
                                             {skill}
                                         </span>

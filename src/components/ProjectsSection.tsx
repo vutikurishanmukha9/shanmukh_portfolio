@@ -58,12 +58,12 @@ interface Project {
 }
 
 const categoryConfig = {
-  'AI/ML': { icon: Brain, color: 'text-violet-500', badge: 'bg-violet-500/10 text-violet-600 dark:text-violet-400 border-violet-500/20' },
-  Cloud: { icon: Cloud, color: 'text-sky-500', badge: 'bg-sky-500/10 text-sky-600 dark:text-sky-400 border-sky-500/20' },
-  'Web App': { icon: Globe, color: 'text-rose-500', badge: 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20' },
-  'Computer Vision': { icon: Eye, color: 'text-emerald-500', badge: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20' },
-  'Data Analysis': { icon: BarChart3, color: 'text-amber-500', badge: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20' },
-  Other: { icon: Layers3, color: 'text-muted-foreground', badge: 'bg-muted text-muted-foreground border-border' },
+  'AI/ML': { icon: Brain, color: 'text-black', badge: 'bg-[#ffdc58] text-black border-2 border-black shadow-xs font-head font-bold' },
+  Cloud: { icon: Cloud, color: 'text-black', badge: 'bg-[#84d2ff] text-black border-2 border-black shadow-xs font-head font-bold' },
+  'Web App': { icon: Globe, color: 'text-black', badge: 'bg-[#ff94b9] text-black border-2 border-black shadow-xs font-head font-bold' },
+  'Computer Vision': { icon: Eye, color: 'text-black', badge: 'bg-[#70e0a5] text-black border-2 border-black shadow-xs font-head font-bold' },
+  'Data Analysis': { icon: BarChart3, color: 'text-black', badge: 'bg-[#ffbd2e] text-black border-2 border-black shadow-xs font-head font-bold' },
+  Other: { icon: Layers3, color: 'text-black', badge: 'bg-muted text-black border-2 border-black shadow-xs font-head font-bold' },
 } satisfies Record<ProjectCategory, { icon: LucideIcon; color: string; badge: string }>;
 
 const projects: Project[] = [
@@ -303,34 +303,15 @@ const LuxuryProjectCard: React.FC<{
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        'group relative rounded-2xl border-[0.5px] border-border/80 bg-card/60 p-2.5 transition-[border-color,box-shadow,transform] duration-300 hover:border-primary/50 hover:shadow-[0_12px_36px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 overflow-hidden',
-        featured && 'md:col-span-2 xl:col-span-3 bg-gradient-to-br from-card via-card/90 to-background'
+        'group relative rounded-none border-2 border-black bg-card p-3 shadow-[4px_4px_0px_#000] hover:shadow-[8px_8px_0px_#000] transition-shadow duration-200 overflow-hidden',
+        featured && 'md:col-span-2 xl:col-span-3 bg-card'
       )}
     >
-      {/* Apple / VisionOS Specular Top Highlight Ray */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent transition-opacity duration-500 group-hover:via-primary/80 group-hover:h-[1.5px] z-20" />
-
-      {/* Ambient Directional Light Bloom */}
-      <div className="pointer-events-none absolute -top-14 left-1/2 -translate-x-1/2 w-3/4 h-14 bg-gradient-to-b from-primary/20 via-primary/5 to-transparent blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
-
-      {/* Dynamic Cursor Spotlight Shader */}
-      {mousePos && (
-        <div
-          className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-300 opacity-100"
-          style={{
-            background: `radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, hsl(var(--primary) / 0.08), transparent 80%)`,
-          }}
-        />
-      )}
-
       {/* Inner Machined Hardware Core */}
       <div className={cn(
-        'relative z-10 rounded-xl border-[0.5px] border-border/60 bg-background/70 p-4 sm:p-5 flex flex-col justify-between h-full backdrop-blur-sm overflow-hidden',
-        featured && 'grid grid-cols-1 lg:grid-cols-12 gap-6 items-center p-6'
+        'relative z-10 rounded-none border-2 border-black bg-card p-3.5 sm:p-5 flex flex-col justify-between h-full overflow-hidden',
+        featured && 'grid grid-cols-1 lg:grid-cols-12 gap-6 items-center p-4 sm:p-6'
       )}>
-        {/* Inner Chamfer Specular Sheen */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-foreground/15 dark:via-white/15 to-transparent transition-opacity duration-300 group-hover:via-primary/40 z-20" />
-
         {/* Visual Mockup Container */}
         <div className={cn('w-full', featured ? 'lg:col-span-6' : 'mb-4')}>
           {renderProjectMockup(project.title)}
@@ -342,54 +323,54 @@ const LuxuryProjectCard: React.FC<{
             {/* Top Category & Solo Badges */}
             <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
               <div className="flex items-center gap-1.5">
-                <span className={cn('inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[9px] font-mono uppercase tracking-wider border', visual.badge)}>
-                  <Icon className="w-3 h-3" />
+                <span className={cn('inline-flex items-center gap-1 px-2.5 py-0.5 rounded-none text-[10px] font-head uppercase tracking-wider', visual.badge)}>
+                  <Icon className="w-3.5 h-3.5" />
                   {project.category}
                 </span>
-                <span className="text-[9px] font-mono text-muted-foreground/80 px-2 py-0.5 rounded bg-muted/40">
+                <span className="text-[10px] font-mono text-black font-bold px-2 py-0.5 border border-black bg-muted/50">
                   {project.focus}
                 </span>
               </div>
 
-              <span className="inline-flex items-center gap-1 text-[9px] font-mono text-emerald-600 dark:text-emerald-400">
-                <CheckCircle2 className="w-3 h-3 text-emerald-500" />
+              <span className="inline-flex items-center gap-1 text-[10px] font-head font-bold uppercase text-emerald-700 bg-emerald-100 border border-black px-2 py-0.5">
+                <CheckCircle2 className="w-3 h-3 text-emerald-700" />
                 {project.soloBuild}
               </span>
             </div>
 
             {/* Title & Description */}
-            <h3 className={cn('font-serif-display font-medium tracking-tight text-foreground', featured ? 'text-2xl sm:text-3xl' : 'text-xl')}>
+            <h3 className={cn('font-head font-bold tracking-tight text-foreground uppercase leading-snug', featured ? 'text-2xl sm:text-3xl' : 'text-xl')}>
               {project.title}
             </h3>
-            <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
+            <p className="mt-2 text-xs text-foreground leading-relaxed font-medium">
               {project.description}
             </p>
 
             {/* Impact Metric Box */}
-            <div className="mt-3.5 p-2.5 rounded-lg border-[0.5px] border-border/80 bg-card/50 text-[11px] font-mono">
-              <span className="text-[8px] uppercase tracking-widest text-primary font-bold block mb-0.5">
-                SYSTEM IMPACT
+            <div className="mt-3.5 p-3 rounded-none border-2 border-black bg-[#fff7e8] text-xs font-mono shadow-xs">
+              <span className="text-[10px] uppercase tracking-widest text-black font-head font-bold block mb-1">
+                ★ SYSTEM IMPACT
               </span>
-              <p className="text-muted-foreground leading-relaxed text-[11px]">
+              <p className="text-black font-semibold leading-relaxed text-[11px]">
                 {project.impact}
               </p>
             </div>
           </div>
 
           {/* Tech Stack & Action Toolbar */}
-          <div className="mt-4 pt-3.5 border-t-[0.5px] border-border/60 space-y-3">
+          <div className="mt-4 pt-3.5 border-t-2 border-black space-y-3">
             {/* Tech Tags */}
             <div className="flex flex-wrap gap-1.5">
               {primaryTech.map((tech) => (
                 <span
                   key={tech}
-                  className="px-2 py-0.5 rounded text-[9px] font-mono bg-muted/50 border-[0.5px] border-border/80 text-muted-foreground"
+                  className="px-2 py-0.5 rounded-none text-[10px] font-head font-medium bg-muted border-2 border-black text-foreground shadow-xs"
                 >
                   {tech}
                 </span>
               ))}
               {project.tech.length > primaryTech.length && (
-                <span className="px-1.5 py-0.5 rounded text-[9px] font-mono text-muted-foreground/60">
+                <span className="px-1.5 py-0.5 rounded-none text-[10px] font-head font-bold text-foreground border-2 border-black bg-card">
                   +{project.tech.length - primaryTech.length}
                 </span>
               )}
@@ -404,16 +385,16 @@ const LuxuryProjectCard: React.FC<{
                   playClick(850, 0.03, 'sine');
                   onInspectBlueprint?.(project);
                 }}
-                className="h-8 rounded-full border-primary/40 bg-primary/5 text-primary hover:bg-primary/15 px-3 text-[10px] font-mono uppercase tracking-wider flex items-center gap-1 font-semibold"
+                className="h-8 rounded-none border-2 border-black bg-muted hover:bg-primary text-black px-3 text-xs font-head font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-xs active:translate-x-0.5 active:translate-y-0.5"
               >
-                <Network className="h-3 w-3" />
+                <Network className="h-3.5 w-3.5" />
                 Blueprint
               </Button>
 
               {project.caseStudy && (
                 <Button
                   size="sm"
-                  className="h-8 rounded-full px-3.5 text-[10px] font-mono uppercase tracking-wider font-semibold"
+                  className="h-8 rounded-none border-2 border-black bg-primary hover:bg-primary-hover text-black px-3.5 text-xs font-head font-bold uppercase tracking-wider shadow-xs active:translate-x-0.5 active:translate-y-0.5"
                   asChild
                 >
                   <Link to={project.caseStudy}>
@@ -425,9 +406,9 @@ const LuxuryProjectCard: React.FC<{
 
               {project.demo && (
                 <Button
-                  variant={project.caseStudy ? 'outline' : 'default'}
+                  variant="default"
                   size="sm"
-                  className="h-8 rounded-full px-3.5 text-[10px] font-mono uppercase tracking-wider"
+                  className="h-8 rounded-none border-2 border-black bg-primary hover:bg-primary-hover text-black px-3.5 text-xs font-head font-bold uppercase tracking-wider shadow-xs active:translate-x-0.5 active:translate-y-0.5"
                   asChild
                 >
                   <a href={project.demo} target="_blank" rel="noopener noreferrer">
@@ -440,11 +421,11 @@ const LuxuryProjectCard: React.FC<{
               <Button
                 variant="outline"
                 size="sm"
-                className="h-8 rounded-full bg-background px-3 text-[10px] font-mono uppercase tracking-wider ml-auto"
+                className="h-8 rounded-none border-2 border-black bg-card hover:bg-muted text-black px-3 text-xs font-head font-bold uppercase tracking-wider sm:ml-auto shadow-xs active:translate-x-0.5 active:translate-y-0.5"
                 asChild
               >
                 <a href={project.github} target="_blank" rel="noopener noreferrer">
-                  <Github className="mr-1 h-3.5 w-3.5" />
+                  <Github className="mr-1.5 h-3.5 w-3.5" />
                   Code
                 </a>
               </Button>
@@ -681,7 +662,7 @@ export const ProjectsSection: React.FC = () => {
   const standardProjects = filteredProjects.filter((p) => p !== heroProject);
 
   return (
-    <SectionWrapper id="projects" className="py-20 border-b-[0.5px] border-border/40 relative">
+    <SectionWrapper id="projects" className="py-20 border-b-2 border-black relative bg-background">
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         
         {/* Section Header with Eyebrow Badge */}
@@ -690,12 +671,10 @@ export const ProjectsSection: React.FC = () => {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-card border-[0.5px] border-border/80 shadow-none mb-4"
+            className="inline-flex items-center gap-2 px-3 py-1 border-2 border-black bg-primary text-black font-head text-xs font-bold uppercase shadow-xs mb-4"
           >
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            <span className="text-[10px] font-mono tracking-widest text-muted-foreground uppercase">
-              Production Codebase
-            </span>
+            <span className="w-2 h-2 rounded-full bg-black animate-pulse" />
+            <span>Production Codebase</span>
           </motion.div>
 
           <motion.h2
@@ -703,7 +682,7 @@ export const ProjectsSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.05 }}
-            className="text-4xl md:text-5xl font-serif-display font-medium tracking-tight text-foreground select-none"
+            className="text-4xl md:text-5xl font-head font-bold tracking-tight text-foreground uppercase select-none"
           >
             Featured Projects
           </motion.h2>
@@ -713,7 +692,7 @@ export const ProjectsSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-muted-foreground mt-3 text-sm font-normal max-w-lg mx-auto leading-relaxed"
+            className="text-foreground mt-3 text-sm font-medium max-w-lg mx-auto leading-relaxed"
           >
             End-to-end architectures engineered with strict type safety, micro-services, and production ML pipelines.
           </motion.p>
@@ -723,7 +702,7 @@ export const ProjectsSection: React.FC = () => {
         <div className="mb-10 flex flex-col sm:flex-row items-center justify-between gap-4">
           
           {/* Category Tabs with Counts */}
-          <div className="flex flex-wrap items-center gap-1.5 p-1 bg-card/60 border border-border/80 rounded-xl backdrop-blur-md">
+          <div className="flex flex-wrap items-center gap-1.5 p-1 bg-card border-2 border-black rounded-none shadow-xs">
             {categories.map((cat) => {
               const count = cat === 'All' ? projects.length : projects.filter((p) => p.category === cat).length;
               const isSelected = selectedCategory === cat;
@@ -737,14 +716,14 @@ export const ProjectsSection: React.FC = () => {
                     setSelectedCategory(cat);
                   }}
                   className={cn(
-                    'px-3 py-1.5 rounded-lg text-xs font-mono transition-all flex items-center gap-1.5 cursor-pointer',
+                    'px-3 py-1.5 rounded-none text-xs font-head font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer',
                     isSelected
-                      ? 'bg-foreground text-background font-bold shadow-sm'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-muted/40'
+                      ? 'bg-primary text-black border-2 border-black shadow-xs'
+                      : 'border-2 border-transparent text-foreground hover:bg-muted'
                   )}
                 >
                   <span>{cat}</span>
-                  <span className={cn('text-[9px] px-1.5 py-0.2 rounded-full', isSelected ? 'bg-background/20 text-background' : 'bg-muted text-muted-foreground')}>
+                  <span className={cn('text-[9px] px-1.5 py-0.2 font-mono font-bold border border-black', isSelected ? 'bg-black text-white' : 'bg-muted text-foreground')}>
                     {count}
                   </span>
                 </button>
@@ -753,7 +732,7 @@ export const ProjectsSection: React.FC = () => {
           </div>
 
           {/* View Mode Toggle: Bento vs Matrix */}
-          <div className="flex items-center gap-1 p-1 bg-card/60 border border-border/80 rounded-xl self-end sm:self-center">
+          <div className="flex items-center gap-1 p-1 bg-card border-2 border-black rounded-none shadow-xs self-end sm:self-center">
             <button
               type="button"
               onClick={() => {
@@ -761,8 +740,8 @@ export const ProjectsSection: React.FC = () => {
                 setViewMode('bento');
               }}
               className={cn(
-                'p-1.5 rounded-lg text-xs font-mono flex items-center gap-1 transition-colors',
-                viewMode === 'bento' ? 'bg-primary text-primary-foreground font-bold' : 'text-muted-foreground hover:text-foreground'
+                'p-1.5 rounded-none text-xs font-head font-bold uppercase flex items-center gap-1 transition-all cursor-pointer',
+                viewMode === 'bento' ? 'bg-primary text-black border-2 border-black shadow-xs' : 'text-foreground hover:bg-muted'
               )}
               title="Bento Grid View"
             >
@@ -776,8 +755,8 @@ export const ProjectsSection: React.FC = () => {
                 setViewMode('matrix');
               }}
               className={cn(
-                'p-1.5 rounded-lg text-xs font-mono flex items-center gap-1 transition-colors',
-                viewMode === 'matrix' ? 'bg-primary text-primary-foreground font-bold' : 'text-muted-foreground hover:text-foreground'
+                'p-1.5 rounded-none text-xs font-head font-bold uppercase flex items-center gap-1 transition-all cursor-pointer',
+                viewMode === 'matrix' ? 'bg-primary text-black border-2 border-black shadow-xs' : 'text-foreground hover:bg-muted'
               )}
               title="Engineering Matrix Table"
             >
@@ -793,10 +772,10 @@ export const ProjectsSection: React.FC = () => {
             <button
               type="button"
               onClick={() => setSelectedSkill(null)}
-              className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-mono uppercase tracking-wider text-primary hover:bg-primary/20 transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-none border-2 border-black bg-primary px-3 py-1 text-xs font-head font-bold uppercase tracking-wider text-black shadow-xs hover:bg-primary-hover transition-colors cursor-pointer"
             >
               Filtered by Skill: {selectedSkill}
-              <X className="h-3 w-3" />
+              <X className="h-3.5 w-3.5" />
             </button>
           </div>
         )}

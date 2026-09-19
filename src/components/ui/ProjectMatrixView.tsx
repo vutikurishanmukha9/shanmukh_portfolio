@@ -55,52 +55,50 @@ export const ProjectMatrixView: React.FC<ProjectMatrixViewProps> = ({
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search projects by tech, title..."
             aria-label="Search projects by tech, title, or keywords"
-            className="w-full pl-9 pr-3 py-1.5 rounded-lg border-[0.5px] border-border bg-card/80 text-xs font-mono placeholder:text-muted-foreground/60 focus:outline-none focus:border-primary/50 text-foreground"
+            className="w-full pl-9 pr-3 py-1.5 rounded-none border-2 border-black bg-card text-xs font-mono placeholder:text-muted-foreground focus:outline-none focus:bg-white text-foreground shadow-xs"
           />
         </div>
-        <div className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider self-end sm:self-center">
+        <div className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider self-end sm:self-center font-bold">
           SHOWING {filtered.length} OF {projects.length} SYSTEM REPOSITORIES
         </div>
       </div>
 
       {/* Engineering Table Matrix */}
-      <div className="relative w-full rounded-xl border-[0.5px] border-border/80 bg-card/40 backdrop-blur-md overflow-x-auto shadow-sm">
-        {/* Specular Top Edge */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/30 dark:via-white/15 to-transparent z-20" />
+      <div className="relative w-full rounded-none border-2 border-black bg-card overflow-x-auto shadow-[4px_4px_0px_#000]">
         <table className="w-full text-left text-xs font-mono border-collapse min-w-[700px]">
           <thead>
-            <tr className="border-b border-border/60 bg-muted/20 text-[9px] uppercase tracking-widest text-muted-foreground">
-              <th className="py-3 px-4 font-semibold">PROJECT NAME</th>
-              <th className="py-3 px-3 font-semibold">DOMAIN</th>
-              <th className="py-3 px-3 font-semibold">PRIMARY STACK</th>
-              <th className="py-3 px-3 font-semibold">CORE METRIC</th>
-              <th className="py-3 px-3 font-semibold">SOLO SPEC</th>
-              <th className="py-3 px-4 font-semibold text-right">ACTIONS</th>
+            <tr className="border-b-2 border-black bg-primary/25 text-[9px] uppercase tracking-widest text-foreground font-head font-bold">
+              <th className="py-3 px-4 font-bold">PROJECT NAME</th>
+              <th className="py-3 px-3 font-bold">DOMAIN</th>
+              <th className="py-3 px-3 font-bold">PRIMARY STACK</th>
+              <th className="py-3 px-3 font-bold">CORE METRIC</th>
+              <th className="py-3 px-3 font-bold">SOLO SPEC</th>
+              <th className="py-3 px-4 font-bold text-right">ACTIONS</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-border/40 text-foreground">
+          <tbody className="divide-y-2 divide-black text-foreground">
             {filtered.map((project, idx) => (
               <motion.tr
                 key={project.title}
                 initial={{ opacity: 0, y: 4 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.18, delay: idx * 0.02 }}
-                className="hover:bg-card transition-colors group"
+                className="hover:bg-muted/40 transition-colors group"
               >
                 {/* Title & Focus */}
                 <td className="py-3.5 px-4">
-                  <div className="font-semibold text-foreground flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary/80 group-hover:bg-primary transition-colors" />
+                  <div className="font-bold text-foreground flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-black" />
                     <span>{project.title}</span>
                   </div>
-                  <span className="text-[10px] text-muted-foreground/80 block mt-0.5">
+                  <span className="text-[10px] text-muted-foreground block mt-0.5">
                     {project.focus}
                   </span>
                 </td>
 
                 {/* Category Chip */}
                 <td className="py-3.5 px-3">
-                  <span className="px-2 py-0.5 rounded-full text-[9px] bg-background border-[0.5px] border-border text-muted-foreground whitespace-nowrap">
+                  <span className="px-2 py-0.5 rounded-none text-[9px] font-head font-bold bg-muted border border-black text-foreground uppercase whitespace-nowrap shadow-xs">
                     {project.category}
                   </span>
                 </td>
@@ -111,13 +109,13 @@ export const ProjectMatrixView: React.FC<ProjectMatrixViewProps> = ({
                     {project.tech.slice(0, 3).map((t) => (
                       <span
                         key={t}
-                        className="px-1.5 py-0.5 rounded bg-muted/40 text-[9px] text-muted-foreground"
+                        className="px-1.5 py-0.5 rounded-none border border-black bg-card text-[9px] font-head font-medium text-foreground"
                       >
                         {t}
                       </span>
                     ))}
                     {project.tech.length > 3 && (
-                      <span className="text-[9px] text-muted-foreground/60">
+                      <span className="text-[9px] font-head font-bold text-muted-foreground">
                         +{project.tech.length - 3}
                       </span>
                     )}
@@ -126,15 +124,15 @@ export const ProjectMatrixView: React.FC<ProjectMatrixViewProps> = ({
 
                 {/* Core Metric */}
                 <td className="py-3.5 px-3 whitespace-nowrap">
-                  <span className="text-primary font-semibold text-[11px]">
+                  <span className="text-black font-bold text-[10px] bg-primary px-1.5 py-0.5 border border-black">
                     {project.metrics[0]}
                   </span>
                 </td>
 
                 {/* Solo Scope */}
-                <td className="py-3.5 px-3 whitespace-nowrap text-emerald-600 dark:text-emerald-400 text-[10px]">
+                <td className="py-3.5 px-3 whitespace-nowrap text-emerald-800 dark:text-emerald-300 text-[10px] font-bold">
                   <div className="flex items-center gap-1">
-                    <CheckCircle2 className="w-3 h-3 text-emerald-500" />
+                    <CheckCircle2 className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
                     <span>Solo Verified</span>
                   </div>
                 </td>
@@ -146,7 +144,7 @@ export const ProjectMatrixView: React.FC<ProjectMatrixViewProps> = ({
                       variant="outline"
                       size="sm"
                       onClick={() => onInspectBlueprint(project)}
-                      className="h-7 px-2 text-[9px] font-mono uppercase tracking-wider rounded-md border-primary/30 text-primary hover:bg-primary/10 gap-1"
+                      className="h-7 px-2 text-[9px] font-head font-bold uppercase tracking-wider rounded-none border-2 border-black bg-card text-black hover:bg-primary gap-1 shadow-xs"
                     >
                       <Network className="w-3 h-3" />
                       Blueprint
@@ -155,7 +153,7 @@ export const ProjectMatrixView: React.FC<ProjectMatrixViewProps> = ({
                     {project.caseStudy && (
                       <Button
                         size="sm"
-                        className="h-7 px-2 text-[9px] font-mono uppercase tracking-wider rounded-md"
+                        className="h-7 px-2 text-[9px] font-head font-bold uppercase tracking-wider rounded-none border-2 border-black bg-primary text-black hover:bg-primary-hover shadow-xs"
                         asChild
                       >
                         <Link to={project.caseStudy}>
@@ -169,7 +167,7 @@ export const ProjectMatrixView: React.FC<ProjectMatrixViewProps> = ({
                       <Button
                         variant="outline"
                         size="sm"
-                        className="h-7 px-2 text-[9px] font-mono uppercase tracking-wider rounded-md"
+                        className="h-7 px-2 text-[9px] font-head font-bold uppercase tracking-wider rounded-none border-2 border-black bg-card text-black hover:bg-muted shadow-xs"
                         asChild
                       >
                         <a href={project.demo} target="_blank" rel="noopener noreferrer">
@@ -182,7 +180,7 @@ export const ProjectMatrixView: React.FC<ProjectMatrixViewProps> = ({
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="h-7 px-2 text-[9px] font-mono uppercase tracking-wider rounded-md"
+                      className="h-7 px-2 text-[9px] font-head font-bold uppercase tracking-wider rounded-none border-2 border-black bg-card text-black hover:bg-muted shadow-xs"
                       asChild
                     >
                       <a
@@ -201,6 +199,11 @@ export const ProjectMatrixView: React.FC<ProjectMatrixViewProps> = ({
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* Mobile Horizontal Scroll Indicator */}
+      <div className="md:hidden text-[10px] font-mono text-muted-foreground text-center mt-2 uppercase tracking-wider font-bold">
+        ← Swipe horizontally to view full architectural matrix →
       </div>
     </div>
   );

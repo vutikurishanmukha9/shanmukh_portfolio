@@ -96,7 +96,7 @@ export const DataDiffSlider: React.FC<DataDiffSliderProps> = ({ caseStudyId }) =
           <FileSpreadsheet className="w-3.5 h-3.5" />
           Raw Uncleaned (Left)
         </span>
-        <span className="text-[9px] opacity-60">Drag Divider // Compare Data Pipeline</span>
+        <span className="text-[9px] opacity-60 hidden sm:inline">Drag Divider // Compare Data Pipeline</span>
         <span className="flex items-center gap-1.5 text-primary font-semibold">
           Cleaned BI Model (Right)
           <CheckCircle2 className="w-3.5 h-3.5" />

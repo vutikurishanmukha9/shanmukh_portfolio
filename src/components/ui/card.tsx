@@ -7,8 +7,9 @@ const Card = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
+    data-slot="card"
     className={cn(
-      "rounded-lg border-[0.5px] border-border/80 bg-card/60 backdrop-blur-md text-card-foreground shadow-none",
+      "rounded-none border-2 border-black bg-card text-card-foreground shadow-md transition-all duration-200",
       className
     )}
     {...props}
@@ -22,6 +23,7 @@ const CardHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
+    data-slot="card-header"
     className={cn("flex flex-col space-y-1.5 p-5 sm:p-6", className)}
     {...props}
   />
@@ -34,8 +36,9 @@ const CardTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <h3
     ref={ref}
+    data-slot="card-title"
     className={cn(
-      "font-serif-display text-xl font-normal leading-none tracking-tight text-foreground",
+      "font-head text-lg font-medium leading-snug tracking-tight text-foreground",
       className
     )}
     {...props}
@@ -49,7 +52,8 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-xs text-muted-foreground leading-relaxed", className)}
+    data-slot="card-description"
+    className={cn("text-sm font-sans text-muted-foreground leading-relaxed", className)}
     {...props}
   />
 ));
@@ -59,7 +63,7 @@ const CardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("p-5 sm:p-6 pt-0", className)} {...props} />
+  <div ref={ref} data-slot="card-content" className={cn("p-5 sm:p-6 pt-0 font-sans", className)} {...props} />
 ));
 CardContent.displayName = "CardContent";
 
@@ -69,10 +73,12 @@ const CardFooter = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex items-center p-5 sm:p-6 pt-0", className)}
+    data-slot="card-footer"
+    className={cn("flex items-center p-5 sm:p-6 pt-0 border-t-2 border-black/10", className)}
     {...props}
   />
 ));
 CardFooter.displayName = "CardFooter";
 
 export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent };
+

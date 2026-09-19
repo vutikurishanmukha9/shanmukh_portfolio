@@ -10,6 +10,10 @@
     "cssVariables": true,
     "prefix": ""
   },
+  "registries": {
+    "@neobrutalism": "https://neobrutalism.com/r/radix/{name}.json",
+    "@neobrutalism-base": "https://neobrutalism.com/r/base/{name}.json"
+  },
   "aliases": {
     "components": "@/components",
     "utils": "@/lib/utils",

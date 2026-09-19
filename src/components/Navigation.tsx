@@ -108,13 +108,10 @@ export const Navigation = () => {
         <div
           onMouseLeave={() => setHoveredHash(null)}
           className={cn(
-            "group pointer-events-auto flex items-center p-1.5 bg-card/85 border-[0.5px] border-border/80 backdrop-blur-xl rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.06)] transition-all duration-300 relative",
-            isScrolled ? "scale-98 shadow-[0_12px_40px_rgba(0,0,0,0.1)]" : "scale-100"
+            "group pointer-events-auto flex items-center p-1.5 bg-card border-2 border-black rounded-none shadow-[4px_4px_0px_#000] transition-all duration-300 relative",
+            isScrolled ? "scale-98 shadow-[6px_6px_0px_#000]" : "scale-100"
           )}
         >
-          {/* Animated Moving Gradient Border on hover / interaction */}
-          <BorderBeam variant="gradient" duration={3.5} borderRadius={9999} alwaysVisible={true} />
-
           {/* Brand - Mobile only */}
           <button
             type="button"
@@ -123,22 +120,22 @@ export const Navigation = () => {
               window.scrollTo({ top: 0, behavior: 'smooth' });
               setActiveHash('#home');
             }}
-            className="px-3 py-1 font-serif-display text-base sm:text-lg tracking-tight text-foreground hover:text-primary transition-colors md:hidden relative z-30 cursor-pointer"
+            className="px-3 py-1 font-head text-base tracking-tight text-foreground hover:text-primary transition-colors md:hidden relative z-30 cursor-pointer"
             aria-label="Scroll to top"
           >
             VS<span className="text-primary">.</span>
           </button>
 
-          {/* Design Portfolio Mode Switcher (Always accessible on Mobile & Tablet) */}
+          {/* Design Portfolio Mode Switcher (Mobile & Tablet) */}
           <div className="md:hidden flex items-center relative z-30 mr-1.5">
             <Link
               to="/design"
               onClick={() => playClick(800, 0.03, 'sine')}
-              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary/10 hover:bg-primary text-primary hover:text-primary-foreground border border-primary/25 text-[10px] font-mono font-medium tracking-wide transition-[background-color,color,border-color,transform] active:scale-95 shadow-none"
+              className="inline-flex items-center gap-1 px-2.5 py-1 bg-black text-white hover:bg-primary hover:text-black border-2 border-black text-[10px] font-head font-bold uppercase tracking-wide transition-all shadow-xs"
               aria-label="Switch to Product Designer Portfolio"
             >
               <Palette className="w-3 h-3" />
-              <span>Design Mode</span>
+              <span>Design</span>
             </Link>
           </div>
 
@@ -147,7 +144,7 @@ export const Navigation = () => {
             <Button
               variant="ghost"
               size="icon"
-              className="rounded-full hover:bg-muted text-foreground h-8 w-8"
+              className="rounded-none border-2 border-black bg-card hover:bg-primary text-foreground h-8 w-8 shadow-xs"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
             >
@@ -172,18 +169,16 @@ export const Navigation = () => {
                     playClick(950, 0.015, 'sine');
                   }}
                 >
-                  {/* Floating Micro-Tooltip Reveal BELOW item - Never Gets Cut Off */}
+                  {/* Floating Micro-Tooltip */}
                   <AnimatePresence>
                     {isHovered && (
                       <motion.div
-                        initial={{ opacity: 0, y: -6, scale: 0.85 }}
+                        initial={{ opacity: 0, y: -6, scale: 0.9 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: -4, scale: 0.85 }}
+                        exit={{ opacity: 0, y: -4, scale: 0.9 }}
                         transition={{ type: "spring", stiffness: 450, damping: 25 }}
-                        className="absolute top-full mt-3.5 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-md bg-foreground text-background text-[10px] font-mono uppercase tracking-wider shadow-2xl pointer-events-none whitespace-nowrap z-50 flex flex-col items-center"
+                        className="absolute top-full mt-3 left-1/2 -translate-x-1/2 px-2 py-0.5 border-2 border-black bg-primary text-black text-[10px] font-head font-bold uppercase tracking-wider shadow-[2px_2px_0px_#000] pointer-events-none whitespace-nowrap z-50"
                       >
-                        {/* Caret arrow pointing upward to the icon */}
-                        <div className="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-foreground absolute bottom-full left-1/2 -translate-x-1/2" />
                         <span>{item.label}</span>
                       </motion.div>
                     )}
@@ -192,18 +187,18 @@ export const Navigation = () => {
                   <a
                     href={item.href}
                     onClick={(e) => handleScrollTo(e, item.href)}
-                    className="relative w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-full select-none"
+                    className="relative w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-none select-none"
                     aria-label={item.label}
                   >
-                    {/* Sliding Active Pill Capsule Indicator */}
+                    {/* Active Indicator Box */}
                     {isHighlighted && (
                       <motion.div
                         layoutId="navbar-dock-pill"
                         className={cn(
-                          "absolute inset-0 rounded-full",
+                          "absolute inset-0 rounded-none border-2 border-black",
                           isActive
-                            ? "bg-foreground text-background dark:bg-primary shadow-[0_2px_12px_rgba(0,0,0,0.18)]"
-                            : "bg-muted/80 border-[0.5px] border-border/80"
+                            ? "bg-primary shadow-[2px_2px_0px_#000]"
+                            : "bg-muted border-black/40"
                         )}
                         transition={{
                           type: "spring",
@@ -214,24 +209,24 @@ export const Navigation = () => {
                       />
                     )}
 
-                    {/* Icon with Spring Magnification Hover Physics */}
+                    {/* Icon */}
                     <motion.div
                       animate={{
-                        scale: isHovered ? 1.25 : 1,
-                        y: isHovered ? -3 : 0,
+                        scale: isHovered ? 1.15 : 1,
+                        y: isHovered ? -2 : 0,
                       }}
-                      whileTap={{ scale: 0.88 }}
+                      whileTap={{ scale: 0.9 }}
                       transition={{ type: "spring", stiffness: 420, damping: 22 }}
                       className="relative z-10 flex items-center justify-center"
                     >
                       <Icon 
                         className={cn(
-                          "h-4 w-4 transition-colors duration-200", 
+                          "h-4 w-4 transition-colors duration-150", 
                           isActive && isHighlighted
-                            ? "text-background dark:text-primary-foreground stroke-[2.2]" 
+                            ? "text-black stroke-[2.5]" 
                             : isHovered
-                              ? "text-foreground stroke-[2]"
-                              : "text-muted-foreground stroke-[1.75]"
+                              ? "text-black stroke-[2.2]"
+                              : "text-muted-foreground stroke-[2]"
                         )} 
                       />
                     </motion.div>
@@ -242,31 +237,31 @@ export const Navigation = () => {
           </nav>
 
           {/* Vertical Divider */}
-          <div className="hidden md:block w-[0.5px] h-4 bg-border/80 mx-1.5 relative z-10" />
+          <div className="hidden md:block w-[2px] h-5 bg-black mx-1.5 relative z-10" />
 
           {/* Design Portfolio Mode Switcher */}
           <div className="hidden md:flex items-center relative z-10">
             <Link
               to="/design"
               onClick={() => playClick(800, 0.03, 'sine')}
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 hover:bg-primary text-primary hover:text-primary-foreground border border-primary/20 text-[10.5px] font-mono font-medium tracking-wide transition-[background-color,color,border-color,transform] duration-300 active:scale-95 shadow-none"
+              className="inline-flex items-center gap-1.5 px-3 py-1 bg-black text-white hover:bg-primary hover:text-black border-2 border-black text-[11px] font-head font-bold uppercase tracking-wide transition-all duration-150 shadow-xs active:translate-x-0.5 active:translate-y-0.5"
               aria-label="Switch to Product Designer Portfolio"
             >
-              <Palette className="w-3 h-3" />
+              <Palette className="w-3.5 h-3.5" />
               <span>Design Mode</span>
             </Link>
           </div>
 
-          {/* Theme & Sound Controls + Resume Button */}
-          <div className="hidden md:flex items-center gap-1.5 relative z-10 pr-1 pl-1">
+          {/* Controls + CV Button */}
+          <div className="hidden md:flex items-center gap-1.5 relative z-10 pr-1 pl-1.5">
             <Button
-              variant="outline"
+              variant="default"
               size="sm"
               onClick={() => {
                 playClick(800, 0.04, 'sine');
                 setIsResumeOpen(true);
               }}
-              className="h-8 text-[10px] font-mono uppercase tracking-wider px-3 rounded-full border-primary/30 text-primary hover:bg-primary/10 transition-colors active:scale-95"
+              className="h-8 text-[11px] font-head font-bold uppercase tracking-wider px-3 border-2 border-black bg-primary text-black hover:bg-primary-hover shadow-xs"
             >
               CV
             </Button>
@@ -289,14 +284,14 @@ export const Navigation = () => {
             className="fixed inset-0 z-50 bg-background/95 backdrop-blur-2xl md:hidden flex flex-col items-center justify-between p-6 pt-safe pb-safe supports-[backdrop-filter]:bg-background/90"
           >
             {/* Top Bar with Brand & Close Button */}
-            <div className="w-full max-w-sm flex items-center justify-between pt-2 pb-4 border-b border-border/40">
-              <span className="font-serif-display text-lg tracking-tight text-foreground">
+            <div className="w-full max-w-sm flex items-center justify-between pt-2 pb-4 border-b-2 border-black">
+              <span className="font-head text-lg font-bold uppercase tracking-tight text-foreground">
                 VS<span className="text-primary">.</span> Navigation
               </span>
               <Button
                 variant="ghost"
                 size="icon"
-                className="rounded-full hover:bg-muted text-foreground h-9 w-9"
+                className="rounded-none border-2 border-black hover:bg-muted text-foreground h-9 w-9 shadow-xs"
                 onClick={() => setIsMobileMenuOpen(false)}
                 aria-label="Close menu"
               >
@@ -309,7 +304,7 @@ export const Navigation = () => {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col items-center gap-3.5 w-full max-w-sm my-auto overflow-y-auto py-2 touch-scroll"
+              className="flex flex-col items-center gap-3 w-full max-w-sm my-auto overflow-y-auto py-2 touch-scroll"
             >
               {/* Prominent Top Design Mode Switcher Link */}
               <Link
@@ -318,7 +313,7 @@ export const Navigation = () => {
                   playClick(800, 0.03, 'sine');
                   setIsMobileMenuOpen(false);
                 }}
-                className="w-full py-3 px-4 rounded-2xl bg-gradient-to-r from-primary/15 via-primary/20 to-primary/15 border border-primary/35 text-primary font-mono text-xs font-semibold text-center flex items-center justify-center gap-2 hover:bg-primary hover:text-primary-foreground transition-[background-color,color,border-color,transform] shadow-sm mb-1 active:scale-98 cursor-pointer"
+                className="w-full py-2.5 px-4 rounded-none bg-primary text-black border-2 border-black font-head text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center gap-2 hover:bg-primary-hover transition-all shadow-xs mb-1 active:translate-x-0.5 active:translate-y-0.5 cursor-pointer"
               >
                 <Palette className="w-4 h-4" />
                 <span>Switch to Product Designer Mode →</span>
@@ -336,7 +331,7 @@ export const Navigation = () => {
                     whileTap={{ scale: 0.97 }}
                     transition={{ delay: 0.03 + (i * 0.02), type: "tween", ease: [0.16, 1, 0.3, 1], duration: 0.2 }}
                     className={cn(
-                      "text-lg sm:text-xl font-serif-display font-medium tracking-tight w-full text-center py-2.5 border-b-[0.5px] border-border/30 transition-colors flex items-center justify-center gap-2.5 active:text-primary",
+                      "text-base sm:text-lg font-head font-bold uppercase tracking-wider w-full text-center py-2 border-b-2 border-black/10 transition-colors flex items-center justify-center gap-2.5 active:text-primary",
                       activeHash === item.href ? "text-primary" : "text-muted-foreground hover:text-foreground"
                     )}
                   >
@@ -348,7 +343,7 @@ export const Navigation = () => {
             </motion.nav>
 
             {/* Bottom Controls Bar */}
-            <div className="w-full max-w-sm pt-4 pb-2 border-t border-border/40 flex items-center justify-between">
+            <div className="w-full max-w-sm pt-4 pb-2 border-t-2 border-black flex items-center justify-between">
               <Button
                 variant="outline"
                 size="sm"
@@ -357,7 +352,7 @@ export const Navigation = () => {
                   setIsMobileMenuOpen(false);
                   setIsResumeOpen(true);
                 }}
-                className="h-9 text-xs font-mono uppercase tracking-wider px-4 rounded-full border-primary/30 text-primary hover:bg-primary/10 active:scale-95"
+                className="h-9 text-xs font-head font-bold uppercase tracking-wider px-4 rounded-none border-2 border-black bg-card text-black hover:bg-primary shadow-xs active:translate-x-0.5 active:translate-y-0.5"
               >
                 View CV / Resume
               </Button>

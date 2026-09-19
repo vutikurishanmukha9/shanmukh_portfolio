@@ -31,9 +31,9 @@ export const ScrollProgress: React.FC = () => {
   return (
     <>
       {/* Top Reading Progress Bar */}
-      <div className="fixed top-0 left-0 right-0 h-[2.5px] z-[100] pointer-events-none bg-foreground/[0.06]">
+      <div className="fixed top-0 left-0 right-0 h-[4px] z-[100] pointer-events-none bg-muted/60 border-b border-black/30">
         <motion.div
-          className="h-full bg-gradient-to-r from-primary/80 via-primary to-primary/90 shadow-[0_0_8px_rgba(204,120,92,0.4)]"
+          className="h-full bg-primary border-r-2 border-black"
           style={{ width: `${scrollPercent}%` }}
           transition={{ ease: 'linear', duration: 0.1 }}
         />
@@ -43,23 +43,23 @@ export const ScrollProgress: React.FC = () => {
       <AnimatePresence>
         {isVisible && (
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.9 }}
+            initial={{ opacity: 0, y: 15, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.9 }}
-            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            exit={{ opacity: 0, y: 15, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
             className="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-40 pointer-events-auto pb-safe pr-safe"
           >
             <button
               type="button"
               onClick={scrollToTop}
               aria-label="Scroll back to top"
-              className="group flex items-center gap-2 px-3 py-1.5 rounded-full bg-background/90 border border-border/70 shadow-lg backdrop-blur-xl hover:border-primary/40 transition-[background-color,border-color,transform] duration-200 cursor-pointer active:scale-95"
+              className="group flex items-center gap-2 px-3 py-1.5 border-2 border-black bg-card hover:bg-primary text-black shadow-[4px_4px_0px_#000] rounded-none hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[5px_5px_0px_#000] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all cursor-pointer font-head font-bold text-xs uppercase"
             >
-              <span className="text-[10px] font-mono text-foreground/75 group-hover:text-foreground transition-colors tracking-tight">
+              <span className="font-mono text-[11px] font-bold">
                 {Math.round(scrollPercent)}%
               </span>
-              <div className="w-5 h-5 rounded-full bg-foreground/5 border border-border/50 flex items-center justify-center text-foreground group-hover:scale-110 transition-transform">
-                <ArrowUp className="w-3 h-3" />
+              <div className="w-5 h-5 border border-black bg-white flex items-center justify-center text-black group-hover:scale-110 transition-transform">
+                <ArrowUp className="w-3.5 h-3.5 stroke-[2.5]" />
               </div>
             </button>
           </motion.div>

@@ -13,8 +13,6 @@ import {
   Split,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { ScrollVelocitySkew } from '@/components/ui/ScrollVelocitySkew';
-import { TextScramble } from '@/components/ui/TextScramble';
 import { DataDiffSlider } from '@/components/ui/DataDiffSlider';
 
 // ─── Case Study Data ──────────────────────────────────────────────────
@@ -246,27 +244,21 @@ const CaseStudyCard = ({ study, index }: { study: CaseStudy; index: number }) =>
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.45, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-      className="group relative border-[0.5px] border-border/80 bg-card/45 backdrop-blur-md rounded-xl overflow-hidden hover-lift-minimal transition-colors duration-300 hover:border-primary/50 hover:shadow-[0_12px_36px_rgba(0,0,0,0.08)]"
+      className="group relative border-2 border-black bg-card rounded-none overflow-hidden shadow-[6px_6px_0px_#000] hover:shadow-[8px_8px_0px_#000] transition-shadow duration-200"
     >
-      {/* Apple / VisionOS Specular Top Highlight Ray */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent transition-opacity duration-500 group-hover:via-primary/80 group-hover:h-[1.5px] z-20" />
-
-      {/* Ambient Directional Light Bloom */}
-      <div className="pointer-events-none absolute -top-14 left-1/2 -translate-x-1/2 w-3/4 h-14 bg-gradient-to-b from-primary/20 via-primary/5 to-transparent blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
-
       {/* Top: Preview + Content side-by-side on lg */}
       <div className="relative z-10 grid lg:grid-cols-[0.95fr_1.05fr] gap-0">
         {/* Preview Panel with View Mode Switch */}
-        <div className="border-b-[0.5px] lg:border-b-0 lg:border-r-[0.5px] border-border/60 p-5 flex flex-col justify-between min-h-[260px] bg-card/30">
-          <div className="flex items-center justify-between mb-3 pb-2 border-b-[0.5px] border-border/40">
-            <span className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground">INSPECTOR</span>
-            <div className="flex bg-muted/50 p-0.5 rounded-full border-[0.5px] border-border/60">
+        <div className="border-b-2 lg:border-b-0 lg:border-r-2 border-black p-5 flex flex-col justify-between min-h-[260px] bg-[#fff7e8]">
+          <div className="flex items-center justify-between mb-3 pb-2 border-b-2 border-black">
+            <span className="text-[10px] font-head font-bold uppercase tracking-widest text-black">INSPECTOR // LIVE DATA</span>
+            <div className="flex border-2 border-black bg-white p-0.5 shadow-xs">
               <button
                 type="button"
                 onClick={() => setViewMode('dashboard')}
                 className={cn(
-                  "px-2.5 py-0.5 text-[8px] font-mono uppercase tracking-wider rounded-full transition-colors",
-                  viewMode === 'dashboard' ? "bg-card text-foreground font-bold shadow-sm" : "text-muted-foreground hover:text-foreground"
+                  "px-2.5 py-1 text-[10px] font-head font-bold uppercase tracking-wider transition-all cursor-pointer",
+                  viewMode === 'dashboard' ? "bg-primary text-black border border-black shadow-none" : "text-foreground hover:bg-muted"
                 )}
               >
                 BI Metric
@@ -275,11 +267,11 @@ const CaseStudyCard = ({ study, index }: { study: CaseStudy; index: number }) =>
                 type="button"
                 onClick={() => setViewMode('diff')}
                 className={cn(
-                  "px-2.5 py-0.5 text-[8px] font-mono uppercase tracking-wider rounded-full transition-colors flex items-center gap-1",
-                  viewMode === 'diff' ? "bg-primary text-primary-foreground font-bold shadow-sm" : "text-muted-foreground hover:text-foreground"
+                  "px-2.5 py-1 text-[10px] font-head font-bold uppercase tracking-wider transition-all flex items-center gap-1 cursor-pointer",
+                  viewMode === 'diff' ? "bg-primary text-black border border-black shadow-none" : "text-foreground hover:bg-muted"
                 )}
               >
-                <Split className="w-2.5 h-2.5" />
+                <Split className="w-3 h-3" />
                 Data Diff
               </button>
             </div>
@@ -303,23 +295,23 @@ const CaseStudyCard = ({ study, index }: { study: CaseStudy; index: number }) =>
           {/* Header */}
           <div>
             <div className="mb-3 flex flex-wrap items-center gap-1.5">
-              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded border-[0.5px] border-border bg-background text-[9px] font-mono uppercase tracking-wider text-muted-foreground">
-                <BarChart3 className="h-3 w-3 text-amber-500" />
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 border-2 border-black bg-primary text-[10px] font-head font-bold uppercase tracking-wider text-black shadow-xs">
+                <BarChart3 className="h-3.5 w-3.5" />
                 {study.focus}
               </span>
             </div>
 
-            <h3 className="font-serif-display text-xl md:text-2xl font-medium tracking-tight text-foreground mb-2">
-              <TextScramble text={study.title} />
+            <h3 className="font-head text-xl md:text-2xl font-bold tracking-tight text-foreground uppercase mb-2">
+              {study.title}
             </h3>
-            <p className="text-muted-foreground text-xs leading-relaxed mb-4">
+            <p className="text-foreground text-xs leading-relaxed font-medium mb-4">
               {study.subtitle}
             </p>
           </div>
 
           {/* Tabbed Narrative */}
           <div className="mb-4">
-            <div className="flex gap-0.5 mb-3 border-[0.5px] border-border/60 bg-muted/40 rounded-full p-0.5 w-fit">
+            <div className="flex gap-1 mb-3 border-2 border-black bg-muted p-1 rounded-none shadow-xs w-fit">
               {tabLabels.map((tab) => {
                 const isActive = activeTab === tab.key;
                 return (
@@ -328,52 +320,45 @@ const CaseStudyCard = ({ study, index }: { study: CaseStudy; index: number }) =>
                     key={tab.key}
                     onClick={() => setActiveTab(tab.key)}
                     className={cn(
-                      'relative px-3 py-1 text-[9px] font-mono tracking-widest uppercase transition-colors duration-200 z-10',
-                      isActive ? 'text-foreground font-semibold' : 'text-muted-foreground hover:text-foreground'
+                      'px-3 py-1 text-[10px] font-head font-bold tracking-wider uppercase transition-all cursor-pointer',
+                      isActive ? 'bg-primary text-black border border-black shadow-xs' : 'text-muted-foreground hover:text-black'
                     )}
                   >
-                    {isActive && (
-                      <motion.div
-                        layoutId={`case-tab-${study.id}`}
-                        className="absolute inset-0 rounded-full bg-card border-[0.5px] border-border/60 shadow-[0_1px_3px_rgba(0,0,0,0.05)]"
-                        transition={{ type: 'tween', ease: [0.16, 1, 0.3, 1], duration: 0.2 }}
-                      />
-                    )}
-                    <span className="relative z-20">{tab.label}</span>
+                    <span>{tab.label}</span>
                   </button>
                 );
               })}
             </div>
-            <div className="bg-muted/10 border-[0.5px] border-border/60 rounded-lg p-3.5 min-h-[72px]">
-              <p className="text-xs leading-relaxed text-muted-foreground">{study.tabs[activeTab]}</p>
+            <div className="bg-muted/30 border-2 border-black p-3.5 min-h-[72px] shadow-xs">
+              <p className="text-xs leading-relaxed text-foreground font-medium">{study.tabs[activeTab]}</p>
             </div>
           </div>
 
           {/* Metrics Row */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-1.5 mb-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 mb-4">
             {study.metrics.map((m) => (
               <div
                 key={m.label}
-                className="rounded border-[0.5px] border-border/80 bg-background/50 px-2 py-2 text-center"
+                className="border-2 border-black bg-card px-2 py-2 text-center shadow-xs"
               >
-                <div className="text-[10px] font-mono font-semibold text-foreground tabular-nums">{m.value}</div>
-                <div className="text-[8px] font-mono uppercase tracking-wider text-muted-foreground mt-0.5">{m.label}</div>
+                <div className="text-xs font-head font-bold text-foreground tabular-nums">{m.value}</div>
+                <div className="text-[9px] font-mono uppercase tracking-wider text-muted-foreground font-semibold mt-0.5">{m.label}</div>
               </div>
             ))}
           </div>
 
           {/* Tech + Links */}
-          <div className="border-t-[0.5px] border-border/60 pt-4 flex flex-col gap-3">
+          <div className="border-t-2 border-black pt-4 flex flex-col gap-3">
             <div>
-              <h4 className="mb-2 flex items-center gap-1 text-[9px] font-mono uppercase tracking-widest text-muted-foreground/80">
-                <Terminal className="h-2.5 w-2.5" />
+              <h4 className="mb-2 flex items-center gap-1 text-[10px] font-head uppercase tracking-widest text-foreground font-bold">
+                <Terminal className="h-3 w-3" />
                 Primary Stack
               </h4>
-              <div className="flex flex-wrap gap-1">
+              <div className="flex flex-wrap gap-1.5">
                 {study.tech.map((t) => (
                   <span
                     key={t}
-                    className="rounded px-2 py-0.5 border border-border/80 bg-background text-[10px] font-mono text-muted-foreground"
+                    className="px-2.5 py-0.5 border-2 border-black bg-muted text-[10px] font-head font-medium text-foreground shadow-xs"
                   >
                     {t}
                   </span>
@@ -383,22 +368,22 @@ const CaseStudyCard = ({ study, index }: { study: CaseStudy; index: number }) =>
             <div className="flex flex-wrap gap-2 pt-1">
               <Button
                 size="sm"
-                className="rounded-full h-8 px-4 text-[10px] font-mono uppercase tracking-wider bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+                className="rounded-none h-8 px-4 text-xs font-head font-bold uppercase tracking-wider bg-primary text-black hover:bg-primary-hover border-2 border-black shadow-xs active:translate-x-0.5 active:translate-y-0.5"
                 asChild
               >
                 <Link to={`/case-study/${study.id}`}>
                   Full Case Study
-                  <ArrowUpRight className="h-3.5 w-3.5 ml-1" />
+                  <ArrowUpRight className="h-4 w-4 ml-1" />
                 </Link>
               </Button>
               <Button
                 variant="outline"
                 size="sm"
-                className="rounded-full h-8 px-4 text-[10px] font-mono uppercase tracking-wider bg-background"
+                className="rounded-none h-8 px-4 text-xs font-head font-bold uppercase tracking-wider bg-card hover:bg-muted text-black border-2 border-black shadow-xs active:translate-x-0.5 active:translate-y-0.5"
                 asChild
               >
                 <a href={study.github} target="_blank" rel="noopener noreferrer">
-                  <Github className="h-3.5 w-3.5 mr-1" />
+                  <Github className="h-4 w-4 mr-1.5" />
                   View Code
                 </a>
               </Button>
@@ -414,7 +399,7 @@ const CaseStudyCard = ({ study, index }: { study: CaseStudy; index: number }) =>
 
 export const CaseStudiesSection = () => {
   return (
-    <SectionWrapper id="case-studies" className="relative overflow-hidden bg-background py-16 border-b-[0.5px] border-border/40">
+    <SectionWrapper id="case-studies" className="relative overflow-hidden bg-background py-16 border-b-2 border-black">
       <div className="container relative z-10 mx-auto px-4 lg:px-8">
 
         {/* Section Header */}
@@ -424,17 +409,17 @@ export const CaseStudiesSection = () => {
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="mb-4 inline-flex items-center gap-2 rounded-full border-[0.5px] border-border/80 bg-card px-3 py-1 shadow-none"
+              className="mb-4 inline-flex items-center gap-2 border-2 border-black bg-primary px-3 py-1 text-black shadow-xs"
             >
-              <Database className="h-3 w-3 text-amber-500" />
-              <span className="text-[10px] font-mono tracking-widest text-muted-foreground uppercase">Data Analysis</span>
+              <Database className="h-3.5 w-3.5" />
+              <span className="text-xs font-head font-bold tracking-wider uppercase">Data Analysis</span>
             </motion.div>
             <motion.h2
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.05 }}
-              className="font-serif-display text-4xl font-normal tracking-tight text-foreground md:text-5xl select-none"
+              className="font-head text-4xl font-bold tracking-tight text-foreground md:text-5xl uppercase select-none"
             >
               Case Studies
             </motion.h2>
@@ -464,12 +449,12 @@ export const CaseStudiesSection = () => {
           </div>
         </div>
 
-        {/* Case Study Cards with Scroll Momentum Inertia Skew */}
-        <ScrollVelocitySkew maxSkew={1.4} className="space-y-6">
+        {/* Case Study Cards */}
+        <div className="space-y-6">
           {caseStudies.map((study, i) => (
             <CaseStudyCard key={study.id} study={study} index={i} />
           ))}
-        </ScrollVelocitySkew>
+        </div>
 
       </div>
     </SectionWrapper>

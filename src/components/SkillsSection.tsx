@@ -137,7 +137,7 @@ export const SkillsSection = () => {
     : skillCategories;
 
   return (
-    <SectionWrapper id="skills" className="py-16 bg-background border-b-[0.5px] border-border/40">
+    <SectionWrapper id="skills" className="py-16 bg-background border-b-2 border-black">
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
 
         {/* Header */}
@@ -146,42 +146,40 @@ export const SkillsSection = () => {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-card border-[0.5px] border-border/80 shadow-none mb-4"
+            className="inline-flex items-center gap-2 px-3 py-1 border-2 border-black bg-primary text-black font-head text-xs font-bold uppercase shadow-xs mb-4"
           >
-            <span className="text-[10px] font-mono tracking-widest text-muted-foreground uppercase">Expertise</span>
+            <span className="w-2 h-2 rounded-full bg-black animate-pulse" />
+            <span>Technical Arsenal</span>
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.05 }}
-            className="text-4xl md:text-5xl font-serif-display font-medium tracking-tight text-foreground select-none"
+            className="text-4xl md:text-5xl font-head font-bold tracking-tight text-foreground uppercase select-none"
           >
-            Technical Arsenal
+            Engineered Skills
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="mt-4 text-muted-foreground text-sm max-w-xl mx-auto leading-relaxed"
+            className="mt-3 text-foreground text-sm font-medium max-w-xl mx-auto leading-relaxed"
           >
             Select a skill or run the pipeline simulator to trace end-to-end data processing from extraction to production delivery.
           </motion.p>
         </div>
 
         {/* Interactive End-to-End Pipeline Bus Simulator */}
-        <div className="relative max-w-5xl mx-auto mb-12 p-4 md:p-6 rounded-xl border-[0.5px] border-border/80 bg-card/40 backdrop-blur-md overflow-hidden group">
-          {/* Apple / VisionOS Specular Top Highlight Ray */}
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent transition-opacity duration-500 group-hover:via-primary/80 group-hover:h-[1.5px] z-20" />
-          
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6 pb-4 border-b-[0.5px] border-border/40">
+        <div className="relative max-w-5xl mx-auto mb-12 p-4 md:p-6 rounded-none border-2 border-black bg-card shadow-[6px_6px_0px_#000] overflow-hidden">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6 pb-4 border-b-2 border-black">
             <div className="flex items-center gap-2.5">
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              <span className="text-xs font-mono tracking-widest uppercase text-foreground font-semibold">
+              <span className="w-2.5 h-2.5 rounded-full bg-primary border border-black animate-pulse" />
+              <span className="text-xs font-head tracking-wider uppercase text-foreground font-bold">
                 End-to-End Systems Pipeline
               </span>
-              <span className="text-[9px] font-mono text-muted-foreground hidden sm:inline">// 5 STAGE ACTIVE TRACE</span>
+              <span className="text-[10px] font-mono text-muted-foreground font-semibold hidden sm:inline">// 5 STAGE ACTIVE TRACE</span>
             </div>
             
             <button
@@ -189,10 +187,10 @@ export const SkillsSection = () => {
               onClick={handleRunSimulation}
               disabled={isSimulating}
               className={cn(
-                "inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-200 shadow-sm active:scale-95",
+                "w-full sm:w-auto justify-center inline-flex items-center gap-2 px-4 py-2 border-2 border-black font-head text-xs uppercase tracking-wider transition-all shadow-xs active:translate-x-0.5 active:translate-y-0.5 cursor-pointer",
                 isSimulating
-                  ? "bg-primary/20 text-primary border border-primary/40 cursor-wait animate-pulse"
-                  : "bg-foreground text-background hover:bg-foreground/90"
+                  ? "bg-primary text-black animate-pulse"
+                  : "bg-primary text-black hover:bg-primary-hover"
               )}
             >
               {isSimulating ? (
@@ -202,7 +200,7 @@ export const SkillsSection = () => {
                 </>
               ) : (
                 <>
-                  <Play className="w-3 h-3 fill-current" />
+                  <Play className="w-3.5 h-3.5 fill-current" />
                   <span>Simulate Pipeline Flow</span>
                 </>
               )}
@@ -225,36 +223,27 @@ export const SkillsSection = () => {
                     setSelectedStage(selectedStage === stage.id ? null : stage.id);
                   }}
                   className={cn(
-                    "group relative p-3 sm:p-3.5 rounded-lg border text-left transition-all duration-200 flex flex-col justify-between min-h-[85px] sm:min-h-[90px] overflow-hidden",
+                    "group relative p-3 sm:p-3.5 rounded-none border-2 border-black text-left transition-all duration-150 flex flex-col justify-between min-h-[85px] sm:min-h-[90px] shadow-xs cursor-pointer active:translate-x-0.5 active:translate-y-0.5",
                     i === 4 && "col-span-2 sm:col-span-1",
                     isCurrent
-                      ? "border-primary bg-primary/10 shadow-[0_0_20px_rgba(204,120,92,0.15)] ring-1 ring-primary/40"
-                      : "border-border/60 bg-background/50 hover:border-border hover:bg-background/80"
+                      ? "bg-primary text-black shadow-none font-bold"
+                      : "bg-muted/40 hover:bg-primary/20 text-foreground"
                   )}
                 >
-                  {/* Active traveling top progress line */}
-                  {isCurrent && (
-                    <motion.div
-                      layoutId="active-stage-line"
-                      className="absolute top-0 inset-x-0 h-0.5 bg-primary"
-                      transition={{ duration: 0.2 }}
-                    />
-                  )}
-
                   <div className="flex items-center justify-between mb-2">
-                    <Icon className={cn("w-4 h-4 transition-colors", isCurrent ? "text-primary" : "text-muted-foreground group-hover:text-foreground")} />
+                    <Icon className="w-4 h-4 text-black stroke-[2.2]" />
                     {isCurrent && (
-                      <span className="text-[8px] font-mono font-bold text-primary px-1.5 py-0.5 rounded bg-primary/15 uppercase">
+                      <span className="text-[9px] font-head font-bold text-black px-1.5 py-0.2 bg-white border border-black uppercase shadow-none">
                         ACTIVE
                       </span>
                     )}
                   </div>
 
                   <div>
-                    <div className={cn("text-xs font-mono font-semibold transition-colors", isCurrent ? "text-foreground" : "text-muted-foreground group-hover:text-foreground")}>
+                    <div className="text-xs font-head font-bold uppercase">
                       {stage.label}
                     </div>
-                    <div className="text-[9px] font-mono text-muted-foreground/70 mt-0.5">
+                    <div className="text-[10px] font-mono text-muted-foreground font-semibold mt-0.5">
                       {stage.sub}
                     </div>
                   </div>
@@ -265,11 +254,11 @@ export const SkillsSection = () => {
 
           {/* Reset / All Categories toggle */}
           {selectedStage && !isSimulating && (
-            <div className="mt-4 pt-3 border-t-[0.5px] border-border/30 flex justify-end">
+            <div className="mt-4 pt-3 border-t-2 border-black flex justify-end">
               <button
                 type="button"
                 onClick={() => setSelectedStage(null)}
-                className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase text-muted-foreground hover:text-foreground tracking-wider transition-colors"
+                className="inline-flex items-center gap-1.5 text-xs font-head uppercase text-foreground hover:text-black font-bold tracking-wider transition-colors cursor-pointer bg-primary/20 hover:bg-primary px-2.5 py-1 border border-black"
               >
                 <RotateCcw className="w-3 h-3" />
                 Reset Pipeline View
@@ -293,51 +282,45 @@ export const SkillsSection = () => {
                   key={category.title}
                   className="h-full"
                 >
-                  <SpotlightBorderCard
-                    spotlightColor="rgba(204, 120, 92, 0.4)"
-                    spotlightRadius={130}
-                    className="h-full hover-lift-minimal"
-                  >
-                    <div className="p-6 flex flex-col h-full justify-between">
-                      <div>
-                        <div className="flex items-center gap-3.5 mb-6 border-b-[0.5px] border-border/40 pb-4">
-                          <div className="w-9 h-9 rounded bg-primary/5 border-[0.5px] border-primary/15 flex items-center justify-center">
-                            <Icon className="w-4.5 h-4.5 text-primary" />
-                          </div>
-                          <h3 className="text-base font-serif-display font-medium text-foreground">{category.title}</h3>
+                  <div className="h-full border-2 border-black bg-card rounded-none shadow-[4px_4px_0px_#000] p-4 sm:p-6 flex flex-col justify-between hover:shadow-[6px_6px_0px_#000] transition-shadow duration-200">
+                    <div>
+                      <div className="flex items-center gap-3 mb-5 border-b-2 border-black pb-3">
+                        <div className="w-9 h-9 rounded-none bg-primary border-2 border-black flex items-center justify-center shadow-xs">
+                          <Icon className="w-4.5 h-4.5 text-black stroke-[2.2]" />
                         </div>
+                        <h3 className="text-sm font-head font-bold uppercase tracking-wide text-foreground">{category.title}</h3>
+                      </div>
 
-                        <div className="flex flex-wrap gap-1.5">
-                          {category.skills.map((skill) => {
-                            const isSkillSelected = selectedSkill === skill;
-                            const count = skillCounts[skill];
-                            return (
-                              <motion.button
-                                key={skill}
-                                whileHover={{ scale: 1.04 }}
-                                whileTap={{ scale: 0.96 }}
-                                transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                                onClick={() => handleSkillClick(skill)}
-                                className={cn(
-                                  "px-3 py-1 rounded-md text-[10px] font-mono border transition-all duration-200 flex items-center gap-1.5",
-                                  isSkillSelected
-                                    ? "bg-primary/10 text-primary border-primary/30 font-semibold"
-                                    : "bg-background/40 text-muted-foreground border-border/40 hover:border-primary/20 hover:text-foreground"
-                                )}
-                              >
-                                <span>{skill}</span>
-                                {count > 0 ? (
-                                  <span className="text-[8px] opacity-70 px-1 py-0.2 bg-muted/60 rounded border-[0.5px] border-border/40">
-                                    {count}
-                                  </span>
-                                ) : null}
-                              </motion.button>
-                            );
-                          })}
-                        </div>
+                      <div className="flex flex-wrap gap-2">
+                        {category.skills.map((skill) => {
+                          const isSkillSelected = selectedSkill === skill;
+                          const count = skillCounts[skill];
+                          return (
+                            <motion.button
+                              key={skill}
+                              whileHover={{ scale: 1.04 }}
+                              whileTap={{ scale: 0.96 }}
+                              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                              onClick={() => handleSkillClick(skill)}
+                              className={cn(
+                                "px-2.5 py-1 rounded-none text-xs font-head font-medium border-2 border-black transition-all flex items-center gap-1.5 cursor-pointer shadow-xs",
+                                isSkillSelected
+                                  ? "bg-primary text-black font-bold shadow-none"
+                                  : "bg-muted/40 text-foreground hover:bg-primary/20 hover:text-black"
+                              )}
+                            >
+                              <span>{skill}</span>
+                              {count > 0 ? (
+                                <span className="text-[9px] font-mono font-bold px-1 bg-black text-white border border-black">
+                                  {count}
+                                </span>
+                              ) : null}
+                            </motion.button>
+                          );
+                        })}
                       </div>
                     </div>
-                  </SpotlightBorderCard>
+                  </div>
                 </motion.div>
               );
             })}

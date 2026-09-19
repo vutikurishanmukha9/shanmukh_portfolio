@@ -11,7 +11,7 @@ interface CredentialBadgeProps {
 
 const CredentialFlipBadge = ({ id, isParentHovered }: CredentialBadgeProps) => {
   return (
-    <div className="relative w-32 h-7 select-none" style={{ perspective: 600 }}>
+    <div className="relative w-36 h-8 select-none" style={{ perspective: 600 }}>
       <motion.div
         animate={{ rotateY: isParentHovered ? 180 : 0 }}
         transition={{ type: 'spring', stiffness: 260, damping: 20 }}
@@ -20,25 +20,25 @@ const CredentialFlipBadge = ({ id, isParentHovered }: CredentialBadgeProps) => {
       >
         {/* Front Face: [ VERIFIED ] */}
         <div
-          className="absolute inset-0 rounded-full bg-background/80 border-[0.5px] border-border/80 px-2.5 py-0.5 flex items-center justify-center gap-1.5 shadow-xs"
+          className="absolute inset-0 rounded-none bg-card border-2 border-black px-2.5 py-1 flex items-center justify-center gap-1.5 shadow-xs"
           style={{ backfaceVisibility: 'hidden' }}
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="text-[9px] font-mono uppercase tracking-wider text-muted-foreground font-medium">
+          <span className="w-2 h-2 rounded-full bg-emerald-500 border border-black animate-pulse" />
+          <span className="text-[10px] font-head uppercase tracking-wider text-foreground font-bold">
             VERIFIED
           </span>
         </div>
 
-        {/* Back Face: [ ID: CODE ] with metallic sheen */}
+        {/* Back Face: [ ID: CODE ] */}
         <div
-          className="absolute inset-0 rounded-full bg-primary/10 border-[0.5px] border-primary/30 px-2.5 py-0.5 flex items-center justify-center gap-1 text-primary shadow-xs"
+          className="absolute inset-0 rounded-none bg-primary border-2 border-black px-2.5 py-1 flex items-center justify-center gap-1.5 text-black shadow-xs"
           style={{
             backfaceVisibility: 'hidden',
             transform: 'rotateY(180deg)',
           }}
         >
-          <ShieldCheck className="w-3 h-3 text-primary shrink-0" />
-          <span className="text-[8.5px] font-mono uppercase tracking-wider font-semibold truncate">
+          <ShieldCheck className="w-3.5 h-3.5 text-black shrink-0" />
+          <span className="text-[9px] font-mono uppercase tracking-wider font-bold truncate">
             {id}
           </span>
         </div>
@@ -104,7 +104,7 @@ export const CertificationsSection = () => {
   const { playClick } = useSound();
 
   return (
-    <SectionWrapper id="certifications" className="py-16 bg-background border-b-[0.5px] border-border/40">
+    <SectionWrapper id="certifications" className="py-16 bg-background border-b-2 border-black">
       <div className="container mx-auto px-4 lg:px-8 relative z-10" ref={containerRef}>
         
         {/* Header */}
@@ -113,17 +113,19 @@ export const CertificationsSection = () => {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-card border-[0.5px] border-border/80 shadow-none mb-4"
+            className="inline-flex items-center gap-2 mb-4"
           >
-            <Award className="w-3.5 h-3.5 text-primary" />
-            <span className="text-[10px] font-mono tracking-widest text-muted-foreground uppercase">Credentials</span>
+            <span className="text-xs font-head font-bold uppercase tracking-wider bg-primary text-black border-2 border-black px-3 py-1 shadow-xs flex items-center gap-1.5">
+              <Award className="w-3.5 h-3.5 text-black" />
+              <span>VERIFIED ACCREDITATIONS</span>
+            </span>
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.05 }}
-            className="text-4xl md:text-5xl font-serif-display font-medium tracking-tight text-foreground select-none"
+            className="text-4xl md:text-5xl font-head font-bold tracking-tight text-foreground uppercase select-none"
           >
             Certifications
           </motion.h2>
@@ -132,21 +134,15 @@ export const CertificationsSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="mt-3 text-muted-foreground text-xs max-w-md mx-auto leading-relaxed"
+            className="mt-3 text-foreground font-sans font-medium text-sm sm:text-base max-w-md mx-auto leading-relaxed"
           >
             Continuously advancing technical expertise through industry-recognized certifications and verified accreditations.
           </motion.p>
         </div>
 
-        {/* Apple-Grade Specular Hardware Enclosure with 3D Flip Badges */}
-        <div className="relative max-w-4xl mx-auto border-[0.5px] border-border/80 bg-card/60 backdrop-blur-md rounded-xl overflow-hidden shadow-none group">
-          {/* Apple / VisionOS Specular Top Highlight Ray */}
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent transition-opacity duration-500 group-hover:via-primary/80 group-hover:h-[1.5px] z-20" />
-
-          {/* Ambient Directional Light Bloom */}
-          <div className="pointer-events-none absolute -top-14 left-1/2 -translate-x-1/2 w-3/4 h-14 bg-gradient-to-b from-primary/15 via-primary/5 to-transparent blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
-
-          <div className="relative z-10 divide-y divide-border/60">
+        {/* Neobrutalism Hardware Enclosure with 3D Flip Badges */}
+        <div className="relative max-w-4xl mx-auto border-2 border-black bg-card rounded-none overflow-hidden shadow-[6px_6px_0px_#000]">
+          <div className="relative z-10 divide-y-2 divide-black">
             {certifications.map((cert, index) => {
               const isHovered = hoveredIdx === index;
               return (
@@ -154,7 +150,6 @@ export const CertificationsSection = () => {
                   key={cert.title}
                   initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  whileHover={{ x: 4 }}
                   onMouseEnter={() => {
                     setHoveredIdx(index);
                     playClick(980, 0.02, 'sine');
@@ -162,24 +157,24 @@ export const CertificationsSection = () => {
                   onMouseLeave={() => setHoveredIdx(null)}
                   viewport={{ once: true }}
                   transition={{ duration: 0.35, delay: index * 0.04, ease: [0.16, 1, 0.3, 1] }}
-                  className="p-6 md:p-8 flex flex-col md:grid md:grid-cols-[1.25fr_2.5fr_1.25fr] gap-6 items-start hover:bg-background/25 transition-colors duration-200"
+                  className="p-4 sm:p-6 md:p-8 flex flex-col md:grid md:grid-cols-[1.25fr_2.5fr_1.25fr] gap-6 items-start hover:bg-muted/40 transition-colors duration-200"
                 >
                   {/* Left: Issuer & Category */}
-                  <div className="flex flex-col gap-1">
-                    <span className="text-[11px] font-mono font-medium tracking-wider text-primary uppercase">
+                  <div className="flex flex-col gap-1.5">
+                    <span className="text-xs font-head font-bold tracking-wider text-foreground uppercase">
                       {cert.issuer}
                     </span>
-                    <span className="text-[9px] font-mono tracking-widest uppercase text-muted-foreground">
+                    <span className="text-[10px] font-mono font-bold uppercase bg-primary text-black px-1.5 py-0.5 border border-black inline-block w-fit">
                       {cert.category}
                     </span>
                   </div>
 
                   {/* Middle: Title & Description */}
                   <div className="space-y-1.5">
-                    <h3 className="text-base font-serif-display font-medium text-foreground leading-tight">
+                    <h3 className="text-base sm:text-lg font-head font-bold text-foreground uppercase leading-tight">
                       {cert.title}
                     </h3>
-                    <p className="text-muted-foreground text-xs leading-relaxed max-w-xl">
+                    <p className="text-muted-foreground font-sans text-xs sm:text-sm leading-relaxed max-w-xl">
                       {cert.description}
                     </p>
                   </div>

@@ -1,5 +1,5 @@
 import { ContactForm } from '@/components/ContactForm';
-import { Github, Linkedin, Mail, ExternalLink, Copy, Check } from 'lucide-react';
+import { Github, Linkedin, Mail, ExternalLink, Copy, Check, MessageSquare, Terminal } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
 import { cn } from '@/lib/utils';
@@ -18,36 +18,35 @@ const ContactCard = ({ contact }: { contact: { icon: LucideIcon; label: string; 
   };
 
   return (
-    <div className="group flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 rounded-lg border-[0.5px] border-border bg-background/40 hover:bg-background/80 transition-colors duration-200 shadow-none">
-      <div className="flex items-center gap-3.5 min-w-0">
-        <div className="w-9 h-9 shrink-0 rounded-full bg-muted/60 flex items-center justify-center group-hover:bg-primary/10 transition-colors duration-200">
-          <Icon className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-4 border-2 border-black bg-card shadow-[4px_4px_0px_#000] rounded-none transition-shadow duration-200 hover:shadow-[6px_6px_0px_#000]">
+      <div className="flex items-center gap-3 min-w-0">
+        <div className="w-10 h-10 shrink-0 border-2 border-black bg-primary flex items-center justify-center text-black font-bold shadow-none rounded-none">
+          <Icon className="h-5 w-5" />
         </div>
         <div className="min-w-0">
-          <p className="text-[10px] sm:text-[9px] font-mono tracking-widest text-muted-foreground uppercase mb-0.5">{contact.label}</p>
+          <p className="text-[10px] font-head font-bold tracking-wider text-muted-foreground uppercase">{contact.label}</p>
           <a
             href={contact.href}
-            className="text-xs font-mono text-foreground hover:text-primary transition-colors duration-200 break-all"
+            className="text-xs font-mono font-bold text-foreground hover:underline transition-colors break-all"
           >
             {contact.value}
           </a>
         </div>
       </div>
 
-      <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+      <button
+        type="button"
         onClick={handleCopy}
         className={cn(
-          "px-3 py-1.5 rounded-full text-[9px] font-mono uppercase tracking-wider border-[0.5px] transition-all flex items-center gap-1.5 self-end sm:self-auto shrink-0",
-          copied 
-            ? "bg-emerald-500/10 text-emerald-600 border-emerald-500/30 font-semibold"
-            : "bg-background/80 text-muted-foreground hover:text-foreground border-border hover:border-primary/40"
+          "px-3 py-1.5 text-[10px] font-head font-bold uppercase tracking-wider border-2 border-black transition-all flex items-center gap-1.5 self-end sm:self-auto shrink-0 cursor-pointer shadow-xs active:translate-x-0.5 active:translate-y-0.5",
+          copied
+            ? "bg-emerald-400 text-black font-bold"
+            : "bg-muted text-foreground hover:bg-primary"
         )}
       >
-        {copied ? <Check className="h-3 w-3 text-emerald-600" /> : <Copy className="h-3 w-3 text-primary" />}
+        {copied ? <Check className="h-3 w-3 text-black stroke-[3]" /> : <Copy className="h-3 w-3" />}
         <span>{copied ? "COPIED" : "COPY"}</span>
-      </motion.button>
+      </button>
     </div>
   );
 };
@@ -55,7 +54,7 @@ const ContactCard = ({ contact }: { contact: { icon: LucideIcon; label: string; 
 const contactInfo = [
   {
     icon: Mail,
-    label: 'Email',
+    label: 'Direct Email',
     value: 'vutikurishanmukh17@gmail.com',
     href: 'mailto:vutikurishanmukh17@gmail.com',
   },
@@ -81,60 +80,65 @@ const socialLinks = [
 
 export const ContactSection = () => {
   return (
-    <SectionWrapper id="contact" className="py-16 bg-background border-t-[0.5px] border-border/40">
+    <SectionWrapper id="contact" className="py-20 bg-background border-b-2 border-black">
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
-        
+
         {/* Header */}
-        <div className="text-center mb-16 max-w-2xl mx-auto">
+        <div className="text-center mb-12 max-w-2xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-card border-[0.5px] border-border/80 shadow-none mb-4"
+            className="inline-flex items-center gap-1.5 px-3 py-1 border-2 border-black bg-primary text-black text-xs font-head font-bold uppercase shadow-[2px_2px_0px_#000] mb-4"
           >
-            <span className="text-[10px] font-mono tracking-widest text-muted-foreground uppercase">Connect</span>
+            <MessageSquare className="size-3.5" />
+            <span>06 // CONNECT & COLLABORATE</span>
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.05 }}
-            className="text-4xl md:text-5xl font-serif-display font-medium tracking-tight text-foreground select-none"
+            className="text-3xl sm:text-4xl md:text-5xl font-head font-bold uppercase tracking-tight text-foreground select-none"
           >
-            Get In Touch
+            LET'S BUILD TOGETHER
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="mt-3 text-muted-foreground text-xs max-w-md mx-auto leading-relaxed"
+            className="mt-3 text-muted-foreground text-xs sm:text-sm font-sans font-medium max-w-md mx-auto leading-relaxed"
           >
-            Ready to collaborate on engineering solutions. Let's discuss how we can build something of robust value.
+            Open for full-time engineering roles, high-throughput backend systems, and applied AI/ML architectures.
           </motion.p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {/* Contact Information */}
-          <motion.div 
+        <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
+          {/* Contact Information Column */}
+          <motion.div
             initial={{ opacity: 0, x: -15 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="h-full"
+            transition={{ duration: 0.4 }}
+            className="flex flex-col h-full"
           >
-            <div className="relative border-[0.5px] border-border/80 bg-card/60 backdrop-blur-md rounded-xl p-6 md:p-8 shadow-none h-full flex flex-col justify-between overflow-hidden group">
-              {/* Apple / VisionOS Specular Top Highlight Ray */}
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent transition-opacity duration-500 group-hover:via-primary/80 group-hover:h-[1.5px] z-20" />
+            <div className="border-2 border-black bg-card p-4 sm:p-8 shadow-[6px_6px_0px_#000] rounded-none h-full flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between border-b-2 border-black pb-3 mb-6">
+                  <div className="flex items-center gap-2">
+                    <Terminal className="size-4 text-black" />
+                    <h3 className="text-base sm:text-lg font-head font-bold uppercase text-foreground tracking-wide">
+                      OPERATOR_CHANNELS
+                    </h3>
+                  </div>
+                  <span className="text-[10px] font-mono font-bold bg-primary px-2 py-0.5 border border-black text-black">
+                    ACTIVE
+                  </span>
+                </div>
 
-              {/* Ambient Directional Light Bloom */}
-              <div className="pointer-events-none absolute -top-14 left-1/2 -translate-x-1/2 w-3/4 h-14 bg-gradient-to-b from-primary/15 via-primary/5 to-transparent blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
-
-              <div className="relative z-10">
-                <h3 className="text-xl font-serif-display font-medium text-foreground mb-3 tracking-tight">Let's Connect</h3>
-                <p className="text-muted-foreground text-xs leading-relaxed mb-8">
-                  I am always motivated to discuss technical opportunities, innovative cloud architectures, and potential open-source collaborations.
-                  Drop a message or reach out via email directly.
+                <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-6 font-sans">
+                  Motivated to discuss technical opportunities, cloud telemetry pipelines, vector database architectures, and production-grade fullstack systems.
                 </p>
 
                 {/* Contact Details */}
@@ -146,51 +150,53 @@ export const ContactSection = () => {
               </div>
 
               {/* Social Links */}
-              <div className="relative z-10">
-                <p className="text-[10px] sm:text-[9px] font-mono tracking-widest text-muted-foreground uppercase mb-3">Social Profiles</p>
-                <div className="flex gap-2">
+              <div className="pt-4 border-t-2 border-black">
+                <p className="text-[10px] font-head font-bold tracking-wider text-muted-foreground uppercase mb-3">
+                  AUTHENTICATED PROFILES
+                </p>
+                <div className="flex flex-wrap gap-2.5">
                   {socialLinks.map((social) => {
-                      const Icon = social.icon;
-                      return (
-                        <a
-                            key={social.name}
-                            href={social.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="group p-3 rounded border-[0.5px] border-border bg-background/40 hover:bg-background/80 hover:border-primary/35 transition-colors duration-200 shadow-none block"
-                            title={social.name}
-                            aria-label={social.name}
-                        >
-                            <Icon className="h-4.5 w-4.5 text-muted-foreground group-hover:text-primary transition-colors duration-200" />
-                        </a>
-                      );
+                    const Icon = social.icon;
+                    return (
+                      <a
+                        key={social.name}
+                        href={social.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-3.5 py-2 border-2 border-black bg-card hover:bg-primary text-foreground hover:text-black font-head font-bold text-xs uppercase shadow-[3px_3px_0px_#000] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[4px_4px_0px_#000] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all"
+                        title={social.name}
+                        aria-label={social.name}
+                      >
+                        <Icon className="h-4 w-4" />
+                        <span>{social.name}</span>
+                      </a>
+                    );
                   })}
                 </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Contact Form */}
-          <motion.div 
+          {/* Contact Form Column */}
+          <motion.div
             initial={{ opacity: 0, x: 15 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.4 }}
             className="flex flex-col h-full"
           >
-            <div className="relative border-[0.5px] border-border/80 bg-card/60 backdrop-blur-md rounded-xl p-6 md:p-8 shadow-none h-full overflow-hidden group"> 
-                {/* Apple / VisionOS Specular Top Highlight Ray */}
-                <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent transition-opacity duration-500 group-hover:via-primary/80 group-hover:h-[1.5px] z-20" />
-
-                {/* Ambient Directional Light Bloom */}
-                <div className="pointer-events-none absolute -top-14 left-1/2 -translate-x-1/2 w-3/4 h-14 bg-gradient-to-b from-primary/15 via-primary/5 to-transparent blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
-
-                <div className="relative z-10">
-                  <h3 className="text-xl font-serif-display font-medium text-foreground mb-6 tracking-tight border-b-[0.5px] border-border/40 pb-4">
-                    Send a Message
+            <div className="border-2 border-black bg-card p-4 sm:p-8 shadow-[6px_6px_0px_#000] rounded-none h-full flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between border-b-2 border-black pb-3 mb-6">
+                  <h3 className="text-base sm:text-lg font-head font-bold uppercase text-foreground tracking-wide">
+                    DISPATCH_MESSAGE
                   </h3>
-                  <ContactForm />
+                  <span className="text-[10px] font-mono font-bold text-muted-foreground">
+                    ENDPOINT: /api/v1/inbox
+                  </span>
                 </div>
+                <ContactForm />
+              </div>
             </div>
           </motion.div>
         </div>

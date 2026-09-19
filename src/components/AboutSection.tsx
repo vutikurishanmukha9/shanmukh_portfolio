@@ -2,7 +2,6 @@ import { useState, useRef } from 'react';
 import { Database, CheckCircle2, FileText, ArrowRight, ShieldCheck, Terminal, Cpu as Processor } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
-import { SplitText } from '@/components/ui/SplitText';
 import { cn } from '@/lib/utils';
 
 type TabType = 'narrative' | 'telemetry' | 'academic';
@@ -20,53 +19,52 @@ export const AboutSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <SectionWrapper id="about" className="py-16 bg-muted/20 border-y-[0.5px] border-border/40 overflow-hidden">
+    <SectionWrapper id="about" className="py-16 bg-muted/20 border-y-2 border-black overflow-hidden">
       <div className="container mx-auto px-4 lg:px-8 relative z-10" ref={containerRef}>
         
         {/* Monospaced Section Indicator */}
-        <div className="mb-12 max-w-7xl mx-auto flex items-center gap-3">
-          <div className="h-[1px] w-8 bg-border" />
-          <span className="text-[10px] font-mono tracking-[0.25em] text-muted-foreground uppercase">
-            [02 // OPERATOR_DOSSIER]
+        <div className="mb-10 max-w-7xl mx-auto flex items-center gap-3">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 border-2 border-black bg-primary text-black font-head text-xs font-bold uppercase shadow-[2px_2px_0px_#000]">
+            ★ 02 // OPERATOR DOSSIER
           </span>
-          <div className="h-[1px] flex-1 bg-border/40" />
+          <div className="h-0.5 flex-1 bg-black" />
         </div>
 
         {/* Main Grid Layout */}
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 max-w-7xl mx-auto items-stretch">
           
           {/* LEFT PANEL: Operator Dossier & Spec Ledger */}
-          <div className="lg:col-span-5 flex flex-col justify-between space-y-8 bg-card/45 backdrop-blur-md border-[0.5px] border-border/80 p-6 md:p-8 rounded-lg shadow-none">
+          <div className="lg:col-span-5 flex flex-col justify-between space-y-8 bg-card border-2 border-black p-4 sm:p-6 md:p-8 rounded-none shadow-[6px_6px_0px_#000]">
             <div className="space-y-6">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded border-[0.5px] border-primary/20 bg-primary/5 text-[10px] sm:text-[9px] font-mono uppercase tracking-wider text-primary shadow-none">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 border-2 border-black bg-black text-white text-[11px] font-head uppercase tracking-wider font-bold shadow-xs">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 SYSTEM OPERATOR // ACTIVE
               </span>
               
               <div className="space-y-2">
-                <h3 className="text-sm font-mono uppercase tracking-widest text-muted-foreground/80">IDENTITY</h3>
-                <h2 className="text-3xl md:text-4xl font-serif-display font-medium text-foreground tracking-tight leading-tight select-none">
-                  <SplitText text="Hey, I’m Shanmukh." delay={0.1} stagger={0.03} />
+                <h3 className="text-xs font-head uppercase tracking-widest text-muted-foreground">IDENTITY</h3>
+                <h2 className="text-3xl md:text-4xl font-head font-bold text-foreground tracking-tight leading-tight uppercase select-none">
+                  Hey, I’m Shanmukh.
                 </h2>
-                <div className="text-sm font-mono text-primary font-semibold tracking-wide">
-                  <SplitText text="I build AI products that actually ship." delay={0.2} stagger={0.02} />
+                <div className="text-sm font-sans font-bold text-foreground tracking-wide bg-primary/30 p-2 border-2 border-black">
+                  I build AI products that actually ship.
                 </div>
               </div>
             </div>
 
-            {/* Spec Ledger - Thin Monospaced Rows */}
-            <div className="space-y-3 pt-6 border-t-[0.5px] border-border/40">
-              <h4 className="text-[10px] sm:text-[9px] font-mono uppercase tracking-widest text-muted-foreground/75 mb-4">
+            {/* Spec Ledger - Monospaced Rows */}
+            <div className="space-y-3 pt-6 border-t-2 border-black">
+              <h4 className="text-xs font-head uppercase tracking-widest text-muted-foreground mb-4">
                 CORE ENGINE SPECIFICATIONS
               </h4>
-              <div className="divide-y divide-border/40">
+              <div className="border-2 border-black divide-y-2 divide-black bg-muted/40 shadow-xs">
                 {specLedger.map((spec, i) => (
-                  <div key={spec.label} className="py-2.5 flex justify-between items-center text-[10px] font-mono">
-                    <span className="text-muted-foreground/80 flex items-center gap-1.5">
-                      <span className="text-[8px] opacity-45">0{i+1}.</span>
+                  <div key={spec.label} className="p-2.5 flex justify-between items-center text-[11px] font-mono">
+                    <span className="text-foreground font-semibold flex items-center gap-1.5">
+                      <span className="font-bold opacity-60">0{i+1}.</span>
                       {spec.label}
                     </span>
-                    <span className="text-foreground font-semibold border-b-[0.5px] border-primary/20 pb-0.5">
+                    <span className="text-black font-bold bg-primary px-1.5 py-0.5 border border-black text-[10px]">
                       {spec.val}
                     </span>
                   </div>
@@ -75,30 +73,27 @@ export const AboutSection = () => {
             </div>
 
             {/* Micro Tagline */}
-            <div className="pt-4 border-t-[0.5px] border-border/40 flex items-center justify-between text-[8px] font-mono text-muted-foreground/60">
+            <div className="pt-4 border-t-2 border-black flex items-center justify-between text-[10px] font-mono text-muted-foreground font-semibold">
               <span>LEDGER_ID // #9AF8B2C</span>
               <span>VERIFIED OUTCOMES ONLY</span>
             </div>
           </div>
 
           {/* RIGHT PANEL: Interactive Console containing Narrative / Telemetry / Academics */}
-          <div className="lg:col-span-7 flex flex-col bg-card/20 backdrop-blur-md border-[0.5px] border-border/80 rounded-lg overflow-hidden">
+          <div className="lg:col-span-7 flex flex-col bg-card border-2 border-black rounded-none shadow-[6px_6px_0px_#000] overflow-hidden">
             
             {/* Console Tab Bar */}
-            <div className="flex border-b-[0.5px] border-border/80 bg-muted/30 select-none">
+            <div className="flex border-b-2 border-black bg-muted divide-x-2 divide-black select-none">
               <button
                 type="button"
                 onClick={() => setActiveTab('narrative')}
                 className={cn(
-                  "flex-1 px-2.5 sm:px-4 py-3 text-[9px] font-mono tracking-wider sm:tracking-widest uppercase transition-colors duration-200 border-r-[0.5px] border-border/80 text-center relative truncate",
+                  "flex-1 px-3 sm:px-4 py-3 text-xs font-head tracking-wider uppercase transition-colors duration-150 text-center relative truncate cursor-pointer",
                   activeTab === 'narrative' 
-                    ? "text-foreground font-bold bg-background/80" 
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted/10"
+                    ? "text-black font-bold bg-primary" 
+                    : "text-muted-foreground hover:text-black hover:bg-muted/80"
                 )}
               >
-                {activeTab === 'narrative' && (
-                  <motion.div layoutId="about-active-tab-indicator" className="absolute bottom-0 inset-x-0 h-[1.5px] bg-primary" />
-                )}
                 <span className="hidden md:inline">01 // </span>DOSSIER
               </button>
               
@@ -106,15 +101,12 @@ export const AboutSection = () => {
                 type="button"
                 onClick={() => setActiveTab('telemetry')}
                 className={cn(
-                  "flex-1 px-2.5 sm:px-4 py-3 text-[9px] font-mono tracking-wider sm:tracking-widest uppercase transition-colors duration-200 border-r-[0.5px] border-border/80 text-center relative truncate",
+                  "flex-1 px-3 sm:px-4 py-3 text-xs font-head tracking-wider uppercase transition-colors duration-150 text-center relative truncate cursor-pointer",
                   activeTab === 'telemetry' 
-                    ? "text-foreground font-bold bg-background/80" 
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted/10"
+                    ? "text-black font-bold bg-primary" 
+                    : "text-muted-foreground hover:text-black hover:bg-muted/80"
                 )}
               >
-                {activeTab === 'telemetry' && (
-                  <motion.div layoutId="about-active-tab-indicator" className="absolute bottom-0 inset-x-0 h-[1.5px] bg-primary" />
-                )}
                 <span className="hidden md:inline">02 // </span>TELEMETRY
               </button>
               
@@ -122,21 +114,18 @@ export const AboutSection = () => {
                 type="button"
                 onClick={() => setActiveTab('academic')}
                 className={cn(
-                  "flex-1 px-2.5 sm:px-4 py-3 text-[9px] font-mono tracking-wider sm:tracking-widest uppercase transition-colors duration-200 text-center relative truncate",
+                  "flex-1 px-3 sm:px-4 py-3 text-xs font-head tracking-wider uppercase transition-colors duration-150 text-center relative truncate cursor-pointer",
                   activeTab === 'academic' 
-                    ? "text-foreground font-bold bg-background/80" 
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted/10"
+                    ? "text-black font-bold bg-primary" 
+                    : "text-muted-foreground hover:text-black hover:bg-muted/80"
                 )}
               >
-                {activeTab === 'academic' && (
-                  <motion.div layoutId="about-active-tab-indicator" className="absolute bottom-0 inset-x-0 h-[1.5px] bg-primary" />
-                )}
                 <span className="hidden md:inline">03 // </span>ACADEMICS
               </button>
             </div>
 
             {/* Console Screen Panel */}
-            <div className="flex-1 p-6 md:p-8 flex flex-col justify-center">
+            <div className="flex-1 p-4 sm:p-6 md:p-8 flex flex-col justify-center">
               <AnimatePresence mode="wait">
                 
                 {/* TAB 1: Narrative Biography */}
@@ -147,31 +136,31 @@ export const AboutSection = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -8 }}
                     transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-                    className="space-y-6 text-sm text-muted-foreground leading-relaxed font-normal"
+                    className="space-y-5 text-sm text-foreground leading-relaxed font-normal"
                   >
                     <p>
-                      I graduated with a B.Tech in <strong className="text-foreground font-medium border-b-[0.5px] border-border/60 pb-0.5">Electronics and Communication Engineering</strong>, but my real education happened while building things. Over the past two years, I’ve shipped <span className="font-mono text-[9.5px] bg-primary/10 border border-primary/20 text-primary px-1.5 py-0.5 rounded font-semibold tracking-tight">10+ full-stack AI products</span>. These are not side projects that sit on GitHub, but live, working tools with real users, real backends, and real complexity.
+                      I graduated with a B.Tech in <strong className="text-foreground font-bold border-b-2 border-black pb-0.5">Electronics and Communication Engineering</strong>, but my real education happened while building things. Over the past two years, I’ve shipped <span className="font-head text-[10px] bg-primary border-2 border-black text-black px-2 py-0.5 font-bold shadow-xs">10+ FULL-STACK AI PRODUCTS</span>. These are not side projects that sit on GitHub, but live, working tools with real users, real backends, and real complexity.
                     </p>
 
                     <p>
-                      From <span className="text-foreground font-semibold font-mono text-[10px] bg-background border border-border px-1.5 py-0.5 rounded shadow-none">HeartOut</span>, an anonymous storytelling platform with 541+ automated tests and a full CI/CD pipeline, to <span className="text-foreground font-semibold font-mono text-[10px] bg-background border border-border px-1.5 py-0.5 rounded shadow-none">GetReport</span>, an AI data analysis tool with a Hybrid RAG engine, Celery task queues, and AWS S3. I’ve built AI debate arenas, HR outreach tools with AES-256 encryption, virtual chemistry workbenches with WebXR and hand tracking, and a conversational assessment recommender with a three-tier LLM failover system. I don’t just connect APIs; I understand what’s happening under the hood.
+                      From <span className="text-black font-bold font-mono text-[11px] bg-white border-2 border-black px-2 py-0.5 shadow-xs">HeartOut</span>, an anonymous storytelling platform with 541+ automated tests and a full CI/CD pipeline, to <span className="text-black font-bold font-mono text-[11px] bg-white border-2 border-black px-2 py-0.5 shadow-xs">GetReport</span>, an AI data analysis tool with a Hybrid RAG engine, Celery task queues, and AWS S3. I’ve built AI debate arenas, HR outreach tools with AES-256 encryption, virtual chemistry workbenches with WebXR and hand tracking, and a conversational assessment recommender with a three-tier LLM failover system. I don’t just connect APIs; I understand what’s happening under the hood.
                     </p>
 
                     <p>
-                      I also had a research paper accepted at <span className="text-foreground font-semibold">IEEE EAIC 2025</span> at <span className="text-foreground font-medium">NIT Jalandhar</span>, which means I can go deep on theory when it matters, not just vibe-code my way through problems.
+                      I also had a research paper accepted at <span className="text-black font-bold bg-primary px-1 border border-black">IEEE EAIC 2025</span> at <span className="font-bold">NIT Jalandhar</span>, which means I can go deep on theory when it matters, not just vibe-code my way through problems.
                     </p>
 
                     <p>
-                      Right now I’m looking for an entry-level role where I can contribute to something ambitious in the AI, data, or full-stack space. If you’re building something that needs someone who <strong className="text-foreground font-medium">ships fast and thinks carefully</strong>, I’d genuinely love to talk.
+                      Right now I’m looking for an entry-level role where I can contribute to something ambitious in the AI, data, or full-stack space. If you’re building something that needs someone who <strong className="text-foreground font-bold underline decoration-2 underline-offset-2">ships fast and thinks carefully</strong>, I’d genuinely love to talk.
                     </p>
 
-                    <div className="pt-4 border-t-[0.5px] border-border/40 flex flex-wrap gap-x-6 gap-y-2 items-center text-[10px] font-mono text-muted-foreground select-none">
-                      <span className="flex items-center gap-1.5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                    <div className="pt-4 border-t-2 border-black flex flex-wrap gap-x-4 gap-y-2 items-center text-xs font-head font-bold text-foreground select-none">
+                      <span className="flex items-center gap-1.5 border-2 border-black bg-muted px-2.5 py-1 shadow-xs">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                         541+ Automated Tests Verified
                       </span>
-                      <span className="flex items-center gap-1.5">
-                        <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
+                      <span className="flex items-center gap-1.5 border-2 border-black bg-muted px-2.5 py-1 shadow-xs">
+                        <ShieldCheck className="w-4 h-4 text-emerald-600" />
                         AES-256 Encryption Compliant
                       </span>
                     </div>
@@ -188,14 +177,14 @@ export const AboutSection = () => {
                     transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
                     className="space-y-6"
                   >
-                    <div className="flex items-center justify-between border-b-[0.5px] border-border/60 pb-3">
+                    <div className="flex items-center justify-between border-b-2 border-black pb-3">
                       <div className="flex items-center gap-2">
-                        <Terminal className="w-4 h-4 text-primary" />
-                        <h4 className="text-[10px] font-mono uppercase tracking-widest text-foreground font-semibold">
+                        <Terminal className="w-4 h-4 text-black" />
+                        <h4 className="text-xs font-head uppercase tracking-widest text-foreground font-bold">
                           DEPLOYED PIPELINE LEDGER
                         </h4>
                       </div>
-                      <span className="text-[8px] font-mono bg-emerald-500/10 text-emerald-600 border border-emerald-500/25 px-1.5 py-0.5 rounded-sm font-semibold animate-pulse">
+                      <span className="text-[10px] font-head bg-emerald-400 text-black border-2 border-black px-2 py-0.5 font-bold shadow-xs">
                         STATUS: OPERATIONAL
                       </span>
                     </div>
@@ -203,51 +192,50 @@ export const AboutSection = () => {
                     <div className="grid md:grid-cols-2 gap-4">
                       
                       {/* Sub-Panel A: CI/CD Test suite runner */}
-                      <div className="border-[0.5px] border-border/80 bg-background/50 rounded p-4 font-mono text-[9px] text-muted-foreground space-y-2.5">
-                        <div className="flex justify-between items-center border-b-[0.5px] border-border/30 pb-1.5">
-                          <span className="text-foreground font-semibold">HEARTOUT_TEST_SUITE</span>
-                          <span className="text-emerald-500 font-semibold">[PASS]</span>
+                      <div className="border-2 border-black bg-card shadow-xs p-4 font-mono text-[10px] text-muted-foreground space-y-2.5">
+                        <div className="flex justify-between items-center border-b-2 border-black pb-1.5">
+                          <span className="text-foreground font-bold">HEARTOUT_TEST_SUITE</span>
+                          <span className="text-emerald-700 font-bold bg-emerald-100 border border-black px-1">[PASS]</span>
                         </div>
-                        <div className="space-y-1 opacity-80 leading-relaxed max-h-24 overflow-y-auto pr-1">
-                          <div>PASS  src/tests/auth.test.ts (1.42s)</div>
-                          <div>PASS  src/tests/db_connection.test.ts (0.84s)</div>
-                          <div>PASS  src/tests/middleware.test.ts (1.12s)</div>
-                          <div>PASS  src/tests/encryption.test.ts (2.03s)</div>
+                        <div className="space-y-1 text-foreground font-medium leading-relaxed max-h-24 overflow-y-auto pr-1">
+                          <div>PASS src/tests/auth.test.ts (1.42s)</div>
+                          <div>PASS src/tests/db_connection.test.ts (0.84s)</div>
+                          <div>PASS src/tests/middleware.test.ts (1.12s)</div>
+                          <div>PASS src/tests/encryption.test.ts (2.03s)</div>
                         </div>
-                        <div className="border-t-[0.5px] border-border/30 pt-1.5 flex justify-between text-[8px] opacity-75">
+                        <div className="border-t-2 border-black pt-1.5 flex justify-between text-[9px] font-bold text-foreground">
                           <span>TESTS: 541 / 541 PASSED</span>
                           <span>TIME: 5.41s</span>
                         </div>
                       </div>
 
                       {/* Sub-Panel B: Celery + Redis Broker */}
-                      <div className="border-[0.5px] border-border/80 bg-background/50 rounded p-4 font-mono text-[9px] text-muted-foreground space-y-2.5">
-                        <div className="flex justify-between items-center border-b-[0.5px] border-border/30 pb-1.5">
-                          <span className="text-foreground font-semibold">GETREPORT_RAG_QUEUE</span>
-                          <span className="text-primary font-semibold">[ACTIVE]</span>
+                      <div className="border-2 border-black bg-card shadow-xs p-4 font-mono text-[10px] text-muted-foreground space-y-2.5">
+                        <div className="flex justify-between items-center border-b-2 border-black pb-1.5">
+                          <span className="text-foreground font-bold">GETREPORT_RAG_QUEUE</span>
+                          <span className="text-black font-bold bg-primary border border-black px-1">[ACTIVE]</span>
                         </div>
                         
                         {/* Custom SVG telemetry vector flow */}
-                        <div className="h-16 flex items-center justify-center relative">
-                          <svg className="w-full h-10 text-primary/45" viewBox="0 0 160 40" role="img" aria-label="Pipeline schematic showing raw CSV converting via Celery worker and Redis to a PDF document">
-                            <rect x="5" y="10" width="30" height="20" rx="2" fill="none" stroke="currentColor" strokeWidth="0.5" />
-                            <text x="20" y="22" textAnchor="middle" fontSize="6" fontFamily="monospace" fill="currentColor">CSV</text>
+                        <div className="h-16 flex items-center justify-center relative border-2 border-black bg-white">
+                          <svg className="w-full h-10 text-black" viewBox="0 0 160 40" role="img" aria-label="Pipeline schematic showing raw CSV converting via Celery worker and Redis to a PDF document">
+                            <rect x="5" y="10" width="30" height="20" fill="#fff7e8" stroke="currentColor" strokeWidth="1.5" />
+                            <text x="20" y="22" textAnchor="middle" fontSize="6" fontFamily="monospace" fontWeight="bold" fill="currentColor">CSV</text>
                             
-                            <path d="M 35 20 L 50 20" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 2" />
-                            <circle cx="42.5" cy="20" r="1" className="fill-primary animate-ping" />
+                            <path d="M 35 20 L 50 20" stroke="currentColor" strokeWidth="1.5" strokeDasharray="2 2" />
                             
-                            <rect x="50" y="5" width="60" height="30" rx="2" fill="none" stroke="currentColor" strokeWidth="0.5" />
-                            <text x="80" y="18" textAnchor="middle" fontSize="5" fontFamily="monospace" fill="currentColor">CELERY_WORKER</text>
-                            <text x="80" y="27" textAnchor="middle" fontSize="5" fontFamily="monospace" fill="currentColor" className="fill-emerald-500 font-bold">REDIS_READY</text>
+                            <rect x="50" y="5" width="60" height="30" fill="#ffdc58" stroke="currentColor" strokeWidth="1.5" />
+                            <text x="80" y="17" textAnchor="middle" fontSize="5" fontFamily="monospace" fontWeight="bold" fill="currentColor">CELERY_WORKER</text>
+                            <text x="80" y="26" textAnchor="middle" fontSize="5" fontFamily="monospace" fontWeight="bold" fill="currentColor">REDIS_READY</text>
                             
-                            <path d="M 110 20 L 125 20" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 2" />
+                            <path d="M 110 20 L 125 20" stroke="currentColor" strokeWidth="1.5" strokeDasharray="2 2" />
                             
-                            <rect x="125" y="10" width="30" height="20" rx="2" fill="none" stroke="currentColor" strokeWidth="0.5" />
-                            <text x="140" y="22" textAnchor="middle" fontSize="6" fontFamily="monospace" fill="currentColor">PDF</text>
+                            <rect x="125" y="10" width="30" height="20" fill="#fff7e8" stroke="currentColor" strokeWidth="1.5" />
+                            <text x="140" y="22" textAnchor="middle" fontSize="6" fontFamily="monospace" fontWeight="bold" fill="currentColor">PDF</text>
                           </svg>
                         </div>
 
-                        <div className="border-t-[0.5px] border-border/30 pt-1.5 flex justify-between text-[8px] opacity-75">
+                        <div className="border-t-2 border-black pt-1.5 flex justify-between text-[9px] font-bold text-foreground">
                           <span>BROKER: REDIS // S3</span>
                           <span>TASK_CAP: POLARS</span>
                         </div>
@@ -255,12 +243,12 @@ export const AboutSection = () => {
                     </div>
 
                     {/* Infrastructure Summary log */}
-                    <div className="rounded border-[0.5px] border-border/60 bg-muted/20 p-3 text-[10px] font-mono text-muted-foreground leading-relaxed">
-                      <div className="flex gap-2 items-center text-foreground font-semibold mb-1">
-                        <Database className="w-3.5 h-3.5 text-primary" />
+                    <div className="border-2 border-black bg-muted/40 p-3 text-xs font-mono text-foreground leading-relaxed shadow-xs">
+                      <div className="flex gap-2 items-center text-foreground font-head font-bold uppercase mb-1">
+                        <Database className="w-3.5 h-3.5 text-black" />
                         HYBRID DATA LAYER SPECIFICATIONS
                       </div>
-                      Active caching powered by <span className="text-foreground">Redis</span> alongside structural data stores in <span className="text-foreground">PostgreSQL</span>. File ingestion pipelines are decoupled using Celery asynchronous workers streaming parsed assets into cloud storage.
+                      Active caching powered by <span className="font-bold bg-primary px-1 border border-black">Redis</span> alongside structural data stores in <span className="font-bold bg-primary px-1 border border-black">PostgreSQL</span>. File ingestion pipelines are decoupled using Celery asynchronous workers streaming parsed assets into cloud storage.
                     </div>
                   </motion.div>
                 )}
@@ -275,53 +263,53 @@ export const AboutSection = () => {
                     transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
                     className="space-y-6"
                   >
-                    <div className="flex items-center justify-between border-b-[0.5px] border-border/60 pb-3">
+                    <div className="flex items-center justify-between border-b-2 border-black pb-3">
                       <div className="flex items-center gap-2">
-                        <FileText className="w-4 h-4 text-primary" />
-                        <h4 className="text-[10px] font-mono uppercase tracking-widest text-foreground font-semibold">
+                        <FileText className="w-4 h-4 text-black" />
+                        <h4 className="text-xs font-head uppercase tracking-widest text-foreground font-bold">
                           ACADEMIC PUBLICATION RECORDFILE
                         </h4>
                       </div>
-                      <span className="text-[8px] font-mono bg-violet-500/10 text-violet-600 border border-violet-500/25 px-1.5 py-0.5 rounded-sm font-semibold">
+                      <span className="text-[10px] font-head bg-primary text-black border-2 border-black px-2 py-0.5 font-bold shadow-xs">
                         PEER-REVIEWED
                       </span>
                     </div>
 
-                    {/* LaTeX styled abstract paper card */}
-                    <div className="border-[0.5px] border-border/80 bg-background/50 rounded p-5 space-y-4 shadow-none">
+                    {/* Paper card */}
+                    <div className="border-2 border-black bg-card p-5 space-y-4 shadow-xs">
                       <div className="text-center space-y-1.5">
-                        <p className="text-[8px] font-mono tracking-widest text-muted-foreground uppercase">
+                        <p className="text-[10px] font-mono tracking-widest text-muted-foreground uppercase font-semibold">
                           PROCEEDINGS OF THE IEEE EAIC 2025
                         </p>
-                        <h5 className="font-serif-display font-medium text-base text-foreground tracking-tight leading-snug">
+                        <h5 className="font-head font-bold text-base text-foreground tracking-tight leading-snug uppercase">
                           IoT-Enabled Cognitive Smart Telemetry Systems: A Convergence Study
                         </h5>
-                        <p className="text-[9px] font-mono text-muted-foreground">
+                        <p className="text-[10px] font-mono text-foreground font-bold">
                           Vutikuri Shanmukha // National Institute of Technology, Jalandhar
                         </p>
                       </div>
 
-                      <div className="border-t-[0.5px] border-b-[0.5px] border-border/40 py-3">
-                        <span className="text-[9px] font-mono text-foreground font-semibold block mb-1">
+                      <div className="border-t-2 border-b-2 border-black py-3">
+                        <span className="text-[10px] font-mono text-foreground font-bold block mb-1">
                           ABSTRACT // COGNITIVE INFRASTRUCTURE
                         </span>
-                        <p className="text-[10.5px] leading-relaxed text-muted-foreground font-serif italic text-justify">
-                          "“…This paper explores the structural convergence of high-frequency cognitive sensor signals with IoT-enabled smart architecture. By decoupling signal processing metrics and utilizing low-latency neural model evaluation networks, we establish a robust telemetry model that maintains 98.42% accuracy under vector-RAG RRF scoring pipelines…”"
+                        <p className="text-xs leading-relaxed text-foreground font-sans text-justify">
+                          "This paper explores the structural convergence of high-frequency cognitive sensor signals with IoT-enabled smart architecture. By decoupling signal processing metrics and utilizing low-latency neural model evaluation networks, we establish a robust telemetry model that maintains 98.42% accuracy under vector-RAG RRF scoring pipelines."
                         </p>
                       </div>
 
-                      <div className="flex justify-between items-center text-[8.5px] font-mono text-muted-foreground">
+                      <div className="flex justify-between items-center text-[10px] font-mono text-foreground font-bold">
                         <span>CONFERENCE: IEEE EAIC 2025</span>
-                        <span className="flex items-center gap-1">
+                        <span className="flex items-center gap-1 bg-primary px-2 py-0.5 border border-black">
                           NIT Jalandhar
-                          <ArrowRight className="w-2.5 h-2.5 text-primary" />
+                          <ArrowRight className="w-3 h-3 text-black" />
                         </span>
                       </div>
                     </div>
 
-                    <div className="rounded border-[0.5px] border-border/60 bg-muted/20 p-3 text-[10px] font-mono text-muted-foreground leading-relaxed">
-                      <div className="flex gap-2 items-center text-foreground font-semibold mb-1">
-                        <Processor className="w-3.5 h-3.5 text-primary" />
+                    <div className="border-2 border-black bg-muted/40 p-3 text-xs font-mono text-foreground leading-relaxed shadow-xs">
+                      <div className="flex gap-2 items-center text-foreground font-head font-bold uppercase mb-1">
+                        <Processor className="w-3.5 h-3.5 text-black" />
                         THEORY & HARDWARE COGNITION
                       </div>
                       My B.Tech in Electronics & Communication Engineering equips me with solid mathematical foundations, signal theories, and low-level system understanding. I apply these methodologies to neural prompt tuning and sparse-versus-dense RAG retrieval algorithms.

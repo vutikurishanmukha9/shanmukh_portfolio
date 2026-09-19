@@ -75,23 +75,23 @@ export const ContactForm = () => {
       </p>
 
       <div className="space-y-1.5">
-        <label htmlFor="name" className="text-[9px] font-mono tracking-widest text-muted-foreground uppercase">
-          Name
+        <label htmlFor="name" className="text-[10px] font-head font-bold tracking-wider text-muted-foreground uppercase">
+          01 // Full Name
         </label>
         <Input
           id="name"
           name="name"
           value={formData.name}
           onChange={handleChange}
-          placeholder="Your name"
+          placeholder="e.g. Satoshi Nakamoto"
           required
-          className="bg-transparent border-[0.5px] border-border/80 focus:border-primary focus:ring-[0.5px] focus:ring-primary/30 transition-[border-color,box-shadow] rounded px-3 py-4 text-xs font-sans h-9"
+          className="border-2 border-black bg-card text-foreground font-mono focus:bg-white focus:outline-none rounded-none shadow-xs text-xs h-10 px-3"
         />
       </div>
 
       <div className="space-y-1.5">
-        <label htmlFor="email" className="text-[9px] font-mono tracking-widest text-muted-foreground uppercase">
-          Email
+        <label htmlFor="email" className="text-[10px] font-head font-bold tracking-wider text-muted-foreground uppercase">
+          02 // Email Address
         </label>
         <Input
           id="email"
@@ -99,61 +99,60 @@ export const ContactForm = () => {
           type="email"
           value={formData.email}
           onChange={handleChange}
-          placeholder="your.email@example.com"
+          placeholder="your.email@organization.com"
           required
-          className="bg-transparent border-[0.5px] border-border/80 focus:border-primary focus:ring-[0.5px] focus:ring-primary/30 transition-[border-color,box-shadow] rounded px-3 py-4 text-xs font-sans h-9"
+          className="border-2 border-black bg-card text-foreground font-mono focus:bg-white focus:outline-none rounded-none shadow-xs text-xs h-10 px-3"
         />
       </div>
 
       <div className="space-y-1.5">
-        <label htmlFor="subject" className="text-[9px] font-mono tracking-widest text-muted-foreground uppercase">
-          Subject
+        <label htmlFor="subject" className="text-[10px] font-head font-bold tracking-wider text-muted-foreground uppercase">
+          03 // Subject Matter
         </label>
         <Input
           id="subject"
           name="subject"
           value={formData.subject}
           onChange={handleChange}
-          placeholder="What is this about?"
+          placeholder="Project Inquiry / Engineering Role"
           required
-          className="bg-transparent border-[0.5px] border-border/80 focus:border-primary focus:ring-[0.5px] focus:ring-primary/30 transition-[border-color,box-shadow] rounded px-3 py-4 text-xs font-sans h-9"
+          className="border-2 border-black bg-card text-foreground font-mono focus:bg-white focus:outline-none rounded-none shadow-xs text-xs h-10 px-3"
         />
       </div>
 
       <div className="space-y-1.5">
-        <label htmlFor="message" className="text-[9px] font-mono tracking-widest text-muted-foreground uppercase">
-          Message
+        <label htmlFor="message" className="text-[10px] font-head font-bold tracking-wider text-muted-foreground uppercase">
+          04 // Message Body
         </label>
         <Textarea
           id="message"
           name="message"
           value={formData.message}
           onChange={handleChange}
-          placeholder="Tell me about your project…"
+          placeholder="Describe project requirements, tech stack specs, or timeline..."
           required
           rows={4}
-          className="bg-transparent border-[0.5px] border-border/80 focus:border-primary focus:ring-[0.5px] focus:ring-primary/30 transition-[border-color,box-shadow] rounded px-3 py-2.5 text-xs font-sans resize-none"
+          className="border-2 border-black bg-card text-foreground font-mono focus:bg-white focus:outline-none rounded-none shadow-xs text-xs resize-none p-3"
         />
       </div>
 
-      <Button
+      <button
         type="submit"
-        size="lg"
-        className="w-full h-11 rounded-full bg-foreground text-background shadow-[0_1px_2px_rgba(0,0,0,0.08),0_4px_12px_rgba(0,0,0,0.04)] hover:bg-foreground/90 transition-colors font-mono text-[11px] tracking-widest uppercase group active:scale-[0.98]"
         disabled={isSubmitting}
+        className="w-full h-12 border-2 border-black bg-primary text-black font-head font-bold uppercase text-xs shadow-[4px_4px_0px_#000] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0px_#000] active:translate-x-1 active:translate-y-1 active:shadow-none rounded-none flex items-center justify-center gap-2 cursor-pointer transition-all disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isSubmitting ? (
           <>
-            <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-            Sending…
+            <Loader2 className="h-4 w-4 animate-spin text-black" />
+            <span>DISPATCHING...</span>
           </>
         ) : (
           <>
-            <Send className="h-3.5 w-3.5 mr-2 transition-transform duration-200 group-hover:translate-x-0.5" />
-            Send Message
+            <Send className="h-4 w-4 text-black" />
+            <span>TRANSMIT_MESSAGE()</span>
           </>
         )}
-      </Button>
+      </button>
     </form>
   );
 };

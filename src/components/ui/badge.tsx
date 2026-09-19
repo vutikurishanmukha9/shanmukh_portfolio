@@ -3,19 +3,26 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const badgeVariants = cva(
-  "inline-flex items-center rounded-full border px-2.5 py-0.5 text-[10px] font-mono uppercase tracking-wider transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+  "group/badge inline-flex h-auto w-fit shrink-0 items-center justify-center gap-1 overflow-hidden rounded-none border-2 border-black px-2.5 py-0.5 text-xs font-head font-medium uppercase tracking-wide whitespace-nowrap shadow-xs transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black",
   {
     variants: {
       variant: {
         default:
-          "border-transparent bg-foreground text-background shadow-xs hover:bg-foreground/80",
+          "bg-primary text-primary-foreground hover:bg-primary-hover",
         secondary:
-          "border-border/60 bg-muted/60 text-foreground hover:bg-muted/80",
+          "bg-secondary text-secondary-foreground hover:bg-neutral-800",
         destructive:
-          "border-transparent bg-destructive text-destructive-foreground shadow-xs hover:bg-destructive/80",
-        outline: "border-border text-foreground",
-        primary: "border-primary/20 bg-primary/10 text-primary font-semibold",
-        emerald: "border-emerald-500/20 bg-emerald-500/10 text-emerald-600 font-semibold",
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+        outline:
+          "bg-card text-foreground hover:bg-muted",
+        primary:
+          "bg-primary text-primary-foreground hover:bg-primary-hover",
+        accent:
+          "bg-accent text-accent-foreground hover:bg-primary/50",
+        emerald:
+          "bg-emerald-400 text-black hover:bg-emerald-300",
+        ghost:
+          "border-transparent bg-transparent shadow-none hover:border-black hover:bg-accent",
       },
     },
     defaultVariants: {
@@ -30,8 +37,14 @@ export interface BadgeProps
 
 function Badge({ className, variant, ...props }: BadgeProps) {
   return (
-    <div className={cn(badgeVariants({ variant }), className)} {...props} />
+    <div
+      data-slot="badge"
+      data-variant={variant}
+      className={cn(badgeVariants({ variant }), className)}
+      {...props}
+    />
   );
 }
 
-export { Badge };
+export { Badge, badgeVariants };
+
