@@ -31,7 +31,7 @@ export const AboutSection = () => {
         </div>
 
         {/* Main Grid Layout */}
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 max-w-7xl mx-auto items-stretch">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 max-w-7xl mx-auto">
           
           {/* LEFT PANEL: Operator Dossier & Spec Ledger */}
           <div className="lg:col-span-5 flex flex-col justify-between space-y-8 bg-card border-2 border-black p-4 sm:p-6 md:p-8 rounded-none shadow-[6px_6px_0px_#000]">
@@ -189,7 +189,7 @@ export const AboutSection = () => {
                       </span>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-4">
+                    <div className="grid sm:grid-cols-2 gap-4">
                       
                       {/* Sub-Panel A: CI/CD Test suite runner */}
                       <div className="border-2 border-black bg-card shadow-xs p-4 font-mono text-[10px] text-muted-foreground space-y-2.5">

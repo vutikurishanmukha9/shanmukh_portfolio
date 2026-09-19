@@ -63,11 +63,11 @@ const TelemetryDashboard = () => {
   };
 
   return (
-    <div className="relative w-full max-w-md lg:max-w-lg mx-auto">
+    <div className="relative w-full max-w-full sm:max-w-md lg:max-w-lg mx-auto">
       {/* Signature Retro Mascot Bobbing atop the Specimen (from neobrutalism.com) */}
       <div
         aria-hidden="true"
-        className="select-none pointer-events-none absolute -end-2 -top-11 z-20 hidden size-16 object-contain sm:block animate-bounce"
+        className="select-none pointer-events-none absolute -end-2 sm:-end-2 -top-11 z-20 hidden size-16 object-contain sm:block animate-bounce"
         style={{ animationDuration: '3.5s' }}
       >
         <svg viewBox="0 0 88 88" className="w-full h-full drop-shadow-[2px_2px_0_#000]">
@@ -167,8 +167,8 @@ const TelemetryDashboard = () => {
 
               {/* Stepped Digital Telemetry Histogram / Oscilloscope */}
               <div className="space-y-1.5">
-                <div className="flex items-center justify-between text-[10px] font-head font-bold uppercase tracking-wide">
-                  <span>Stepped Digital Telemetry Histogram</span>
+                <div className="flex flex-wrap items-center justify-between text-[10px] font-head font-bold uppercase tracking-wide gap-1">
+                  <span className="truncate">Stepped Digital Telemetry Histogram</span>
                   <span className="text-black bg-primary px-1.5 py-0.2 border border-black text-[9px] font-bold font-mono">
                     SAMPLE: 100Hz
                   </span>
@@ -213,17 +213,17 @@ const TelemetryDashboard = () => {
                 </div>
                 <div className="space-y-1 font-mono text-[11px] sm:text-xs">
                   <div className="grid grid-cols-[1.5fr_0.7fr_0.8fr] items-center">
-                    <span className="font-bold truncate">FastAPI_Telemetry</span>
+                    <span className="font-bold truncate text-[10px] sm:text-[11px]">FastAPI_Telemetry</span>
                     <span className="text-center opacity-70">8000</span>
                     <span className="text-right text-emerald-700 font-bold">ONLINE</span>
                   </div>
                   <div className="grid grid-cols-[1.5fr_0.7fr_0.8fr] items-center">
-                    <span className="font-bold truncate">FAISS_VectorDB</span>
+                    <span className="font-bold truncate text-[10px] sm:text-[11px]">FAISS_VectorDB</span>
                     <span className="text-center opacity-70">2375</span>
                     <span className="text-right text-emerald-700 font-bold">ONLINE</span>
                   </div>
                   <div className="grid grid-cols-[1.5fr_0.7fr_0.8fr] items-center">
-                    <span className="font-bold truncate">Vite_Frontend</span>
+                    <span className="font-bold truncate text-[10px] sm:text-[11px]">Vite_Frontend</span>
                     <span className="text-center opacity-70">5173</span>
                     <span className="text-right text-emerald-700 font-bold">ONLINE</span>
                   </div>
@@ -279,7 +279,7 @@ const TelemetryDashboard = () => {
               </div>
 
               {/* Streaming token box */}
-              <div className="p-3 bg-muted/30 border-2 border-black min-h-[105px] text-xs font-mono flex flex-col justify-between relative shadow-xs">
+              <div className="p-3 bg-muted/30 border-2 border-black min-h-[90px] sm:min-h-[105px] text-xs font-mono flex flex-col justify-between relative shadow-xs">
                 <div className="flex flex-wrap gap-1.5 items-center relative z-10">
                   {simTokens.length > 0 ? (
                     simTokens.map((tok) => (
@@ -368,7 +368,7 @@ const TelemetryDashboard = () => {
             <span className="flex size-5 shrink-0 items-center justify-center border-2 border-black bg-primary font-bold text-black text-xs shadow-none">
               $
             </span>
-            <code className="min-w-0 truncate text-foreground font-semibold text-[11px]">
+            <code className="min-w-0 truncate text-foreground font-semibold text-[10px] sm:text-[11px]">
               curl -s https://api.vutikuri.dev/v1/telemetry | jq .status
             </code>
           </div>
@@ -415,8 +415,8 @@ export const HeroSection = () => {
       />
 
       <div className="container mx-auto px-4 relative z-10 w-full">
-        <div className="grid min-h-[calc(100vh-10rem)] items-center gap-8 lg:gap-10 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="max-w-3xl space-y-5 sm:space-y-6 text-center lg:text-left flex flex-col justify-center">
+        <div className="grid items-center gap-10 lg:gap-10 lg:grid-cols-[1.1fr_0.9fr] py-8 sm:py-12 lg:py-0 lg:min-h-[calc(100vh-10rem)]">
+          <div className="w-full max-w-3xl space-y-5 sm:space-y-6 text-center lg:text-left flex flex-col justify-center">
 
             {/* Status Sticker Badge */}
             <motion.div
@@ -556,7 +556,7 @@ export const HeroSection = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="w-full max-w-md lg:max-w-lg mx-auto"
+            className="w-full max-w-full sm:max-w-md lg:max-w-lg mx-auto overflow-hidden"
           >
             <TelemetryDashboard />
           </motion.div>
