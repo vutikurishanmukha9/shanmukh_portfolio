@@ -63,7 +63,7 @@ const TelemetryDashboard = () => {
   };
 
   return (
-    <div className="relative w-full max-w-full sm:max-w-md lg:max-w-lg mx-auto">
+    <div className="relative w-full mx-auto overflow-visible">
       {/* Signature Retro Mascot Bobbing atop the Specimen (from neobrutalism.com) */}
       <div
         aria-hidden="true"
@@ -85,7 +85,7 @@ const TelemetryDashboard = () => {
       </div>
 
       {/* Signature Neobrutalism Offset Under-Layer */}
-      <div className="absolute border-2 border-black -bottom-2.5 -right-2.5 left-2.5 top-2.5 bg-primary pointer-events-none" />
+      <div className="hidden sm:block absolute border-2 border-black -bottom-2.5 -right-2.5 left-2.5 top-2.5 bg-primary pointer-events-none" />
 
       {/* Main Specimen Window */}
       <Card className="relative border-2 border-black bg-card shadow-none rounded-none select-none flex flex-col justify-between">
@@ -402,7 +402,7 @@ export const HeroSection = () => {
   const { playClick } = useSound();
 
   return (
-    <section id="home" className="relative min-h-screen overflow-hidden pt-28 sm:pt-32 pb-12 sm:pb-16 bg-background">
+    <section id="home" className="relative min-h-screen overflow-x-hidden pt-28 sm:pt-32 pb-12 sm:pb-16 bg-background">
       <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} />
 
       {/* Background Subtle Technical Grid */}
@@ -556,7 +556,7 @@ export const HeroSection = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="w-full max-w-full sm:max-w-md lg:max-w-lg mx-auto pt-16 sm:pt-14"
+            className="w-full sm:max-w-md lg:max-w-lg mx-auto sm:pt-14"
           >
             <TelemetryDashboard />
           </motion.div>
