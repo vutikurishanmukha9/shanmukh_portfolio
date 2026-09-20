@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -30,7 +30,7 @@ const navItems = [
   { label: "Career", href: "#career", icon: Briefcase },
   { label: "Work", href: "#projects", icon: FolderGit2 },
   { label: "Case Studies", href: "#case-studies", icon: BarChart3 },
-  { label: "Certifications", href: "#certifications", icon: Award },
+  { label: "Certs", href: "#certifications", icon: Award },
   { label: "Contact", href: "#contact", icon: Mail },
 ];
 
@@ -46,12 +46,8 @@ export const Navigation = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 30);
-
-      // Use viewport center point to determine which section is "current"
       const viewportCenter = window.innerHeight * 0.4;
       let found = false;
-
-      // Iterate sections in reverse so bottom sections get priority when overlapping
       const sections = navItems.map(item => item.href.substring(1));
       for (let i = sections.length - 1; i >= 0; i--) {
         const element = document.getElementById(sections[i]);
@@ -64,33 +60,25 @@ export const Navigation = () => {
           }
         }
       }
-
-      // If at the very top, default to #home
       if (!found && window.scrollY < 100) {
         setActiveHash("#home");
       }
     };
-
-    // Run immediately on mount
     handleScroll();
-
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    playClick(850, 0.03, 'sine');
-    const targetId = href.replace('#', '');
+    playClick(850, 0.03, "sine");
+    const targetId = href.replace("#", "");
     const element = document.getElementById(targetId);
-
     if (element) {
-      // Use Lenis scrollTo for consistent smooth scroll behavior
       scrollTo(element, -90);
     } else {
       window.location.href = `/${href}`;
     }
-
     setActiveHash(href);
     setIsMobileMenuOpen(false);
   };
@@ -116,9 +104,9 @@ export const Navigation = () => {
           <button
             type="button"
             onClick={() => {
-              playClick(850, 0.03, 'sine');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-              setActiveHash('#home');
+              playClick(850, 0.03, "sine");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              setActiveHash("#home");
             }}
             className="px-3 py-1 font-head text-base tracking-tight text-foreground hover:text-primary transition-colors md:hidden relative z-30 cursor-pointer"
             aria-label="Scroll to top"
@@ -126,11 +114,11 @@ export const Navigation = () => {
             VS<span className="text-primary">.</span>
           </button>
 
-          {/* Design Portfolio Mode Switcher (Mobile & Tablet) */}
+          {/* Design Portfolio Mode Switcher (Mobile) */}
           <div className="md:hidden flex items-center relative z-30 mr-1.5">
             <Link
               to="/design"
-              onClick={() => playClick(800, 0.03, 'sine')}
+              onClick={() => playClick(800, 0.03, "sine")}
               className="inline-flex items-center gap-1 px-2.5 py-1 bg-black text-white hover:bg-primary hover:text-black border-2 border-black text-[10px] font-head font-bold uppercase tracking-wide transition-all shadow-xs"
               aria-label="Switch to Product Designer Portfolio"
             >
@@ -152,45 +140,28 @@ export const Navigation = () => {
             </Button>
           </div>
 
-          {/* Desktop Animated Floating Dock Navigation */}
-          <nav className="hidden md:flex items-center gap-1 relative z-30 p-0.5">
+          {/* Desktop Nav: icon + label */}
+          <nav className="hidden md:flex items-center gap-0.5 relative z-30 p-0.5">
             {navItems.map((item) => {
               const isActive = activeHash === item.href;
               const isHovered = hoveredHash === item.href;
               const isHighlighted = currentHighlighted === item.href;
               const Icon = item.icon;
-
               return (
-                <div 
-                  key={item.href} 
-                  className="relative flex items-center justify-center"
+                <div
+                  key={item.href}
+                  className="relative flex items-center justify-center shrink-0"
                   onMouseEnter={() => {
                     setHoveredHash(item.href);
-                    playClick(950, 0.015, 'sine');
+                    playClick(950, 0.015, "sine");
                   }}
                 >
-                  {/* Floating Micro-Tooltip */}
-                  <AnimatePresence>
-                    {isHovered && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -6, scale: 0.9 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: -4, scale: 0.9 }}
-                        transition={{ type: "spring", stiffness: 450, damping: 25 }}
-                        className="absolute top-full mt-3 left-1/2 -translate-x-1/2 px-2 py-0.5 border-2 border-black bg-primary text-black text-[10px] font-head font-bold uppercase tracking-wider shadow-[2px_2px_0px_#000] pointer-events-none whitespace-nowrap z-50"
-                      >
-                        <span>{item.label}</span>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-
                   <a
                     href={item.href}
                     onClick={(e) => handleScrollTo(e, item.href)}
-                    className="relative w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-none select-none"
+                    className="relative flex items-center gap-1.5 px-2.5 py-1.5 select-none"
                     aria-label={item.label}
                   >
-                    {/* Active Indicator Box */}
                     {isHighlighted && (
                       <motion.div
                         layoutId="navbar-dock-pill"
@@ -200,36 +171,38 @@ export const Navigation = () => {
                             ? "bg-primary shadow-[2px_2px_0px_#000]"
                             : "bg-muted border-black/40"
                         )}
-                        transition={{
-                          type: "spring",
-                          stiffness: 400,
-                          damping: 28,
-                          mass: 0.75,
-                        }}
+                        transition={{ type: "spring", stiffness: 400, damping: 28, mass: 0.75 }}
                       />
                     )}
-
-                    {/* Icon */}
                     <motion.div
-                      animate={{
-                        scale: isHovered ? 1.15 : 1,
-                        y: isHovered ? -2 : 0,
-                      }}
+                      animate={{ scale: isHovered ? 1.1 : 1, y: isHovered ? -1 : 0 }}
                       whileTap={{ scale: 0.9 }}
                       transition={{ type: "spring", stiffness: 420, damping: 22 }}
                       className="relative z-10 flex items-center justify-center"
                     >
-                      <Icon 
+                      <Icon
                         className={cn(
-                          "h-4 w-4 transition-colors duration-150", 
+                          "h-3.5 w-3.5 transition-colors duration-150 shrink-0",
                           isActive && isHighlighted
-                            ? "text-black stroke-[2.5]" 
+                            ? "text-black stroke-[2.5]"
                             : isHovered
                               ? "text-black stroke-[2.2]"
                               : "text-muted-foreground stroke-[2]"
-                        )} 
+                        )}
                       />
                     </motion.div>
+                    <span
+                      className={cn(
+                        "relative z-10 text-[10px] font-head font-bold uppercase tracking-wider transition-colors duration-150 whitespace-nowrap",
+                        isActive && isHighlighted
+                          ? "text-black"
+                          : isHovered
+                            ? "text-black"
+                            : "text-muted-foreground"
+                      )}
+                    >
+                      {item.label}
+                    </span>
                   </a>
                 </div>
               );
@@ -239,11 +212,11 @@ export const Navigation = () => {
           {/* Vertical Divider */}
           <div className="hidden md:block w-[2px] h-5 bg-black mx-1.5 relative z-10" />
 
-          {/* Design Portfolio Mode Switcher */}
+          {/* Design Mode Switcher */}
           <div className="hidden md:flex items-center relative z-10">
             <Link
               to="/design"
-              onClick={() => playClick(800, 0.03, 'sine')}
+              onClick={() => playClick(800, 0.03, "sine")}
               className="inline-flex items-center gap-1.5 px-3 py-1 bg-black text-white hover:bg-primary hover:text-black border-2 border-black text-[11px] font-head font-bold uppercase tracking-wide transition-all duration-150 shadow-xs active:translate-x-0.5 active:translate-y-0.5"
               aria-label="Switch to Product Designer Portfolio"
             >
@@ -252,13 +225,13 @@ export const Navigation = () => {
             </Link>
           </div>
 
-          {/* Controls + CV Button */}
+          {/* Controls + CV */}
           <div className="hidden md:flex items-center gap-1.5 relative z-10 pr-1 pl-1.5">
             <Button
               variant="default"
               size="sm"
               onClick={() => {
-                playClick(800, 0.04, 'sine');
+                playClick(800, 0.04, "sine");
                 setIsResumeOpen(true);
               }}
               className="h-8 text-[11px] font-head font-bold uppercase tracking-wider px-3 border-2 border-black bg-primary text-black hover:bg-primary-hover shadow-xs"
@@ -268,7 +241,6 @@ export const Navigation = () => {
             <ThemeToggle />
             <SoundToggle />
           </div>
-
         </div>
       </motion.header>
 
@@ -283,7 +255,6 @@ export const Navigation = () => {
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 bg-background/95 backdrop-blur-2xl md:hidden flex flex-col items-center justify-between p-6 pt-safe pb-safe supports-[backdrop-filter]:bg-background/90"
           >
-            {/* Top Bar with Brand & Close Button */}
             <div className="w-full max-w-sm flex items-center justify-between pt-2 pb-4 border-b-2 border-black">
               <span className="font-head text-lg font-bold uppercase tracking-tight text-foreground">
                 VS<span className="text-primary">.</span> Navigation
@@ -299,18 +270,16 @@ export const Navigation = () => {
               </Button>
             </div>
 
-            {/* Middle Nav Items */}
             <motion.nav
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
               className="flex flex-col items-center gap-3 w-full max-w-sm my-auto overflow-y-auto py-2 touch-scroll"
             >
-              {/* Prominent Top Design Mode Switcher Link */}
               <Link
                 to="/design"
                 onClick={() => {
-                  playClick(800, 0.03, 'sine');
+                  playClick(800, 0.03, "sine");
                   setIsMobileMenuOpen(false);
                 }}
                 className="w-full py-2.5 px-4 rounded-none bg-primary text-black border-2 border-black font-head text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center gap-2 hover:bg-primary-hover transition-all shadow-xs mb-1 active:translate-x-0.5 active:translate-y-0.5 cursor-pointer"
@@ -329,7 +298,7 @@ export const Navigation = () => {
                     initial={{ y: 8, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     whileTap={{ scale: 0.97 }}
-                    transition={{ delay: 0.03 + (i * 0.02), type: "tween", ease: [0.16, 1, 0.3, 1], duration: 0.2 }}
+                    transition={{ delay: 0.03 + i * 0.02, type: "tween", ease: [0.16, 1, 0.3, 1], duration: 0.2 }}
                     className={cn(
                       "text-base sm:text-lg font-head font-bold uppercase tracking-wider w-full text-center py-2 border-b-2 border-black/10 transition-colors flex items-center justify-center gap-2.5 active:text-primary",
                       activeHash === item.href ? "text-primary" : "text-muted-foreground hover:text-foreground"
@@ -342,13 +311,12 @@ export const Navigation = () => {
               })}
             </motion.nav>
 
-            {/* Bottom Controls Bar */}
             <div className="w-full max-w-sm pt-4 pb-2 border-t-2 border-black flex items-center justify-between">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => {
-                  playClick(800, 0.04, 'sine');
+                  playClick(800, 0.04, "sine");
                   setIsMobileMenuOpen(false);
                   setIsResumeOpen(true);
                 }}
