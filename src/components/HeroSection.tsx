@@ -67,7 +67,7 @@ const TelemetryDashboard = () => {
       {/* Signature Retro Mascot Bobbing atop the Specimen (from neobrutalism.com) */}
       <div
         aria-hidden="true"
-        className="select-none pointer-events-none absolute -end-2 sm:-end-2 -top-11 z-20 hidden size-16 object-contain sm:block animate-bounce"
+        className="select-none pointer-events-none absolute -end-2 -top-14 z-30 hidden size-16 object-contain sm:block animate-bounce"
         style={{ animationDuration: '3.5s' }}
       >
         <svg viewBox="0 0 88 88" className="w-full h-full drop-shadow-[2px_2px_0_#000]">
@@ -88,7 +88,7 @@ const TelemetryDashboard = () => {
       <div className="absolute border-2 border-black -bottom-2.5 -right-2.5 left-2.5 top-2.5 bg-primary pointer-events-none" />
 
       {/* Main Specimen Window */}
-      <Card className="relative border-2 border-black bg-card shadow-none rounded-none overflow-hidden select-none flex flex-col justify-between">
+      <Card className="relative border-2 border-black bg-card shadow-none rounded-none select-none flex flex-col justify-between">
         {/* Specimen Header with Window Controls */}
         <div className="flex shrink-0 items-center justify-between border-b-2 border-black bg-muted px-3.5 py-2.5">
           <div className="flex items-center gap-2.5">
@@ -111,7 +111,7 @@ const TelemetryDashboard = () => {
           </div>
         </div>
 
-        <CardContent className="p-3.5 sm:p-5 flex flex-col justify-between gap-4">
+        <CardContent className="p-3.5 sm:p-5 flex flex-col justify-between gap-4 overflow-hidden">
           {/* Neobrutalism Tabs: 3 Views */}
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList className="w-full grid grid-cols-3 mb-3 bg-muted p-1 border-2 border-black shadow-xs">
