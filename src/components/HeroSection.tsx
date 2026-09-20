@@ -63,7 +63,7 @@ const TelemetryDashboard = () => {
   };
 
   return (
-    <div className="relative w-full mx-auto overflow-visible">
+    <div className="relative w-full mx-auto overflow-hidden sm:overflow-visible">
       {/* Signature Retro Mascot Bobbing atop the Specimen (from neobrutalism.com) */}
       <div
         aria-hidden="true"
@@ -88,7 +88,7 @@ const TelemetryDashboard = () => {
       <div className="hidden sm:block absolute border-2 border-black -bottom-2.5 -right-2.5 left-2.5 top-2.5 bg-primary pointer-events-none" />
 
       {/* Main Specimen Window */}
-      <Card className="relative border-2 border-black bg-card shadow-none rounded-none select-none flex flex-col justify-between">
+      <Card className="relative border-2 border-black bg-card shadow-none rounded-none select-none flex flex-col justify-between overflow-hidden">
         {/* Specimen Header with Window Controls */}
         <div className="flex shrink-0 items-center justify-between border-b-2 border-black bg-muted px-3.5 py-2.5">
           <div className="flex items-center gap-2.5">
@@ -415,8 +415,8 @@ export const HeroSection = () => {
       />
 
       <div className="container mx-auto px-4 relative z-10 w-full">
-        <div className="grid items-center gap-10 lg:gap-10 lg:grid-cols-[1.1fr_0.9fr] py-8 sm:py-12 lg:py-0 lg:min-h-[calc(100vh-10rem)]">
-          <div className="w-full max-w-3xl space-y-5 sm:space-y-6 text-center lg:text-left flex flex-col justify-center">
+        <div className="grid min-w-0 items-center gap-10 lg:gap-10 lg:grid-cols-[1.1fr_0.9fr] py-8 sm:py-12 lg:py-0 lg:min-h-[calc(100vh-10rem)]">
+          <div className="w-full min-w-0 max-w-3xl space-y-5 sm:space-y-6 text-center lg:text-left flex flex-col justify-center">
 
             {/* Status Sticker Badge */}
             <motion.div
@@ -556,7 +556,7 @@ export const HeroSection = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="w-full sm:max-w-md lg:max-w-lg mx-auto sm:pt-14"
+            className="w-full sm:max-w-md lg:max-w-lg mx-auto px-2 sm:px-0 sm:pt-14"
           >
             <TelemetryDashboard />
           </motion.div>
