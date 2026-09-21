@@ -114,7 +114,7 @@ export const ContactSection = () => {
           </motion.p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto items-stretch">
           {/* Contact Information Column */}
           <motion.div
             initial={{ opacity: 0, x: -15 }}

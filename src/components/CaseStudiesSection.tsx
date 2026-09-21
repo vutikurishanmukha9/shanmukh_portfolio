@@ -247,7 +247,7 @@ const CaseStudyCard = ({ study, index }: { study: CaseStudy; index: number }) =>
       className="group relative border-2 border-black bg-card rounded-none overflow-hidden shadow-[6px_6px_0px_#000] hover:shadow-[8px_8px_0px_#000] transition-shadow duration-200"
     >
       {/* Top: Preview + Content side-by-side on lg */}
-      <div className="relative z-10 grid lg:grid-cols-[0.95fr_1.05fr] gap-0">
+      <div className="relative z-10 grid md:grid-cols-[0.95fr_1.05fr] gap-0">
         {/* Preview Panel with View Mode Switch */}
         <div className="border-b-2 lg:border-b-0 lg:border-r-2 border-black p-5 flex flex-col justify-between min-h-[260px] bg-[#fff7e8]">
           <div className="flex items-center justify-between mb-3 pb-2 border-b-2 border-black">
@@ -403,7 +403,7 @@ export const CaseStudiesSection = () => {
       <div className="container relative z-10 mx-auto px-4 lg:px-8">
 
         {/* Section Header */}
-        <div className="mb-12 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+        <div className="mb-12 grid gap-6 md:gap-8 md:grid-cols-[1fr_auto] md:items-end">
           <div className="max-w-3xl">
             <motion.div
               initial={{ opacity: 0, y: 10 }}

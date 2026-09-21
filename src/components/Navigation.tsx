@@ -1,4 +1,4 @@
-﻿import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -141,7 +141,7 @@ export const Navigation = () => {
           </div>
 
           {/* Desktop Nav: icon + label */}
-          <nav className="hidden md:flex items-center gap-0.5 relative z-30 p-0.5">
+          <nav className="hidden md:flex items-center gap-0 lg:gap-0.5 relative z-30 p-0.5">
             {navItems.map((item) => {
               const isActive = activeHash === item.href;
               const isHovered = hoveredHash === item.href;
@@ -159,7 +159,7 @@ export const Navigation = () => {
                   <a
                     href={item.href}
                     onClick={(e) => handleScrollTo(e, item.href)}
-                    className="relative flex items-center gap-1.5 px-2.5 py-1.5 select-none"
+                    className="relative flex items-center gap-1 md:gap-1 lg:gap-1.5 px-1.5 md:px-1.5 lg:px-2.5 py-1.5 select-none"
                     aria-label={item.label}
                   >
                     {isHighlighted && (
@@ -193,7 +193,7 @@ export const Navigation = () => {
                     </motion.div>
                     <span
                       className={cn(
-                        "relative z-10 text-[10px] font-head font-bold uppercase tracking-wider transition-colors duration-150 whitespace-nowrap",
+                        "relative z-10 text-[9px] md:text-[9px] lg:text-[10px] font-head font-bold uppercase tracking-wide lg:tracking-wider transition-colors duration-150 whitespace-nowrap",
                         isActive && isHighlighted
                           ? "text-black"
                           : isHovered

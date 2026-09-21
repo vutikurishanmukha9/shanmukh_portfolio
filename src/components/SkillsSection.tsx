@@ -208,7 +208,7 @@ export const SkillsSection = () => {
           </div>
 
           {/* Interactive Pipeline Stages Map */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3 relative">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-2.5 md:gap-3 relative">
             {pipelineStages.map((stage, i) => {
               const Icon = stage.icon;
               const isCurrent = activeHighlightedStage === stage.id;
@@ -268,7 +268,7 @@ export const SkillsSection = () => {
         </div>
 
         {/* Categories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-6 max-w-6xl mx-auto">
           <AnimatePresence mode="popLayout">
             {filteredCategories.map((category) => {
               const Icon = category.icon;

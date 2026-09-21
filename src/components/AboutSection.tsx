@@ -31,10 +31,10 @@ export const AboutSection = () => {
         </div>
 
         {/* Main Grid Layout */}
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-12 gap-6 md:gap-8 lg:gap-12 max-w-7xl mx-auto">
           
           {/* LEFT PANEL: Operator Dossier & Spec Ledger */}
-          <div className="lg:col-span-5 flex flex-col justify-between space-y-8 bg-card border-2 border-black p-4 sm:p-6 md:p-8 rounded-none shadow-[6px_6px_0px_#000]">
+          <div className="md:col-span-5 flex flex-col justify-between space-y-8 bg-card border-2 border-black p-4 sm:p-6 md:p-8 rounded-none shadow-[6px_6px_0px_#000]">
             <div className="space-y-6">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 border-2 border-black bg-black text-white text-[11px] font-head uppercase tracking-wider font-bold shadow-xs">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -80,7 +80,7 @@ export const AboutSection = () => {
           </div>
 
           {/* RIGHT PANEL: Interactive Console containing Narrative / Telemetry / Academics */}
-          <div className="lg:col-span-7 flex flex-col bg-card border-2 border-black rounded-none shadow-[6px_6px_0px_#000] overflow-hidden">
+          <div className="md:col-span-7 flex flex-col bg-card border-2 border-black rounded-none shadow-[6px_6px_0px_#000] overflow-hidden">
             
             {/* Console Tab Bar */}
             <div className="flex border-b-2 border-black bg-muted divide-x-2 divide-black select-none">

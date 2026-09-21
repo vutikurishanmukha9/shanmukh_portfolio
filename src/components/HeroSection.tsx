@@ -63,11 +63,11 @@ const TelemetryDashboard = () => {
   };
 
   return (
-    <div className="relative w-full mx-auto overflow-hidden sm:overflow-visible">
+    <div className="relative w-full min-w-0 overflow-hidden md:overflow-visible">
       {/* Signature Retro Mascot Bobbing atop the Specimen (from neobrutalism.com) */}
       <div
         aria-hidden="true"
-        className="select-none pointer-events-none absolute -end-2 -top-14 z-30 hidden size-16 object-contain sm:block animate-bounce"
+        className="select-none pointer-events-none absolute -end-2 -top-14 z-30 hidden size-16 object-contain md:block animate-bounce"
         style={{ animationDuration: '3.5s' }}
       >
         <svg viewBox="0 0 88 88" className="w-full h-full drop-shadow-[2px_2px_0_#000]">
@@ -85,13 +85,13 @@ const TelemetryDashboard = () => {
       </div>
 
       {/* Signature Neobrutalism Offset Under-Layer */}
-      <div className="hidden sm:block absolute border-2 border-black -bottom-2.5 -right-2.5 left-2.5 top-2.5 bg-primary pointer-events-none" />
+      <div className="hidden md:block absolute border-2 border-black -bottom-2.5 -right-2.5 left-2.5 top-2.5 bg-primary pointer-events-none" />
 
       {/* Main Specimen Window */}
       <Card className="relative border-2 border-black bg-card shadow-none rounded-none select-none flex flex-col justify-between overflow-hidden">
         {/* Specimen Header with Window Controls */}
         <div className="flex shrink-0 items-center justify-between border-b-2 border-black bg-muted px-3.5 py-2.5">
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-2.5 min-w-0 flex-1 overflow-hidden">
             <span aria-hidden="true" className="flex items-center gap-1.5">
               <span className="size-2.5 rounded-full border border-black bg-[#ff5f56]" />
               <span className="size-2.5 rounded-full border border-black bg-[#ffbd2e]" />
@@ -111,17 +111,17 @@ const TelemetryDashboard = () => {
           </div>
         </div>
 
-        <CardContent className="p-3.5 sm:p-5 flex flex-col justify-between gap-4 overflow-hidden">
+        <CardContent className="p-3 sm:p-4 flex flex-col justify-between gap-3 overflow-hidden min-w-0">
           {/* Neobrutalism Tabs: 3 Views */}
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="w-full grid grid-cols-3 mb-3 bg-muted p-1 border-2 border-black shadow-xs">
-              <TabsTrigger value="runtime" className="text-[10px] sm:text-xs font-head font-bold uppercase">
+            <TabsList className="w-full grid grid-cols-3 mb-2 bg-muted p-0.5 border-2 border-black shadow-xs overflow-hidden">
+              <TabsTrigger value="runtime" className="text-[9px] sm:text-[10px] font-head font-bold uppercase truncate px-0.5">
                 RUNTIME
               </TabsTrigger>
-              <TabsTrigger value="rag" className="text-[10px] sm:text-xs font-head font-bold uppercase">
+              <TabsTrigger value="rag" className="text-[9px] sm:text-[10px] font-head font-bold uppercase truncate px-0.5">
                 RAG QUERY
               </TabsTrigger>
-              <TabsTrigger value="ui" className="text-[10px] sm:text-xs font-head font-bold uppercase">
+              <TabsTrigger value="ui" className="text-[9px] sm:text-[10px] font-head font-bold uppercase truncate px-0.5">
                 PRIMITIVES
               </TabsTrigger>
             </TabsList>
@@ -167,9 +167,9 @@ const TelemetryDashboard = () => {
 
               {/* Stepped Digital Telemetry Histogram / Oscilloscope */}
               <div className="space-y-1.5">
-                <div className="flex flex-wrap items-center justify-between text-[10px] font-head font-bold uppercase tracking-wide gap-1">
-                  <span className="truncate">Stepped Digital Telemetry Histogram</span>
-                  <span className="text-black bg-primary px-1.5 py-0.2 border border-black text-[9px] font-bold font-mono">
+                <div className="flex items-center justify-between text-[9px] font-head font-bold uppercase gap-1 min-w-0">
+                  <span className="truncate min-w-0 flex-1">Stepped</span>
+                  <span className="shrink-0 text-black bg-primary px-1 border border-black text-[9px] font-bold font-mono whitespace-nowrap">
                     SAMPLE: 100Hz
                   </span>
                 </div>
@@ -206,12 +206,12 @@ const TelemetryDashboard = () => {
 
               {/* Micro Services Status Table */}
               <div className="border-2 border-black bg-muted/40 p-2 shadow-xs">
-                <div className="grid grid-cols-[1.5fr_0.7fr_0.8fr] text-[10px] font-head font-bold uppercase tracking-wider text-muted-foreground mb-1 pb-1 border-b border-black/20">
+                <div className="grid grid-cols-[1.5fr_0.7fr_0.8fr] text-[8px] sm:text-[10px] font-head font-bold uppercase tracking-tight text-muted-foreground mb-1 pb-1 border-b border-black/20">
                   <span>SERVICE</span>
                   <span className="text-center">PORT</span>
                   <span className="text-right">STATUS</span>
                 </div>
-                <div className="space-y-1 font-mono text-[11px] sm:text-xs">
+                <div className="space-y-0.5 font-mono text-[9px] sm:text-[11px]">
                   <div className="grid grid-cols-[1.5fr_0.7fr_0.8fr] items-center">
                     <span className="font-bold truncate text-[10px] sm:text-[11px]">FastAPI_Telemetry</span>
                     <span className="text-center opacity-70">8000</span>
@@ -363,12 +363,12 @@ const TelemetryDashboard = () => {
         </CardContent>
 
         {/* Signature Neobrutalism CLI Command Bar */}
-        <div className="flex shrink-0 items-center justify-between gap-2 border-t-2 border-black bg-card px-3.5 py-2 font-mono text-xs">
+        <div className="flex shrink-0 items-center justify-between gap-1 border-t-2 border-black bg-card px-2.5 py-1.5 font-mono text-xs overflow-hidden min-w-0">
           <div className="flex items-center gap-2 min-w-0">
             <span className="flex size-5 shrink-0 items-center justify-center border-2 border-black bg-primary font-bold text-black text-xs shadow-none">
               $
             </span>
-            <code className="min-w-0 truncate text-foreground font-semibold text-[10px] sm:text-[11px]">
+            <code className="min-w-0 truncate text-foreground font-semibold text-[9px] sm:text-[11px]">
               curl -s https://api.vutikuri.dev/v1/telemetry | jq .status
             </code>
           </div>
@@ -385,7 +385,7 @@ const TelemetryDashboard = () => {
 
         {/* Specimen Footer Specification Strip */}
         <div className="flex shrink-0 items-center justify-between gap-2 border-t-2 border-black bg-muted px-3.5 py-2">
-          <span className="truncate font-head text-[10px] font-bold tracking-[0.12em] text-foreground uppercase">
+          <span className="truncate font-head text-[9px] sm:text-[10px] font-bold tracking-normal sm:tracking-[0.12em] text-foreground uppercase">
             TELEMETRY BUS · BASE UI · RADIX
           </span>
           <span className="shrink-0 font-mono text-[10px] text-muted-foreground font-semibold">
@@ -402,7 +402,7 @@ export const HeroSection = () => {
   const { playClick } = useSound();
 
   return (
-    <section id="home" className="relative min-h-screen overflow-x-hidden pt-28 sm:pt-32 pb-12 sm:pb-16 bg-background">
+    <section id="home" className="relative w-full overflow-hidden pt-24 sm:pt-28 md:pt-32 pb-10 sm:pb-14 md:min-h-screen bg-background">
       <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} />
 
       {/* Background Subtle Technical Grid */}
@@ -414,16 +414,16 @@ export const HeroSection = () => {
         }}
       />
 
-      <div className="container mx-auto px-4 relative z-10 w-full">
-        <div className="grid min-w-0 items-center gap-10 lg:gap-10 lg:grid-cols-[1.1fr_0.9fr] py-8 sm:py-12 lg:py-0 lg:min-h-[calc(100vh-10rem)]">
-          <div className="w-full min-w-0 max-w-3xl space-y-5 sm:space-y-6 text-center lg:text-left flex flex-col justify-center">
+      <div className="container mx-auto px-4 relative z-10 w-full max-w-full overflow-hidden">
+        <div className="grid w-full min-w-0 items-center gap-6 md:grid-cols-[1.1fr_0.9fr] md:gap-10 md:min-h-[calc(100vh-11rem)]">
+          <div className="w-full min-w-0 overflow-hidden space-y-5 sm:space-y-6 text-center md:text-left flex flex-col justify-center">
 
             {/* Status Sticker Badge */}
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
-              className="inline-flex self-center lg:self-start"
+              className="inline-flex self-center md:self-start"
             >
               <Badge variant="default" className="text-[10px] sm:text-xs px-2.5 sm:px-3 py-1 shadow-sm flex items-center gap-1.5 sm:gap-2 max-w-full">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse border border-black shrink-0" />
@@ -461,7 +461,7 @@ export const HeroSection = () => {
             </div>
 
             {/* Subheading / Bio */}
-            <p className="mx-auto max-w-2xl text-base sm:text-lg leading-relaxed text-foreground md:text-xl lg:mx-0 font-sans font-medium">
+            <p className="mx-auto max-w-2xl text-base sm:text-lg leading-relaxed text-foreground md:text-xl md:mx-0 font-sans font-medium">
               I build production-grade AI systems, scalable cloud infrastructure, and analytics products with clean interfaces and measurable user value.
             </p>
 
@@ -470,7 +470,7 @@ export const HeroSection = () => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.15 }}
-              className="grid grid-cols-3 border-2 border-black bg-card divide-x-2 divide-black shadow-[4px_4px_0px_#000] rounded-none max-w-lg sm:max-w-xl lg:max-w-2xl mx-auto lg:mx-0 select-none"
+              className="grid grid-cols-3 border-2 border-black bg-card divide-x-2 divide-black shadow-[4px_4px_0px_#000] rounded-none max-w-lg sm:max-w-xl mx-auto md:mx-0 select-none"
             >
               <div className="px-2 sm:px-3 py-2.5 sm:py-3 text-center">
                 <div className="text-lg sm:text-2xl font-head text-foreground font-bold">
@@ -495,7 +495,7 @@ export const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.2 }}
-              className="flex w-full flex-col sm:flex-row flex-wrap items-center gap-3 pt-2 lg:items-start justify-center lg:justify-start"
+              className="flex w-full flex-col sm:flex-row flex-wrap items-center gap-3 pt-2 md:items-start justify-center md:justify-start"
             >
               <div className="w-full sm:w-auto">
                 <Button
@@ -556,7 +556,7 @@ export const HeroSection = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="w-full sm:max-w-md lg:max-w-lg mx-auto px-2 sm:px-0 sm:pt-14"
+            className="w-full min-w-0 overflow-hidden md:overflow-visible md:max-w-none mx-auto md:pt-14"
           >
             <TelemetryDashboard />
           </motion.div>

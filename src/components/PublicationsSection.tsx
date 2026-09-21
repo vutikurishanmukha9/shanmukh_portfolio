@@ -260,7 +260,7 @@ export const PublicationsSection = () => {
                 transition={{ duration: 0.45, delay: idx * 0.1 }}
                 className="group relative rounded-none border-2 border-black bg-card p-4 sm:p-6 md:p-8 shadow-[6px_6px_0px_#000] hover:shadow-[8px_8px_0px_#000] transition-all duration-200"
               >
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
                   
                   {/* Left Column: Metadata and Abstract details (5 Columns) */}
                   <div className="lg:col-span-5 space-y-4">
