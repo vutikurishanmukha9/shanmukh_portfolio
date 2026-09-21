@@ -318,10 +318,10 @@ export const DesignSystemStash: React.FC = () => {
           </div>
 
           {/* Master Stash Grid: List (5 Cols) vs Preview (7 Cols) */}
-          <div className="grid lg:grid-cols-12 gap-5 items-start">
+          <div className="grid md:grid-cols-12 gap-5 items-start">
             
             {/* Left: Component List Selector */}
-            <div className="lg:col-span-5 space-y-2 max-h-[720px] overflow-y-auto pr-1">
+            <div className="md:col-span-5 space-y-2 max-h-[720px] overflow-y-auto pr-1">
               {filteredComponents.length === 0 ? (
                 <div className="p-8 bg-[#FFFFFF] border-2 border-[#0A0A0A] shadow-[3px_3px_0px_#0A0A0A] text-center font-mono text-xs text-[#0A0A0A]/60 uppercase font-bold">
                   NO COMPONENTS MATCH "{componentSearchQuery}"
@@ -369,7 +369,7 @@ export const DesignSystemStash: React.FC = () => {
             </div>
 
             {/* Right: Component Preview & Code Copier */}
-            <div className="lg:col-span-7">
+            <div className="md:col-span-7">
               <div className="bg-[#FFFFFF] border-3 border-[#0A0A0A] shadow-[6px_6px_0px_#0A0A0A] sm:shadow-[8px_8px_0px_#0A0A0A] p-4 sm:p-6 space-y-4">
                 
                 {/* Header & Controls */}
@@ -652,7 +652,7 @@ export default {
       {/* TAB 3: THE COMPLETE CREATION STACK DIRECTORY */}
       {/* ========================================================================= */}
       {activeTab === 'stack' && (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
           {[
             {
               title: 'React 19 & TypeScript 5',

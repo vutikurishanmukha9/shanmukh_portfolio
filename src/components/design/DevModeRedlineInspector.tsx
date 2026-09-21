@@ -93,10 +93,10 @@ export const DevModeRedlineInspector: React.FC = () => {
       </div>
 
       {/* Main Inspector Stage */}
-      <div className="grid lg:grid-cols-12 gap-6 items-start">
+      <div className="grid md:grid-cols-12 gap-6 items-start">
         
         {/* Left Stage (7 Cols): Interactive Specimen with Overlaid Redline Metrics */}
-        <div className="lg:col-span-7 space-y-3">
+        <div className="md:col-span-7 space-y-3">
           <div className="flex items-center justify-between text-xs font-mono text-white/50 px-1">
             <span>SPECIMEN: HIGH-CONVERSION TELEMETRY CARD</span>
             <span className="text-sky-400">CLICK ELEMENT TO TARGET</span>
@@ -231,7 +231,7 @@ export const DevModeRedlineInspector: React.FC = () => {
         </div>
 
         {/* Right Telemetry Column (5 Cols): Computed CSS & Figma Token Inspector */}
-        <div className="lg:col-span-5 space-y-4">
+        <div className="md:col-span-5 space-y-4">
           
           {/* Target Element Summary Pill */}
           <div className="p-4 rounded-xl bg-black/60 border border-white/10 space-y-3">

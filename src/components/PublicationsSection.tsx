@@ -263,7 +263,7 @@ export const PublicationsSection = () => {
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
                   
                   {/* Left Column: Metadata and Abstract details (5 Columns) */}
-                  <div className="lg:col-span-5 space-y-4">
+                  <div className="md:col-span-5 space-y-4">
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="inline-flex items-center px-2.5 py-0.5 rounded-none text-[10px] font-head font-bold uppercase tracking-wider bg-primary text-black border-2 border-black shadow-xs">
                         {pub.journal}
@@ -350,12 +350,12 @@ export const PublicationsSection = () => {
                   </div>
 
                   {/* Middle Column: LaTeX PDF reprint Abstract Card (4 Columns) */}
-                  <div className="lg:col-span-4 flex items-center justify-center">
+                  <div className="md:col-span-4 flex items-center justify-center">
                     <LaTeXPaperPreview url={pub.link} />
                   </div>
 
                   {/* Right Column: Telemetry Performance Metrics Grid (3 Columns) */}
-                  <div className="lg:col-span-3 flex flex-col justify-between border-2 border-black bg-muted/40 p-4 h-full min-h-[190px] shadow-xs rounded-none">
+                  <div className="md:col-span-3 flex flex-col justify-between border-2 border-black bg-muted/40 p-4 h-full min-h-[190px] shadow-xs rounded-none">
                     <div>
                       <div className="text-xs font-head font-bold tracking-wider uppercase text-foreground border-b-2 border-black pb-2 mb-3 flex items-center justify-between">
                         <span>SYSTEM TELEMETRY</span>

@@ -58,7 +58,7 @@ export const DesignPhilosophy: React.FC = () => {
       </div>
 
       {/* 4-Column Principles Matrix */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+      <div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
         {PRINCIPLES.map((principle, index) => {
           const Icon = principle.icon;
           return (

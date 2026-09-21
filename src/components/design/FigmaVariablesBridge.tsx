@@ -157,10 +157,10 @@ export const FigmaVariablesBridge: React.FC = () => {
       </div>
 
       {/* Main Grid: Controls + Live Specimen + Export Code */}
-      <div className="grid lg:grid-cols-12 gap-6 items-start">
+      <div className="grid md:grid-cols-12 gap-6 items-start">
         
         {/* Left Column (5 Cols): Live Sliders & Color Swatches */}
-        <div className="lg:col-span-5 space-y-5">
+        <div className="md:col-span-5 space-y-5">
           
           {/* Accent Color Preset Matrix */}
           <div className="space-y-2">
@@ -247,7 +247,7 @@ export const FigmaVariablesBridge: React.FC = () => {
         </div>
 
         {/* Center & Right Column (7 Cols): Live Reactive Specimen & Code Tabs */}
-        <div className="lg:col-span-7 space-y-5">
+        <div className="md:col-span-7 space-y-5">
           
           {/* Live Reactive Card Specimen */}
           <div className="p-6 sm:p-8 rounded-2xl bg-[#050608] border border-white/10 flex items-center justify-center min-h-[260px] relative overflow-hidden">

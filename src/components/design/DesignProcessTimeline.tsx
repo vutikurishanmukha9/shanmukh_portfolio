@@ -658,10 +658,10 @@ export const DesignProcessTimeline: React.FC = () => {
       {/* MODE 1: STEP-BY-STEP STAGE DEEP-DIVE */}
       {/* ========================================================================= */}
       {viewMode === 'deep-dive' && (
-        <div className="grid lg:grid-cols-12 gap-5 items-start">
+        <div className="grid md:grid-cols-12 gap-5 items-start">
           
           {/* Left Column: Stage Selector Tabs (4 Columns) */}
-          <div className="lg:col-span-4 space-y-2.5">
+          <div className="md:col-span-4 space-y-2.5">
             {PROCESS_STAGES.map((stage, idx) => {
               const Icon = stage.icon;
               const isActive = stage.id === activeStageId;
@@ -730,7 +730,7 @@ export const DesignProcessTimeline: React.FC = () => {
           </div>
 
           {/* Right Column: Active Stage Comprehensive Deep-Dive (8 Columns) */}
-          <div className="lg:col-span-8">
+          <div className="md:col-span-8">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentStage.id}
@@ -1073,7 +1073,7 @@ export const DesignProcessTimeline: React.FC = () => {
             </div>
 
             {/* Grid of All AI Tools by Phase */}
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
               {displayedAiTools.map((aiTool) => (
                 <div
                   key={aiTool.name}

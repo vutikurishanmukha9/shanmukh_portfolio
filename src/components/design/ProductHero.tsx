@@ -55,10 +55,10 @@ export const ProductHero: React.FC = () => {
       {/* ========================================================================= */}
       {/* HERO STAGE: LEFT TYPOGRAPHY & BIO  vs  RIGHT INTERACTIVE WORKSTATION */}
       {/* ========================================================================= */}
-      <div className="relative z-10 grid lg:grid-cols-12 gap-8 lg:gap-8 items-center">
+      <div className="relative z-10 grid md:grid-cols-12 gap-8 items-center">
         
         {/* Left Column: Headline, Pill, Discipline Strip & Bio (7 Columns) */}
-        <div className="lg:col-span-7 space-y-6 text-left">
+        <div className="md:col-span-7 space-y-6 text-left">
           
           {/* Top Control Strip: Disciplinary Pill Badge + 60s Executive Dossier + Fluid Orb Controller */}
           <div className="flex flex-wrap items-center gap-2.5">
@@ -248,7 +248,7 @@ export const ProductHero: React.FC = () => {
         </div>
 
         {/* Right Column: Live Interactive Design Workstation (Replaces Fake 3D SVG Vectors) */}
-        <div className="lg:col-span-5 relative flex items-center justify-center min-h-[340px] sm:min-h-[380px] lg:min-h-[440px]">
+        <div className="md:col-span-5 relative flex items-center justify-center min-h-[340px] md:min-h-[380px] lg:min-h-[440px]">
           <DesignWorkstationCanvas onNavigateToWorks={() => scrollToSection('works')} />
         </div>
 

@@ -310,15 +310,15 @@ const LuxuryProjectCard: React.FC<{
       {/* Inner Machined Hardware Core */}
       <div className={cn(
         'relative z-10 rounded-none border-2 border-black bg-card p-3.5 sm:p-5 flex flex-col justify-between h-full overflow-hidden',
-        featured && 'grid grid-cols-1 lg:grid-cols-12 gap-6 items-center p-4 sm:p-6'
+        featured && 'grid grid-cols-1 md:grid-cols-12 gap-6 items-center p-4 sm:p-6'
       )}>
         {/* Visual Mockup Container */}
-        <div className={cn('w-full', featured ? 'lg:col-span-6' : 'mb-4')}>
+        <div className={cn('w-full', featured ? 'md:col-span-6' : 'mb-4')}>
           {renderProjectMockup(project.title)}
         </div>
 
         {/* Content & Metadata */}
-        <div className={cn('flex flex-col justify-between flex-1', featured && 'lg:col-span-6 space-y-4')}>
+        <div className={cn('flex flex-col justify-between flex-1', featured && 'md:col-span-6 space-y-4')}>
           <div>
             {/* Top Category & Solo Badges */}
             <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
