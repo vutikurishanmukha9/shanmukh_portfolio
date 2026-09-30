@@ -315,3 +315,13 @@ body::after {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Minimalist Custom Cursor: Replace default system cursor on fine-pointer desktop devices */
+@media (hover: hover) and (pointer: fine) {
+  *,
+  *::before,
+  *::after {
+    cursor: none !important;
+  }
+}
+
