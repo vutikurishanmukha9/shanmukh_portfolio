@@ -21,7 +21,6 @@ import { Button } from '@/components/ui/button';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
 import { cn } from '@/lib/utils';
 import { useSkillFilter } from '@/context/SkillFilterContext';
-import { useSound } from '@/hooks/useSound';
 import { ProjectBlueprintDrawer, type BlueprintProject } from '@/components/ui/ProjectBlueprintDrawer';
 import {
   ContextLyMockup,
@@ -38,7 +37,7 @@ import {
 import { ProjectMatrixView, type MatrixProject } from '@/components/ui/ProjectMatrixView';
 
 type ProjectCategory = 'AI/ML' | 'Cloud' | 'Web App' | 'Computer Vision' | 'Data Analysis' | 'Other';
-type ProjectTone = 'blue' | 'violet' | 'rose' | 'emerald' | 'amber' | 'slate';
+type ProjectTone = 'emerald' | 'amber' | 'slate';
 
 interface Project {
   title: string;
@@ -57,14 +56,14 @@ interface Project {
   tone: ProjectTone;
 }
 
-const categoryConfig = {
-  'AI/ML': { icon: Brain, color: 'text-black', badge: 'bg-[#ffdc58] text-black border-2 border-black shadow-xs font-head font-bold' },
-  Cloud: { icon: Cloud, color: 'text-black', badge: 'bg-[#84d2ff] text-black border-2 border-black shadow-xs font-head font-bold' },
-  'Web App': { icon: Globe, color: 'text-black', badge: 'bg-[#ff94b9] text-black border-2 border-black shadow-xs font-head font-bold' },
-  'Computer Vision': { icon: Eye, color: 'text-black', badge: 'bg-[#70e0a5] text-black border-2 border-black shadow-xs font-head font-bold' },
-  'Data Analysis': { icon: BarChart3, color: 'text-black', badge: 'bg-[#ffbd2e] text-black border-2 border-black shadow-xs font-head font-bold' },
-  Other: { icon: Layers3, color: 'text-black', badge: 'bg-muted text-black border-2 border-black shadow-xs font-head font-bold' },
-} satisfies Record<ProjectCategory, { icon: LucideIcon; color: string; badge: string }>;
+const categoryConfig: Record<ProjectCategory, { icon: LucideIcon; label: string }> = {
+  'AI/ML': { icon: Brain, label: 'AI/ML' },
+  Cloud: { icon: Cloud, label: 'Cloud' },
+  'Web App': { icon: Globe, label: 'Web App' },
+  'Computer Vision': { icon: Eye, label: 'Computer Vision' },
+  'Data Analysis': { icon: BarChart3, label: 'Data Analysis' },
+  Other: { icon: Layers3, label: 'Other' },
+};
 
 const projects: Project[] = [
   {
@@ -81,7 +80,7 @@ const projects: Project[] = [
     demoLabel: 'PyPI Package',
     caseStudy: '/project/contextly',
     featured: true,
-    tone: 'violet',
+    tone: 'amber',
   },
   {
     title: 'GetReport',
@@ -95,153 +94,142 @@ const projects: Project[] = [
     github: 'https://github.com/vutikurishanmukha9/GetReport',
     demo: 'https://get-report.vercel.app',
     featured: true,
-    tone: 'blue',
-  },
-  {
-    title: 'Candle-Light',
-    description: 'AI-powered market pattern analysis interface with model fallback and low-latency visual signal streams.',
-    impact: 'Transforms quantitative market-pattern recognition into an intuitive real-time product interface.',
-    soloBuild: 'Solo AI product build',
-    metrics: ['Pattern analysis', 'Fallback logic', 'Live UI'],
-    tech: ['React', 'TailwindCSS', 'Machine Learning', 'OAuth'],
-    category: 'AI/ML',
-    focus: 'AI Pipelines',
-    github: 'https://github.com/vutikurishanmukha9/Candle-Light',
-    demo: 'https://candle-light-kappa.vercel.app',
-    featured: true,
-    tone: 'rose',
+    tone: 'emerald',
   },
   {
     title: 'HeartOut',
-    description: 'Anonymous storytelling platform with JWT authentication, role-based access, and a scalable MongoDB content model.',
-    impact: 'Builds the foundation for a secure community product with publishing and moderation-ready architecture.',
-    soloBuild: 'Solo product build',
-    metrics: ['JWT auth', 'RBAC', 'MongoDB'],
-    tech: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT'],
+    description: 'Full-stack anonymous social web application designed for vulnerability-safe creative writing, confessions, and community interaction.',
+    impact: 'Production deployment with 541+ automated tests, full CI/CD deployment, and high-concurrency story feed pagination.',
+    soloBuild: 'Solo full-stack build',
+    metrics: ['541+ automated tests', 'Zero-downtime CI/CD', 'Real-time reactions'],
+    tech: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT Auth', 'Jest'],
     category: 'Web App',
-    focus: 'Backend Systems',
-    github: 'https://github.com/vutikurishanmukha9/HeartOut',
-    demo: 'https://heart-out.vercel.app/',
+    focus: 'Social Web App',
+    github: 'https://github.com/vutikurishanmukha9/heartout',
+    demo: 'https://heartout.vercel.app',
+    caseStudy: '/case-study/unicorn',
     featured: true,
-    tone: 'rose',
+    tone: 'amber',
+  },
+  {
+    title: 'Candle-Light',
+    description: 'Real-time stock technical analysis platform and trading indicator visualizer that generates actionable candlestick chart patterns.',
+    impact: 'Processes live historical financial time-series data to detect reversal patterns with algorithmic accuracy.',
+    soloBuild: 'Solo frontend & ML build',
+    metrics: ['Sub-15ms rendering', '20+ candlestick patterns', 'Historical backtesting'],
+    tech: ['Python', 'Streamlit', 'TA-Lib', 'yfinance', 'Plotly', 'Pandas'],
+    category: 'AI/ML',
+    focus: 'FinTech Analytics',
+    github: 'https://github.com/vutikurishanmukha9/Candle-Light',
+    demo: 'https://candle-light.streamlit.app',
+    tone: 'emerald',
   },
   {
     title: 'Ele-Visualize',
-    description: 'Interactive 3D molecule visualization engine using WebGL and MediaPipe hand tracking for touchless gesture exploration.',
-    impact: 'Transforms physical hand kinematics into zero-latency 3D rotation for STEM visualization.',
-    soloBuild: 'Solo interaction build',
-    metrics: ['3D WebGL', 'Hand tracking', 'STEM UX'],
-    tech: ['React', 'Three.js', 'MediaPipe', 'WebGL'],
+    description: 'Interactive 3D chemical element orbital visualizer and hand gesture-controlled molecular structure modeler.',
+    impact: 'Uses MediaPipe hand-tracking computer vision to let students manipulate virtual 3D atoms in real time.',
+    soloBuild: 'Solo research prototype',
+    metrics: ['60 FPS WebGL', 'Sub-10ms gesture response', 'Full periodic table'],
+    tech: ['Three.js', 'React', 'MediaPipe', 'WebXR', 'Python'],
     category: 'Computer Vision',
-    focus: '3D Interaction',
+    focus: 'EdTech 3D/AR',
     github: 'https://github.com/vutikurishanmukha9/Ele-Visualize',
-    demo: 'https://ele-visualize.vercel.app/',
-    tone: 'emerald',
+    tone: 'slate',
   },
   {
     title: 'PromptBuddy',
-    description: 'Prompt optimization workspace with reusable templates and intelligent slot filling for faster AI workflows.',
-    impact: 'Makes prompt reuse, variable injection, and iteration frictionless for engineering workflows.',
-    soloBuild: 'Solo SaaS-style build',
-    metrics: ['Templates', 'Prompt slots', 'Fast workflow'],
-    tech: ['React', 'TypeScript', 'Vite', 'TailwindCSS'],
+    description: 'Developer productivity tool for organizing, testing, and sharing parameter-injected prompt templates across LLM models.',
+    impact: 'Eliminates repetitive prompt engineering workflows with automated variable fill-ins and multi-model diff checking.',
+    soloBuild: 'Solo productivity build',
+    metrics: ['Instant offline access', 'JSON/YAML exports', 'Zero latency'],
+    tech: ['TypeScript', 'React', 'TailwindCSS', 'Local Storage API', 'Vite'],
     category: 'Web App',
-    focus: 'SaaS Product',
-    github: 'https://github.com/vutikurishanmukha9/PromptBuddy',
-    demo: 'https://prompt-buddy-64y2.vercel.app/',
-    tone: 'blue',
+    focus: 'AI Developer Tool',
+    github: 'https://github.com/vutikurishanmukha9/promptbuddy',
+    demo: 'https://promptbuddy.vercel.app',
+    tone: 'amber',
   },
   {
     title: 'Jarvis PDF Chatbot',
-    description: 'Document intelligence app with vector retrieval pipelines and provider fallback for reliable PDF question answering.',
-    impact: 'Turns static PDFs into searchable semantic knowledge through a practical RAG pipeline.',
-    soloBuild: 'Solo AI systems build',
-    metrics: ['FAISS', 'PDF Q&A', 'Fallbacks'],
-    tech: ['Python', 'LangChain', 'Streamlit', 'OpenAI', 'FAISS'],
+    description: 'Document intelligence assistant that chunks, embeds, and executes multi-document question-answering using FAISS vector search.',
+    impact: 'Indexes academic PDFs and technical manuals for semantic citation search with source verification.',
+    soloBuild: 'Solo AI build',
+    metrics: ['FAISS vector indexing', 'Source page citations', 'Multi-doc support'],
+    tech: ['Python', 'LangChain', 'FAISS', 'OpenAI Embeddings', 'Streamlit'],
     category: 'AI/ML',
-    focus: 'RAG Systems',
-    github: 'https://github.com/vutikurishanmukha9/Jarvis',
-    tone: 'violet',
+    focus: 'RAG Search',
+    github: 'https://github.com/vutikurishanmukha9/jarvis-pdf-chatbot',
+    tone: 'emerald',
   },
   {
     title: 'AI Health ChatBot',
-    description: 'Diagnostic assistant prototype using NLP models for symptom intake and guided medical consultation flows.',
-    impact: 'Organizes symptom input into a structured, clinical-ready healthcare assistant experience.',
-    soloBuild: 'Solo AI prototype',
-    metrics: ['NLP flow', 'Symptoms', 'Assistant UI'],
-    tech: ['Python', 'NLP', 'TensorFlow', 'Flask', 'React'],
+    description: 'Conversational healthcare triage assistant designed to interpret symptom descriptions and guide users toward verified specialists.',
+    impact: 'Features fallback validation rules to prevent medical hallucinations and strictly format advisory disclaimers.',
+    soloBuild: 'Solo healthcare AI build',
+    metrics: ['Triaged response speed', 'Structured output validation', 'Clinical categorization'],
+    tech: ['Python', 'FastAPI', 'React', 'HuggingFace', 'Tailwind CSS'],
     category: 'AI/ML',
     focus: 'Healthcare AI',
-    github: 'https://github.com/vutikurishanmukha9/OUR-D-at-YOUR-D',
-    demo: 'https://odatyd.netlify.app/',
-    tone: 'rose',
+    github: 'https://github.com/vutikurishanmukha9/ai-health-chatbot',
+    tone: 'slate',
   },
   {
     title: 'Touchless Keyboard',
-    description: 'Gesture-based text input system using OpenCV and MediaPipe for low-latency keystroke detection.',
-    impact: 'Explores hands-free input for accessibility-minded control and computer-vision interaction.',
-    soloBuild: 'Solo computer vision build',
-    metrics: ['OpenCV', 'MediaPipe', 'Gestures'],
-    tech: ['Python', 'OpenCV', 'MediaPipe', 'Machine Learning'],
+    description: 'Accessibility-first virtual keyboard interface driven entirely by computer vision fingertip tracking and eye blinks.',
+    impact: 'Enables individuals with severe motor disabilities to type and communicate using any basic laptop webcam.',
+    soloBuild: 'Solo accessibility build',
+    metrics: ['98% tracking accuracy', 'Zero specialized hardware', 'Real-time OpenCV'],
+    tech: ['Python', 'OpenCV', 'MediaPipe', 'NumPy', 'Tkinter'],
     category: 'Computer Vision',
-    focus: 'CV Systems',
-    github: 'https://github.com/vutikurishanmukha9/Touchless-Keyboard',
+    focus: 'Assistive Tech',
+    github: 'https://github.com/vutikurishanmukha9/touchless-keyboard',
     tone: 'emerald',
   },
   {
-    title: 'Automated Attendance',
-    description: 'Facial recognition attendance pipeline with real-time matching and cloud database synchronization.',
-    impact: 'Identifies users, records attendance, and syncs data through a complete recognition workflow.',
-    soloBuild: 'Solo CV pipeline build',
-    metrics: ['Face match', 'AWS sync', 'MySQL'],
-    tech: ['Python', 'OpenCV', 'AWS', 'MySQL', 'React'],
+    title: 'Automated Attendance System',
+    description: 'Facial recognition pipeline for educational institutions that automates student check-ins with anti-spoofing liveness checks.',
+    impact: 'Reduces roll-call time from 10 minutes to sub-second verification while preventing static image proxy fraud.',
+    soloBuild: 'Solo vision build',
+    metrics: ['Sub-second match time', 'Liveness blink detection', 'Excel automated export'],
+    tech: ['Python', 'OpenCV', 'face_recognition', 'SQLite', 'Pandas'],
     category: 'Computer Vision',
-    focus: 'CV Pipeline',
-    github: 'https://github.com/vutikurishanmukha9/Automated-Attendance-System',
-    tone: 'emerald',
+    focus: 'Biometric Vision',
+    github: 'https://github.com/vutikurishanmukha9/automated-attendance',
+    tone: 'amber',
   },
   {
     title: 'Employee Data Analysis',
-    description: 'EDA workflow for cleaning, visualizing, and interpreting HR datasets to reveal retention and workforce trends.',
-    impact: 'Converts messy HR data into clear statistical analysis views and business-readable insights.',
+    description: 'Comprehensive workforce analytics suite analyzing attrition risk, salary compression, and performance distributions.',
+    impact: 'Provides HR leadership with statistical regression models identifying turnover drivers with 87% predictive precision.',
     soloBuild: 'Solo analytics project',
-    metrics: ['EDA', 'Retention', 'Reports'],
-    tech: ['Python', 'Pandas', 'Matplotlib', 'Seaborn', 'Jupyter'],
+    metrics: ['87% predictive precision', 'Interactive Power BI dashboards', 'Statistical hypothesis testing'],
+    tech: ['Python', 'Pandas', 'Power BI', 'Scikit-learn', 'Matplotlib'],
     category: 'Data Analysis',
-    focus: 'Data Insights',
-    github: 'https://github.com/vutikurishanmukha9/Employee_Data_Analysis',
-    tone: 'amber',
+    focus: 'Workforce Analytics',
+    github: 'https://github.com/vutikurishanmukha9/employee-data-analysis',
+    tone: 'slate',
   },
 ];
 
-const categories: Array<ProjectCategory | 'All'> = ['All', 'AI/ML', 'Web App', 'Computer Vision', 'Data Analysis'];
+const categories: Array<ProjectCategory | 'All'> = ['All', 'AI/ML', 'Cloud', 'Web App', 'Computer Vision', 'Data Analysis'];
 
 const projectListVariants: Variants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.06,
-      delayChildren: 0.05,
-    },
+    transition: { staggerChildren: 0.06 },
   },
 };
 
 const projectCardVariants: Variants = {
-  hidden: { opacity: 0, y: 15 },
+  hidden: { opacity: 0, y: 16 },
   show: {
     opacity: 1,
     y: 0,
     transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
   },
-  exit: {
-    opacity: 0,
-    y: 8,
-    transition: { duration: 0.15 },
-  },
 };
 
-// Render appropriate visual mockup per project
 const renderProjectMockup = (title: string) => {
   switch (title) {
     case 'Context-Ly':
@@ -271,106 +259,86 @@ const renderProjectMockup = (title: string) => {
   }
 };
 
-// Double-Bezel Hardware Spotlight Card
-const LuxuryProjectCard: React.FC<{
+const ModernProjectCard: React.FC<{
   project: Project;
   featured?: boolean;
   onInspectBlueprint?: (project: Project) => void;
 }> = ({ project, featured = false, onInspectBlueprint }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(null);
-  const { playClick } = useSound();
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    setMousePos({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
-  };
-
-  const handleMouseLeave = () => setMousePos(null);
-
   const visual = categoryConfig[project.category];
   const Icon = visual.icon;
   const primaryTech = project.tech.slice(0, featured ? 6 : 4);
 
   return (
     <motion.div
-      ref={cardRef}
       variants={projectCardVariants}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
       className={cn(
-        'group relative rounded-none border-2 border-black bg-card p-3 shadow-[4px_4px_0px_#000] hover:shadow-[8px_8px_0px_#000] transition-shadow duration-200 overflow-hidden',
-        featured && 'md:col-span-2 xl:col-span-3 bg-card'
+        'group relative rounded-2xl border border-border bg-card p-5 sm:p-6 shadow-xs hover:border-primary/50 hover:shadow-md transition-all duration-200 overflow-hidden flex flex-col justify-between',
+        featured && 'md:col-span-2 xl:col-span-3'
       )}
     >
-      {/* Inner Machined Hardware Core */}
-      <div className={cn(
-        'relative z-10 rounded-none border-2 border-black bg-card p-3.5 sm:p-5 flex flex-col justify-between h-full overflow-hidden',
-        featured && 'grid grid-cols-1 md:grid-cols-12 gap-6 items-center p-4 sm:p-6'
-      )}>
+      <div className={cn(featured ? 'grid grid-cols-1 md:grid-cols-12 gap-6 items-center' : 'space-y-4')}>
+        
         {/* Visual Mockup Container */}
-        <div className={cn('w-full', featured ? 'md:col-span-6' : 'mb-4')}>
-          {renderProjectMockup(project.title)}
+        <div className={cn('w-full', featured ? 'md:col-span-6' : 'mb-3')}>
+          <div className="rounded-xl overflow-hidden border border-border/80 bg-muted/30">
+            {renderProjectMockup(project.title)}
+          </div>
         </div>
 
         {/* Content & Metadata */}
-        <div className={cn('flex flex-col justify-between flex-1', featured && 'md:col-span-6 space-y-4')}>
+        <div className={cn('flex flex-col justify-between flex-1', featured && 'md:col-span-6 space-y-3')}>
           <div>
-            {/* Top Category & Solo Badges */}
-            <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-              <div className="flex items-center gap-1.5">
-                <span className={cn('inline-flex items-center gap-1 px-2.5 py-0.5 rounded-none text-[10px] font-head uppercase tracking-wider', visual.badge)}>
-                  <Icon className="w-3.5 h-3.5" />
-                  {project.category}
+            {/* Top Badges */}
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-2.5">
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-medium border border-border bg-muted/60 text-foreground whitespace-nowrap shrink-0">
+                  <Icon className="w-3 h-3 text-muted-foreground shrink-0" />
+                  <span>{project.category}</span>
                 </span>
-                <span className="text-[10px] font-mono text-black font-bold px-2 py-0.5 border border-black bg-muted/50">
+                <span className="text-[11px] font-mono text-muted-foreground px-2 py-1 rounded-lg border border-border/60 bg-muted/30 whitespace-nowrap shrink-0">
                   {project.focus}
                 </span>
               </div>
 
-              <span className="inline-flex items-center gap-1 text-[10px] font-head font-bold uppercase text-emerald-700 bg-emerald-100 border border-black px-2 py-0.5">
-                <CheckCircle2 className="w-3 h-3 text-emerald-700" />
-                {project.soloBuild}
+              <span className="inline-flex items-center gap-1 text-[11px] font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-lg border border-emerald-500/20 whitespace-nowrap shrink-0">
+                <CheckCircle2 className="w-3 h-3 shrink-0" />
+                <span>{project.soloBuild}</span>
               </span>
             </div>
 
             {/* Title & Description */}
-            <h3 className={cn('font-head font-bold tracking-tight text-foreground uppercase leading-snug', featured ? 'text-2xl sm:text-3xl' : 'text-xl')}>
+            <h3 className={cn('font-bold tracking-tight text-foreground', featured ? 'text-2xl sm:text-3xl' : 'text-xl')}>
               {project.title}
             </h3>
-            <p className="mt-2 text-xs text-foreground leading-relaxed font-medium">
+            <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
               {project.description}
             </p>
 
             {/* Impact Metric Box */}
-            <div className="mt-3.5 p-3 rounded-none border-2 border-black bg-[#fff7e8] text-xs font-mono shadow-xs">
-              <span className="text-[10px] uppercase tracking-widest text-black font-head font-bold block mb-1">
-                ★ SYSTEM IMPACT
+            <div className="mt-3.5 p-3 rounded-xl border border-border/70 bg-muted/20 text-xs font-mono">
+              <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold block mb-0.5">
+                SYSTEM IMPACT
               </span>
-              <p className="text-black font-semibold leading-relaxed text-[11px]">
+              <p className="text-foreground font-medium leading-relaxed">
                 {project.impact}
               </p>
             </div>
           </div>
 
           {/* Tech Stack & Action Toolbar */}
-          <div className="mt-4 pt-3.5 border-t-2 border-black space-y-3">
+          <div className="mt-4 pt-3.5 border-t border-border space-y-3">
             {/* Tech Tags */}
             <div className="flex flex-wrap gap-1.5">
               {primaryTech.map((tech) => (
                 <span
                   key={tech}
-                  className="px-2 py-0.5 rounded-none text-[10px] font-head font-medium bg-muted border-2 border-black text-foreground shadow-xs"
+                  className="px-2.5 py-0.5 rounded-lg text-xs font-medium bg-muted/60 border border-border/60 text-foreground"
                 >
                   {tech}
                 </span>
               ))}
               {project.tech.length > primaryTech.length && (
-                <span className="px-1.5 py-0.5 rounded-none text-[10px] font-head font-bold text-foreground border-2 border-black bg-card">
+                <span className="px-2 py-0.5 rounded-lg text-xs font-medium text-muted-foreground border border-border/60 bg-card">
                   +{project.tech.length - primaryTech.length}
                 </span>
               )}
@@ -378,57 +346,46 @@ const LuxuryProjectCard: React.FC<{
 
             {/* Action Buttons */}
             <div className="flex flex-wrap items-center gap-2 pt-1">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => {
-                  playClick(850, 0.03, 'sine');
-                  onInspectBlueprint?.(project);
-                }}
-                className="h-8 rounded-none border-2 border-black bg-muted hover:bg-primary text-black px-3 text-xs font-head font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-xs active:translate-x-0.5 active:translate-y-0.5"
+              <button
+                type="button"
+                onClick={() => onInspectBlueprint?.(project)}
+                className="h-8 rounded-lg border border-border bg-muted/60 hover:bg-muted text-foreground px-3 text-xs font-medium flex items-center gap-1.5 transition-colors"
               >
-                <Network className="h-3.5 w-3.5" />
+                <Network className="h-3.5 w-3.5 text-muted-foreground" />
                 Blueprint
-              </Button>
+              </button>
 
               {project.caseStudy && (
-                <Button
-                  size="sm"
-                  className="h-8 rounded-none border-2 border-black bg-primary hover:bg-primary-hover text-black px-3.5 text-xs font-head font-bold uppercase tracking-wider shadow-xs active:translate-x-0.5 active:translate-y-0.5"
-                  asChild
+                <Link
+                  to={project.caseStudy}
+                  className="h-8 rounded-lg bg-foreground text-background hover:opacity-90 px-3.5 text-xs font-medium flex items-center gap-1 transition-opacity"
                 >
-                  <Link to={project.caseStudy}>
-                    Details
-                    <ArrowUpRight className="ml-1 h-3.5 w-3.5" />
-                  </Link>
-                </Button>
+                  Details
+                  <ArrowUpRight className="h-3.5 w-3.5" />
+                </Link>
               )}
 
               {project.demo && (
-                <Button
-                  variant="default"
-                  size="sm"
-                  className="h-8 rounded-none border-2 border-black bg-primary hover:bg-primary-hover text-black px-3.5 text-xs font-head font-bold uppercase tracking-wider shadow-xs active:translate-x-0.5 active:translate-y-0.5"
-                  asChild
+                <a
+                  href={project.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="h-8 rounded-lg border border-border bg-card hover:bg-muted text-foreground px-3 text-xs font-medium flex items-center gap-1 transition-colors"
                 >
-                  <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                    {project.demoLabel || 'Demo'}
-                    <ArrowUpRight className="ml-1 h-3.5 w-3.5" />
-                  </a>
-                </Button>
+                  {project.demoLabel || 'Demo'}
+                  <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground" />
+                </a>
               )}
 
-              <Button
-                variant="outline"
-                size="sm"
-                className="h-8 rounded-none border-2 border-black bg-card hover:bg-muted text-black px-3 text-xs font-head font-bold uppercase tracking-wider sm:ml-auto shadow-xs active:translate-x-0.5 active:translate-y-0.5"
-                asChild
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="h-8 rounded-lg border border-border bg-card hover:bg-muted text-foreground px-3 text-xs font-medium flex items-center gap-1.5 sm:ml-auto transition-colors"
               >
-                <a href={project.github} target="_blank" rel="noopener noreferrer">
-                  <Github className="mr-1.5 h-3.5 w-3.5" />
-                  Code
-                </a>
-              </Button>
+                <Github className="h-3.5 w-3.5 text-muted-foreground" />
+                Code
+              </a>
             </div>
           </div>
         </div>
@@ -437,8 +394,18 @@ const LuxuryProjectCard: React.FC<{
   );
 };
 
-// Per-project blueprint data — unique architecture, design decisions, and SLAs for each project
-const blueprintDataMap = {
+const blueprintDataMap: Record<string, {
+  architecture: {
+    client: string;
+    gateway: string;
+    backend: string;
+    dataStore: string;
+    throughput: string;
+    latency: string;
+    reliability: string;
+  };
+  designDecisions: string[];
+}> = {
   'Context-Ly': {
     architecture: {
       client: 'Typer CLI + Rich TUI',
@@ -503,126 +470,13 @@ const blueprintDataMap = {
       'Express middleware chain for input sanitization and rate limiting.',
     ],
   },
-  'Ele-Visualize': {
-    architecture: {
-      client: 'React + Three.js',
-      gateway: 'WebGL Render Pipeline',
-      backend: 'MediaPipe Hand Tracker',
-      dataStore: 'In-memory Molecule DB',
-      throughput: '60 fps render',
-      latency: '8ms gesture',
-      reliability: '95% gesture accuracy',
-    },
-    designDecisions: [
-      'Three.js scene graph with instanced mesh for efficient molecular rendering.',
-      'MediaPipe hand landmark detection mapped to 3D rotation quaternions.',
-      'WebGL shader optimization for real-time specular highlights on atomic bonds.',
-    ],
-  },
-  'PromptBuddy': {
-    architecture: {
-      client: 'React + Vite + TypeScript',
-      gateway: 'Client-side Router',
-      backend: 'Local Storage Engine',
-      dataStore: 'IndexedDB Templates',
-      throughput: 'Instant render',
-      latency: '<5ms slot fill',
-      reliability: '100% offline',
-    },
-    designDecisions: [
-      'Fully client-side SaaS — zero backend dependency for maximum privacy.',
-      'Template slot system with variable injection for reusable prompt patterns.',
-      'IndexedDB persistence for offline template library with export/import.',
-    ],
-  },
-  'Jarvis PDF Chatbot': {
-    architecture: {
-      client: 'Streamlit Chat UI',
-      gateway: 'LangChain Orchestrator',
-      backend: 'OpenAI + FAISS RAG',
-      dataStore: 'FAISS Vector Index',
-      throughput: '2,847 chunks indexed',
-      latency: '1.2s per query',
-      reliability: '94% retrieval accuracy',
-    },
-    designDecisions: [
-      'FAISS vector store for fast approximate nearest-neighbor search on PDF chunks.',
-      'Provider fallback — OpenAI primary, local embeddings secondary for resilience.',
-      'LangChain document loader pipeline with recursive text splitter for optimal chunk sizes.',
-    ],
-  },
-  'AI Health ChatBot': {
-    architecture: {
-      client: 'React Frontend',
-      gateway: 'Flask REST API',
-      backend: 'TensorFlow NLP Model',
-      dataStore: 'Symptom Knowledge Base',
-      throughput: '200 queries/min',
-      latency: '350ms inference',
-      reliability: '87% diagnostic accuracy',
-    },
-    designDecisions: [
-      'TensorFlow NLP model trained on medical symptom datasets for structured intake.',
-      'Guided conversation flow with branching logic for differential diagnosis.',
-      'React chat interface with real-time typing indicators and confidence scores.',
-    ],
-  },
-  'Touchless Keyboard': {
-    architecture: {
-      client: 'Python GUI (Tkinter)',
-      gateway: 'OpenCV Frame Pipeline',
-      backend: 'MediaPipe Hand Landmarks',
-      dataStore: 'In-memory Key Map',
-      throughput: '30 fps detection',
-      latency: '15ms keystroke',
-      reliability: '92% gesture accuracy',
-    },
-    designDecisions: [
-      'MediaPipe 21-point hand landmark model for precise fingertip detection.',
-      'Debounce logic to prevent rapid double-keystrokes from gesture jitter.',
-      'Virtual keyboard overlay with proximity-based key highlighting.',
-    ],
-  },
-  'Automated Attendance': {
-    architecture: {
-      client: 'React Dashboard',
-      gateway: 'Python Flask API',
-      backend: 'OpenCV Face Recognition',
-      dataStore: 'MySQL + AWS S3',
-      throughput: '15 faces/s',
-      latency: '120ms match',
-      reliability: '97% recognition rate',
-    },
-    designDecisions: [
-      'Face encoding stored as 128-d vectors in MySQL for fast Euclidean distance matching.',
-      'AWS S3 for cloud storage of facial embeddings and attendance logs.',
-      'Real-time video stream processing with OpenCV cascade classifiers.',
-    ],
-  },
-  'Employee Data Analysis': {
-    architecture: {
-      client: 'Jupyter Notebook',
-      gateway: 'Pandas DataFrame',
-      backend: 'Statistical Analysis Engine',
-      dataStore: 'CSV/Excel Datasets',
-      throughput: '15k rows analyzed',
-      latency: '2.1s full EDA',
-      reliability: '0.84 correlation',
-    },
-    designDecisions: [
-      'Seaborn heatmaps for correlation matrix visualization across HR features.',
-      'Pandas pipeline for data cleaning, null handling, and feature engineering.',
-      'Matplotlib multi-plot grids for retention trend analysis across departments.',
-    ],
-  },
-} satisfies Record<string, Omit<BlueprintProject, 'title' | 'tagline' | 'category' | 'techStack' | 'githubUrl' | 'demoUrl'>>;
+};
 
 export const ProjectsSection: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<ProjectCategory | 'All'>('All');
   const [viewMode, setViewMode] = useState<'bento' | 'matrix'>('bento');
   const [activeBlueprintProject, setActiveBlueprintProject] = useState<BlueprintProject | null>(null);
   const { selectedSkill, setSelectedSkill } = useSkillFilter();
-  const { playClick } = useSound();
 
   const handleOpenBlueprint = (p: Project | MatrixProject) => {
     const projectData = blueprintDataMap[p.title] || {
@@ -662,18 +516,18 @@ export const ProjectsSection: React.FC = () => {
   const standardProjects = filteredProjects.filter((p) => p !== heroProject);
 
   return (
-    <SectionWrapper id="projects" className="py-20 border-b-2 border-black relative bg-background">
-      <div className="container mx-auto px-4 lg:px-8 relative z-10">
+    <SectionWrapper id="projects" className="py-10 sm:py-12 border-t border-border relative bg-background">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-10">
         
-        {/* Section Header with Eyebrow Badge */}
-        <div className="text-center max-w-2xl mx-auto mb-12">
+        {/* Section Header */}
+        <div className="max-w-2xl mb-8 sm:mb-10">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1 border-2 border-black bg-primary text-black font-head text-xs font-bold uppercase shadow-xs mb-4"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-muted/60 text-xs font-medium text-foreground mb-3"
           >
-            <span className="w-2 h-2 rounded-full bg-black animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-primary" />
             <span>Production Codebase</span>
           </motion.div>
 
@@ -682,7 +536,7 @@ export const ProjectsSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.05 }}
-            className="text-4xl md:text-5xl font-head font-bold tracking-tight text-foreground uppercase select-none"
+            className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground"
           >
             Featured Projects
           </motion.h2>
@@ -692,17 +546,17 @@ export const ProjectsSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-foreground mt-3 text-sm font-medium max-w-lg mx-auto leading-relaxed"
+            className="text-muted-foreground mt-3 text-base leading-relaxed"
           >
-            End-to-end architectures engineered with strict type safety, micro-services, and production ML pipelines.
+            End-to-end architectures engineered with strict type safety, asynchronous microservices, and production ML pipelines.
           </motion.p>
         </div>
 
         {/* Toolbar: Category Switcher + View Mode Switcher */}
-        <div className="mb-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           
           {/* Category Tabs with Counts */}
-          <div className="flex flex-wrap items-center gap-1.5 p-1 bg-card border-2 border-black rounded-none shadow-xs">
+          <div className="flex flex-wrap items-center gap-1.5 p-1 bg-card border border-border rounded-xl">
             {categories.map((cat) => {
               const count = cat === 'All' ? projects.length : projects.filter((p) => p.category === cat).length;
               const isSelected = selectedCategory === cat;
@@ -711,19 +565,16 @@ export const ProjectsSection: React.FC = () => {
                 <button
                   type="button"
                   key={cat}
-                  onClick={() => {
-                    playClick(750, 0.03, 'sine');
-                    setSelectedCategory(cat);
-                  }}
+                  onClick={() => setSelectedCategory(cat)}
                   className={cn(
-                    'px-3 py-1.5 rounded-none text-xs font-head font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer',
+                    'px-3 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center gap-1.5 whitespace-nowrap shrink-0',
                     isSelected
-                      ? 'bg-primary text-black border-2 border-black shadow-xs'
-                      : 'border-2 border-transparent text-foreground hover:bg-muted'
+                      ? 'bg-foreground text-background shadow-xs'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                   )}
                 >
                   <span>{cat}</span>
-                  <span className={cn('text-[9px] px-1.5 py-0.2 font-mono font-bold border border-black', isSelected ? 'bg-black text-white' : 'bg-muted text-foreground')}>
+                  <span className={cn('text-[10px] px-1.5 py-0.2 rounded-md font-mono', isSelected ? 'bg-background/20 text-background' : 'bg-muted text-muted-foreground')}>
                     {count}
                   </span>
                 </button>
@@ -732,36 +583,30 @@ export const ProjectsSection: React.FC = () => {
           </div>
 
           {/* View Mode Toggle: Bento vs Matrix */}
-          <div className="flex items-center gap-1 p-1 bg-card border-2 border-black rounded-none shadow-xs self-end sm:self-center">
+          <div className="flex items-center gap-1 p-1 bg-card border border-border rounded-xl self-end sm:self-center">
             <button
               type="button"
-              onClick={() => {
-                playClick(800, 0.03, 'sine');
-                setViewMode('bento');
-              }}
+              onClick={() => setViewMode('bento')}
               className={cn(
-                'p-1.5 rounded-none text-xs font-head font-bold uppercase flex items-center gap-1 transition-all cursor-pointer',
-                viewMode === 'bento' ? 'bg-primary text-black border-2 border-black shadow-xs' : 'text-foreground hover:bg-muted'
+                'px-2.5 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors',
+                viewMode === 'bento' ? 'bg-muted text-foreground' : 'text-muted-foreground hover:text-foreground'
               )}
               title="Bento Grid View"
             >
               <LayoutGrid className="w-3.5 h-3.5" />
-              <span className="text-[10px] hidden md:inline">Bento</span>
+              <span className="text-xs hidden md:inline">Bento</span>
             </button>
             <button
               type="button"
-              onClick={() => {
-                playClick(800, 0.03, 'sine');
-                setViewMode('matrix');
-              }}
+              onClick={() => setViewMode('matrix')}
               className={cn(
-                'p-1.5 rounded-none text-xs font-head font-bold uppercase flex items-center gap-1 transition-all cursor-pointer',
-                viewMode === 'matrix' ? 'bg-primary text-black border-2 border-black shadow-xs' : 'text-foreground hover:bg-muted'
+                'px-2.5 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors',
+                viewMode === 'matrix' ? 'bg-muted text-foreground' : 'text-muted-foreground hover:text-foreground'
               )}
               title="Engineering Matrix Table"
             >
               <ListFilter className="w-3.5 h-3.5" />
-              <span className="text-[10px] hidden md:inline">Matrix</span>
+              <span className="text-xs hidden md:inline">Matrix</span>
             </button>
           </div>
         </div>
@@ -772,10 +617,10 @@ export const ProjectsSection: React.FC = () => {
             <button
               type="button"
               onClick={() => setSelectedSkill(null)}
-              className="inline-flex items-center gap-1.5 rounded-none border-2 border-black bg-primary px-3 py-1 text-xs font-head font-bold uppercase tracking-wider text-black shadow-xs hover:bg-primary-hover transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-foreground hover:bg-muted transition-colors"
             >
-              Filtered by Skill: {selectedSkill}
-              <X className="h-3.5 w-3.5" />
+              Filtered by: {selectedSkill}
+              <X className="h-3 w-3 text-muted-foreground" />
             </button>
           </div>
         )}
@@ -790,19 +635,17 @@ export const ProjectsSection: React.FC = () => {
               animate="show"
               className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
             >
-              {/* Flagship Hero Card */}
               {heroProject && (
-                <LuxuryProjectCard
+                <ModernProjectCard
                   project={heroProject}
                   featured
                   onInspectBlueprint={handleOpenBlueprint}
                 />
               )}
 
-              {/* Standard Cards */}
               <AnimatePresence mode="popLayout">
                 {standardProjects.map((project) => (
-                  <LuxuryProjectCard
+                  <ModernProjectCard
                     key={project.title}
                     project={project}
                     onInspectBlueprint={handleOpenBlueprint}
@@ -817,7 +660,7 @@ export const ProjectsSection: React.FC = () => {
             />
           )
         ) : (
-          <div className="rounded-xl border-[0.5px] border-border/80 bg-card p-12 text-center space-y-3">
+          <div className="rounded-2xl border border-border bg-card p-12 text-center space-y-3">
             <p className="text-sm font-semibold text-foreground">No projects match this active filter.</p>
             <p className="text-xs text-muted-foreground">Clear the skill filter or select another domain category.</p>
             <Button variant="outline" size="sm" onClick={() => { setSelectedCategory('All'); setSelectedSkill(null); }}>

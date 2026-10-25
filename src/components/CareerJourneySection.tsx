@@ -1,127 +1,140 @@
-import { useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
+import { Briefcase, Calendar, MapPin } from 'lucide-react';
 
 type Experience = {
-    title: string;
-    company: string;
-    location: string;
-    period: string;
-    description: string;
-    skills: string[];
-    current: boolean;
+  title: string;
+  company: string;
+  location: string;
+  period: string;
+  description: string;
+  skills: string[];
+  current?: boolean;
 };
 
 const experiences: Experience[] = [
-    {
-        title: 'Cloud Engineering Intern',
-        company: 'Brain O Vision',
-        location: 'Remote',
-        period: 'June 2024 – Aug 2024',
-        description: 'Worked on cloud infrastructure projects, designed cloud deployment architectures, and gained hands-on expertise with AWS services.',
-        skills: ['Cloud Computing', 'Python', 'AWS', 'Automation'],
-        current: false,
-    },
-    {
-        title: 'Cloud Computing Engineering Intern',
-        company: 'EXCELr EdTech',
-        location: 'Remote',
-        period: 'Dec 2024 – Apr 2025',
-        description: 'Assisted in deploying cloud-native architectures, configured CI/CD deployment logic, and automated container orchestration pipelines.',
-        skills: ['AWS', 'Cloud Architecture', 'DevOps', 'Docker'],
-        current: false,
-    },
-    {
-        title: 'Data Analytics Intern',
-        company: 'Codegnan IT Solutions',
-        location: 'Hyderabad',
-        period: 'June 2025 – Feb 2026',
-        description: 'Mastered advanced data analytics workflows under Sr. Data Science Lead Mr. Puneet Kansal and translated them into production-ready solutions. Built and deployed a dynamic Exploratory Data Analysis dashboard on Global Unicorn Companies using Power BI, and engineered multi-region sales analytics reports to drive business decisions.',
-        skills: ['Python', 'MySQL', 'Power BI', 'Statistics', 'EDA', 'Excel', 'Snowflake'],
-        current: false,
-    },
+  {
+    title: 'Data Analytics Intern',
+    company: 'Codegnan IT Solutions',
+    location: 'Hyderabad, India',
+    period: 'June 2025 – Feb 2026',
+    description: 'Executed advanced exploratory data analysis and built business intelligence infrastructure under Sr. Data Science leadership. Designed dynamic Power BI dashboards analyzing 1,074 Global Unicorn startups and engineered multi-region retail sales optimization models.',
+    skills: ['Python', 'MySQL', 'Power BI', 'Statistics', 'EDA', 'Snowflake', 'Data Modeling'],
+  },
+  {
+    title: 'Cloud Computing Engineering Intern',
+    company: 'EXCELr EdTech',
+    location: 'Remote',
+    period: 'Dec 2024 – Apr 2025',
+    description: 'Configured cloud-native deployment logic, orchestrated automated container pipelines using Docker, and managed cloud infrastructure integration with AWS services.',
+    skills: ['AWS', 'Cloud Architecture', 'DevOps', 'Docker', 'Automation'],
+  },
+  {
+    title: 'Cloud Engineering Intern',
+    company: 'Brain O Vision',
+    location: 'Remote',
+    period: 'June 2024 – Aug 2024',
+    description: 'Designed cloud infrastructure topologies, provisioned core AWS compute/storage resources, and automated administrative maintenance tasks via Python scripts.',
+    skills: ['AWS', 'Python', 'Cloud Computing', 'Linux', 'Automation'],
+  },
 ];
 
 export const CareerJourneySection = () => {
-    const containerRef = useRef<HTMLDivElement>(null);
+  return (
+    <SectionWrapper id="career" className="py-10 sm:py-12 border-t border-border bg-background">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+        
+        {/* Section Header */}
+        <div className="max-w-2xl mb-8 sm:mb-10">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-muted/60 text-xs font-medium text-foreground mb-3"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+            <span>Professional Experience</span>
+          </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.05 }}
+            className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground"
+          >
+            Career Milestones
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="mt-3 text-muted-foreground text-base leading-relaxed"
+          >
+            Hands-on technical internships building data intelligence, cloud automation, and analytics pipelines.
+          </motion.p>
+        </div>
 
-    return (
-        <SectionWrapper id="career" className="py-16 bg-muted/20 border-b-2 border-black">
-            <div className="container mx-auto px-4 lg:px-8 relative z-10" ref={containerRef}>
-                {/* Header */}
-                <div className="text-center mb-16 max-w-2xl mx-auto">
-                    <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="inline-flex items-center gap-2 px-3 py-1 border-2 border-black bg-primary text-black font-head text-xs font-bold uppercase shadow-xs mb-4"
-                    >
-                        <span className="w-2 h-2 rounded-full bg-black animate-pulse" />
-                        <span>Experience</span>
-                    </motion.div>
-                    <motion.h2
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.05 }}
-                        className="text-4xl md:text-5xl font-head font-bold tracking-tight text-foreground uppercase select-none"
-                    >
-                        Career Timeline
-                    </motion.h2>
-                </div>
+        {/* Minimalist Timeline Stack */}
+        <div className="relative border-l border-border pl-6 sm:pl-8 ml-3 sm:ml-4 space-y-10 sm:space-y-12">
+          {experiences.map((exp, index) => (
+            <motion.div
+              key={`${exp.title}-${exp.company}`}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.35, delay: index * 0.08 }}
+              className="relative"
+            >
+              {/* Timeline Bullet Node */}
+              <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-background border-2 border-primary" />
 
-                {/* Neobrutalist Milestone Ledger Container */}
-                <div className="relative max-w-4xl mx-auto border-2 border-black bg-card rounded-none overflow-hidden shadow-[6px_6px_0px_#000]">
-                    <div className="relative z-10 divide-y-2 divide-black">
-                        {experiences.map((exp, index) => (
-                            <motion.div
-                                key={`${exp.title}-${exp.company}`}
-                                initial={{ opacity: 0, y: 15 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.4, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
-                                className="p-4 sm:p-6 md:p-8 flex flex-col md:grid md:grid-cols-[1.3fr_2.5fr_1.2fr] gap-6 items-start hover:bg-primary/5 transition-colors duration-150"
-                            >
-                                {/* Left: Period & Location */}
-                                <div className="flex flex-col gap-1.5">
-                                    <span className="text-[11px] font-head font-bold tracking-wider text-black bg-primary px-2 py-0.5 border border-black uppercase shadow-xs inline-block w-fit">
-                                        {exp.period}
-                                    </span>
-                                    <span className="text-[10px] font-mono tracking-wider uppercase text-muted-foreground font-semibold">
-                                        {exp.location}
-                                    </span>
-                                </div>
-
-                                {/* Middle: Title, Company, Description */}
-                                <div className="space-y-2">
-                                    <h3 className="text-base sm:text-lg font-head font-bold text-foreground leading-tight uppercase">
-                                        {exp.title}
-                                    </h3>
-                                    <div className="text-xs font-mono uppercase tracking-wider text-foreground font-bold">
-                                        @{exp.company}
-                                    </div>
-                                    <p className="text-foreground text-xs leading-relaxed max-w-xl font-normal">
-                                        {exp.description}
-                                    </p>
-                                </div>
-
-                                {/* Right: Skills Tags */}
-                                <div className="flex flex-wrap gap-1.5 md:justify-end w-full">
-                                    {exp.skills.map((skill) => (
-                                        <span
-                                            key={skill}
-                                            className="px-2 py-0.5 bg-muted/60 border-2 border-black text-[10px] font-head font-medium text-foreground shadow-xs"
-                                        >
-                                            {skill}
-                                        </span>
-                                    ))}
-                                </div>
-                            </motion.div>
-                        ))}
+              {/* Experience Card */}
+              <div className="p-6 rounded-2xl border border-border bg-card shadow-xs hover:border-primary/40 transition-colors">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                  <div>
+                    <h3 className="text-lg font-bold text-foreground">
+                      {exp.title}
+                    </h3>
+                    <div className="text-sm font-semibold text-primary mt-0.5">
+                      {exp.company}
                     </div>
-                </div>
-            </div>
-        </SectionWrapper>
-    );
-};
+                  </div>
 
+                  <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground font-mono">
+                    <span className="flex items-center gap-1">
+                      <Calendar className="w-3.5 h-3.5" />
+                      {exp.period}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <MapPin className="w-3.5 h-3.5" />
+                      {exp.location}
+                    </span>
+                  </div>
+                </div>
+
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {exp.description}
+                </p>
+
+                {/* Skills Badges */}
+                <div className="mt-4 pt-3.5 border-t border-border flex flex-wrap gap-1.5">
+                  {exp.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="px-2.5 py-0.5 text-xs font-medium rounded-md bg-muted/60 text-foreground border border-border/60"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+      </div>
+    </SectionWrapper>
+  );
+};

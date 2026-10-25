@@ -3,26 +3,26 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const badgeVariants = cva(
-  "group/badge inline-flex h-auto w-fit shrink-0 items-center justify-center gap-1 overflow-hidden rounded-none border-2 border-black px-2.5 py-0.5 text-xs font-head font-medium uppercase tracking-wide whitespace-nowrap shadow-xs transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black",
+  "group/badge inline-flex h-auto w-fit shrink-0 items-center justify-center gap-1.5 overflow-hidden rounded-full border px-2.5 py-0.5 text-xs font-mono font-medium tracking-wide whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20",
   {
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground hover:bg-primary-hover",
+          "border-transparent bg-primary text-primary-foreground",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-neutral-800",
+          "border-border bg-secondary text-secondary-foreground",
         destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+          "border-transparent bg-destructive/15 text-destructive border border-destructive/20",
         outline:
-          "bg-card text-foreground hover:bg-muted",
+          "border-border bg-card/60 text-foreground hover:bg-muted/80",
         primary:
-          "bg-primary text-primary-foreground hover:bg-primary-hover",
+          "border-transparent bg-primary text-primary-foreground",
         accent:
-          "bg-accent text-accent-foreground hover:bg-primary/50",
+          "border-border bg-muted text-foreground",
         emerald:
-          "bg-emerald-400 text-black hover:bg-emerald-300",
+          "border-emerald-500/20 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
         ghost:
-          "border-transparent bg-transparent shadow-none hover:border-black hover:bg-accent",
+          "border-transparent bg-transparent hover:bg-muted",
       },
     },
     defaultVariants: {
@@ -47,4 +47,3 @@ function Badge({ className, variant, ...props }: BadgeProps) {
 }
 
 export { Badge, badgeVariants };
-

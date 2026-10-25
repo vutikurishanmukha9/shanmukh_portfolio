@@ -1,5 +1,5 @@
 import { ContactForm } from '@/components/ContactForm';
-import { Github, Linkedin, Mail, ExternalLink, Copy, Check, MessageSquare, Terminal } from 'lucide-react';
+import { Github, Linkedin, Mail, ExternalLink, Copy, Check, MessageSquare, MapPin } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
 import { cn } from '@/lib/utils';
@@ -18,16 +18,16 @@ const ContactCard = ({ contact }: { contact: { icon: LucideIcon; label: string; 
   };
 
   return (
-    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-4 border-2 border-black bg-card shadow-[4px_4px_0px_#000] rounded-none transition-shadow duration-200 hover:shadow-[6px_6px_0px_#000]">
+    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-4 rounded-xl border border-border bg-muted/40 transition-colors hover:border-zinc-300 dark:hover:border-zinc-700">
       <div className="flex items-center gap-3 min-w-0">
-        <div className="w-10 h-10 shrink-0 border-2 border-black bg-primary flex items-center justify-center text-black font-bold shadow-none rounded-none">
-          <Icon className="h-5 w-5" />
+        <div className="w-10 h-10 shrink-0 rounded-lg border border-border bg-card flex items-center justify-center text-foreground font-bold shadow-xs">
+          <Icon className="h-5 w-5 text-primary" />
         </div>
         <div className="min-w-0">
-          <p className="text-[10px] font-head font-bold tracking-wider text-muted-foreground uppercase">{contact.label}</p>
+          <p className="text-[11px] font-mono font-medium text-muted-foreground uppercase">{contact.label}</p>
           <a
             href={contact.href}
-            className="text-xs font-mono font-bold text-foreground hover:underline transition-colors break-all"
+            className="text-xs sm:text-sm font-mono font-semibold text-foreground hover:text-primary transition-colors break-all"
           >
             {contact.value}
           </a>
@@ -38,14 +38,14 @@ const ContactCard = ({ contact }: { contact: { icon: LucideIcon; label: string; 
         type="button"
         onClick={handleCopy}
         className={cn(
-          "px-3 py-1.5 text-[10px] font-head font-bold uppercase tracking-wider border-2 border-black transition-all flex items-center gap-1.5 self-end sm:self-auto shrink-0 cursor-pointer shadow-xs active:translate-x-0.5 active:translate-y-0.5",
+          "px-3 py-1.5 text-xs font-mono font-medium rounded-lg border border-border transition-all flex items-center gap-1.5 self-end sm:self-auto shrink-0 cursor-pointer shadow-xs",
           copied
-            ? "bg-emerald-400 text-black font-bold"
-            : "bg-muted text-foreground hover:bg-primary"
+            ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
+            : "bg-card text-foreground hover:bg-muted"
         )}
       >
-        {copied ? <Check className="h-3 w-3 text-black stroke-[3]" /> : <Copy className="h-3 w-3" />}
-        <span>{copied ? "COPIED" : "COPY"}</span>
+        {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5 text-muted-foreground" />}
+        <span>{copied ? "Copied" : "Copy"}</span>
       </button>
     </div>
   );
@@ -80,79 +80,90 @@ const socialLinks = [
 
 export const ContactSection = () => {
   return (
-    <SectionWrapper id="contact" className="py-20 bg-background border-b-2 border-black">
+    <SectionWrapper id="contact" className="py-10 sm:py-12 bg-background border-t border-border">
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
 
-        {/* Header */}
-        <div className="text-center mb-12 max-w-2xl mx-auto">
+        {/* Section Header */}
+        <div className="text-center mb-8 sm:mb-10 max-w-2xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-1.5 px-3 py-1 border-2 border-black bg-primary text-black text-xs font-head font-bold uppercase shadow-[2px_2px_0px_#000] mb-4"
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border bg-card text-muted-foreground text-xs font-mono mb-4 shadow-xs"
           >
-            <MessageSquare className="size-3.5" />
-            <span>06 // CONNECT & COLLABORATE</span>
+            <MessageSquare className="size-3.5 text-primary" />
+            <span>Direct Communication</span>
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.05 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-head font-bold uppercase tracking-tight text-foreground select-none"
+            className="text-3xl sm:text-4xl font-head font-bold tracking-tight text-foreground"
           >
-            LET'S BUILD TOGETHER
+            Let's build something enduring.
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="mt-3 text-muted-foreground text-xs sm:text-sm font-sans font-medium max-w-md mx-auto leading-relaxed"
+            className="mt-3 text-muted-foreground text-sm sm:text-base font-sans max-w-lg mx-auto leading-relaxed"
           >
-            Open for full-time engineering roles, high-throughput backend systems, and applied AI/ML architectures.
+            Open for full-time engineering roles, backend systems architecture, and applied AI/ML pipelines.
           </motion.p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto items-stretch">
-          {/* Contact Information Column */}
+        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
+          {/* Contact Details Column */}
           <motion.div
-            initial={{ opacity: 0, x: -15 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4 }}
             className="flex flex-col h-full"
           >
-            <div className="border-2 border-black bg-card p-4 sm:p-8 shadow-[6px_6px_0px_#000] rounded-none h-full flex flex-col justify-between">
+            <div className="rounded-2xl border border-border bg-card p-6 sm:p-8 shadow-xs h-full flex flex-col justify-between">
               <div>
-                <div className="flex items-center justify-between border-b-2 border-black pb-3 mb-6">
+                <div className="flex items-center justify-between border-b border-border pb-4 mb-6">
                   <div className="flex items-center gap-2">
-                    <Terminal className="size-4 text-black" />
-                    <h3 className="text-base sm:text-lg font-head font-bold uppercase text-foreground tracking-wide">
-                      OPERATOR_CHANNELS
+                    <div className="size-2 rounded-full bg-emerald-500 animate-pulse" />
+                    <h3 className="text-base font-head font-semibold text-foreground">
+                      Communication Channels
                     </h3>
                   </div>
-                  <span className="text-[10px] font-mono font-bold bg-primary px-2 py-0.5 border border-black text-black">
-                    ACTIVE
+                  <span className="text-[11px] font-mono font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20 whitespace-nowrap shrink-0">
+                    Active & Responding
                   </span>
                 </div>
 
-                <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-6 font-sans">
-                  Motivated to discuss technical opportunities, cloud telemetry pipelines, vector database architectures, and production-grade fullstack systems.
+                <p className="text-muted-foreground text-sm leading-relaxed mb-6 font-sans">
+                  Whether you are hiring for a software engineering role, discussing distributed RAG architectures, or reviewing production telemetry systems, I welcome thoughtful technical conversations.
                 </p>
 
-                {/* Contact Details */}
+                {/* Direct Contact Cards */}
                 <div className="space-y-3 mb-8">
                   {contactInfo.map((contact) => (
                     <ContactCard key={contact.label} contact={contact} />
                   ))}
                 </div>
+
+                {/* Location & Schedule Card */}
+                <div className="p-4 rounded-xl border border-border bg-muted/40 mb-6">
+                  <div className="flex items-center gap-2 text-xs font-mono font-medium text-foreground mb-1">
+                    <MapPin className="h-4 w-4 text-primary" />
+                    <span>Location & Availability</span>
+                  </div>
+                  <p className="text-xs text-muted-foreground font-sans leading-relaxed">
+                    Hyderabad, India (IST / UTC+5:30) • Available for hybrid, on-site, or remote engineering teams worldwide.
+                  </p>
+                </div>
               </div>
 
-              {/* Social Links */}
-              <div className="pt-4 border-t-2 border-black">
-                <p className="text-[10px] font-head font-bold tracking-wider text-muted-foreground uppercase mb-3">
-                  AUTHENTICATED PROFILES
+              {/* Social Profiles */}
+              <div className="pt-6 border-t border-border">
+                <p className="text-xs font-mono font-medium text-muted-foreground uppercase tracking-wider mb-3">
+                  Verified Profiles
                 </p>
                 <div className="flex flex-wrap gap-2.5">
                   {socialLinks.map((social) => {
@@ -163,7 +174,7 @@ export const ContactSection = () => {
                         href={social.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-3.5 py-2 border-2 border-black bg-card hover:bg-primary text-foreground hover:text-black font-head font-bold text-xs uppercase shadow-[3px_3px_0px_#000] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[4px_4px_0px_#000] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all"
+                        className="flex items-center gap-2 px-3.5 py-2 rounded-xl border border-border bg-card hover:bg-muted text-foreground hover:text-primary font-mono text-xs font-medium shadow-xs transition-colors"
                         title={social.name}
                         aria-label={social.name}
                       >
@@ -179,20 +190,20 @@ export const ContactSection = () => {
 
           {/* Contact Form Column */}
           <motion.div
-            initial={{ opacity: 0, x: 15 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
             className="flex flex-col h-full"
           >
-            <div className="border-2 border-black bg-card p-4 sm:p-8 shadow-[6px_6px_0px_#000] rounded-none h-full flex flex-col justify-between">
+            <div className="rounded-2xl border border-border bg-card p-6 sm:p-8 shadow-xs h-full flex flex-col justify-between">
               <div>
-                <div className="flex items-center justify-between border-b-2 border-black pb-3 mb-6">
-                  <h3 className="text-base sm:text-lg font-head font-bold uppercase text-foreground tracking-wide">
-                    DISPATCH_MESSAGE
+                <div className="flex items-center justify-between border-b border-border pb-4 mb-6">
+                  <h3 className="text-base font-head font-semibold text-foreground">
+                    Send a Message
                   </h3>
-                  <span className="text-[10px] font-mono font-bold text-muted-foreground">
-                    ENDPOINT: /api/v1/inbox
+                  <span className="text-[11px] font-mono text-muted-foreground">
+                    Direct to Inbox
                   </span>
                 </div>
                 <ContactForm />

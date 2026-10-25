@@ -1,8 +1,3 @@
-/**
- * Tailwind CSS Configuration
- * Custom theme with CSS variable-based colors for light/dark mode support
- */
-
 import type { Config } from "tailwindcss";
 import tailwindcssAnimate from "tailwindcss-animate";
 
@@ -20,25 +15,23 @@ export default {
     },
     extend: {
       fontFamily: {
-        head: ['"Archivo Black"', 'sans-serif'],
+        head: ['"Space Grotesk"', 'sans-serif'],
         sans: ['"Space Grotesk"', 'sans-serif'],
-        display: ['"Archivo Black"', 'sans-serif'],
+        display: ['"Space Grotesk"', 'sans-serif'],
         grotesk: ['"Space Grotesk"', 'sans-serif'],
         jakarta: ['"Plus Jakarta Sans"', '-apple-system', 'sans-serif'],
-        instrument: ['"Instrument Serif"', 'Georgia', 'serif'],
-        serif: ['var(--font-display)', 'Cormorant Garamond', 'Georgia', 'serif'],
-        mono: ['var(--font-mono)', 'JetBrains Mono', 'monospace'],
-        syne: ['"Syne"', 'sans-serif'],
-        signature: ['var(--font-signature)', 'Caveat', 'cursive'],
+        serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
       },
       boxShadow: {
-        xs: "var(--shadow-xs, 1px 1px 0 0 var(--border))",
-        sm: "var(--shadow-sm, 2px 2px 0 0 var(--border))",
-        DEFAULT: "var(--shadow, 3px 3px 0 0 var(--border))",
-        md: "var(--shadow-md, 4px 4px 0 0 var(--border))",
-        lg: "var(--shadow-lg, 6px 6px 0 0 var(--border))",
-        xl: "var(--shadow-xl, 10px 10px 0 1px var(--border))",
-        "2xl": "var(--shadow-2xl, 16px 16px 0 1px var(--border))",
+        xs: "var(--shadow-xs)",
+        sm: "var(--shadow-sm)",
+        DEFAULT: "var(--shadow)",
+        md: "var(--shadow-md)",
+        lg: "var(--shadow-lg)",
+        xl: "var(--shadow-xl)",
+        "2xl": "var(--shadow-2xl)",
+        none: "none",
       },
       colors: {
         border: "var(--border)",
@@ -76,22 +69,17 @@ export default {
           DEFAULT: "var(--card)",
           foreground: "var(--card-foreground)",
         },
-        teal: {
-          primary: "hsl(var(--teal-primary, 174 60% 51%))",
-          light: "hsl(var(--teal-light, 174 60% 80%))",
-          accent: "hsl(var(--teal-accent, 174 80% 40%))",
-        },
-        slate: {
-          primary: "hsl(var(--slate-primary, 215 16% 47%))",
-          light: "hsl(var(--slate-light, 215 16% 75%))",
-        },
       },
       borderRadius: {
-        DEFAULT: "var(--radius, 0px)",
+        DEFAULT: "var(--radius, 0.75rem)",
         none: "0px",
-        lg: "var(--radius, 0px)",
-        md: "calc(var(--radius, 0px) - 2px)",
-        sm: "calc(var(--radius, 0px) - 4px)",
+        sm: "calc(var(--radius, 0.75rem) - 4px)",
+        md: "calc(var(--radius, 0.75rem) - 2px)",
+        lg: "var(--radius, 0.75rem)",
+        xl: "calc(var(--radius, 0.75rem) + 4px)",
+        "2xl": "1rem",
+        "3xl": "1.5rem",
+        full: "9999px",
       },
       keyframes: {
         highlight: {
@@ -104,20 +92,12 @@ export default {
           "100%": { backgroundColor: "hsl(var(--card))" },
         },
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
       },
       animation: {

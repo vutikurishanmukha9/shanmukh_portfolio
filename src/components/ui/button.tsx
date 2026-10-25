@@ -6,40 +6,40 @@ import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
   cn(
-    "group/button font-head font-medium inline-flex cursor-pointer items-center justify-center gap-2 rounded-none whitespace-nowrap select-none transition-all duration-200",
-    "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-60",
-    "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black aria-invalid:border-destructive",
+    "group/button font-sans font-medium inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl whitespace-nowrap select-none transition-all duration-150",
+    "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:border-primary aria-invalid:border-destructive",
     "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
   ),
   {
     variants: {
       variant: {
         default:
-          "border-2 border-black bg-primary text-primary-foreground shadow-md transition duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-primary-hover hover:shadow-lg active:translate-x-1 active:translate-y-1 active:shadow-none",
+          "bg-primary text-primary-foreground hover:bg-primary/90 shadow-xs active:scale-[0.98]",
         primary:
-          "border-2 border-black bg-primary text-primary-foreground shadow-md transition duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-primary-hover hover:shadow-lg active:translate-x-1 active:translate-y-1 active:shadow-none",
+          "bg-primary text-primary-foreground hover:bg-primary/90 shadow-xs active:scale-[0.98]",
         secondary:
-          "border-2 border-black bg-secondary text-secondary-foreground shadow-md transition duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-neutral-800 hover:shadow-lg active:translate-x-1 active:translate-y-1 active:shadow-none",
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-xs active:scale-[0.98]",
         destructive:
-          "border-2 border-black bg-destructive text-destructive-foreground shadow-md transition duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-destructive/90 hover:shadow-lg active:translate-x-1 active:translate-y-1 active:shadow-none",
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-xs active:scale-[0.98]",
         outline:
-          "border-2 border-black bg-card text-foreground shadow-md transition duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-accent hover:shadow-lg active:translate-x-1 active:translate-y-1 active:shadow-none",
+          "border border-border bg-card text-foreground hover:bg-muted hover:border-zinc-300 dark:hover:border-zinc-700 shadow-xs active:scale-[0.98]",
         ghost:
-          "border-2 border-transparent bg-transparent text-foreground hover:border-black hover:bg-accent transition duration-150 active:translate-x-0.5 active:translate-y-0.5",
+          "bg-transparent text-foreground hover:bg-muted active:scale-[0.98]",
         link: "bg-transparent text-primary underline-offset-4 hover:underline",
         glass:
-          "border-2 border-black bg-card text-foreground shadow-md transition duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-lg active:translate-x-1 active:translate-y-1 active:shadow-none",
+          "border border-border/80 bg-card/80 backdrop-blur-md text-foreground hover:bg-card shadow-xs active:scale-[0.98]",
       },
       size: {
-        default: "h-10 px-4 py-2 text-sm",
-        xs: "h-7 px-2.5 py-0.5 text-xs",
-        sm: "h-8 px-3 py-1 text-xs",
-        lg: "h-12 px-6 py-2.5 text-base",
-        xl: "h-14 px-8 py-3 text-lg",
-        icon: "h-10 w-10 p-2",
-        "icon-xs": "h-7 w-7 p-1",
-        "icon-sm": "h-8 w-8 p-1.5",
-        "icon-lg": "h-12 w-12 p-3",
+        default: "h-9 px-4 py-2 text-sm",
+        xs: "h-7 px-2.5 py-0.5 text-xs rounded-lg",
+        sm: "h-8 px-3 py-1 text-xs rounded-lg",
+        lg: "h-11 px-6 py-2.5 text-base",
+        xl: "h-12 px-8 py-3 text-base",
+        icon: "h-9 w-9 p-2",
+        "icon-xs": "h-7 w-7 p-1 rounded-lg",
+        "icon-sm": "h-8 w-8 p-1.5 rounded-lg",
+        "icon-lg": "h-11 w-11 p-2.5",
       },
     },
     defaultVariants: {

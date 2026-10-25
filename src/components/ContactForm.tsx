@@ -32,8 +32,8 @@ export const ContactForm = () => {
 
       if (response.ok) {
         toast({
-          title: 'Message Sent!',
-          description: 'Thank you for reaching out. I will get back to you soon.',
+          title: 'Message Sent Successfully',
+          description: 'Thank you for reaching out. I will get back to you shortly.',
         });
         setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
@@ -41,8 +41,8 @@ export const ContactForm = () => {
       }
     } catch {
       toast({
-        title: 'Error',
-        description: 'Failed to send message. Please try again or email me directly.',
+        title: 'Submission Issue',
+        description: 'Failed to send message via form. Please email directly at vutikurishanmukh17@gmail.com',
         variant: 'destructive',
       });
     } finally {
@@ -64,7 +64,7 @@ export const ContactForm = () => {
       data-netlify="true"
       netlify-honeypot="bot-field"
       onSubmit={handleSubmit}
-      className="space-y-6"
+      className="space-y-4"
     >
       {/* Hidden fields for Netlify */}
       <input type="hidden" name="form-name" value="contact" />
@@ -75,23 +75,23 @@ export const ContactForm = () => {
       </p>
 
       <div className="space-y-1.5">
-        <label htmlFor="name" className="text-[10px] font-head font-bold tracking-wider text-muted-foreground uppercase">
-          01 // Full Name
+        <label htmlFor="name" className="text-xs font-mono font-medium text-foreground">
+          Full Name
         </label>
         <Input
           id="name"
           name="name"
           value={formData.name}
           onChange={handleChange}
-          placeholder="e.g. Satoshi Nakamoto"
+          placeholder="e.g. Alex Morgan"
           required
-          className="border-2 border-black bg-card text-foreground font-mono focus:bg-white focus:outline-none rounded-none shadow-xs text-xs h-10 px-3"
+          className="rounded-xl border border-border bg-card text-foreground text-sm h-10 px-3.5"
         />
       </div>
 
       <div className="space-y-1.5">
-        <label htmlFor="email" className="text-[10px] font-head font-bold tracking-wider text-muted-foreground uppercase">
-          02 // Email Address
+        <label htmlFor="email" className="text-xs font-mono font-medium text-foreground">
+          Email Address
         </label>
         <Input
           id="email"
@@ -99,60 +99,60 @@ export const ContactForm = () => {
           type="email"
           value={formData.email}
           onChange={handleChange}
-          placeholder="your.email@organization.com"
+          placeholder="alex@company.com"
           required
-          className="border-2 border-black bg-card text-foreground font-mono focus:bg-white focus:outline-none rounded-none shadow-xs text-xs h-10 px-3"
+          className="rounded-xl border border-border bg-card text-foreground text-sm h-10 px-3.5"
         />
       </div>
 
       <div className="space-y-1.5">
-        <label htmlFor="subject" className="text-[10px] font-head font-bold tracking-wider text-muted-foreground uppercase">
-          03 // Subject Matter
+        <label htmlFor="subject" className="text-xs font-mono font-medium text-foreground">
+          Subject
         </label>
         <Input
           id="subject"
           name="subject"
           value={formData.subject}
           onChange={handleChange}
-          placeholder="Project Inquiry / Engineering Role"
+          placeholder="Engineering role / technical collaboration"
           required
-          className="border-2 border-black bg-card text-foreground font-mono focus:bg-white focus:outline-none rounded-none shadow-xs text-xs h-10 px-3"
+          className="rounded-xl border border-border bg-card text-foreground text-sm h-10 px-3.5"
         />
       </div>
 
       <div className="space-y-1.5">
-        <label htmlFor="message" className="text-[10px] font-head font-bold tracking-wider text-muted-foreground uppercase">
-          04 // Message Body
+        <label htmlFor="message" className="text-xs font-mono font-medium text-foreground">
+          Message
         </label>
         <Textarea
           id="message"
           name="message"
           value={formData.message}
           onChange={handleChange}
-          placeholder="Describe project requirements, tech stack specs, or timeline..."
+          placeholder="Tell me about your team, system challenges, or project requirements..."
           required
           rows={4}
-          className="border-2 border-black bg-card text-foreground font-mono focus:bg-white focus:outline-none rounded-none shadow-xs text-xs resize-none p-3"
+          className="rounded-xl border border-border bg-card text-foreground text-sm resize-none p-3.5"
         />
       </div>
 
-      <button
+      <Button
         type="submit"
         disabled={isSubmitting}
-        className="w-full h-12 border-2 border-black bg-primary text-black font-head font-bold uppercase text-xs shadow-[4px_4px_0px_#000] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0px_#000] active:translate-x-1 active:translate-y-1 active:shadow-none rounded-none flex items-center justify-center gap-2 cursor-pointer transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full h-11 rounded-xl font-sans font-medium text-sm flex items-center justify-center gap-2 cursor-pointer transition-all mt-2"
       >
         {isSubmitting ? (
           <>
-            <Loader2 className="h-4 w-4 animate-spin text-black" />
-            <span>DISPATCHING...</span>
+            <Loader2 className="h-4 w-4 animate-spin" />
+            <span>Sending message...</span>
           </>
         ) : (
           <>
-            <Send className="h-4 w-4 text-black" />
-            <span>TRANSMIT_MESSAGE()</span>
+            <Send className="h-4 w-4" />
+            <span>Send Message</span>
           </>
         )}
-      </button>
+      </Button>
     </form>
   );
 };

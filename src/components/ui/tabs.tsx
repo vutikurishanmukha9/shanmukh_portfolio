@@ -12,7 +12,7 @@ const TabsList = React.forwardRef<
     ref={ref}
     data-slot="tabs-list"
     className={cn(
-      "inline-flex h-auto items-center justify-center rounded-none border-2 border-black bg-card p-1 text-muted-foreground shadow-sm",
+      "inline-flex h-10 items-center justify-center rounded-xl border border-border bg-muted/60 p-1 text-muted-foreground shadow-xs",
       className
     )}
     {...props}
@@ -28,7 +28,7 @@ const TabsTrigger = React.forwardRef<
     ref={ref}
     data-slot="tabs-trigger"
     className={cn(
-      "relative inline-flex items-center justify-center gap-1.5 rounded-none border-2 border-transparent px-3 py-1.5 text-xs font-head font-medium uppercase tracking-wide text-muted-foreground transition-all duration-150 select-none hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black disabled:pointer-events-none disabled:opacity-50 data-[state=active]:border-black data-[state=active]:bg-primary data-[state=active]:text-black data-[state=active]:shadow-xs",
+      "relative inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-mono font-medium tracking-wide text-muted-foreground transition-all duration-150 select-none hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-xs",
       className
     )}
     {...props}
@@ -44,7 +44,7 @@ const TabsContent = React.forwardRef<
     ref={ref}
     data-slot="tabs-content"
     className={cn(
-      "mt-3 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black",
+      "mt-4 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20",
       className
     )}
     {...props}
@@ -53,4 +53,3 @@ const TabsContent = React.forwardRef<
 TabsContent.displayName = TabsPrimitive.Content.displayName;
 
 export { Tabs, TabsList, TabsTrigger, TabsContent };
-

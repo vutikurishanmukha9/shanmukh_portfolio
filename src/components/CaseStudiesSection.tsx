@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
@@ -8,14 +8,11 @@ import {
   Github,
   ArrowUpRight,
   TrendingUp,
-  Database,
   Terminal,
   Split,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { DataDiffSlider } from '@/components/ui/DataDiffSlider';
-
-// ─── Case Study Data ──────────────────────────────────────────────────
 
 type CaseStudy = {
   id: string;
@@ -44,22 +41,22 @@ const caseStudies: CaseStudy[] = [
     metrics: [
       { label: 'Companies', value: '1,074' },
       { label: 'Total Valuation', value: '$3,711B' },
-      { label: '2021 Surge', value: '520 (48.4%)' },
-      { label: 'Avg Time-to-$1B', value: '7.0 Years' },
+      { label: '2021 Surge', value: '48.4% (520)' },
+      { label: 'Time to $1B', value: '7.0 Years' },
       { label: 'Total Funding', value: '$591.8B' },
       { label: 'Top Sector', value: 'Fintech (224)' },
     ],
     tabs: {
       bottleneck: 'The global startup ecosystem crossed 1,000 unicorns, but the structural distribution of value, funding efficiency, and time-to-unicorn across geographies and industries remained poorly understood. 520 of 1,074 unicorns (48.4%) were created in 2021 alone, representing a 5x increase over 2018-2019 baselines, and raising questions about whether this was structural or cyclical.',
       decision: 'Built a star-schema data model in Power BI with separate Funding and Investors dimension tables. Engineered DAX measures for valuation/funding efficiency ratios, average years-to-unicorn by sector, and investor count aggregations. Used Power Query ETL to clean valuation strings, parse date fields, and compute "Years to Unicorn" calculated columns across 6 continents.',
-      outcome: 'North America holds 589 companies (54.8%) and $2,032B in valuation, but Asia\'s startups require 25% more funding ($632M avg vs $504M) for similar outcomes. AI has the highest avg valuation at $4.49B but lower capital efficiency (4.88x) than Fintech (6.15x). Fastest unicorns (Brex, Wiz, Scale AI) reached $1B in under 12 months. SHEIN achieved 50x return on capital ($2B raised → $100B valuation).',
+      outcome: 'North America holds 589 companies (54.8%) and $2,032B in valuation, but Asia\'s startups require 25% more funding ($632M avg vs $504M) for similar outcomes. AI has the highest avg valuation at $4.49B but lower capital efficiency (4.88x) than Fintech (6.15x). Fastest unicorns reached $1B in under 12 months. SHEIN achieved 50x return on capital ($2B raised → $100B valuation).',
     },
     previewType: 'unicorn',
   },
   {
     id: 'adidas',
     title: 'Adidas US Retail Sales Analysis',
-    subtitle: 'Highly rigorous exploratory data analysis solving 15 structured business questions with spike anomaly detection, YoY growth tracking, and operating margin breakdowns.',
+    subtitle: 'Exploratory data analysis solving 15 structured business questions with spike anomaly detection, YoY growth tracking, and operating margin breakdowns.',
     focus: 'Exploratory Data Analysis',
     github: 'https://github.com/vutikurishanmukha9/Adidas_US_Sales',
     tech: ['Python', 'Pandas', 'NumPy', 'Matplotlib', 'Seaborn'],
@@ -102,119 +99,103 @@ const caseStudies: CaseStudy[] = [
   },
 ];
 
-// ─── Preview Panels ───────────────────────────────────────────────────
-
 const UnicornPreview = () => (
-  <div className="flex flex-col justify-between h-full font-mono text-[9px] text-muted-foreground">
-    <div className="flex items-center justify-between border-b-[0.5px] border-border/60 pb-2">
-      <span className="font-semibold text-foreground">UNICORN_GLOBAL_TELEMETRY</span>
-      <span className="text-amber-500 font-semibold text-[8px]">$3,711B VAL</span>
+  <div className="flex flex-col justify-between h-full font-mono text-[10px] text-muted-foreground p-3">
+    <div className="flex items-center justify-between border-b border-border/80 pb-2">
+      <span className="font-semibold text-foreground">Global Unicorn Distribution</span>
+      <span className="text-primary font-semibold">$3,711B Val</span>
     </div>
-    {/* Continent Distribution */}
-    <div className="my-1.5 space-y-1">
+    <div className="my-3 space-y-1.5">
       {[
-        { region: 'N. America', count: 589, pct: 54.8, color: 'bg-primary' },
-        { region: 'Asia', count: 310, pct: 28.9, color: 'bg-amber-500' },
-        { region: 'Europe', count: 143, pct: 13.3, color: 'bg-sky-500' },
-        { region: 'Other', count: 32, pct: 3.0, color: 'bg-muted-foreground/50' },
+        { region: 'N. America', count: 589, pct: 54.8, color: 'bg-foreground' },
+        { region: 'Asia', count: 310, pct: 28.9, color: 'bg-primary' },
+        { region: 'Europe', count: 143, pct: 13.3, color: 'bg-emerald-500' },
+        { region: 'Other', count: 32, pct: 3.0, color: 'bg-muted-foreground/40' },
       ].map((d) => (
-        <div key={d.region} className="flex items-center gap-1.5">
-          <span className="w-14 text-[7.5px] text-right opacity-80 shrink-0">{d.region}</span>
-          <div className="flex-1 h-2 bg-background/60 border-[0.5px] border-border/30 rounded-sm overflow-hidden">
-            <div className={cn('h-full rounded-sm', d.color)} style={{ width: `${d.pct}%` }} />
+        <div key={d.region} className="flex items-center gap-2">
+          <span className="w-16 text-[9px] text-right opacity-80 shrink-0">{d.region}</span>
+          <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
+            <div className={cn('h-full rounded-full', d.color)} style={{ width: `${d.pct}%` }} />
           </div>
-          <span className="w-16 text-[7px] text-foreground font-semibold tabular-nums">{d.count} ({d.pct}%)</span>
+          <span className="w-16 text-[9px] text-foreground font-semibold tabular-nums">{d.count} ({d.pct}%)</span>
         </div>
       ))}
     </div>
-    {/* 2021 Surge Indicator */}
-    <div className="border-[0.5px] border-amber-500/20 bg-amber-500/5 rounded px-2 py-1 my-1">
-      <div className="flex justify-between items-center text-[7.5px]">
-        <span className="text-amber-600 font-semibold">2021_SURGE</span>
+    <div className="border border-border/80 bg-muted/40 rounded-xl px-2.5 py-1.5 my-1">
+      <div className="flex justify-between items-center text-[9px]">
+        <span className="text-primary font-semibold">2021 Capital Surge</span>
         <span className="text-foreground font-bold">520 / 1,074 (48.4%)</span>
       </div>
-      <div className="h-1.5 bg-background/60 border-[0.5px] border-border/30 rounded-sm overflow-hidden mt-1">
-        <div className="h-full rounded-sm bg-amber-500" style={{ width: '48.4%' }} />
+      <div className="h-1.5 bg-muted rounded-full overflow-hidden mt-1">
+        <div className="h-full rounded-full bg-primary" style={{ width: '48.4%' }} />
       </div>
     </div>
-    {/* Bottom Stats */}
-    <div className="border-t-[0.5px] border-border/60 pt-1.5 flex justify-between items-center">
-      <div className="flex gap-2.5 text-[7.5px] opacity-70">
-        <span>FUND: <span className="text-foreground font-semibold">$591.8B</span></span>
-        <span>AVG_TTU: <span className="text-foreground font-semibold">7.0yr</span></span>
-      </div>
-      <span className="text-[6.5px] opacity-50">STAR_SCHEMA // DAX</span>
+    <div className="border-t border-border/80 pt-2 flex justify-between items-center text-[9px]">
+      <span>Funding: <strong className="text-foreground">$591.8B</strong></span>
+      <span>Star Schema · DAX</span>
     </div>
   </div>
 );
 
 const AdidasPreview = () => (
-  <div className="flex flex-col justify-between h-full font-mono text-[9px] text-muted-foreground">
-    <div className="flex items-center justify-between border-b-[0.5px] border-border/60 pb-2">
-      <span className="font-semibold text-foreground">MARGIN_COMPARISON_ENGINE</span>
-      <span className="text-emerald-500 font-semibold text-[8px]">15 Q&A</span>
+  <div className="flex flex-col justify-between h-full font-mono text-[10px] text-muted-foreground p-3">
+    <div className="flex items-center justify-between border-b border-border/80 pb-2">
+      <span className="font-semibold text-foreground">Channel Margin Performance</span>
+      <span className="text-emerald-500 font-semibold">15 Questions</span>
     </div>
-    <div className="my-2 space-y-2">
+    <div className="my-3 space-y-2.5">
       {[
-        { channel: 'Online', margin: 46.4, color: 'bg-emerald-500' },
-        { channel: 'In-Store', margin: 35.6, color: 'bg-primary' },
-        { channel: 'Outlet', margin: 39.5, color: 'bg-muted-foreground/50' },
+        { channel: 'Online Store', margin: 46.4, color: 'bg-emerald-500' },
+        { channel: 'In-Store Retail', margin: 35.6, color: 'bg-primary' },
+        { channel: 'Outlet Network', margin: 39.5, color: 'bg-muted-foreground/50' },
       ].map((d) => (
-        <div key={d.channel} className="space-y-0.5">
-          <div className="flex justify-between text-[8px]">
+        <div key={d.channel} className="space-y-1">
+          <div className="flex justify-between text-[9px]">
             <span className="opacity-80">{d.channel}</span>
             <span className="text-foreground font-semibold">{d.margin}%</span>
           </div>
-          <div className="h-2 bg-background/60 border-[0.5px] border-border/30 rounded-sm overflow-hidden">
-            <div className={cn('h-full rounded-sm', d.color)} style={{ width: `${d.margin * 2}%` }} />
+          <div className="h-2 bg-muted rounded-full overflow-hidden">
+            <div className={cn('h-full rounded-full', d.color)} style={{ width: `${d.margin * 2}%` }} />
           </div>
         </div>
       ))}
     </div>
-    <div className="border-t-[0.5px] border-border/60 pt-2 flex justify-between items-center text-[8px]">
-      <span className="opacity-70">ANOMALY_DETECT: <span className="text-amber-500 font-semibold">2σ SPIKES</span></span>
-      <span className="opacity-50">PANDAS // SEABORN</span>
+    <div className="border-t border-border/80 pt-2 flex justify-between items-center text-[9px]">
+      <span>Anomaly Detection: <strong className="text-primary">2σ Spikes</strong></span>
+      <span>Pandas · Seaborn</span>
     </div>
   </div>
 );
 
 const SalesPreview = () => (
-  <div className="flex flex-col justify-between h-full font-mono text-[9px] text-muted-foreground">
-    <div className="flex items-center justify-between border-b-[0.5px] border-border/60 pb-2">
-      <span className="font-semibold text-foreground">WORKFORCE_ATTRITION_INDEX</span>
-      <span className="text-sky-500 font-semibold text-[8px]">3,000 FTE</span>
+  <div className="flex flex-col justify-between h-full font-mono text-[10px] text-muted-foreground p-3">
+    <div className="flex items-center justify-between border-b border-border/80 pb-2">
+      <span className="font-semibold text-foreground">Attrition by Tenure Year</span>
+      <span className="text-primary font-semibold">3,000 FTE</span>
     </div>
-    <div className="my-3 flex items-end justify-between h-20 px-1 relative">
-      {/* Grid lines */}
-      <div className="absolute inset-0 grid grid-rows-4 pointer-events-none opacity-[0.06]">
-        <div className="border-b border-foreground" />
-        <div className="border-b border-foreground" />
-        <div className="border-b border-foreground" />
-        <div className="border-b border-foreground" />
-      </div>
-      {/* Tenure bars */}
+    <div className="my-3 flex items-end justify-between h-20 px-2 relative">
       {[
-        { t: 'Y1', h: '85%', c: 'bg-primary shadow-[0_0_8px_rgba(245,158,11,0.2)]' },
+        { t: 'Y1', h: '85%', c: 'bg-primary' },
         { t: 'Y2', h: '65%', c: 'bg-primary/80' },
-        { t: 'Y3', h: '45%', c: 'bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.15)]' },
-        { t: 'Y4', h: '32%', c: 'bg-amber-500/80' },
+        { t: 'Y3', h: '45%', c: 'bg-foreground/80' },
+        { t: 'Y4', h: '32%', c: 'bg-foreground/60' },
         { t: 'Y5', h: '22%', c: 'bg-emerald-500/80' },
         { t: 'Y6', h: '16%', c: 'bg-emerald-500/60' },
         { t: 'Y7', h: '10%', c: 'bg-emerald-500/40' },
         { t: 'Y8', h: '6%', c: 'bg-emerald-500/20' },
       ].map((bar) => (
-        <div key={bar.t} className="flex flex-col items-center justify-end h-full gap-1.5 flex-1">
+        <div key={bar.t} className="flex flex-col items-center justify-end h-full gap-1 flex-1">
           <div
-            className={cn('w-full max-w-[14px] rounded-t-md border-[0.5px] border-border/40 transition-all duration-300 hover:scale-y-110 origin-bottom', bar.c)}
+            className={cn('w-full max-w-[12px] rounded-t-sm transition-all', bar.c)}
             style={{ height: bar.h }}
           />
-          <span className="text-[6px] opacity-60 font-semibold">{bar.t}</span>
+          <span className="text-[7px] text-muted-foreground font-semibold">{bar.t}</span>
         </div>
       ))}
     </div>
-    <div className="border-t-[0.5px] border-border/60 pt-2 flex justify-between items-center text-[8px]">
-      <span className="opacity-70">OVERTIME_CORR: <span className="text-foreground font-semibold">+30.5%</span></span>
-      <span className="opacity-50">PYTHON // PANDAS</span>
+    <div className="border-t border-border/80 pt-2 flex justify-between items-center text-[9px]">
+      <span>Early Exit Rate: <strong className="text-foreground">47.3% (Year 1)</strong></span>
+      <span>Python EDA</span>
     </div>
   </div>
 );
@@ -224,8 +205,6 @@ const previewComponents = {
   adidas: <AdidasPreview />,
   sales: <SalesPreview />,
 } satisfies Record<CaseStudy['previewType'], React.ReactNode>;
-
-// ─── Case Study Card ──────────────────────────────────────────────────
 
 type TabKey = 'bottleneck' | 'decision' | 'outcome';
 const tabLabels: { key: TabKey; label: string }[] = [
@@ -240,35 +219,35 @@ const CaseStudyCard = ({ study, index }: { study: CaseStudy; index: number }) =>
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.45, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-      className="group relative border-2 border-black bg-card rounded-none overflow-hidden shadow-[6px_6px_0px_#000] hover:shadow-[8px_8px_0px_#000] transition-shadow duration-200"
+      transition={{ duration: 0.4, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+      className="rounded-2xl border border-border bg-card overflow-hidden shadow-xs hover:border-primary/50 transition-all duration-200"
     >
-      {/* Top: Preview + Content side-by-side on lg */}
-      <div className="relative z-10 grid md:grid-cols-[0.95fr_1.05fr] gap-0">
-        {/* Preview Panel with View Mode Switch */}
-        <div className="border-b-2 lg:border-b-0 lg:border-r-2 border-black p-5 flex flex-col justify-between min-h-[260px] bg-[#fff7e8]">
-          <div className="flex items-center justify-between mb-3 pb-2 border-b-2 border-black">
-            <span className="text-[10px] font-head font-bold uppercase tracking-widest text-black">INSPECTOR // LIVE DATA</span>
-            <div className="flex border-2 border-black bg-white p-0.5 shadow-xs">
+      <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-0">
+        
+        {/* Left Preview Panel */}
+        <div className="border-b lg:border-b-0 lg:border-r border-border p-5 sm:p-6 flex flex-col justify-between bg-muted/20">
+          <div className="flex items-center justify-between mb-4 pb-2 border-b border-border/80">
+            <span className="text-xs font-mono font-semibold text-foreground">Interactive Metrics</span>
+            <div className="flex rounded-lg border border-border bg-card p-0.5">
               <button
                 type="button"
                 onClick={() => setViewMode('dashboard')}
                 className={cn(
-                  "px-2.5 py-1 text-[10px] font-head font-bold uppercase tracking-wider transition-all cursor-pointer",
-                  viewMode === 'dashboard' ? "bg-primary text-black border border-black shadow-none" : "text-foreground hover:bg-muted"
+                  "px-2.5 py-1 text-xs font-medium rounded-md transition-colors",
+                  viewMode === 'dashboard' ? "bg-muted text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
-                BI Metric
+                Telemetry
               </button>
               <button
                 type="button"
                 onClick={() => setViewMode('diff')}
                 className={cn(
-                  "px-2.5 py-1 text-[10px] font-head font-bold uppercase tracking-wider transition-all flex items-center gap-1 cursor-pointer",
-                  viewMode === 'diff' ? "bg-primary text-black border border-black shadow-none" : "text-foreground hover:bg-muted"
+                  "px-2.5 py-1 text-xs font-medium rounded-md transition-colors flex items-center gap-1",
+                  viewMode === 'diff' ? "bg-muted text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 <Split className="w-3 h-3" />
@@ -290,169 +269,124 @@ const CaseStudyCard = ({ study, index }: { study: CaseStudy; index: number }) =>
           </div>
         </div>
 
-        {/* Content Panel */}
-        <div className="p-5 flex flex-col justify-between">
-          {/* Header */}
+        {/* Right Content Panel */}
+        <div className="p-5 sm:p-6 flex flex-col justify-between space-y-4">
           <div>
-            <div className="mb-3 flex flex-wrap items-center gap-1.5">
-              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 border-2 border-black bg-primary text-[10px] font-head font-bold uppercase tracking-wider text-black shadow-xs">
-                <BarChart3 className="h-3.5 w-3.5" />
-                {study.focus}
+            <div className="mb-2.5 flex items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium border border-border bg-muted/60 text-foreground whitespace-nowrap shrink-0">
+                <BarChart3 className="h-3.5 w-3.5 text-primary shrink-0" />
+                <span>{study.focus}</span>
               </span>
             </div>
 
-            <h3 className="font-head text-xl md:text-2xl font-bold tracking-tight text-foreground uppercase mb-2">
+            <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">
               {study.title}
             </h3>
-            <p className="text-foreground text-xs leading-relaxed font-medium mb-4">
+            <p className="text-sm text-muted-foreground leading-relaxed mt-1.5">
               {study.subtitle}
             </p>
           </div>
 
-          {/* Tabbed Narrative */}
-          <div className="mb-4">
-            <div className="flex gap-1 mb-3 border-2 border-black bg-muted p-1 rounded-none shadow-xs w-fit">
-              {tabLabels.map((tab) => {
-                const isActive = activeTab === tab.key;
-                return (
-                  <button
-                    type="button"
-                    key={tab.key}
-                    onClick={() => setActiveTab(tab.key)}
-                    className={cn(
-                      'px-3 py-1 text-[10px] font-head font-bold tracking-wider uppercase transition-all cursor-pointer',
-                      isActive ? 'bg-primary text-black border border-black shadow-xs' : 'text-muted-foreground hover:text-black'
-                    )}
-                  >
-                    <span>{tab.label}</span>
-                  </button>
-                );
-              })}
+          {/* Narrative Tabs */}
+          <div className="space-y-2">
+            <div className="flex gap-1 p-0.5 rounded-lg border border-border bg-muted/40 w-fit">
+              {tabLabels.map((tab) => (
+                <button
+                  type="button"
+                  key={tab.key}
+                  onClick={() => setActiveTab(tab.key)}
+                  className={cn(
+                    'px-3 py-1 text-xs font-medium rounded-md transition-colors whitespace-nowrap',
+                    activeTab === tab.key ? 'bg-card text-foreground shadow-xs' : 'text-muted-foreground hover:text-foreground'
+                  )}
+                >
+                  {tab.label}
+                </button>
+              ))}
             </div>
-            <div className="bg-muted/30 border-2 border-black p-3.5 min-h-[72px] shadow-xs">
-              <p className="text-xs leading-relaxed text-foreground font-medium">{study.tabs[activeTab]}</p>
+            <div className="p-3.5 rounded-xl border border-border/80 bg-muted/20 min-h-[70px]">
+              <p className="text-xs sm:text-sm leading-relaxed text-foreground">{study.tabs[activeTab]}</p>
             </div>
           </div>
 
-          {/* Metrics Row */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 mb-4">
+          {/* Metrics Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
             {study.metrics.map((m) => (
-              <div
-                key={m.label}
-                className="border-2 border-black bg-card px-2 py-2 text-center shadow-xs"
-              >
-                <div className="text-xs font-head font-bold text-foreground tabular-nums">{m.value}</div>
-                <div className="text-[9px] font-mono uppercase tracking-wider text-muted-foreground font-semibold mt-0.5">{m.label}</div>
+              <div key={m.label} className="p-2 rounded-xl border border-border bg-card/60 text-center flex flex-col justify-center min-h-[58px] shadow-2xs">
+                <div className="text-xs font-bold text-foreground tabular-nums whitespace-nowrap overflow-hidden text-ellipsis">{m.value}</div>
+                <div className="text-[10px] text-muted-foreground font-medium mt-0.5 whitespace-nowrap overflow-hidden text-ellipsis">{m.label}</div>
               </div>
             ))}
           </div>
 
-          {/* Tech + Links */}
-          <div className="border-t-2 border-black pt-4 flex flex-col gap-3">
-            <div>
-              <h4 className="mb-2 flex items-center gap-1 text-[10px] font-head uppercase tracking-widest text-foreground font-bold">
-                <Terminal className="h-3 w-3" />
-                Primary Stack
-              </h4>
-              <div className="flex flex-wrap gap-1.5">
-                {study.tech.map((t) => (
-                  <span
-                    key={t}
-                    className="px-2.5 py-0.5 border-2 border-black bg-muted text-[10px] font-head font-medium text-foreground shadow-xs"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
+          {/* Footer Stack & Code Link */}
+          <div className="border-t border-border pt-4 flex flex-wrap items-center justify-between gap-3">
+            <div className="flex flex-wrap gap-1.5">
+              {study.tech.map((t) => (
+                <span key={t} className="px-2 py-0.5 rounded-md text-[11px] font-medium bg-muted/60 text-foreground border border-border/60">
+                  {t}
+                </span>
+              ))}
             </div>
-            <div className="flex flex-wrap gap-2 pt-1">
-              <Button
-                size="sm"
-                className="rounded-none h-8 px-4 text-xs font-head font-bold uppercase tracking-wider bg-primary text-black hover:bg-primary-hover border-2 border-black shadow-xs active:translate-x-0.5 active:translate-y-0.5"
-                asChild
-              >
-                <Link to={`/case-study/${study.id}`}>
-                  Full Case Study
-                  <ArrowUpRight className="h-4 w-4 ml-1" />
-                </Link>
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                className="rounded-none h-8 px-4 text-xs font-head font-bold uppercase tracking-wider bg-card hover:bg-muted text-black border-2 border-black shadow-xs active:translate-x-0.5 active:translate-y-0.5"
-                asChild
-              >
-                <a href={study.github} target="_blank" rel="noopener noreferrer">
-                  <Github className="h-4 w-4 mr-1.5" />
-                  View Code
-                </a>
-              </Button>
-            </div>
+
+            <a
+              href={study.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-lg border border-border hover:bg-muted text-foreground transition-colors"
+            >
+              <Github className="w-3.5 h-3.5" />
+              <span>Inspect Repository</span>
+            </a>
           </div>
+
         </div>
+
       </div>
     </motion.article>
   );
 };
 
-// ─── Section ──────────────────────────────────────────────────────────
-
 export const CaseStudiesSection = () => {
   return (
-    <SectionWrapper id="case-studies" className="relative overflow-hidden bg-background py-16 border-b-2 border-black">
-      <div className="container relative z-10 mx-auto px-4 lg:px-8">
-
+    <SectionWrapper id="case-studies" className="py-10 sm:py-12 border-t border-border bg-muted/10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+        
         {/* Section Header */}
-        <div className="mb-12 grid gap-6 md:gap-8 md:grid-cols-[1fr_auto] md:items-end">
-          <div className="max-w-3xl">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="mb-4 inline-flex items-center gap-2 border-2 border-black bg-primary px-3 py-1 text-black shadow-xs"
-            >
-              <Database className="h-3.5 w-3.5" />
-              <span className="text-xs font-head font-bold tracking-wider uppercase">Data Analysis</span>
-            </motion.div>
-            <motion.h2
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.05 }}
-              className="font-head text-4xl font-bold tracking-tight text-foreground md:text-5xl uppercase select-none"
-            >
-              Case Studies
-            </motion.h2>
-            <p className="mt-4 max-w-xl text-muted-foreground text-sm leading-relaxed">
-              Deep-dive analyses on real-world datasets, highlighting structured problem solving, statistical rigor, and actionable business intelligence.
-            </p>
-          </div>
-
-          {/* Summary Stats */}
-          <div className="border-[0.5px] border-border/85 bg-card/60 backdrop-blur-md p-4 rounded-lg shadow-none">
-            <div className="grid grid-cols-3 gap-6 text-center divide-x divide-border/60">
-              <div className="px-3">
-                <div className="text-xl font-serif-display text-foreground font-normal">3</div>
-                <div className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground mt-0.5">Studies</div>
-              </div>
-              <div className="px-3">
-                <div className="text-xl font-serif-display text-foreground font-normal">
-                  <TrendingUp className="h-5 w-5 inline-block text-primary" />
-                </div>
-                <div className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground mt-0.5">BI + EDA</div>
-              </div>
-              <div className="px-3">
-                <div className="text-xl font-serif-display text-foreground font-normal">2</div>
-                <div className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground mt-0.5">Tools</div>
-              </div>
-            </div>
-          </div>
+        <div className="max-w-2xl mb-8 sm:mb-10">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-card text-xs font-medium text-foreground mb-3 whitespace-nowrap shrink-0"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+            <span>Deep Dive Analysis</span>
+          </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.05 }}
+            className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground"
+          >
+            Engineering Case Studies
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="mt-3 text-muted-foreground text-base leading-relaxed"
+          >
+            Real data transformations, statistical root-cause analyses, and production BI models with verified outcomes.
+          </motion.p>
         </div>
 
-        {/* Case Study Cards */}
-        <div className="space-y-6">
-          {caseStudies.map((study, i) => (
-            <CaseStudyCard key={study.id} study={study} index={i} />
+        {/* Case Studies Stack */}
+        <div className="space-y-8">
+          {caseStudies.map((study, idx) => (
+            <CaseStudyCard key={study.id} study={study} index={idx} />
           ))}
         </div>
 

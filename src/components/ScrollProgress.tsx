@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUp } from 'lucide-react';
-import { useSound } from '@/hooks/useSound';
 
 export const ScrollProgress: React.FC = () => {
   const [scrollPercent, setScrollPercent] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
-  const { playClick } = useSound();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,22 +22,21 @@ export const ScrollProgress: React.FC = () => {
   }, []);
 
   const scrollToTop = () => {
-    playClick(900, 0.04, 'sine');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
     <>
-      {/* Top Reading Progress Bar */}
-      <div className="fixed top-0 left-0 right-0 h-[4px] z-[100] pointer-events-none bg-muted/60 border-b border-black/30">
+      {/* Subtle Top Reading Progress Line */}
+      <div className="fixed top-0 left-0 right-0 h-[2px] z-[100] pointer-events-none bg-border/40">
         <motion.div
-          className="h-full bg-primary border-r-2 border-black"
+          className="h-full bg-primary"
           style={{ width: `${scrollPercent}%` }}
           transition={{ ease: 'linear', duration: 0.1 }}
         />
       </div>
 
-      {/* Floating Back-to-Top Telemetry Pill */}
+      {/* Floating Back-to-Top Pill */}
       <AnimatePresence>
         {isVisible && (
           <motion.div
@@ -47,19 +44,19 @@ export const ScrollProgress: React.FC = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 15, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-40 pointer-events-auto pb-safe pr-safe"
+            className="fixed bottom-6 right-6 z-40 pointer-events-auto pb-safe pr-safe"
           >
             <button
               type="button"
               onClick={scrollToTop}
               aria-label="Scroll back to top"
-              className="group flex items-center gap-2 px-3 py-1.5 border-2 border-black bg-card hover:bg-primary text-black shadow-[4px_4px_0px_#000] rounded-none hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[5px_5px_0px_#000] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all cursor-pointer font-head font-bold text-xs uppercase"
+              className="group flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-card/90 backdrop-blur-md hover:bg-card text-foreground shadow-md transition-all cursor-pointer font-mono text-xs"
             >
-              <span className="font-mono text-[11px] font-bold">
+              <span className="text-[11px] text-muted-foreground group-hover:text-foreground">
                 {Math.round(scrollPercent)}%
               </span>
-              <div className="w-5 h-5 border border-black bg-white flex items-center justify-center text-black group-hover:scale-110 transition-transform">
-                <ArrowUp className="w-3.5 h-3.5 stroke-[2.5]" />
+              <div className="w-5 h-5 rounded-full bg-muted flex items-center justify-center text-foreground group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                <ArrowUp className="w-3 h-3" />
               </div>
             </button>
           </motion.div>

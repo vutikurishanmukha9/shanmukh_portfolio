@@ -1,7 +1,7 @@
 {
   "rewrites": [
     {
-      "source": "/((?!assets/|favicon.svg|placeholder.svg).*)/",
+      "source": "/((?!assets/|favicon.*|apple-touch-icon.png|Shanmukh.png|placeholder.svg).*)/",
       "destination": "/index.html"
     },
     {
