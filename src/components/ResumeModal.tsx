@@ -139,9 +139,20 @@ export const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
                   <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
                   <span><strong>GetReport:</strong> Hybrid RAG document intelligence engine combining dense vector retrieval with keyword ranking, Celery task workers, and AWS S3 artifact staging.</span>
                 </li>
-                <li className="flex items-start gap-2.5 p-3 rounded-xl border border-border bg-card">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                  <span><strong>IEEE Published Researcher:</strong> First author on intelligent IoT and ML signal telemetry architecture presented at IEEE EATC 2025 (NIT Jalandhar).</span>
+                <li className="flex items-start justify-between gap-2.5 p-3 rounded-xl border border-border bg-card">
+                  <div className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                    <span><strong>IEEE Published Researcher:</strong> First author on intelligent IoT and ML signal telemetry architecture published at IEEE EAIC 2025 (NIT Jalandhar).</span>
+                  </div>
+                  <a
+                    href="https://ieeexplore.ieee.org/document/11101373"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="shrink-0 p-1 rounded-md text-muted-foreground hover:text-primary hover:bg-muted transition-colors"
+                    title="View IEEE Xplore Publication"
+                  >
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
                 </li>
               </ul>
             </div>

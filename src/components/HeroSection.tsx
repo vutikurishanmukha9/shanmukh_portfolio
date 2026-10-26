@@ -102,10 +102,21 @@ export const HeroSection = () => {
                 <div className="text-lg sm:text-2xl font-bold text-foreground">541+</div>
                 <div className="text-[11px] sm:text-xs text-muted-foreground font-medium mt-0.5 leading-tight">Automated Tests</div>
               </div>
-              <div className="p-2.5 sm:p-3.5 rounded-xl border border-border bg-card/60 backdrop-blur-xs min-h-[72px] sm:min-h-[78px] flex flex-col justify-between">
-                <div className="text-lg sm:text-2xl font-bold text-foreground">IEEE</div>
+              <button
+                type="button"
+                onClick={() => {
+                  const el = document.getElementById('publications');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="p-2.5 sm:p-3.5 rounded-xl border border-border bg-card/60 hover:bg-card hover:border-primary/40 backdrop-blur-xs min-h-[72px] sm:min-h-[78px] flex flex-col justify-between text-left transition-all cursor-pointer group/stat"
+                title="View IEEE Publication"
+              >
+                <div className="text-lg sm:text-2xl font-bold text-foreground group-hover/stat:text-primary transition-colors flex items-center justify-between">
+                  <span>IEEE</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground group-hover/stat:text-primary transition-colors" />
+                </div>
                 <div className="text-[11px] sm:text-xs text-muted-foreground font-medium mt-0.5 leading-tight">Published Author</div>
-              </div>
+              </button>
             </motion.div>
 
             {/* Primary Action Buttons */}
