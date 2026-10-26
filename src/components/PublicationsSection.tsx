@@ -114,109 +114,138 @@ export const PublicationsSection = () => {
               transition={{ duration: 0.4, delay: idx * 0.1 }}
               className="p-1.5 rounded-[1.375rem] border border-border/80 bg-muted/20 shadow-xs hover:border-primary/40 transition-all duration-200"
             >
-              <div className="p-6 sm:p-8 rounded-2xl border border-border/70 bg-card">
-                <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
-                  
-                  <div className="space-y-3 max-w-3xl">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-foreground text-background">
-                        <BookOpen className="w-3 h-3" />
-                        <span>{pub.journal}</span>
-                      </span>
-                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full border border-primary/20 bg-primary/10 text-primary text-xs font-medium">
-                        <Award className="w-3 h-3" />
-                        <span>First Author</span>
-                      </span>
-                      <span className="text-xs font-mono text-muted-foreground">
-                        {pub.conference} · {pub.year}
-                      </span>
-                    </div>
-
-                    <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground leading-snug">
-                      {pub.title}
-                    </h3>
-
-                    <div className="space-y-1">
-                      <p className="text-xs font-mono text-foreground font-medium">
-                        <span className="text-primary font-semibold">{pub.firstAuthor}</span> (First Author), {pub.coAuthors}
-                      </p>
-                      <div className="flex flex-wrap items-center gap-3 pt-0.5 text-xs font-mono text-muted-foreground">
-                        <span>Pages: {pub.pages}</span>
-                        <span>•</span>
-                        <a
-                          href={pub.doiUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="hover:text-primary transition-colors underline underline-offset-2"
-                        >
-                          DOI: {pub.doi}
-                        </a>
-                      </div>
-                    </div>
-
-                    <p className="text-sm text-muted-foreground leading-relaxed pt-1">
-                      {pub.description}
-                    </p>
+              <div className="p-6 sm:p-8 rounded-2xl border border-border/70 bg-card space-y-6">
+                
+                {/* Top Row: Conference Badges + Primary Action */}
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-border/60">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-foreground text-background">
+                      <BookOpen className="w-3.5 h-3.5" />
+                      <span>{pub.journal}</span>
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-medium">
+                      <Award className="w-3.5 h-3.5" />
+                      <span>Lead / First Author</span>
+                    </span>
+                    <span className="text-xs font-mono text-muted-foreground sm:pl-1">
+                      {pub.conference} · {pub.year}
+                    </span>
                   </div>
 
-                  {/* Citation & Direct Actions */}
-                  <div className="flex flex-col gap-3 shrink-0 md:items-end">
-                    {/* Primary Button-in-Button CTA */}
-                    <a
-                      href={pub.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group/btn inline-flex items-center gap-2 pl-4 pr-1.5 py-2 rounded-full bg-foreground text-background text-xs font-medium hover:opacity-90 transition-all shadow-xs"
-                    >
-                      <span>Read on IEEE Xplore</span>
-                      <span className="w-6 h-6 rounded-full bg-background/20 flex items-center justify-center transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 shrink-0">
-                        <ExternalLink className="w-3 h-3" />
-                      </span>
-                    </a>
+                  {/* Primary Button-in-Button CTA */}
+                  <a
+                    href={pub.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group/btn inline-flex items-center gap-2 pl-4 pr-1.5 py-1.5 rounded-full bg-foreground text-background text-xs font-medium hover:opacity-90 transition-all shadow-xs shrink-0 self-stretch sm:self-auto justify-center"
+                  >
+                    <span>Read on IEEE Xplore</span>
+                    <span className="w-6 h-6 rounded-full bg-background/20 flex items-center justify-center transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 shrink-0">
+                      <ExternalLink className="w-3 h-3" />
+                    </span>
+                  </a>
+                </div>
 
-                    {/* Copy Citation Buttons */}
-                    <div className="flex items-center gap-2">
-                      <button
-                        type="button"
-                        onClick={() => handleCopyCitation('BibTeX')}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono rounded-lg border border-border bg-muted/40 hover:bg-muted text-foreground transition-colors cursor-pointer"
-                        title="Copy BibTeX Citation"
-                      >
-                        {copiedFormat === 'BibTeX' ? (
-                          <Check className="w-3.5 h-3.5 text-emerald-500" />
-                        ) : (
-                          <Copy className="w-3.5 h-3.5 text-muted-foreground" />
-                        )}
-                        <span>BibTeX</span>
-                      </button>
+                {/* Paper Title & Authors */}
+                <div className="space-y-3">
+                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-foreground leading-snug">
+                    {pub.title}
+                  </h3>
 
-                      <button
-                        type="button"
-                        onClick={() => handleCopyCitation('APA')}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono rounded-lg border border-border bg-muted/40 hover:bg-muted text-foreground transition-colors cursor-pointer"
-                        title="Copy APA Citation"
-                      >
-                        {copiedFormat === 'APA' ? (
-                          <Check className="w-3.5 h-3.5 text-emerald-500" />
-                        ) : (
-                          <Copy className="w-3.5 h-3.5 text-muted-foreground" />
-                        )}
-                        <span>APA</span>
-                      </button>
-                    </div>
+                  {/* Authors Badges */}
+                  <div className="flex flex-wrap items-center gap-1.5 text-xs">
+                    <span className="font-semibold text-primary px-2.5 py-1 rounded-md bg-primary/10 border border-primary/20">
+                      Shanmukha Vutikuri (First Author)
+                    </span>
+                    <span className="text-muted-foreground px-2 py-1 rounded-md bg-muted/60 border border-border/60">
+                      Rajyalakshmi Uppada
+                    </span>
+                    <span className="text-muted-foreground px-2 py-1 rounded-md bg-muted/60 border border-border/60">
+                      Tejaswini Panse
+                    </span>
+                    <span className="text-muted-foreground px-2 py-1 rounded-md bg-muted/60 border border-border/60">
+                      Dr. S. Saradha Rani
+                    </span>
+                    <span className="text-muted-foreground px-2 py-1 rounded-md bg-muted/60 border border-border/60">
+                      Abhishek Savarapu
+                    </span>
+                  </div>
+                </div>
 
+                {/* Abstract Callout */}
+                <div className="p-4 sm:p-5 rounded-xl border border-border/60 bg-muted/20 text-sm text-muted-foreground leading-relaxed">
+                  <p>
+                    <strong className="text-foreground font-semibold">Abstract: </strong>
+                    {pub.description}
+                  </p>
+                </div>
+
+                {/* High-Signal Research Takeaways Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+                  <div className="p-3.5 rounded-xl border border-border/60 bg-card flex flex-col justify-between">
+                    <div className="text-[11px] font-mono text-muted-foreground uppercase tracking-wider">Efficiency Gain</div>
+                    <div className="text-lg font-bold text-foreground mt-1.5">Up to 34%</div>
+                    <div className="text-xs text-muted-foreground mt-0.5">HVAC & lighting energy waste minimized</div>
+                  </div>
+                  <div className="p-3.5 rounded-xl border border-border/60 bg-card flex flex-col justify-between">
+                    <div className="text-[11px] font-mono text-muted-foreground uppercase tracking-wider">Privacy Architecture</div>
+                    <div className="text-lg font-bold text-foreground mt-1.5">100% Zero-Camera</div>
+                    <div className="text-xs text-muted-foreground mt-0.5">Spatial low-power passive sensor arrays</div>
+                  </div>
+                  <div className="p-3.5 rounded-xl border border-border/60 bg-card flex flex-col justify-between">
+                    <div className="text-[11px] font-mono text-muted-foreground uppercase tracking-wider">Publication Index</div>
+                    <div className="text-lg font-bold text-foreground mt-1.5">IEEE Xplore</div>
+                    <div className="text-xs text-muted-foreground mt-0.5">Peer-reviewed 7-page proceedings</div>
+                  </div>
+                </div>
+
+                {/* Footer Bar: Metadata + Citation Tools */}
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-4 border-t border-border/60 text-xs font-mono">
+                  <div className="flex flex-wrap items-center gap-3 text-muted-foreground">
+                    <span>Pages: {pub.pages}</span>
+                    <span>•</span>
                     <a
                       href={pub.doiUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-[11px] font-mono text-muted-foreground hover:text-primary transition-colors"
+                      className="text-foreground hover:text-primary transition-colors flex items-center gap-1 group/doi break-all"
                     >
-                      <span>Direct DOI Resolver</span>
-                      <ExternalLink className="w-3 h-3" />
+                      <span>DOI: {pub.doi}</span>
+                      <ExternalLink className="w-3 h-3 text-muted-foreground group-hover/doi:text-primary transition-colors shrink-0" />
                     </a>
                   </div>
 
+                  <div className="flex items-center gap-2 self-stretch sm:self-auto justify-end">
+                    <button
+                      type="button"
+                      onClick={() => handleCopyCitation('BibTeX')}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-muted/40 hover:bg-muted text-foreground transition-colors cursor-pointer text-xs"
+                      title="Copy BibTeX Citation"
+                    >
+                      {copiedFormat === 'BibTeX' ? (
+                        <Check className="w-3.5 h-3.5 text-emerald-500" />
+                      ) : (
+                        <Copy className="w-3.5 h-3.5 text-muted-foreground" />
+                      )}
+                      <span>BibTeX</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => handleCopyCitation('APA')}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-muted/40 hover:bg-muted text-foreground transition-colors cursor-pointer text-xs"
+                      title="Copy APA Citation"
+                    >
+                      {copiedFormat === 'APA' ? (
+                        <Check className="w-3.5 h-3.5 text-emerald-500" />
+                      ) : (
+                        <Copy className="w-3.5 h-3.5 text-muted-foreground" />
+                      )}
+                      <span>APA Citation</span>
+                    </button>
+                  </div>
                 </div>
+
               </div>
             </motion.div>
           ))}
