@@ -136,10 +136,10 @@ export const ContactForm = () => {
         />
       </div>
 
-      <Button
+      <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full h-11 rounded-xl font-sans font-medium text-sm flex items-center justify-center gap-2 cursor-pointer transition-all mt-2"
+        className="group/btn w-full h-11 rounded-full bg-primary hover:bg-primary-hover text-primary-foreground font-sans font-medium text-sm flex items-center justify-center gap-2.5 cursor-pointer transition-all mt-2 shadow-xs"
       >
         {isSubmitting ? (
           <>
@@ -148,11 +148,13 @@ export const ContactForm = () => {
           </>
         ) : (
           <>
-            <Send className="h-4 w-4" />
-            <span>Send Message</span>
+            <span>Send Direct Message</span>
+            <span className="w-6 h-6 rounded-full bg-black/15 dark:bg-white/20 flex items-center justify-center transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 shrink-0">
+              <Send className="h-3.5 w-3.5" />
+            </span>
           </>
         )}
-      </Button>
+      </button>
     </form>
   );
 };

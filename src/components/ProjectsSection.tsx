@@ -272,120 +272,130 @@ const ModernProjectCard: React.FC<{
     <motion.div
       variants={projectCardVariants}
       className={cn(
-        'group relative rounded-2xl border border-border bg-card p-5 sm:p-6 shadow-xs hover:border-primary/50 hover:shadow-md transition-all duration-200 overflow-hidden flex flex-col justify-between',
+        'group p-1.5 rounded-[1.375rem] border border-border/80 bg-muted/20 shadow-xs hover:border-primary/40 hover:shadow-md transition-all duration-300 flex flex-col justify-between overflow-hidden',
         featured && 'md:col-span-2 xl:col-span-3'
       )}
     >
-      <div className={cn(featured ? 'grid grid-cols-1 md:grid-cols-12 gap-6 items-center' : 'space-y-4')}>
-        
-        {/* Visual Mockup Container */}
-        <div className={cn('w-full', featured ? 'md:col-span-6' : 'mb-3')}>
-          <div className="rounded-xl overflow-hidden border border-border/80 bg-muted/30">
-            {renderProjectMockup(project.title)}
+      <div className="rounded-2xl border border-border/70 bg-card p-5 sm:p-6 flex flex-col justify-between h-full">
+        <div className={cn(featured ? 'grid grid-cols-1 md:grid-cols-12 gap-6 items-center' : 'space-y-4')}>
+          
+          {/* Visual Mockup Container */}
+          <div className={cn('w-full', featured ? 'md:col-span-6' : 'mb-3')}>
+            <div className="rounded-xl overflow-hidden border border-border/80 bg-muted/30">
+              {renderProjectMockup(project.title)}
+            </div>
           </div>
-        </div>
 
-        {/* Content & Metadata */}
-        <div className={cn('flex flex-col justify-between flex-1', featured && 'md:col-span-6 space-y-3')}>
-          <div>
-            {/* Top Badges */}
-            <div className="flex flex-wrap items-center justify-between gap-2 mb-2.5">
-              <div className="flex items-center gap-1.5 flex-wrap">
-                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-medium border border-border bg-muted/60 text-foreground whitespace-nowrap shrink-0">
-                  <Icon className="w-3 h-3 text-muted-foreground shrink-0" />
-                  <span>{project.category}</span>
-                </span>
-                <span className="text-[11px] font-mono text-muted-foreground px-2 py-1 rounded-lg border border-border/60 bg-muted/30 whitespace-nowrap shrink-0">
-                  {project.focus}
+          {/* Content & Metadata */}
+          <div className={cn('flex flex-col justify-between flex-1', featured && 'md:col-span-6 space-y-3')}>
+            <div>
+              {/* Top Badges */}
+              <div className="flex flex-wrap items-center justify-between gap-2 mb-2.5">
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-medium border border-border bg-muted/60 text-foreground whitespace-nowrap shrink-0">
+                    <Icon className="w-3 h-3 text-muted-foreground shrink-0" />
+                    <span>{project.category}</span>
+                  </span>
+                  <span className="text-[11px] font-mono text-muted-foreground px-2 py-1 rounded-lg border border-border/60 bg-muted/30 whitespace-nowrap shrink-0">
+                    {project.focus}
+                  </span>
+                </div>
+
+                <span className="inline-flex items-center gap-1 text-[11px] font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-lg border border-emerald-500/20 whitespace-nowrap shrink-0">
+                  <CheckCircle2 className="w-3 h-3 shrink-0" />
+                  <span>{project.soloBuild}</span>
                 </span>
               </div>
 
-              <span className="inline-flex items-center gap-1 text-[11px] font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-lg border border-emerald-500/20 whitespace-nowrap shrink-0">
-                <CheckCircle2 className="w-3 h-3 shrink-0" />
-                <span>{project.soloBuild}</span>
-              </span>
-            </div>
-
-            {/* Title & Description */}
-            <h3 className={cn('font-bold tracking-tight text-foreground', featured ? 'text-2xl sm:text-3xl' : 'text-xl')}>
-              {project.title}
-            </h3>
-            <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-              {project.description}
-            </p>
-
-            {/* Impact Metric Box */}
-            <div className="mt-3.5 p-3 rounded-xl border border-border/70 bg-muted/20 text-xs font-mono">
-              <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold block mb-0.5">
-                SYSTEM IMPACT
-              </span>
-              <p className="text-foreground font-medium leading-relaxed">
-                {project.impact}
+              {/* Title & Description */}
+              <h3 className={cn('font-bold tracking-tight text-foreground', featured ? 'text-2xl sm:text-3xl' : 'text-xl')}>
+                {project.title}
+              </h3>
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                {project.description}
               </p>
-            </div>
-          </div>
 
-          {/* Tech Stack & Action Toolbar */}
-          <div className="mt-4 pt-3.5 border-t border-border space-y-3">
-            {/* Tech Tags */}
-            <div className="flex flex-wrap gap-1.5">
-              {primaryTech.map((tech) => (
-                <span
-                  key={tech}
-                  className="px-2.5 py-0.5 rounded-lg text-xs font-medium bg-muted/60 border border-border/60 text-foreground"
-                >
-                  {tech}
+              {/* Impact Metric Box */}
+              <div className="mt-3.5 p-3 rounded-xl border border-border/70 bg-muted/20 text-xs font-mono">
+                <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold block mb-0.5">
+                  SYSTEM IMPACT
                 </span>
-              ))}
-              {project.tech.length > primaryTech.length && (
-                <span className="px-2 py-0.5 rounded-lg text-xs font-medium text-muted-foreground border border-border/60 bg-card">
-                  +{project.tech.length - primaryTech.length}
-                </span>
-              )}
+                <p className="text-foreground font-medium leading-relaxed">
+                  {project.impact}
+                </p>
+              </div>
             </div>
 
-            {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-2 pt-1">
-              <button
-                type="button"
-                onClick={() => onInspectBlueprint?.(project)}
-                className="h-8 rounded-lg border border-border bg-muted/60 hover:bg-muted text-foreground px-3 text-xs font-medium flex items-center gap-1.5 transition-colors"
-              >
-                <Network className="h-3.5 w-3.5 text-muted-foreground" />
-                Blueprint
-              </button>
+            {/* Tech Stack & Action Toolbar */}
+            <div className="mt-4 pt-3.5 border-t border-border space-y-3">
+              {/* Tech Tags */}
+              <div className="flex flex-wrap gap-1.5">
+                {primaryTech.map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-2.5 py-0.5 rounded-lg text-xs font-medium bg-muted/60 border border-border/60 text-foreground"
+                  >
+                    {tech}
+                  </span>
+                ))}
+                {project.tech.length > primaryTech.length && (
+                  <span className="px-2 py-0.5 rounded-lg text-xs font-medium text-muted-foreground border border-border/60 bg-card">
+                    +{project.tech.length - primaryTech.length}
+                  </span>
+                )}
+              </div>
 
-              {project.caseStudy && (
-                <Link
-                  to={project.caseStudy}
-                  className="h-8 rounded-lg bg-foreground text-background hover:opacity-90 px-3.5 text-xs font-medium flex items-center gap-1 transition-opacity"
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center gap-2 pt-1">
+                <button
+                  type="button"
+                  onClick={() => onInspectBlueprint?.(project)}
+                  className="group/btn h-8 rounded-full border border-border bg-muted/60 hover:bg-muted text-foreground pl-3 pr-1.5 text-xs font-medium inline-flex items-center gap-2 transition-all shadow-2xs"
                 >
-                  Details
-                  <ArrowUpRight className="h-3.5 w-3.5" />
-                </Link>
-              )}
+                  <span>Blueprint</span>
+                  <span className="w-5 h-5 rounded-full bg-background border border-border/80 flex items-center justify-center transition-transform duration-200 group-hover/btn:scale-105 shrink-0">
+                    <Network className="h-3 w-3 text-muted-foreground group-hover/btn:text-foreground" />
+                  </span>
+                </button>
 
-              {project.demo && (
+                {project.caseStudy && (
+                  <Link
+                    to={project.caseStudy}
+                    className="group/btn h-8 rounded-full bg-foreground text-background hover:opacity-90 pl-3.5 pr-1.5 text-xs font-medium inline-flex items-center gap-2 transition-all shadow-xs"
+                  >
+                    <span>Details</span>
+                    <span className="w-5 h-5 rounded-full bg-background/20 flex items-center justify-center transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 shrink-0">
+                      <ArrowUpRight className="h-3 w-3" />
+                    </span>
+                  </Link>
+                )}
+
+                {project.demo && (
+                  <a
+                    href={project.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group/btn h-8 rounded-full border border-border bg-card hover:bg-muted text-foreground pl-3 pr-1.5 text-xs font-medium inline-flex items-center gap-2 transition-all shadow-2xs"
+                  >
+                    <span>{project.demoLabel || 'Demo'}</span>
+                    <span className="w-5 h-5 rounded-full bg-muted border border-border/80 flex items-center justify-center transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 shrink-0">
+                      <ArrowUpRight className="h-3 w-3 text-muted-foreground group-hover/btn:text-foreground" />
+                    </span>
+                  </a>
+                )}
+
                 <a
-                  href={project.demo}
+                  href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="h-8 rounded-lg border border-border bg-card hover:bg-muted text-foreground px-3 text-xs font-medium flex items-center gap-1 transition-colors"
+                  className="group/btn h-8 rounded-full border border-border bg-card hover:bg-muted text-foreground pl-3 pr-1.5 text-xs font-medium inline-flex items-center gap-2 sm:ml-auto transition-all shadow-2xs"
                 >
-                  {project.demoLabel || 'Demo'}
-                  <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground" />
+                  <span>Code</span>
+                  <span className="w-5 h-5 rounded-full bg-muted border border-border/80 flex items-center justify-center transition-transform duration-200 group-hover/btn:scale-105 shrink-0">
+                    <Github className="h-3 w-3 text-muted-foreground group-hover/btn:text-foreground" />
+                  </span>
                 </a>
-              )}
-
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="h-8 rounded-lg border border-border bg-card hover:bg-muted text-foreground px-3 text-xs font-medium flex items-center gap-1.5 sm:ml-auto transition-colors"
-              >
-                <Github className="h-3.5 w-3.5 text-muted-foreground" />
-                Code
-              </a>
+              </div>
             </div>
           </div>
         </div>

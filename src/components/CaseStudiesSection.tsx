@@ -223,8 +223,9 @@ const CaseStudyCard = ({ study, index }: { study: CaseStudy; index: number }) =>
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-      className="rounded-2xl border border-border bg-card overflow-hidden shadow-xs hover:border-primary/50 transition-all duration-200"
+      className="p-1.5 rounded-[1.375rem] border border-border/80 bg-muted/20 shadow-xs hover:border-primary/40 hover:shadow-md transition-all duration-300"
     >
+      <div className="rounded-2xl border border-border/70 bg-card overflow-hidden shadow-xs">
       <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-0">
         
         {/* Left Preview Panel */}
@@ -333,15 +334,19 @@ const CaseStudyCard = ({ study, index }: { study: CaseStudy; index: number }) =>
               href={study.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-lg border border-border hover:bg-muted text-foreground transition-colors"
+              className="group/btn inline-flex items-center gap-2 pl-3.5 pr-1.5 py-1 text-xs font-medium rounded-full border border-border bg-card hover:bg-muted text-foreground transition-all shadow-2xs"
             >
-              <Github className="w-3.5 h-3.5" />
+              <Github className="w-3.5 h-3.5 text-muted-foreground group-hover/btn:text-foreground" />
               <span>Inspect Repository</span>
+              <span className="w-5 h-5 rounded-full bg-muted border border-border/80 flex items-center justify-center transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 shrink-0">
+                <ArrowUpRight className="h-3 w-3 text-muted-foreground group-hover/btn:text-foreground" />
+              </span>
             </a>
           </div>
 
         </div>
 
+      </div>
       </div>
     </motion.article>
   );

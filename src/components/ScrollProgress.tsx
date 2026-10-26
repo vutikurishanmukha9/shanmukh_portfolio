@@ -44,7 +44,7 @@ export const ScrollProgress: React.FC = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 15, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-6 right-6 z-40 pointer-events-auto pb-safe pr-safe"
+            className="fixed bottom-6 right-6 z-50 pointer-events-auto pb-safe pr-safe"
           >
             <button
               type="button"

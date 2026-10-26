@@ -273,3 +273,24 @@ html, body {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Viewport Edge Dissolve Transitions */
+.viewport-fade-top {
+  background: linear-gradient(
+    to bottom,
+    var(--background) 0%,
+    color-mix(in srgb, var(--background) 92%, transparent) 35%,
+    color-mix(in srgb, var(--background) 45%, transparent) 70%,
+    transparent 100%
+  );
+}
+
+.viewport-fade-bottom {
+  background: linear-gradient(
+    to top,
+    var(--background) 0%,
+    color-mix(in srgb, var(--background) 92%, transparent) 35%,
+    color-mix(in srgb, var(--background) 45%, transparent) 70%,
+    transparent 100%
+  );
+}

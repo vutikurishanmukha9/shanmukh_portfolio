@@ -88,8 +88,9 @@ export const AboutSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="lg:col-span-5 rounded-2xl border border-border bg-card p-6 sm:p-7 shadow-sm space-y-6"
+            className="lg:col-span-5 p-1.5 rounded-[1.375rem] border border-border/80 bg-muted/20 shadow-xs"
           >
+            <div className="rounded-2xl border border-border bg-card p-6 sm:p-7 shadow-sm space-y-6">
             <div className="border-b border-border pb-4">
               <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
                 Architectural Principles
@@ -141,6 +142,7 @@ export const AboutSection = () => {
             <div className="pt-4 border-t border-border flex items-center justify-between text-xs font-mono text-muted-foreground">
               <span>Origin: Hyderabad, India</span>
               <span className="text-emerald-600 dark:text-emerald-400 font-medium">Ready to Deploy</span>
+            </div>
             </div>
           </motion.div>
 

@@ -12,10 +12,10 @@ export const SectionWrapper = ({ children, className, id, delay = 0, ...props }:
     return (
         <motion.section
             id={id}
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.55, delay, ease: [0.16, 1, 0.3, 1] }}
             className={cn("py-10 sm:py-12 relative", className)}
             {...props}
         >

@@ -97,17 +97,18 @@ export const SkillsSection = () => {
                 transition={{ duration: 0.35, delay: idx * 0.08 }}
                 onMouseEnter={() => setActiveCategory(category.title)}
                 onMouseLeave={() => setActiveCategory(null)}
-                className={`p-6 sm:p-7 rounded-2xl border transition-all duration-200 bg-card flex flex-col justify-between h-full ${
-                  isHovered ? 'border-primary/60 shadow-md' : 'border-border shadow-xs'
+                className={`p-1.5 rounded-[1.375rem] border transition-all duration-300 min-w-0 flex flex-col justify-between h-full ${
+                  isHovered ? 'border-primary/50 shadow-md bg-muted/40' : 'border-border/80 shadow-2xs bg-muted/20'
                 }`}
               >
-                <div>
+                <div className="p-4 sm:p-5 lg:p-6 rounded-2xl border border-border/70 bg-card flex flex-col justify-between h-full min-w-0">
+                <div className="min-w-0">
                   {/* Card Header */}
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="p-2.5 rounded-xl border border-border bg-muted/60 text-primary shrink-0">
+                  <div className="flex items-start gap-3 sm:gap-4 mb-4">
+                    <div className="p-2 sm:p-2.5 rounded-xl border border-border bg-muted/60 text-primary shrink-0">
                       <Icon className="w-5 h-5" />
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <h3 className="text-base font-bold text-foreground">
                         {category.title}
                       </h3>
@@ -127,7 +128,7 @@ export const SkillsSection = () => {
                         {category.primarySkills.map((skill) => (
                           <span
                             key={skill}
-                            className="px-2.5 py-1 text-xs font-mono font-medium rounded-lg border border-border bg-card text-foreground whitespace-nowrap shadow-2xs"
+                            className="px-2.5 py-1 text-xs font-mono font-medium rounded-lg border border-border bg-card text-foreground shadow-2xs leading-snug"
                           >
                             {skill}
                           </span>
@@ -143,7 +144,7 @@ export const SkillsSection = () => {
                         {category.toolsAndFrameworks.map((item) => (
                           <span
                             key={item}
-                            className="px-2.5 py-1 text-xs font-sans rounded-lg border border-border/70 bg-muted/40 text-muted-foreground hover:text-foreground hover:border-primary/40 transition-colors whitespace-nowrap"
+                            className="px-2.5 py-1 text-xs font-sans rounded-lg border border-border/70 bg-muted/40 text-muted-foreground hover:text-foreground hover:border-primary/40 transition-colors leading-snug"
                           >
                             {item}
                           </span>
@@ -151,6 +152,7 @@ export const SkillsSection = () => {
                       </div>
                     </div>
                   </div>
+                </div>
                 </div>
               </motion.div>
             );

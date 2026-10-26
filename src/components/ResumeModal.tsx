@@ -33,8 +33,9 @@ export const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.98, y: 10 }}
           transition={{ duration: 0.2 }}
-          className="relative w-full max-w-3xl max-h-[85vh] bg-card border border-border shadow-xl rounded-2xl overflow-hidden flex flex-col z-10"
+          className="relative w-full max-w-3xl max-h-[85vh] p-1.5 rounded-[1.375rem] border border-border/80 bg-muted/20 shadow-2xl flex flex-col z-10"
         >
+          <div className="w-full h-full bg-card border border-border/70 rounded-2xl overflow-hidden flex flex-col">
           {/* Modal Header */}
           <div className="flex items-center justify-between px-6 py-4 border-b border-border bg-muted/30">
             <div className="flex items-center gap-3">
@@ -50,15 +51,16 @@ export const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
             </div>
 
             <div className="flex items-center gap-2 shrink-0">
-              <Button
-                variant="default"
-                size="sm"
+              <button
+                type="button"
                 onClick={handleDownload}
-                className="h-8 text-xs font-mono gap-1.5 rounded-lg shadow-xs"
+                className="group/btn h-8 text-xs font-mono inline-flex items-center gap-2 pl-3 pr-1.5 rounded-full bg-primary hover:bg-primary-hover text-primary-foreground shadow-xs transition-all cursor-pointer"
               >
-                <Download className="w-3.5 h-3.5" />
                 <span>Request PDF</span>
-              </Button>
+                <span className="w-5 h-5 rounded-full bg-black/15 dark:bg-white/20 flex items-center justify-center transition-transform duration-200 group-hover/btn:translate-y-0.5 shrink-0">
+                  <Download className="w-3 h-3" />
+                </span>
+              </button>
               <button
                 type="button"
                 onClick={onClose}
@@ -157,6 +159,7 @@ export const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
               <span>LinkedIn Profile</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
+          </div>
           </div>
         </motion.div>
       </div>

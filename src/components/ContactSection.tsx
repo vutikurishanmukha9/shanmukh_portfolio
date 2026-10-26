@@ -18,13 +18,13 @@ const ContactCard = ({ contact }: { contact: { icon: LucideIcon; label: string; 
   };
 
   return (
-    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-4 rounded-xl border border-border bg-muted/40 transition-colors hover:border-zinc-300 dark:hover:border-zinc-700">
-      <div className="flex items-center gap-3 min-w-0">
-        <div className="w-10 h-10 shrink-0 rounded-lg border border-border bg-card flex items-center justify-center text-foreground font-bold shadow-xs">
-          <Icon className="h-5 w-5 text-primary" />
+    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 sm:gap-3 p-3 sm:p-4 rounded-xl border border-border bg-muted/40 transition-colors hover:border-zinc-300 dark:hover:border-zinc-700 min-w-0">
+      <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
+        <div className="w-9 h-9 sm:w-10 sm:h-10 shrink-0 rounded-lg border border-border bg-card flex items-center justify-center text-foreground font-bold shadow-xs">
+          <Icon className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
         </div>
-        <div className="min-w-0">
-          <p className="text-[11px] font-mono font-medium text-muted-foreground uppercase">{contact.label}</p>
+        <div className="min-w-0 flex-1">
+          <p className="text-[10px] sm:text-[11px] font-mono font-medium text-muted-foreground uppercase">{contact.label}</p>
           <a
             href={contact.href}
             className="text-xs sm:text-sm font-mono font-semibold text-foreground hover:text-primary transition-colors break-all"
@@ -38,7 +38,7 @@ const ContactCard = ({ contact }: { contact: { icon: LucideIcon; label: string; 
         type="button"
         onClick={handleCopy}
         className={cn(
-          "px-3 py-1.5 text-xs font-mono font-medium rounded-lg border border-border transition-all flex items-center gap-1.5 self-end sm:self-auto shrink-0 cursor-pointer shadow-xs",
+          "px-2.5 sm:px-3 py-1 sm:py-1.5 text-xs font-mono font-medium rounded-lg border border-border transition-all flex items-center gap-1.5 self-end sm:self-auto shrink-0 cursor-pointer shadow-xs",
           copied
             ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
             : "bg-card text-foreground hover:bg-muted"
@@ -121,18 +121,18 @@ export const ContactSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4 }}
-            className="flex flex-col h-full"
+            className="flex flex-col h-full min-w-0 p-1.5 rounded-[1.375rem] border border-border/80 bg-muted/20 shadow-xs"
           >
-            <div className="rounded-2xl border border-border bg-card p-6 sm:p-8 shadow-xs h-full flex flex-col justify-between">
+            <div className="rounded-2xl border border-border/70 bg-card p-4 sm:p-6 lg:p-8 shadow-xs h-full flex flex-col justify-between min-w-0">
               <div>
-                <div className="flex items-center justify-between border-b border-border pb-4 mb-6">
+                <div className="flex flex-col xs:flex-row xs:items-center justify-between border-b border-border pb-4 mb-5 sm:mb-6 gap-2">
                   <div className="flex items-center gap-2">
-                    <div className="size-2 rounded-full bg-emerald-500 animate-pulse" />
+                    <div className="size-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
                     <h3 className="text-base font-head font-semibold text-foreground">
                       Communication Channels
                     </h3>
                   </div>
-                  <span className="text-[11px] font-mono font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20 whitespace-nowrap shrink-0">
+                  <span className="text-[11px] font-mono font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20 whitespace-nowrap shrink-0 w-fit">
                     Active & Responding
                   </span>
                 </div>
@@ -149,9 +149,9 @@ export const ContactSection = () => {
                 </div>
 
                 {/* Location & Schedule Card */}
-                <div className="p-4 rounded-xl border border-border bg-muted/40 mb-6">
+                <div className="p-3.5 sm:p-4 rounded-xl border border-border bg-muted/40 mb-6 min-w-0">
                   <div className="flex items-center gap-2 text-xs font-mono font-medium text-foreground mb-1">
-                    <MapPin className="h-4 w-4 text-primary" />
+                    <MapPin className="h-4 w-4 text-primary shrink-0" />
                     <span>Location & Availability</span>
                   </div>
                   <p className="text-xs text-muted-foreground font-sans leading-relaxed">
@@ -165,7 +165,7 @@ export const ContactSection = () => {
                 <p className="text-xs font-mono font-medium text-muted-foreground uppercase tracking-wider mb-3">
                   Verified Profiles
                 </p>
-                <div className="flex flex-wrap gap-2.5">
+                <div className="flex flex-wrap gap-2 sm:gap-2.5">
                   {socialLinks.map((social) => {
                     const Icon = social.icon;
                     return (
@@ -174,7 +174,7 @@ export const ContactSection = () => {
                         href={social.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-3.5 py-2 rounded-xl border border-border bg-card hover:bg-muted text-foreground hover:text-primary font-mono text-xs font-medium shadow-xs transition-colors"
+                        className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl border border-border bg-card hover:bg-muted text-foreground hover:text-primary font-mono text-xs font-medium shadow-xs transition-colors"
                         title={social.name}
                         aria-label={social.name}
                       >
@@ -194,11 +194,11 @@ export const ContactSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.1 }}
-            className="flex flex-col h-full"
+            className="flex flex-col h-full min-w-0 p-1.5 rounded-[1.375rem] border border-border/80 bg-muted/20 shadow-xs"
           >
-            <div className="rounded-2xl border border-border bg-card p-6 sm:p-8 shadow-xs h-full flex flex-col justify-between">
+            <div className="rounded-2xl border border-border/70 bg-card p-4 sm:p-6 lg:p-8 shadow-xs h-full flex flex-col justify-between min-w-0">
               <div>
-                <div className="flex items-center justify-between border-b border-border pb-4 mb-6">
+                <div className="flex flex-col xs:flex-row xs:items-center justify-between border-b border-border pb-4 mb-5 sm:mb-6 gap-2">
                   <h3 className="text-base font-head font-semibold text-foreground">
                     Send a Message
                   </h3>
