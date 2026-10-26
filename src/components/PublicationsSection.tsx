@@ -146,30 +146,11 @@ export const PublicationsSection = () => {
                   </a>
                 </div>
 
-                {/* Paper Title & Authors */}
-                <div className="space-y-3">
+                {/* Paper Title */}
+                <div>
                   <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-foreground leading-snug">
                     {pub.title}
                   </h3>
-
-                  {/* Authors Badges */}
-                  <div className="flex flex-wrap items-center gap-1.5 text-xs">
-                    <span className="font-semibold text-primary px-2.5 py-1 rounded-md bg-primary/10 border border-primary/20">
-                      Shanmukha Vutikuri (First Author)
-                    </span>
-                    <span className="text-muted-foreground px-2 py-1 rounded-md bg-muted/60 border border-border/60">
-                      Rajyalakshmi Uppada
-                    </span>
-                    <span className="text-muted-foreground px-2 py-1 rounded-md bg-muted/60 border border-border/60">
-                      Tejaswini Panse
-                    </span>
-                    <span className="text-muted-foreground px-2 py-1 rounded-md bg-muted/60 border border-border/60">
-                      Dr. S. Saradha Rani
-                    </span>
-                    <span className="text-muted-foreground px-2 py-1 rounded-md bg-muted/60 border border-border/60">
-                      Abhishek Savarapu
-                    </span>
-                  </div>
                 </div>
 
                 {/* Abstract Callout */}
@@ -178,25 +159,6 @@ export const PublicationsSection = () => {
                     <strong className="text-foreground font-semibold">Abstract: </strong>
                     {pub.description}
                   </p>
-                </div>
-
-                {/* High-Signal Research Takeaways Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
-                  <div className="p-3.5 rounded-xl border border-border/60 bg-card flex flex-col justify-between">
-                    <div className="text-[11px] font-mono text-muted-foreground uppercase tracking-wider">Efficiency Gain</div>
-                    <div className="text-lg font-bold text-foreground mt-1.5">Up to 34%</div>
-                    <div className="text-xs text-muted-foreground mt-0.5">HVAC & lighting energy waste minimized</div>
-                  </div>
-                  <div className="p-3.5 rounded-xl border border-border/60 bg-card flex flex-col justify-between">
-                    <div className="text-[11px] font-mono text-muted-foreground uppercase tracking-wider">Privacy Architecture</div>
-                    <div className="text-lg font-bold text-foreground mt-1.5">100% Zero-Camera</div>
-                    <div className="text-xs text-muted-foreground mt-0.5">Spatial low-power passive sensor arrays</div>
-                  </div>
-                  <div className="p-3.5 rounded-xl border border-border/60 bg-card flex flex-col justify-between">
-                    <div className="text-[11px] font-mono text-muted-foreground uppercase tracking-wider">Publication Index</div>
-                    <div className="text-lg font-bold text-foreground mt-1.5">IEEE Xplore</div>
-                    <div className="text-xs text-muted-foreground mt-0.5">Peer-reviewed 7-page proceedings</div>
-                  </div>
                 </div>
 
                 {/* Footer Bar: Metadata + Citation Tools */}
