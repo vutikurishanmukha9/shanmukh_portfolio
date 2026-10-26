@@ -33,7 +33,7 @@ const publications: Publication[] = [
     pages: 'pp. 1–7',
     doi: '10.1109/eaic66483.2025.11101373',
     doiUrl: 'https://doi.org/10.1109/eaic66483.2025.11101373',
-    description: 'Investigates autonomous low-power edge sensing architectures using spatial sensor arrays to infer room occupancy patterns, minimizing HVAC and lighting energy waste by up to 34% with zero privacy encroachment.',
+    description: 'Modern smart building management systems often face severe energy inefficiencies caused by unoptimized HVAC and luminaire scheduling in dynamically occupied spaces. This paper proposes a decentralized, low-power edge-sensing framework using spatial sensor arrays to infer room occupancy distributions in real time without camera surveillance or privacy encroachment. Through autonomous micro-controller inferencing and dynamic load shedding, the architecture achieves up to 34% reduction in overall energy expenditure while rigorously preserving occupant comfort and data privacy.',
     url: 'https://ieeexplore.ieee.org/document/11101373',
   },
 ];
@@ -154,8 +154,8 @@ export const PublicationsSection = () => {
                 </div>
 
                 {/* Abstract Callout */}
-                <div className="p-4 sm:p-5 rounded-xl border border-border/60 bg-muted/20 text-sm text-muted-foreground leading-relaxed">
-                  <p>
+                <div className="p-4 sm:p-5 rounded-xl border border-border/70 bg-muted/20 text-sm text-muted-foreground leading-relaxed">
+                  <p className="max-w-none w-full text-justify [text-justify:inter-word] hyphens-auto">
                     <strong className="text-foreground font-semibold">Abstract: </strong>
                     {pub.description}
                   </p>
