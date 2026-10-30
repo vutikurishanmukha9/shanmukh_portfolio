@@ -58,12 +58,12 @@ export const HeroSection = () => {
             </motion.div>
 
             {/* Main Headline */}
-            <div className="space-y-2">
+            <div className="space-y-1.5 sm:space-y-2">
               <motion.h1
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.05 }}
-                className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.08]"
+                className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-bold font-display tracking-tight text-foreground leading-[1.08]"
               >
                 Shanmukh Vutikuri
               </motion.h1>
@@ -71,7 +71,7 @@ export const HeroSection = () => {
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.1 }}
-                className="text-base sm:text-xl font-medium text-primary tracking-tight"
+                className="text-sm xs:text-base sm:text-lg font-semibold text-primary tracking-tight"
               >
                 AI Systems & Full-Stack Engineer
               </motion.p>
@@ -82,7 +82,7 @@ export const HeroSection = () => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.15 }}
-              className="text-sm sm:text-lg text-muted-foreground leading-relaxed max-w-xl"
+              className="text-sm sm:text-base text-muted-foreground leading-relaxed max-w-xl"
             >
               I architect production-grade AI systems, hybrid RAG pipelines, and scalable cloud microservices engineered for high throughput and verified reliability.
             </motion.p>
@@ -92,14 +92,14 @@ export const HeroSection = () => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.2 }}
-              className="grid grid-cols-3 gap-2 sm:gap-3 w-full max-w-md pt-2"
+              className="grid grid-cols-3 gap-2 sm:gap-3 w-full max-w-md pt-1"
             >
-              <div className="p-2.5 sm:p-3.5 rounded-xl border border-border bg-card/60 backdrop-blur-xs min-h-[72px] sm:min-h-[78px] flex flex-col justify-between">
-                <div className="text-lg sm:text-2xl font-bold text-foreground">10+</div>
+              <div className="p-2.5 sm:p-3 rounded-xl border border-border bg-card/70 backdrop-blur-xs min-h-[72px] sm:min-h-[78px] flex flex-col justify-between">
+                <div className="text-xl sm:text-2xl font-bold font-display text-foreground">10+</div>
                 <div className="text-[11px] sm:text-xs text-muted-foreground font-medium mt-0.5 leading-tight">Shipped Products</div>
               </div>
-              <div className="p-2.5 sm:p-3.5 rounded-xl border border-border bg-card/60 backdrop-blur-xs min-h-[72px] sm:min-h-[78px] flex flex-col justify-between">
-                <div className="text-lg sm:text-2xl font-bold text-foreground">541+</div>
+              <div className="p-2.5 sm:p-3 rounded-xl border border-border bg-card/70 backdrop-blur-xs min-h-[72px] sm:min-h-[78px] flex flex-col justify-between">
+                <div className="text-xl sm:text-2xl font-bold font-display text-foreground">541+</div>
                 <div className="text-[11px] sm:text-xs text-muted-foreground font-medium mt-0.5 leading-tight">Automated Tests</div>
               </div>
               <button
@@ -108,10 +108,10 @@ export const HeroSection = () => {
                   const el = document.getElementById('publications');
                   if (el) el.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="p-2.5 sm:p-3.5 rounded-xl border border-border bg-card/60 hover:bg-card hover:border-primary/40 backdrop-blur-xs min-h-[72px] sm:min-h-[78px] flex flex-col justify-between text-left transition-all cursor-pointer group/stat"
+                className="p-2.5 sm:p-3 rounded-xl border border-border bg-card/70 hover:bg-card hover:border-primary/40 backdrop-blur-xs min-h-[72px] sm:min-h-[78px] flex flex-col justify-between text-left transition-all cursor-pointer group/stat"
                 title="View IEEE Publication"
               >
-                <div className="text-lg sm:text-2xl font-bold text-foreground group-hover/stat:text-primary transition-colors flex items-center justify-between">
+                <div className="text-xl sm:text-2xl font-bold font-display text-foreground group-hover/stat:text-primary transition-colors flex items-center justify-between">
                   <span>IEEE</span>
                   <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground group-hover/stat:text-primary transition-colors" />
                 </div>
@@ -119,37 +119,39 @@ export const HeroSection = () => {
               </button>
             </motion.div>
 
-            {/* Primary Action Buttons */}
+            {/* Primary Action Buttons & Social Strip */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.25 }}
-              className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-2 w-full"
+              className="flex flex-col sm:flex-row sm:items-center gap-3 pt-2 w-full"
             >
-              <button
-                type="button"
-                onClick={handleScrollToProjects}
-                className="group/btn inline-flex items-center justify-center gap-2 pl-4 sm:pl-5 pr-2 py-2 rounded-full bg-foreground text-background text-xs sm:text-sm font-medium hover:opacity-95 transition-all shadow-xs"
-              >
-                <span>Explore Selected Work</span>
-                <span className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-background/20 flex items-center justify-center transition-transform duration-200 group-hover/btn:translate-y-0.5 shrink-0">
-                  <ArrowDown className="w-3.5 h-3.5 shrink-0" />
-                </span>
-              </button>
+              <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
+                <button
+                  type="button"
+                  onClick={handleScrollToProjects}
+                  className="group/btn inline-flex items-center justify-center gap-2 pl-4 sm:pl-5 pr-2 py-2.5 rounded-full bg-foreground text-background text-xs sm:text-sm font-medium hover:opacity-95 transition-all shadow-xs cursor-pointer"
+                >
+                  <span>Explore Work</span>
+                  <span className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-background/20 flex items-center justify-center transition-transform duration-200 group-hover/btn:translate-y-0.5 shrink-0">
+                    <ArrowDown className="w-3.5 h-3.5 shrink-0" />
+                  </span>
+                </button>
 
-              <button
-                type="button"
-                onClick={() => setIsResumeOpen(true)}
-                className="group/btn inline-flex items-center gap-2 pl-3.5 sm:pl-4 pr-1.5 py-2 rounded-full border border-border bg-card text-foreground text-xs sm:text-sm font-medium hover:bg-muted/70 transition-all shadow-2xs"
-              >
-                <span>View Resume</span>
-                <span className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-muted border border-border/80 flex items-center justify-center transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 shrink-0">
-                  <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground group-hover/btn:text-foreground" />
-                </span>
-              </button>
+                <button
+                  type="button"
+                  onClick={() => setIsResumeOpen(true)}
+                  className="group/btn inline-flex items-center gap-2 pl-3.5 sm:pl-4 pr-1.5 py-2.5 rounded-full border border-border bg-card text-foreground text-xs sm:text-sm font-medium hover:bg-muted/70 transition-all shadow-2xs cursor-pointer"
+                >
+                  <span>View Resume</span>
+                  <span className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-muted border border-border/80 flex items-center justify-center transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 shrink-0">
+                    <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground group-hover/btn:text-foreground" />
+                  </span>
+                </button>
+              </div>
 
               {/* Social Links */}
-              <div className="flex items-center gap-1.5 pl-2">
+              <div className="flex items-center gap-1.5 sm:pl-2">
                 {heroSocialLinks.map((item) => {
                   const Icon = item.icon;
                   return (
@@ -158,7 +160,7 @@ export const HeroSection = () => {
                       href={item.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2.5 rounded-full border border-border text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                      className="p-2 sm:p-2.5 rounded-full border border-border text-muted-foreground hover:text-foreground hover:bg-muted transition-colors flex items-center justify-center"
                       aria-label={item.label}
                     >
                       <Icon className="w-4 h-4" />

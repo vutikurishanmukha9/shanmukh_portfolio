@@ -14,9 +14,9 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('portfolio-theme') as Theme | null;
       if (saved === 'dark' || saved === 'light') return saved;
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      return 'dark'; // Deep Obsidian Void by default
     }
-    return 'light';
+    return 'dark';
   });
 
   useEffect(() => {
