@@ -209,8 +209,8 @@ export const HeroSection = () => {
                     type="button"
                     onClick={() => setActiveTab('architecture')}
                     className={`flex-1 py-1.5 px-2 sm:px-3 rounded-lg text-[11px] sm:text-xs font-medium transition-colors ${activeTab === 'architecture'
-                        ? 'bg-card text-foreground shadow-xs'
-                        : 'text-muted-foreground hover:text-foreground'
+                      ? 'bg-card text-foreground shadow-xs'
+                      : 'text-muted-foreground hover:text-foreground'
                       }`}
                   >
                     System Flow
@@ -219,8 +219,8 @@ export const HeroSection = () => {
                     type="button"
                     onClick={() => setActiveTab('pipeline')}
                     className={`flex-1 py-1.5 px-2 sm:px-3 rounded-lg text-[11px] sm:text-xs font-medium transition-colors ${activeTab === 'pipeline'
-                        ? 'bg-card text-foreground shadow-xs'
-                        : 'text-muted-foreground hover:text-foreground'
+                      ? 'bg-card text-foreground shadow-xs'
+                      : 'text-muted-foreground hover:text-foreground'
                       }`}
                   >
                     Retrieval Spec
@@ -229,8 +229,8 @@ export const HeroSection = () => {
                     type="button"
                     onClick={() => setActiveTab('benchmarks')}
                     className={`flex-1 py-1.5 px-2 sm:px-3 rounded-lg text-[11px] sm:text-xs font-medium transition-colors ${activeTab === 'benchmarks'
-                        ? 'bg-card text-foreground shadow-xs'
-                        : 'text-muted-foreground hover:text-foreground'
+                      ? 'bg-card text-foreground shadow-xs'
+                      : 'text-muted-foreground hover:text-foreground'
                       }`}
                   >
                     Benchmarks

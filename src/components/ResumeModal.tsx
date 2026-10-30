@@ -37,34 +37,34 @@ export const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
         >
           <div className="w-full h-full bg-card border border-border/70 rounded-2xl overflow-hidden flex flex-col">
           {/* Modal Header */}
-          <div className="flex items-center justify-between px-6 py-4 border-b border-border bg-muted/30">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl border border-border bg-card flex items-center justify-center text-primary shrink-0 shadow-xs">
+          <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-border bg-muted/30 gap-2">
+            <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl border border-border bg-card flex items-center justify-center text-primary shrink-0 shadow-xs">
                 <FileText className="w-4 h-4" />
               </div>
               <div className="min-w-0">
-                <h3 className="text-sm font-head font-semibold text-foreground truncate">
-                  Technical Profile & Curriculum Vitae
+                <h3 className="text-xs sm:text-sm font-semibold tracking-tight text-foreground truncate">
+                  Technical Profile & CV
                 </h3>
-                <p className="text-xs font-mono text-muted-foreground truncate">Shanmukh_Vutikuri_CV.pdf</p>
+                <p className="text-[10px] sm:text-xs font-mono text-muted-foreground truncate">Shanmukh_Vutikuri_CV.pdf</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2 shrink-0">
+            <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
               <button
                 type="button"
                 onClick={handleDownload}
-                className="group/btn h-8 text-xs font-mono inline-flex items-center gap-2 pl-3 pr-1.5 rounded-full bg-primary hover:bg-primary-hover text-primary-foreground shadow-xs transition-all cursor-pointer"
+                className="group/btn h-7 sm:h-8 text-[11px] sm:text-xs font-mono inline-flex items-center gap-1.5 sm:gap-2 pl-2.5 sm:pl-3 pr-1 sm:pr-1.5 rounded-full bg-primary hover:bg-primary-hover text-primary-foreground shadow-xs transition-all cursor-pointer"
               >
                 <span>Request PDF</span>
-                <span className="w-5 h-5 rounded-full bg-black/15 dark:bg-white/20 flex items-center justify-center transition-transform duration-200 group-hover/btn:translate-y-0.5 shrink-0">
-                  <Download className="w-3 h-3" />
+                <span className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-black/15 dark:bg-white/20 flex items-center justify-center transition-transform duration-200 group-hover/btn:translate-y-0.5 shrink-0">
+                  <Download className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                 </span>
               </button>
               <button
                 type="button"
                 onClick={onClose}
-                className="p-1.5 rounded-lg border border-border bg-card hover:bg-muted text-muted-foreground hover:text-foreground transition-colors cursor-pointer shadow-xs"
+                className="p-1 sm:p-1.5 rounded-lg border border-border bg-card hover:bg-muted text-muted-foreground hover:text-foreground transition-colors cursor-pointer shadow-xs"
                 aria-label="Close modal"
               >
                 <X className="w-4 h-4" />
@@ -73,7 +73,7 @@ export const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
           </div>
 
           {/* Modal Body */}
-          <div className="flex-1 overflow-y-auto p-6 space-y-6">
+          <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5 sm:space-y-6">
             {/* Header Info */}
             <div className="border-b border-border pb-5">
               <div className="flex flex-wrap items-center justify-between gap-2 mb-2">

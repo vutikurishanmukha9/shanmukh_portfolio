@@ -16,7 +16,7 @@ export default {
     extend: {
       fontFamily: {
         head: ['"Space Grotesk"', 'sans-serif'],
-        sans: ['"Space Grotesk"', 'sans-serif'],
+        sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
         display: ['"Space Grotesk"', 'sans-serif'],
         grotesk: ['"Space Grotesk"', 'sans-serif'],
         jakarta: ['"Plus Jakarta Sans"', '-apple-system', 'sans-serif'],

@@ -33,7 +33,7 @@ const publications: Publication[] = [
     pages: 'pp. 1–7',
     doi: '10.1109/eaic66483.2025.11101373',
     doiUrl: 'https://doi.org/10.1109/eaic66483.2025.11101373',
-    description: 'Modern smart building management systems often face severe energy inefficiencies caused by unoptimized HVAC and luminaire scheduling in dynamically occupied spaces. This paper proposes a decentralized, low-power edge-sensing framework using spatial sensor arrays to infer room occupancy distributions in real time without camera surveillance or privacy encroachment. Through autonomous micro-controller inferencing and dynamic load shedding, the architecture achieves up to 34% reduction in overall energy expenditure while rigorously preserving occupant comfort and data privacy.',
+    description: 'Investigates autonomous low-power edge sensing architectures using spatial sensor arrays to infer room occupancy patterns, minimizing HVAC and lighting energy waste by up to 34% with zero privacy encroachment.',
     url: 'https://ieeexplore.ieee.org/document/11101373',
   },
 ];
@@ -114,100 +114,115 @@ export const PublicationsSection = () => {
               transition={{ duration: 0.4, delay: idx * 0.1 }}
               className="p-1.5 rounded-[1.375rem] border border-border/80 bg-muted/20 shadow-xs hover:border-primary/40 transition-all duration-200"
             >
-              <div className="p-6 sm:p-8 rounded-2xl border border-border/70 bg-card space-y-6">
-                
-                {/* Top Row: Conference Badges + Primary Action */}
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-border/60">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-foreground text-background">
-                      <BookOpen className="w-3.5 h-3.5" />
-                      <span>{pub.journal}</span>
-                    </span>
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-medium">
-                      <Award className="w-3.5 h-3.5" />
-                      <span>Lead / First Author</span>
-                    </span>
-                    <span className="text-xs font-mono text-muted-foreground sm:pl-1">
-                      {pub.conference} · {pub.year}
-                    </span>
+              <div className="p-6 sm:p-8 rounded-2xl border border-border/70 bg-card">
+                <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
+                  
+                  {/* Left Column: Badges, Title, Authors, DOI & Abstract */}
+                  <div className="flex-1 min-w-0">
+                    {/* Conference Badges */}
+                    <div className="flex flex-wrap items-center gap-2 mb-3.5">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-foreground text-background">
+                        <BookOpen className="w-3.5 h-3.5" />
+                        <span>{pub.journal}</span>
+                      </span>
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-medium">
+                        <Award className="w-3.5 h-3.5" />
+                        <span>First Author</span>
+                      </span>
+                      <span className="text-xs font-mono text-muted-foreground sm:pl-1">
+                        {pub.conference} · {pub.year}
+                      </span>
+                    </div>
+
+                    {/* Paper Title */}
+                    <h3 className="text-xl sm:text-2xl lg:text-[1.75rem] font-bold tracking-tight text-foreground leading-snug">
+                      {pub.title}
+                    </h3>
+
+                    {/* Authors */}
+                    <p className="text-xs sm:text-sm font-mono leading-relaxed mt-3">
+                      <span className="font-bold text-primary">{pub.firstAuthor} (First Author)</span>
+                      <span className="text-muted-foreground">, {pub.coAuthors}</span>
+                    </p>
+
+                    {/* Metadata: Pages & DOI */}
+                    <div className="text-xs font-mono text-muted-foreground mt-2 flex flex-wrap items-center gap-2">
+                      <span>Pages: {pub.pages}</span>
+                      <span>•</span>
+                      <span>DOI: </span>
+                      <a
+                        href={pub.doiUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-foreground hover:text-primary underline underline-offset-2 transition-colors break-all"
+                      >
+                        {pub.doi}
+                      </a>
+                    </div>
+
+                    {/* Abstract / Summary Body */}
+                    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mt-5 max-w-3xl">
+                      {pub.description}
+                    </p>
                   </div>
 
-                  {/* Primary Button-in-Button CTA */}
-                  <a
-                    href={pub.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group/btn inline-flex items-center gap-2 pl-4 pr-1.5 py-1.5 rounded-full bg-foreground text-background text-xs font-medium hover:opacity-90 transition-all shadow-xs shrink-0 self-stretch sm:self-auto justify-center"
-                  >
-                    <span>Read on IEEE Xplore</span>
-                    <span className="w-6 h-6 rounded-full bg-background/20 flex items-center justify-center transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 shrink-0">
-                      <ExternalLink className="w-3 h-3" />
-                    </span>
-                  </a>
-                </div>
+                  {/* Right Column: Actions Dock */}
+                  <div className="flex flex-col items-stretch md:items-end gap-2.5 shrink-0 pt-1 border-t md:border-t-0 border-border/60 pt-4 md:pt-0">
+                    {/* Primary Button */}
+                    <a
+                      href={pub.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group/btn inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-foreground text-background text-xs font-medium hover:opacity-90 transition-all shadow-xs"
+                    >
+                      <span>Read on IEEE Xplore</span>
+                      <ExternalLink className="w-3.5 h-3.5 transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+                    </a>
 
-                {/* Paper Title */}
-                <div>
-                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-foreground leading-snug">
-                    {pub.title}
-                  </h3>
-                </div>
+                    {/* Citation Format Buttons */}
+                    <div className="flex items-center gap-2 justify-end w-full">
+                      <button
+                        type="button"
+                        onClick={() => handleCopyCitation('BibTeX')}
+                        className="inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-full border border-border bg-muted/40 hover:bg-muted text-foreground transition-colors cursor-pointer text-xs font-mono flex-1 md:flex-initial"
+                        title="Copy BibTeX Citation"
+                      >
+                        {copiedFormat === 'BibTeX' ? (
+                          <Check className="w-3.5 h-3.5 text-emerald-500" />
+                        ) : (
+                          <Copy className="w-3.5 h-3.5 text-muted-foreground" />
+                        )}
+                        <span>BibTeX</span>
+                      </button>
 
-                {/* Abstract Callout */}
-                <div className="p-4 sm:p-5 rounded-xl border border-border/70 bg-muted/20 text-sm text-muted-foreground leading-relaxed">
-                  <p className="max-w-none w-full text-justify [text-justify:inter-word] hyphens-auto">
-                    <strong className="text-foreground font-semibold">Abstract: </strong>
-                    {pub.description}
-                  </p>
-                </div>
+                      <button
+                        type="button"
+                        onClick={() => handleCopyCitation('APA')}
+                        className="inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-full border border-border bg-muted/40 hover:bg-muted text-foreground transition-colors cursor-pointer text-xs font-mono flex-1 md:flex-initial"
+                        title="Copy APA Citation"
+                      >
+                        {copiedFormat === 'APA' ? (
+                          <Check className="w-3.5 h-3.5 text-emerald-500" />
+                        ) : (
+                          <Copy className="w-3.5 h-3.5 text-muted-foreground" />
+                        )}
+                        <span>APA</span>
+                      </button>
+                    </div>
 
-                {/* Footer Bar: Metadata + Citation Tools */}
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-4 border-t border-border/60 text-xs font-mono">
-                  <div className="flex flex-wrap items-center gap-3 text-muted-foreground">
-                    <span>Pages: {pub.pages}</span>
-                    <span>•</span>
+                    {/* Direct DOI Resolver Link */}
                     <a
                       href={pub.doiUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-foreground hover:text-primary transition-colors flex items-center gap-1 group/doi break-all"
+                      className="text-xs text-muted-foreground hover:text-foreground inline-flex items-center justify-center md:justify-end gap-1 transition-colors pt-1"
                     >
-                      <span>DOI: {pub.doi}</span>
-                      <ExternalLink className="w-3 h-3 text-muted-foreground group-hover/doi:text-primary transition-colors shrink-0" />
+                      <span>Direct DOI Resolver</span>
+                      <ExternalLink className="w-3 h-3" />
                     </a>
                   </div>
 
-                  <div className="flex items-center gap-2 self-stretch sm:self-auto justify-end">
-                    <button
-                      type="button"
-                      onClick={() => handleCopyCitation('BibTeX')}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-muted/40 hover:bg-muted text-foreground transition-colors cursor-pointer text-xs"
-                      title="Copy BibTeX Citation"
-                    >
-                      {copiedFormat === 'BibTeX' ? (
-                        <Check className="w-3.5 h-3.5 text-emerald-500" />
-                      ) : (
-                        <Copy className="w-3.5 h-3.5 text-muted-foreground" />
-                      )}
-                      <span>BibTeX</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => handleCopyCitation('APA')}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-muted/40 hover:bg-muted text-foreground transition-colors cursor-pointer text-xs"
-                      title="Copy APA Citation"
-                    >
-                      {copiedFormat === 'APA' ? (
-                        <Check className="w-3.5 h-3.5 text-emerald-500" />
-                      ) : (
-                        <Copy className="w-3.5 h-3.5 text-muted-foreground" />
-                      )}
-                      <span>APA Citation</span>
-                    </button>
-                  </div>
                 </div>
-
               </div>
             </motion.div>
           ))}

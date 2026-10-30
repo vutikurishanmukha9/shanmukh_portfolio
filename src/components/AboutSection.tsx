@@ -47,37 +47,49 @@ export const AboutSection = () => {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-7 space-y-5 text-sm sm:text-base text-muted-foreground leading-relaxed font-normal"
+            className="lg:col-span-7 space-y-4 text-sm sm:text-base text-muted-foreground leading-relaxed font-normal"
           >
-            <p>
-              I graduated with a B.Tech in <span className="font-semibold text-foreground">Electronics and Communication Engineering</span>, but my true foundation was built in the trenches of shipping software. Over the past two years, I’ve designed, built, and deployed <span className="font-semibold text-foreground">10+ production-ready full-stack AI products</span>. These are not toy tutorials, but live applications with real users, asynchronous queues, and database scaling.
+            <p className="text-foreground font-medium text-base sm:text-lg leading-relaxed">
+              I graduated with a B.Tech in <span className="text-primary font-semibold">Electronics and Communication Engineering</span>, but my true foundation was forged in the trenches of shipping production software. Over the past two years, I’ve designed, built, and deployed <span className="text-foreground font-semibold">10+ production-ready full-stack AI products</span>.
             </p>
 
-            <p>
-              My portfolio ranges from <span className="font-semibold text-foreground">HeartOut</span> (an anonymous storytelling platform backed by 541+ automated tests and an end-to-end CI/CD pipeline) to <span className="font-semibold text-foreground">GetReport</span> (an AI-powered business intelligence engine featuring a Hybrid RAG retrieval pipeline, Celery task workers, and AWS S3 integration). I believe in understanding the math, the memory buffers, and the networking protocols behind the APIs.
-            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+              <div className="p-3.5 rounded-xl border border-border bg-card/60 space-y-1.5">
+                <span className="text-xs font-mono font-semibold text-foreground uppercase tracking-wider block">
+                  Production Scale
+                </span>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Architect of <strong className="text-foreground">HeartOut</strong> (541+ automated tests with CI/CD) and <strong className="text-foreground">GetReport</strong> (hybrid RAG with Celery workers, Redis queues, and AWS S3).
+                </p>
+              </div>
 
-            <p>
-              Beyond development, I authored research accepted at <span className="font-semibold text-foreground">IEEE EAIC 2025</span> (hosted by NIT Jalandhar), validating that I can go deep on algorithmic theory when performance tuning demands it.
-            </p>
+              <div className="p-3.5 rounded-xl border border-border bg-card/60 space-y-1.5">
+                <span className="text-xs font-mono font-semibold text-foreground uppercase tracking-wider block">
+                  Academic Depth
+                </span>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  First author on intelligent IoT and ML signal telemetry architecture published at <strong className="text-foreground">IEEE EAIC 2025</strong> (NIT Jalandhar).
+                </p>
+              </div>
+            </div>
 
-            <p>
+            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed pt-1">
               I am actively seeking software engineering roles (SDE, AI Systems, Cloud Backend) where I can bring velocity, architectural precision, and disciplined test coverage to a high-impact team.
             </p>
 
             {/* Verified Technical Proofs */}
-            <div className="pt-4 grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-              <div className="flex items-center gap-2 px-3 py-2 rounded-xl border border-border bg-card/80 text-xs font-medium text-foreground shadow-2xs">
+            <div className="pt-2 grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-2.5">
+              <div className="flex items-center gap-2 px-3 py-2 rounded-xl border border-border bg-card text-xs font-medium text-foreground shadow-2xs">
                 <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
                 <span className="truncate">541+ Tests Passing</span>
               </div>
-              <div className="flex items-center gap-2 px-3 py-2 rounded-xl border border-border bg-card/80 text-xs font-medium text-foreground shadow-2xs">
+              <div className="flex items-center gap-2 px-3 py-2 rounded-xl border border-border bg-card text-xs font-medium text-foreground shadow-2xs">
                 <Award className="w-4 h-4 text-primary shrink-0" />
                 <span className="truncate">AWS Cloud Practitioner</span>
               </div>
-              <div className="flex items-center gap-2 px-3 py-2 rounded-xl border border-border bg-card/80 text-xs font-medium text-foreground shadow-2xs">
+              <div className="flex items-center gap-2 px-3 py-2 rounded-xl border border-border bg-card text-xs font-medium text-foreground shadow-2xs">
                 <ShieldCheck className="w-4 h-4 text-emerald-500 shrink-0" />
-                <span className="truncate">IEEE EAIC 2025</span>
+                <span className="truncate">IEEE EAIC 2025 Author</span>
               </div>
             </div>
           </motion.div>

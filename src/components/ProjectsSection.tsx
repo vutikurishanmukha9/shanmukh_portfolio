@@ -485,6 +485,7 @@ const blueprintDataMap: Record<string, {
 export const ProjectsSection: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<ProjectCategory | 'All'>('All');
   const [viewMode, setViewMode] = useState<'bento' | 'matrix'>('bento');
+  const [showAllMobile, setShowAllMobile] = useState(false);
   const [activeBlueprintProject, setActiveBlueprintProject] = useState<BlueprintProject | null>(null);
   const { selectedSkill, setSelectedSkill } = useSkillFilter();
 
@@ -563,10 +564,10 @@ export const ProjectsSection: React.FC = () => {
         </div>
 
         {/* Toolbar: Category Switcher + View Mode Switcher */}
-        <div className="mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="mb-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
           
-          {/* Category Tabs with Counts */}
-          <div className="flex flex-wrap items-center gap-1.5 p-1 bg-card border border-border rounded-xl">
+          {/* Category Tabs with Counts (Smooth Horizontal Swipe on Mobile) */}
+          <div className="flex items-center gap-1.5 p-1 bg-card border border-border rounded-xl overflow-x-auto no-scrollbar touch-pan-x max-w-full">
             {categories.map((cat) => {
               const count = cat === 'All' ? projects.length : projects.filter((p) => p.category === cat).length;
               const isSelected = selectedCategory === cat;
@@ -577,7 +578,7 @@ export const ProjectsSection: React.FC = () => {
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
                   className={cn(
-                    'px-3 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center gap-1.5 whitespace-nowrap shrink-0',
+                    'px-3 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center gap-1.5 whitespace-nowrap shrink-0 cursor-pointer',
                     isSelected
                       ? 'bg-foreground text-background shadow-xs'
                       : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
@@ -593,12 +594,12 @@ export const ProjectsSection: React.FC = () => {
           </div>
 
           {/* View Mode Toggle: Bento vs Matrix */}
-          <div className="flex items-center gap-1 p-1 bg-card border border-border rounded-xl self-end sm:self-center">
+          <div className="flex items-center gap-1 p-1 bg-card border border-border rounded-xl self-end sm:self-center shrink-0">
             <button
               type="button"
               onClick={() => setViewMode('bento')}
               className={cn(
-                'px-2.5 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors',
+                'px-2.5 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer',
                 viewMode === 'bento' ? 'bg-muted text-foreground' : 'text-muted-foreground hover:text-foreground'
               )}
               title="Bento Grid View"
@@ -610,7 +611,7 @@ export const ProjectsSection: React.FC = () => {
               type="button"
               onClick={() => setViewMode('matrix')}
               className={cn(
-                'px-2.5 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors',
+                'px-2.5 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer',
                 viewMode === 'matrix' ? 'bg-muted text-foreground' : 'text-muted-foreground hover:text-foreground'
               )}
               title="Engineering Matrix Table"
@@ -627,7 +628,7 @@ export const ProjectsSection: React.FC = () => {
             <button
               type="button"
               onClick={() => setSelectedSkill(null)}
-              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-foreground hover:bg-muted transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-foreground hover:bg-muted transition-colors cursor-pointer"
             >
               Filtered by: {selectedSkill}
               <X className="h-3 w-3 text-muted-foreground" />
@@ -638,31 +639,56 @@ export const ProjectsSection: React.FC = () => {
         {/* Main Content Area */}
         {filteredProjects.length > 0 ? (
           viewMode === 'bento' ? (
-            <motion.div
-              key={`${selectedCategory}-${selectedSkill ?? 'all'}`}
-              variants={projectListVariants}
-              initial="hidden"
-              animate="show"
-              className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
-            >
-              {heroProject && (
-                <ModernProjectCard
-                  project={heroProject}
-                  featured
-                  onInspectBlueprint={handleOpenBlueprint}
-                />
-              )}
-
-              <AnimatePresence mode="popLayout">
-                {standardProjects.map((project) => (
+            <div className="space-y-6">
+              <motion.div
+                key={`${selectedCategory}-${selectedSkill ?? 'all'}`}
+                variants={projectListVariants}
+                initial="hidden"
+                animate="show"
+                className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
+              >
+                {heroProject && (
                   <ModernProjectCard
-                    key={project.title}
-                    project={project}
+                    project={heroProject}
+                    featured
                     onInspectBlueprint={handleOpenBlueprint}
                   />
-                ))}
-              </AnimatePresence>
-            </motion.div>
+                )}
+
+                <AnimatePresence mode="popLayout">
+                  {(selectedCategory === 'All' && !selectedSkill && !showAllMobile
+                    ? standardProjects.slice(0, 3)
+                    : standardProjects
+                  ).map((project) => (
+                    <ModernProjectCard
+                      key={project.title}
+                      project={project}
+                      onInspectBlueprint={handleOpenBlueprint}
+                    />
+                  ))}
+                </AnimatePresence>
+              </motion.div>
+
+              {/* Mobile Expansion Toggle (Only when All category is active on small screens) */}
+              {selectedCategory === 'All' && !selectedSkill && standardProjects.length > 3 && (
+                <div className="md:hidden pt-2 flex justify-center">
+                  <button
+                    type="button"
+                    onClick={() => setShowAllMobile(!showAllMobile)}
+                    className="group/btn inline-flex items-center gap-2 pl-4 pr-2 py-2.5 rounded-full border border-border bg-card text-xs font-medium text-foreground hover:bg-muted transition-all shadow-xs cursor-pointer w-full justify-between"
+                  >
+                    <span>
+                      {showAllMobile
+                        ? 'Collapse Project Archive'
+                        : `Show All ${projects.length} Engineering Builds (${standardProjects.length - 3} more)`}
+                    </span>
+                    <span className="w-6 h-6 rounded-full bg-muted border border-border/80 flex items-center justify-center transition-transform duration-200 group-hover/btn:scale-105 shrink-0">
+                      <ArrowUpRight className={cn("w-3 h-3 text-muted-foreground group-hover/btn:text-foreground transition-transform duration-200", showAllMobile ? "rotate-[-90deg]" : "rotate-90")} />
+                    </span>
+                  </button>
+                </div>
+              )}
+            </div>
           ) : (
             <ProjectMatrixView
               projects={filteredProjects}

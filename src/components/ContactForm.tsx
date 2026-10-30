@@ -85,7 +85,7 @@ export const ContactForm = () => {
           onChange={handleChange}
           placeholder="e.g. Alex Morgan"
           required
-          className="rounded-xl border border-border bg-card text-foreground text-sm h-10 px-3.5"
+          className="rounded-xl border border-border bg-card text-foreground text-base sm:text-sm h-11 sm:h-10 px-3.5"
         />
       </div>
 
@@ -101,7 +101,7 @@ export const ContactForm = () => {
           onChange={handleChange}
           placeholder="alex@company.com"
           required
-          className="rounded-xl border border-border bg-card text-foreground text-sm h-10 px-3.5"
+          className="rounded-xl border border-border bg-card text-foreground text-base sm:text-sm h-11 sm:h-10 px-3.5"
         />
       </div>
 
@@ -116,7 +116,7 @@ export const ContactForm = () => {
           onChange={handleChange}
           placeholder="Engineering role / technical collaboration"
           required
-          className="rounded-xl border border-border bg-card text-foreground text-sm h-10 px-3.5"
+          className="rounded-xl border border-border bg-card text-foreground text-base sm:text-sm h-11 sm:h-10 px-3.5"
         />
       </div>
 
@@ -132,7 +132,7 @@ export const ContactForm = () => {
           placeholder="Tell me about your team, system challenges, or project requirements..."
           required
           rows={4}
-          className="rounded-xl border border-border bg-card text-foreground text-sm resize-none p-3.5"
+          className="rounded-xl border border-border bg-card text-foreground text-base sm:text-sm resize-none p-3.5"
         />
       </div>
 

@@ -82,7 +82,7 @@ export const GrindingActivitySection = () => {
                 href={`https://github.com/${GITHUB_USERNAME}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group/btn inline-flex items-center gap-2 pl-3.5 pr-1.5 py-1.5 rounded-full border border-border bg-muted/40 hover:bg-muted text-xs font-medium text-foreground transition-all shadow-2xs"
+                className="group/btn inline-flex items-center gap-2 pl-3.5 pr-1.5 py-1.5 rounded-full border border-border bg-muted/40 hover:bg-muted text-xs font-medium text-foreground transition-all shadow-2xs self-stretch sm:self-auto justify-center"
               >
                 <span>Inspect GitHub Profile</span>
                 <span className="w-5 h-5 rounded-full bg-background border border-border/70 flex items-center justify-center transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 shrink-0">
@@ -90,9 +90,25 @@ export const GrindingActivitySection = () => {
                 </span>
               </a>
             </div>
+
+            {/* High-Signal Metrics Strip */}
+            <div className="grid grid-cols-3 gap-2.5 mb-6">
+              <div className="p-3 rounded-xl border border-border/70 bg-muted/20 text-center">
+                <div className="text-lg sm:text-xl font-bold font-display text-foreground">1,500+</div>
+                <div className="text-[10px] sm:text-xs font-mono text-muted-foreground mt-0.5">Commits Tracked</div>
+              </div>
+              <div className="p-3 rounded-xl border border-border/70 bg-muted/20 text-center">
+                <div className="text-lg sm:text-xl font-bold font-display text-foreground">10+</div>
+                <div className="text-[10px] sm:text-xs font-mono text-muted-foreground mt-0.5">Public Repos</div>
+              </div>
+              <div className="p-3 rounded-xl border border-border/70 bg-muted/20 text-center">
+                <div className="text-lg sm:text-xl font-bold font-display text-emerald-600 dark:text-emerald-400">Daily</div>
+                <div className="text-[10px] sm:text-xs font-mono text-muted-foreground mt-0.5">Code Velocity</div>
+              </div>
+            </div>
             
             {/* Live GitHub Calendar Tracker */}
-            <div className="overflow-x-auto pb-2 pt-1 no-scrollbar">
+            <div className="relative overflow-x-auto pb-2 pt-1 no-scrollbar touch-pan-x">
               <div className="min-w-[720px] text-foreground flex justify-center">
                 <GitHubCalendar
                   username={GITHUB_USERNAME}
