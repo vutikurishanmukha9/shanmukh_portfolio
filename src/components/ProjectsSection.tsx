@@ -20,6 +20,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
 import { cn } from '@/lib/utils';
+import { BorderBeam } from '@/components/magicui/border-beam';
 import { useSkillFilter } from '@/context/SkillFilterContext';
 import { ProjectBlueprintDrawer, type BlueprintProject } from '@/components/ui/ProjectBlueprintDrawer';
 import {
@@ -272,11 +273,20 @@ const ModernProjectCard: React.FC<{
     <motion.div
       variants={projectCardVariants}
       className={cn(
-        'group p-1.5 rounded-[1.375rem] border border-border/80 bg-muted/20 shadow-xs hover:border-primary/40 hover:shadow-md transition-all duration-300 flex flex-col justify-between overflow-hidden',
+        'group p-1.5 rounded-[1.375rem] border border-border/80 bg-muted/20 shadow-xs hover:border-primary/40 hover:shadow-md transition-all duration-300 flex flex-col justify-between overflow-hidden relative',
         featured && 'md:col-span-2 xl:col-span-3'
       )}
     >
-      <div className="rounded-2xl border border-border/70 bg-card p-5 sm:p-6 flex flex-col justify-between h-full">
+      {featured && (
+        <BorderBeam
+          size={100}
+          duration={12}
+          delay={0}
+          colorFrom="hsl(var(--primary))"
+          colorTo="#10b981"
+        />
+      )}
+      <div className="rounded-2xl border border-border/70 bg-card p-5 sm:p-6 flex flex-col justify-between h-full relative z-10">
         <div className={cn(featured ? 'grid grid-cols-1 md:grid-cols-12 gap-6 items-center' : 'space-y-4')}>
           
           {/* Visual Mockup Container */}

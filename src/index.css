@@ -3,36 +3,36 @@
 @tailwind utilities;
 
 @layer base {
-  /* Functional Minimalism Design System (Zero Blue Tint, Strict Neutrals) */
+  /* Functional Minimalism Design System (Deep Obsidian Void Dark Mode by Default) */
   :root {
     --radius: 0.75rem;
-    --background: #fafafa;
-    --foreground: #171717;
-    --card: #ffffff;
-    --card-foreground: #171717;
-    --primary: #ea580c;
-    --primary-hover: #c2410c;
-    --primary-foreground: #ffffff;
-    --secondary: #f4f4f5;
-    --secondary-hover: #e4e4e7;
-    --secondary-foreground: #18181b;
-    --muted: #f4f4f5;
-    --muted-foreground: #71717a;
-    --accent: #f4f4f5;
-    --accent-foreground: #18181b;
+    --background: #050507;
+    --foreground: #f8fafc;
+    --card: #0d0e11;
+    --card-foreground: #f8fafc;
+    --primary: #f97316;
+    --primary-hover: #fb923c;
+    --primary-foreground: #000000;
+    --secondary: #131418;
+    --secondary-hover: #1a1c22;
+    --secondary-foreground: #f8fafc;
+    --muted: #111216;
+    --muted-foreground: #9ca3af;
+    --accent: #15161b;
+    --accent-foreground: #f8fafc;
     --destructive: #ef4444;
     --destructive-foreground: #ffffff;
-    --border: #e4e4e7;
-    --input: #e4e4e7;
-    --ring: #ea580c;
+    --border: #1e2025;
+    --input: #15161b;
+    --ring: #f97316;
 
-    --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
-    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
-    --shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.06), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
-    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.06), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
-    --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.6);
+    --shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.6);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.6);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.7);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.8);
+    --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.9);
 
     --font-head: 'Space Grotesk', -apple-system, sans-serif;
     --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -71,6 +71,36 @@
     --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.8);
     --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.9);
   }
+
+  .light {
+    --background: #fafafa;
+    --foreground: #171717;
+    --card: #ffffff;
+    --card-foreground: #171717;
+    --primary: #ea580c;
+    --primary-hover: #c2410c;
+    --primary-foreground: #ffffff;
+    --secondary: #f4f4f5;
+    --secondary-hover: #e4e4e7;
+    --secondary-foreground: #18181b;
+    --muted: #f4f4f5;
+    --muted-foreground: #71717a;
+    --accent: #f4f4f5;
+    --accent-foreground: #18181b;
+    --destructive: #ef4444;
+    --destructive-foreground: #ffffff;
+    --border: #e4e4e7;
+    --input: #e4e4e7;
+    --ring: #ea580c;
+
+    --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+    --shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.06), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.06), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+    --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  }
 }
 
 @layer base {
@@ -88,15 +118,17 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: clip;
-  }
-
-  .dark body {
     background-image: radial-gradient(
       ellipse 80% 45% at 50% -5%,
       rgba(249, 115, 22, 0.05),
       transparent 70%
     );
     background-attachment: fixed;
+  }
+
+  .light body,
+  html.light body {
+    background-image: none;
   }
 
   p {

@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
 import { ExternalLink, Copy, Check, BookOpen, Award, FileText } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { BlurFade } from '@/components/magicui/blur-fade';
+import { BorderBeam } from '@/components/magicui/border-beam';
 
 interface Publication {
   title: string;
@@ -106,15 +108,16 @@ export const PublicationsSection = () => {
         {/* Publication Cards */}
         <div className="space-y-6">
           {publications.map((pub, idx) => (
-            <motion.div
-              key={pub.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: idx * 0.1 }}
-              className="p-1.5 rounded-[1.375rem] border border-border/80 bg-muted/20 shadow-xs hover:border-primary/40 transition-all duration-200"
-            >
-              <div className="p-6 sm:p-8 rounded-2xl border border-border/70 bg-card">
+            <BlurFade key={pub.title} delay={0.1 + idx * 0.1} inView>
+              <div className="p-1.5 rounded-[1.375rem] border border-border/80 bg-muted/20 shadow-xs hover:border-primary/40 transition-all duration-200 relative overflow-hidden">
+                <BorderBeam
+                  size={100}
+                  duration={14}
+                  delay={0}
+                  colorFrom="hsl(var(--primary))"
+                  colorTo="#10b981"
+                />
+                <div className="p-6 sm:p-8 rounded-2xl border border-border/70 bg-card relative z-10">
                 <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
                   
                   {/* Left Column: Badges, Title, Authors, DOI & Abstract */}
@@ -224,7 +227,8 @@ export const PublicationsSection = () => {
 
                 </div>
               </div>
-            </motion.div>
+            </div>
+          </BlurFade>
           ))}
         </div>
 

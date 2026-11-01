@@ -99,12 +99,49 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(calc(-100% - var(--gap, 1rem)))" },
+        },
+        "marquee-vertical": {
+          from: { transform: "translateY(0)" },
+          to: { transform: "translateY(calc(-100% - var(--gap, 1rem)))" },
+        },
+        "border-beam": {
+          "100%": {
+            "offset-distance": "100%",
+          },
+        },
+        "shimmer-slide": {
+          to: {
+            transform: "translate(calc(100% - 1rem), 0)",
+          },
+        },
+        "spin-around": {
+          "0%": {
+            transform: "translateZ(0) rotate(0)",
+          },
+          "15%, 35%": {
+            transform: "translateZ(0) rotate(90deg)",
+          },
+          "65%, 85%": {
+            transform: "translateZ(0) rotate(270deg)",
+          },
+          "100%": {
+            transform: "translateZ(0) rotate(360deg)",
+          },
+        },
       },
       animation: {
         highlight: "highlight 0.6s ease forwards",
         flash: "flash 0.6s ease forwards",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        marquee: "marquee var(--duration, 30s) infinite linear",
+        "marquee-vertical": "marquee-vertical var(--duration, 30s) linear infinite",
+        "border-beam": "border-beam calc(var(--duration, 15) * 1s) infinite linear",
+        "shimmer-slide": "shimmer-slide var(--speed, 3s) ease-in-out infinite alternate",
+        "spin-around": "spin-around calc(var(--speed, 3s) * 2) infinite linear",
       },
     },
   },

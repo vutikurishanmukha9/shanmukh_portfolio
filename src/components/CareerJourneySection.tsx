@@ -1,7 +1,7 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
-import { Briefcase, Calendar, MapPin } from 'lucide-react';
+import { Calendar, MapPin } from 'lucide-react';
+import { BlurFade } from '@/components/magicui/blur-fade';
 
 type Experience = {
   title: string;
@@ -46,45 +46,28 @@ export const CareerJourneySection = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
         
         {/* Section Header */}
-        <div className="max-w-2xl mb-8 sm:mb-10">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-muted/60 text-xs font-medium text-foreground mb-3"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-            <span>Professional Experience</span>
-          </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.05 }}
-            className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground"
-          >
-            Career Milestones
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="mt-3 text-muted-foreground text-base leading-relaxed"
-          >
-            Hands-on technical internships building data intelligence, cloud automation, and analytics pipelines.
-          </motion.p>
-        </div>
+        <BlurFade delay={0.05} inView>
+          <div className="max-w-2xl mb-8 sm:mb-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-muted/60 text-xs font-medium text-foreground mb-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+              <span>Professional Experience</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
+              Career Milestones
+            </h2>
+            <p className="mt-3 text-muted-foreground text-base leading-relaxed">
+              Hands-on technical internships building data intelligence, cloud automation, and analytics pipelines.
+            </p>
+          </div>
+        </BlurFade>
 
-        {/* Minimalist Timeline Stack */}
+        {/* Minimalist Timeline Stack with Magic UI BlurFade */}
         <div className="relative border-l border-border pl-6 sm:pl-8 ml-3 sm:ml-4 space-y-10 sm:space-y-12">
           {experiences.map((exp, index) => (
-            <motion.div
+            <BlurFade
               key={`${exp.title}-${exp.company}`}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.35, delay: index * 0.08 }}
+              delay={0.1 + index * 0.08}
+              inView
               className="relative"
             >
               {/* Timeline Bullet Node */}
@@ -130,7 +113,7 @@ export const CareerJourneySection = () => {
                   ))}
                 </div>
               </div>
-            </motion.div>
+            </BlurFade>
           ))}
         </div>
 

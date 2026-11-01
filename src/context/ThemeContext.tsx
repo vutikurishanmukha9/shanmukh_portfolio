@@ -13,7 +13,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('portfolio-theme') as Theme | null;
-      if (saved === 'dark' || saved === 'light') return saved;
+      if (saved === 'light') return 'light';
       return 'dark'; // Deep Obsidian Void by default
     }
     return 'dark';
@@ -24,9 +24,11 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     if (theme === 'dark') {
       root.classList.add('dark');
       root.classList.remove('light');
+      document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#050507');
     } else {
       root.classList.add('light');
       root.classList.remove('dark');
+      document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#fafafa');
     }
     localStorage.setItem('portfolio-theme', theme);
   }, [theme]);

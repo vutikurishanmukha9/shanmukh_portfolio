@@ -11,6 +11,7 @@
     "prefix": ""
   },
   "registries": {
+    "@magicui": "https://magicui.design/r/{name}.json",
     "@neobrutalism": "https://neobrutalism.com/r/radix/{name}.json",
     "@neobrutalism-base": "https://neobrutalism.com/r/base/{name}.json"
   },

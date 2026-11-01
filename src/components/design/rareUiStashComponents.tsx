@@ -778,7 +778,7 @@ const DeleteButtonPreview: React.FC<{ ctx: StashStateContext }> = ({ ctx }) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    let interval: any;
+    let interval: ReturnType<typeof setInterval> | undefined;
     if (holding && !deleted) {
       interval = setInterval(() => {
         setProgress(p => {

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Github, Linkedin, Mail, ExternalLink, ArrowUp } from 'lucide-react';
+import { Dock, DockIcon } from '@/components/magicui/dock';
 
 const quickLinks = [
   { label: 'About', href: '#about' },
@@ -65,19 +66,31 @@ export const Footer = () => {
             <p className="text-muted-foreground leading-relaxed text-sm max-w-sm font-sans">
               AI Systems & Full-Stack Engineer building high-throughput retrieval pipelines, microservices, and reliable cloud software.
             </p>
-            <div className="flex gap-2 pt-2">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.name}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 rounded-xl border border-border bg-card hover:bg-muted text-muted-foreground hover:text-foreground shadow-xs transition-colors"
-                  aria-label={social.name}
-                >
-                  <social.icon className="h-4 w-4" />
-                </a>
-              ))}
+            {/* Interactive Magic UI Dock */}
+            <div className="pt-2">
+              <Dock className="mx-0 mt-0 h-[48px] bg-card/60 border-border/80 p-1.5 gap-1.5">
+                {socialLinks.map((social) => {
+                  const Icon = social.icon;
+                  return (
+                    <DockIcon
+                      key={social.name}
+                      size={34}
+                      magnification={46}
+                      className="border border-border/60 bg-muted/40 hover:bg-muted text-muted-foreground hover:text-foreground"
+                    >
+                      <a
+                        href={social.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center w-full h-full"
+                        aria-label={social.name}
+                      >
+                        <Icon className="h-4 w-4" />
+                      </a>
+                    </DockIcon>
+                  );
+                })}
+              </Dock>
             </div>
           </div>
 
