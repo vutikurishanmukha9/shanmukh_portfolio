@@ -128,7 +128,7 @@ const projects: Project[] = [
   {
     title: 'Ele-Visualize',
     description: 'Interactive 3D chemical element orbital visualizer and hand gesture-controlled molecular structure modeler.',
-    impact: 'Uses MediaPipe hand-tracking computer vision to let students manipulate virtual 3D atoms in real time.',
+    impact: 'Leverages MediaPipe spatial vision to enable real-time 3D orbital manipulation without tactile hardware.',
     soloBuild: 'Solo research prototype',
     metrics: ['60 FPS WebGL', 'Sub-10ms gesture response', 'Full periodic table'],
     tech: ['Three.js', 'React', 'MediaPipe', 'WebXR', 'Python'],
@@ -179,7 +179,7 @@ const projects: Project[] = [
     description: 'Accessibility-first virtual keyboard interface driven entirely by computer vision fingertip tracking and eye blinks.',
     impact: 'Enables individuals with severe motor disabilities to type and communicate using any basic laptop webcam.',
     soloBuild: 'Solo accessibility build',
-    metrics: ['98% tracking accuracy', 'Zero specialized hardware', 'Real-time OpenCV'],
+    metrics: ['98% spatial coordinate precision', 'Zero specialized hardware', 'Real-time OpenCV'],
     tech: ['Python', 'OpenCV', 'MediaPipe', 'NumPy', 'Tkinter'],
     category: 'Computer Vision',
     focus: 'Assistive Tech',
@@ -328,7 +328,7 @@ const ModernProjectCard: React.FC<{
               {/* Impact Metric Box */}
               <div className="mt-3.5 p-3 rounded-xl border border-border/70 bg-muted/20 text-xs font-mono">
                 <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold block mb-0.5">
-                  SYSTEM IMPACT
+                  ENGINEERING HIGHLIGHT
                 </span>
                 <p className="text-foreground font-medium leading-relaxed">
                   {project.impact}

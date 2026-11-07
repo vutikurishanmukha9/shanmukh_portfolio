@@ -142,7 +142,7 @@ export const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
                 <li className="flex items-start justify-between gap-2.5 p-3 rounded-xl border border-border bg-card">
                   <div className="flex items-start gap-2.5">
                     <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                    <span><strong>IEEE Published Researcher:</strong> First author on intelligent IoT and ML signal telemetry architecture published at IEEE EAIC 2025 (NIT Jalandhar).</span>
+                    <span><strong>IEEE Published Researcher:</strong> First author on edge sensor intelligence and spatial occupancy analytics published at IEEE EAIC 2025 (NIT Jalandhar).</span>
                   </div>
                   <a
                     href="https://ieeexplore.ieee.org/document/11101373"

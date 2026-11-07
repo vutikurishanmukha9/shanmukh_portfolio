@@ -15,13 +15,13 @@ export default {
     },
     extend: {
       fontFamily: {
-        head: ['"Space Grotesk"', 'sans-serif'],
-        sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-        display: ['"Space Grotesk"', 'sans-serif'],
-        grotesk: ['"Space Grotesk"', 'sans-serif'],
+        head: ['"Cabinet Grotesk"', '"Outfit"', '"Geist"', '"Plus Jakarta Sans"', '-apple-system', 'sans-serif'],
+        display: ['"Cabinet Grotesk"', '"Outfit"', '"Geist"', '"Plus Jakarta Sans"', '-apple-system', 'sans-serif'],
+        sans: ['"Satoshi"', '"Plus Jakarta Sans"', '"Geist"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        grotesk: ['"Cabinet Grotesk"', '"Outfit"', '"Geist"', 'sans-serif'],
         jakarta: ['"Plus Jakarta Sans"', '-apple-system', 'sans-serif'],
-        serif: ['Cormorant Garamond', 'Georgia', 'serif'],
-        mono: ['"JetBrains Mono"', 'monospace'],
+        serif: ['"Instrument Serif"', '"Cormorant Garamond"', 'Georgia', 'serif'],
+        mono: ['"Geist Mono"', '"JetBrains Mono"', 'ui-monospace', 'monospace'],
       },
       boxShadow: {
         xs: "var(--shadow-xs)",

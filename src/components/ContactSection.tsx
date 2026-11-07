@@ -138,7 +138,7 @@ export const ContactSection = () => {
                 </div>
 
                 <p className="text-muted-foreground text-sm leading-relaxed mb-6 font-sans">
-                  Whether you are hiring for a software engineering role, discussing distributed RAG architectures, or reviewing production telemetry systems, I welcome thoughtful technical conversations.
+                  Whether you are hiring for a software engineering role, exploring high-throughput data architectures, or discussing compiler-level developer tools, I welcome thoughtful technical conversations.
                 </p>
 
                 {/* Direct Contact Cards */}
@@ -163,7 +163,7 @@ export const ContactSection = () => {
               {/* Social Profiles */}
               <div className="pt-6 border-t border-border">
                 <p className="text-xs font-mono font-medium text-muted-foreground uppercase tracking-wider mb-3">
-                  Verified Profiles
+                  Networks & Code
                 </p>
                 <div className="flex flex-wrap gap-2 sm:gap-2.5">
                   {socialLinks.map((social) => {

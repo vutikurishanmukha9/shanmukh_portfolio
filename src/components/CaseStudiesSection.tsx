@@ -91,7 +91,7 @@ const caseStudies: CaseStudy[] = [
       { label: 'Exec Churn', value: '79.2%' },
     ],
     tabs: {
-      bottleneck: 'HR leadership faced severe employee churn, losing over half of the workforce (51.1%) over the tracking period, with no visibility into early-career exits, performance linkages, or role-specific talent drain.',
+      bottleneck: 'HR leadership faced severe employee churn, losing over half of the workforce (51.1%) over the observation window, with no visibility into early-career exits, performance linkages, or role-specific talent drain.',
       decision: 'Ingested 3,000 employee records to construct normalized tenure spans, exited indicators, and age cohorts. Coded dynamic seaborn visualization functions and programmatic cell manipulation layers in Python.',
       outcome: 'Isolated a critical year-one failure point (47.3% of exits). Exposed a major performance paradox where high performers leave at the same rate as PIP employees (52%), and discovered a 79.2% Executive Office turnover.',
     },
@@ -241,7 +241,7 @@ const CaseStudyCard = ({ study, index }: { study: CaseStudy; index: number }) =>
                   viewMode === 'dashboard' ? "bg-muted text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
-                Telemetry
+                Interactive View
               </button>
               <button
                 type="button"

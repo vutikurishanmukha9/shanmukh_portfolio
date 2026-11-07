@@ -20,7 +20,7 @@ export const GrindingActivitySection = () => {
   const { theme } = useTheme();
 
   return (
-    <SectionWrapper id="activity" className="py-10 sm:py-12 bg-muted/10 border-t border-border relative overflow-hidden">
+    <SectionWrapper id="activity" className="py-16 sm:py-24 bg-muted/10 border-t border-border relative overflow-hidden">
       {/* Background Architectural Grid Pattern */}
       <GridPattern
         width={40}
@@ -42,23 +42,23 @@ export const GrindingActivitySection = () => {
         {/* Section Header */}
         <BlurFade delay={0.05} inView>
           <div className="max-w-2xl mb-8 sm:mb-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-card text-xs font-medium text-foreground mb-3">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-border bg-card text-xs font-mono font-medium text-foreground mb-4 shadow-2xs">
               <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-              <span>Open Source Velocity</span>
+              <span>OPEN SOURCE ARCHITECTURE</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
-              Engineering Activity
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground font-display leading-[1.12]">
+              Public Code & Systems Cadence
             </h2>
-            <p className="mt-3 text-muted-foreground text-base leading-relaxed">
-              Live tracking of continuous engineering commits, open-source repositories, and code contributions.
+            <p className="mt-4 text-muted-foreground text-base sm:text-lg leading-relaxed">
+              Writing production architectures, developer tools, and reproducible benchmarks in public view.
             </p>
           </div>
         </BlurFade>
 
-        {/* GitHub Calendar Card */}
+        {/* GitHub Calendar Card (Double-Bezel Hardware Architecture) */}
         <BlurFade delay={0.15} inView>
-          <div className="p-1.5 rounded-[1.375rem] border border-border/80 bg-muted/20 shadow-xs hover:border-primary/40 transition-all duration-200">
-            <div className="rounded-2xl border border-border/70 bg-card p-6 sm:p-8 shadow-xs">
+          <div className="p-1.5 rounded-[1.5rem] border border-border/80 bg-muted/20 shadow-xs hover:border-primary/40 transition-all duration-200">
+            <div className="rounded-[1.375rem] border border-border/70 bg-card p-6 sm:p-8 shadow-xs">
               {/* Card Header */}
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 pb-4 border-b border-border gap-4">
                 <div className="flex items-center gap-3">
@@ -68,9 +68,9 @@ export const GrindingActivitySection = () => {
                   <div>
                     <div className="flex items-center gap-2">
                       <h3 className="text-base font-bold text-foreground">GitHub Contributions</h3>
-                      <span className="inline-flex items-center gap-1 text-[11px] font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full">
+                      <span className="inline-flex items-center gap-1 text-[11px] font-mono font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                        Live Sync
+                        Live Feed
                       </span>
                     </div>
                     <p className="text-xs font-mono text-muted-foreground mt-0.5">@{GITHUB_USERNAME}</p>
@@ -83,7 +83,7 @@ export const GrindingActivitySection = () => {
                   rel="noopener noreferrer"
                   className="group/btn inline-flex items-center gap-2 pl-3.5 pr-1.5 py-1.5 rounded-full border border-border bg-muted/40 hover:bg-muted text-xs font-medium text-foreground transition-all shadow-2xs self-stretch sm:self-auto justify-center"
                 >
-                  <span>Inspect GitHub Profile</span>
+                  <span>Inspect GitHub Repositories</span>
                   <span className="w-5 h-5 rounded-full bg-background border border-border/70 flex items-center justify-center transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 shrink-0">
                     <ArrowUpRight className="w-3 h-3 text-muted-foreground group-hover/btn:text-foreground" />
                   </span>
@@ -91,22 +91,22 @@ export const GrindingActivitySection = () => {
               </div>
 
               {/* High-Signal Metrics Strip with Magic UI NumberTicker */}
-              <div className="grid grid-cols-3 gap-2.5 mb-6">
-                <div className="p-3 rounded-xl border border-border/70 bg-muted/20 text-center">
-                  <div className="text-lg sm:text-xl font-bold font-display text-foreground">
+              <div className="grid grid-cols-3 gap-2.5 sm:gap-3 mb-6">
+                <div className="p-3.5 rounded-xl border border-border/70 bg-muted/20 text-center">
+                  <div className="text-lg sm:text-2xl font-bold font-display text-foreground">
                     <NumberTicker value={1500} suffix="+" />
                   </div>
-                  <div className="text-[10px] sm:text-xs font-mono text-muted-foreground mt-0.5">Commits Tracked</div>
+                  <div className="text-[11px] sm:text-xs font-mono text-muted-foreground mt-1">Public Contributions</div>
                 </div>
-                <div className="p-3 rounded-xl border border-border/70 bg-muted/20 text-center">
-                  <div className="text-lg sm:text-xl font-bold font-display text-foreground">
+                <div className="p-3.5 rounded-xl border border-border/70 bg-muted/20 text-center">
+                  <div className="text-lg sm:text-2xl font-bold font-display text-foreground">
                     <NumberTicker value={10} suffix="+" />
                   </div>
-                  <div className="text-[10px] sm:text-xs font-mono text-muted-foreground mt-0.5">Public Repos</div>
+                  <div className="text-[11px] sm:text-xs font-mono text-muted-foreground mt-1">Open Repositories</div>
                 </div>
-                <div className="p-3 rounded-xl border border-border/70 bg-muted/20 text-center">
-                  <div className="text-lg sm:text-xl font-bold font-display text-emerald-600 dark:text-emerald-400">Daily</div>
-                  <div className="text-[10px] sm:text-xs font-mono text-muted-foreground mt-0.5">Code Velocity</div>
+                <div className="p-3.5 rounded-xl border border-border/70 bg-muted/20 text-center">
+                  <div className="text-lg sm:text-2xl font-bold font-display text-emerald-600 dark:text-emerald-400">Continuous</div>
+                  <div className="text-[11px] sm:text-xs font-mono text-muted-foreground mt-1">Commit Cadence</div>
                 </div>
               </div>
               

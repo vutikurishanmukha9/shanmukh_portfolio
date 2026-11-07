@@ -101,7 +101,7 @@ export const PublicationsSection = () => {
             transition={{ delay: 0.1 }}
             className="mt-3 text-muted-foreground text-base leading-relaxed"
           >
-            Peer-reviewed research exploring embedded cognitive sensing, telemetry pipelines, and autonomous edge intelligence published in IEEE Xplore.
+            Peer-reviewed research exploring spatial edge sensing, distributed sensor arrays, and autonomous energy optimization published in IEEE Xplore.
           </motion.p>
         </div>
 
