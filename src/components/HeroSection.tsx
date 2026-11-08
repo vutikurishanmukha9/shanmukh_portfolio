@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, Github, Linkedin, Mail, ArrowDown, GitBranch } from 'lucide-react';
+import { ArrowUpRight, Github, Linkedin, Mail, ArrowDown, GitBranch, Copy, Check } from 'lucide-react';
 import { ResumeModal } from '@/components/ResumeModal';
 import { Marquee } from '@/components/magicui/marquee';
 import { BorderBeam } from '@/components/magicui/border-beam';
@@ -112,8 +112,15 @@ const FLAGSHIP_SYSTEMS: Record<SystemKey, SystemArchitecture> = {
 export const HeroSection = () => {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
   const [activeSystemKey, setActiveSystemKey] = useState<SystemKey>('contextly');
+  const [copiedCommand, setCopiedCommand] = useState(false);
 
   const activeSystem = FLAGSHIP_SYSTEMS[activeSystemKey];
+
+  const handleCopyCommand = (cmd: string) => {
+    navigator.clipboard.writeText(cmd);
+    setCopiedCommand(true);
+    setTimeout(() => setCopiedCommand(false), 2000);
+  };
 
   const handleScrollToProjects = () => {
     const el = document.getElementById('projects');
@@ -208,7 +215,7 @@ export const HeroSection = () => {
               <ShimmerButton
                 type="button"
                 onClick={handleScrollToProjects}
-                className="gap-2.5 pl-5 pr-2.5 py-2.5 text-xs sm:text-sm font-medium"
+                className="gap-2.5 pl-5 pr-2.5 py-2.5 text-xs sm:text-sm font-medium active:scale-[0.98] transition-transform"
               >
                 <span>Explore Featured Systems</span>
                 <span className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-background/20 flex items-center justify-center transition-transform duration-200 group-hover:translate-y-0.5 shrink-0">
@@ -219,7 +226,7 @@ export const HeroSection = () => {
               <button
                 type="button"
                 onClick={() => setIsResumeOpen(true)}
-                className="group/btn inline-flex items-center gap-2.5 pl-4 pr-1.5 py-2.5 rounded-full border border-border bg-card text-foreground text-xs sm:text-sm font-medium hover:bg-muted/70 transition-all shadow-2xs cursor-pointer"
+                className="group/btn inline-flex items-center gap-2.5 pl-4 pr-1.5 py-2.5 rounded-full border border-border bg-card text-foreground text-xs sm:text-sm font-medium hover:bg-muted/70 active:scale-[0.98] transition-all shadow-2xs cursor-pointer"
               >
                 <span>Curated CV & Technical Profile</span>
                 <span className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-muted border border-border/80 flex items-center justify-center transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 shrink-0">
@@ -369,12 +376,41 @@ export const HeroSection = () => {
 
                   {/* Interactive CLI Console View */}
                   <div className="rounded-xl border border-border/80 bg-black/90 p-4 font-mono text-xs text-emerald-400 space-y-1.5 overflow-x-auto shadow-inner">
-                    <div className="text-muted-foreground flex items-center justify-between pb-2 border-b border-white/10 mb-2">
-                      <span className="text-[11px] text-white/70 font-semibold">$ {activeSystem.cliCommand}</span>
-                      <span className="text-[10px] font-mono text-emerald-400/90 flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                        DAEMON_READY
-                      </span>
+                    <div className="text-muted-foreground flex items-center justify-between pb-2.5 border-b border-white/10 mb-2 gap-2">
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        {/* Hardware Window Dots */}
+                        <div className="flex items-center gap-1.5 shrink-0">
+                          <span className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
+                          <span className="w-2.5 h-2.5 rounded-full bg-amber-500/70" />
+                          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/70" />
+                        </div>
+                        <span className="text-[11px] text-white/70 font-semibold truncate">$ {activeSystem.cliCommand}</span>
+                      </div>
+
+                      <div className="flex items-center gap-2 shrink-0">
+                        <button
+                          type="button"
+                          onClick={() => handleCopyCommand(activeSystem.cliCommand)}
+                          className="inline-flex items-center gap-1 text-[10px] text-white/60 hover:text-white px-2 py-0.5 rounded border border-white/10 bg-white/5 transition-colors cursor-pointer"
+                          title="Copy command"
+                        >
+                          {copiedCommand ? (
+                            <>
+                              <Check className="w-3 h-3 text-emerald-400" />
+                              <span className="text-emerald-400 font-semibold">Copied</span>
+                            </>
+                          ) : (
+                            <>
+                              <Copy className="w-3 h-3" />
+                              <span>Copy</span>
+                            </>
+                          )}
+                        </button>
+                        <span className="text-[10px] font-mono text-emerald-400/90 hidden sm:flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                          READY
+                        </span>
+                      </div>
                     </div>
                     {activeSystem.cliOutput.map((line, i) => (
                       <div key={i} className="leading-relaxed">

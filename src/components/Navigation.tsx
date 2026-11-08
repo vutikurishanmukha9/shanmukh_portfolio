@@ -16,6 +16,18 @@ const navItems = [
   { label: "Contact", href: "#contact" },
 ];
 
+const sectionMappings = [
+  { id: "contact", nav: "#contact" },
+  { id: "publications", nav: "#certifications" },
+  { id: "certifications", nav: "#certifications" },
+  { id: "career", nav: "#career" },
+  { id: "skills", nav: "#skills" },
+  { id: "case-studies", nav: "#projects" },
+  { id: "projects", nav: "#projects" },
+  { id: "activity", nav: "#about" },
+  { id: "about", nav: "#about" },
+];
+
 export const Navigation = () => {
   const [activeHash, setActiveHash] = useState("#home");
   const [isScrolled, setIsScrolled] = useState(false);
@@ -24,30 +36,48 @@ export const Navigation = () => {
   const { scrollTo } = useLenis();
 
   useEffect(() => {
+    let animationFrameId: number;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 40);
-      const viewportCenter = window.innerHeight * 0.35;
-      let found = false;
-      const sections = navItems.map((item) => item.href.substring(1));
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const element = document.getElementById(sections[i]);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= viewportCenter && rect.bottom > viewportCenter) {
-            setActiveHash(`#${sections[i]}`);
-            found = true;
-            break;
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = requestAnimationFrame(() => {
+        setIsScrolled(window.scrollY > 40);
+
+        // Top of page -> Home
+        if (window.scrollY < 180) {
+          setActiveHash("#home");
+          return;
+        }
+
+        // Near bottom of page -> Contact
+        const scrollBottom = window.innerHeight + window.scrollY;
+        const documentHeight = document.documentElement.scrollHeight;
+        if (scrollBottom >= documentHeight - 120) {
+          setActiveHash("#contact");
+          return;
+        }
+
+        // Viewport focus horizon line (38% from top of viewport)
+        const focusHorizon = window.innerHeight * 0.38;
+        for (const section of sectionMappings) {
+          const el = document.getElementById(section.id);
+          if (el) {
+            const rect = el.getBoundingClientRect();
+            if (rect.top <= focusHorizon && rect.bottom > focusHorizon) {
+              setActiveHash(section.nav);
+              return;
+            }
           }
         }
-      }
-      if (!found && window.scrollY < 120) {
-        setActiveHash("#home");
-      }
+      });
     };
 
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -92,7 +122,7 @@ export const Navigation = () => {
           </button>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center gap-1 px-1">
+          <div className="hidden md:flex items-center gap-0.5 px-1">
             {navItems.map((item) => {
               const isActive = activeHash === item.href;
               return (
@@ -101,20 +131,25 @@ export const Navigation = () => {
                   href={item.href}
                   onClick={(e) => handleScrollTo(e, item.href)}
                   className={cn(
-                    "relative px-3 py-1.5 text-xs font-medium rounded-full transition-colors whitespace-nowrap shrink-0",
+                    "relative px-3.5 py-1.5 text-xs font-medium rounded-full transition-colors duration-200 whitespace-nowrap shrink-0 flex items-center justify-center",
                     isActive
-                      ? "text-foreground font-semibold"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                      ? "text-primary font-semibold"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
                   )}
                 >
                   {isActive && (
                     <motion.div
                       layoutId="active-nav-indicator"
-                      className="absolute inset-0 bg-muted rounded-full -z-10"
-                      transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                      className="absolute inset-0 bg-primary/20 border border-primary/45 rounded-full shadow-[0_0_12px_rgba(249,115,22,0.3)] z-0 pointer-events-none"
+                      transition={{
+                        type: "spring",
+                        stiffness: 380,
+                        damping: 30,
+                        mass: 0.6,
+                      }}
                     />
                   )}
-                  {item.label}
+                  <span className="relative z-10">{item.label}</span>
                 </a>
               );
             })}
@@ -197,12 +232,17 @@ export const Navigation = () => {
                     className={cn(
                       "px-4 py-3 rounded-xl text-lg font-semibold tracking-tight flex items-center justify-between transition-colors",
                       isActive
-                        ? "bg-foreground text-background"
+                        ? "bg-primary/20 text-primary border border-primary/45 shadow-xs"
                         : "text-foreground hover:bg-muted/70"
                     )}
                   >
-                    <span>{item.label}</span>
-                    <span className={cn("text-xs font-mono", isActive ? "text-background/70" : "text-muted-foreground")}>
+                    <span className="flex items-center gap-2.5">
+                      {isActive && (
+                        <span className="w-2 h-2 rounded-full bg-primary animate-pulse shrink-0" />
+                      )}
+                      <span>{item.label}</span>
+                    </span>
+                    <span className={cn("text-xs font-mono", isActive ? "text-primary font-bold" : "text-muted-foreground")}>
                       0{idx + 1}
                     </span>
                   </motion.a>

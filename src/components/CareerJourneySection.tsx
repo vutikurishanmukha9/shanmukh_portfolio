@@ -42,20 +42,20 @@ const experiences: Experience[] = [
 
 export const CareerJourneySection = () => {
   return (
-    <SectionWrapper id="career" className="py-10 sm:py-12 border-t border-border bg-background">
+    <SectionWrapper id="career" className="py-20 sm:py-28 md:py-32 border-t border-border bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
         
         {/* Section Header */}
         <BlurFade delay={0.05} inView>
-          <div className="max-w-2xl mb-8 sm:mb-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-muted/60 text-xs font-medium text-foreground mb-3">
+          <div className="max-w-2xl mb-10 sm:mb-14">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-border bg-muted/60 text-xs font-mono font-medium text-foreground mb-4 shadow-2xs">
               <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-              <span>Professional Experience</span>
+              <span>PROFESSIONAL EXPERIENCE</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground font-display leading-[1.12]">
               Career Milestones
             </h2>
-            <p className="mt-3 text-muted-foreground text-base leading-relaxed">
+            <p className="mt-4 text-muted-foreground text-base sm:text-lg leading-relaxed max-w-[62ch]">
               Hands-on technical internships building data intelligence, cloud automation, and analytics pipelines.
             </p>
           </div>
@@ -71,10 +71,11 @@ export const CareerJourneySection = () => {
               className="relative"
             >
               {/* Timeline Bullet Node */}
-              <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-background border-2 border-primary" />
+              <div className="absolute -left-[31px] sm:-left-[39px] top-4 w-3.5 h-3.5 rounded-full bg-background border-2 border-primary z-10" />
 
-              {/* Experience Card */}
-              <div className="p-6 rounded-2xl border border-border bg-card shadow-xs hover:border-primary/40 transition-colors">
+              {/* Experience Card (Double-Bezel Hardware Enclosure) */}
+              <div className="p-1.5 rounded-[1.5rem] border border-border/80 bg-muted/20 shadow-xs hover:border-primary/40 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                <div className="p-6 rounded-[1.375rem] border border-border bg-card shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
                   <div>
                     <h3 className="text-lg font-bold text-foreground">
@@ -106,14 +107,15 @@ export const CareerJourneySection = () => {
                   {exp.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="px-2.5 py-0.5 text-xs font-medium rounded-md bg-muted/60 text-foreground border border-border/60"
+                      className="px-2.5 py-0.5 text-xs font-mono rounded-md bg-muted/40 text-muted-foreground border border-border/50 hover:text-foreground transition-colors"
                     >
                       {skill}
                     </span>
                   ))}
                 </div>
               </div>
-            </BlurFade>
+            </div>
+          </BlurFade>
           ))}
         </div>
 

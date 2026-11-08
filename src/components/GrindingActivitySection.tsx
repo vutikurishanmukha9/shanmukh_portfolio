@@ -20,7 +20,7 @@ export const GrindingActivitySection = () => {
   const { theme } = useTheme();
 
   return (
-    <SectionWrapper id="activity" className="py-16 sm:py-24 bg-muted/10 border-t border-border relative overflow-hidden">
+    <SectionWrapper id="activity" className="py-20 sm:py-28 md:py-32 bg-muted/10 border-t border-border relative overflow-hidden">
       {/* Background Architectural Grid Pattern */}
       <GridPattern
         width={40}
@@ -49,7 +49,7 @@ export const GrindingActivitySection = () => {
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground font-display leading-[1.12]">
               Public Code & Systems Cadence
             </h2>
-            <p className="mt-4 text-muted-foreground text-base sm:text-lg leading-relaxed">
+            <p className="mt-4 text-muted-foreground text-base sm:text-lg leading-[1.7] max-w-[62ch]">
               Writing production architectures, developer tools, and reproducible benchmarks in public view.
             </p>
           </div>
@@ -58,7 +58,7 @@ export const GrindingActivitySection = () => {
         {/* GitHub Calendar Card (Double-Bezel Hardware Architecture) */}
         <BlurFade delay={0.15} inView>
           <div className="p-1.5 rounded-[1.5rem] border border-border/80 bg-muted/20 shadow-xs hover:border-primary/40 transition-all duration-200">
-            <div className="rounded-[1.375rem] border border-border/70 bg-card p-6 sm:p-8 shadow-xs">
+            <div className="rounded-[1.375rem] border border-border/70 bg-card p-6 sm:p-8 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]">
               {/* Card Header */}
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 pb-4 border-b border-border gap-4">
                 <div className="flex items-center gap-3">
@@ -81,7 +81,7 @@ export const GrindingActivitySection = () => {
                   href={`https://github.com/${GITHUB_USERNAME}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group/btn inline-flex items-center gap-2 pl-3.5 pr-1.5 py-1.5 rounded-full border border-border bg-muted/40 hover:bg-muted text-xs font-medium text-foreground transition-all shadow-2xs self-stretch sm:self-auto justify-center"
+                  className="group/btn inline-flex items-center gap-2 pl-3.5 pr-1.5 py-1.5 rounded-full border border-border bg-muted/40 hover:bg-muted active:scale-[0.98] text-xs font-medium text-foreground transition-all shadow-2xs self-stretch sm:self-auto justify-center"
                 >
                   <span>Inspect GitHub Repositories</span>
                   <span className="w-5 h-5 rounded-full bg-background border border-border/70 flex items-center justify-center transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 shrink-0">

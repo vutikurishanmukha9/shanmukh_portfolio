@@ -46,22 +46,22 @@ export const SkillsSection = () => {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   return (
-    <SectionWrapper id="skills" className="py-10 sm:py-12 bg-background border-t border-border">
+    <SectionWrapper id="skills" className="py-20 sm:py-28 md:py-32 bg-background border-t border-border">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
         
         {/* Section Header */}
         <BlurFade delay={0.05} inView>
-          <div className="max-w-2xl mb-8 sm:mb-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-muted/60 text-xs font-medium text-foreground mb-3">
+          <div className="max-w-2xl mb-10 sm:mb-14">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-border bg-muted/60 text-xs font-mono font-medium text-foreground mb-4 shadow-2xs">
               <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-              <span>Technical Capabilities</span>
+              <span>TECHNICAL CAPABILITIES</span>
             </div>
             
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground font-display leading-[1.12]">
               Architecture & Tech Stack
             </h2>
             
-            <p className="mt-3 text-muted-foreground text-base leading-relaxed">
+            <p className="mt-4 text-muted-foreground text-base sm:text-lg leading-relaxed max-w-[62ch]">
               A disciplined stack designed for high throughput, production reliability, and scalable machine intelligence.
             </p>
           </div>
@@ -78,11 +78,11 @@ export const SkillsSection = () => {
                 <div
                   onMouseEnter={() => setActiveCategory(category.title)}
                   onMouseLeave={() => setActiveCategory(null)}
-                  className={`p-1.5 rounded-[1.375rem] border transition-all duration-300 min-w-0 flex flex-col justify-between h-full ${
+                  className={`p-1.5 rounded-[1.5rem] border transition-all duration-300 min-w-0 flex flex-col justify-between h-full hover:-translate-y-1 hover:shadow-xl ${
                     isHovered ? 'border-primary/50 shadow-md bg-muted/40' : 'border-border/80 shadow-2xs bg-muted/20'
                   }`}
                 >
-                  <div className="p-4 sm:p-5 lg:p-6 rounded-2xl border border-border/70 bg-card flex flex-col justify-between h-full min-w-0">
+                  <div className="p-5 sm:p-6 lg:p-7 rounded-[1.375rem] border border-border/70 bg-card shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)] flex flex-col justify-between h-full min-w-0">
                     <div className="min-w-0">
                       {/* Card Header */}
                       <div className="flex items-start gap-3 sm:gap-4 mb-4">

@@ -1,17 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
-import { CheckCircle2, Award, FileCode2, Cpu, Terminal as TerminalIcon, Network, Layers } from 'lucide-react';
+import { CheckCircle2, Award, FileCode2, Cpu, Terminal as TerminalIcon, Network, Layers, Copy, Check } from 'lucide-react';
 import { Terminal, TypingAnimation, AnimatedSpan } from '@/components/magicui/terminal';
 import { BlurFade } from '@/components/magicui/blur-fade';
 
 export const AboutSection = () => {
+  const [copiedCmd, setCopiedCmd] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText('contextly index --repo ./enterprise-rag --ast-depth 3 --optimize');
+    setCopiedCmd(true);
+    setTimeout(() => setCopiedCmd(false), 2000);
+  };
+
   return (
-    <SectionWrapper id="about" className="py-16 sm:py-24 bg-muted/20 border-t border-border">
+    <SectionWrapper id="about" className="py-20 sm:py-28 md:py-32 bg-muted/20 border-t border-border">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
         
         {/* Section Header */}
         <BlurFade delay={0.05} inView>
-          <div className="max-w-3xl mb-10 sm:mb-14">
+          <div className="max-w-3xl mb-12 sm:mb-16">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-border bg-card text-xs font-mono font-medium text-foreground mb-4 shadow-2xs">
               <span className="w-1.5 h-1.5 rounded-full bg-primary" />
               <span>SYSTEMS MANIFESTO</span>
@@ -19,7 +27,7 @@ export const AboutSection = () => {
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground font-display leading-[1.12]">
               From Silicon Intuition to Distributed Intelligence
             </h2>
-            <p className="mt-4 text-muted-foreground text-base sm:text-lg leading-relaxed">
+            <p className="mt-4 text-muted-foreground text-base sm:text-lg leading-relaxed max-w-[62ch]">
               Why deterministic correctness, compiler-level efficiency, and zero-compromise test discipline matter more than AI hype.
             </p>
           </div>
@@ -30,12 +38,12 @@ export const AboutSection = () => {
           
           {/* Left Column: Narrative Philosophy */}
           <BlurFade delay={0.1} inView className="lg:col-span-7 space-y-5 text-sm sm:text-base text-muted-foreground leading-relaxed font-normal">
-            <p className="text-foreground font-medium text-base sm:text-lg leading-relaxed">
+            <p className="text-foreground font-medium text-base sm:text-lg leading-relaxed max-w-[62ch]">
               My engineering discipline began in hardware and telecommunications—analyzing transistor logic, clock domains, and bus bandwidth. That low-level intuition fundamentally shapes how I build distributed software: treating memory allocations, network packets, and CPU cache-lines with absolute respect.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1">
-              <div className="p-4 rounded-xl border border-border bg-card/60 space-y-1.5 shadow-2xs">
+              <div className="p-4 rounded-xl border border-border bg-card/60 space-y-1.5 shadow-2xs hover:border-primary/40 transition-colors">
                 <div className="flex items-center gap-2">
                   <Layers className="w-4 h-4 text-primary shrink-0" />
                   <span className="text-xs font-mono font-semibold text-foreground uppercase tracking-wider">
@@ -47,7 +55,7 @@ export const AboutSection = () => {
                 </p>
               </div>
 
-              <div className="p-4 rounded-xl border border-border bg-card/60 space-y-1.5 shadow-2xs">
+              <div className="p-4 rounded-xl border border-border bg-card/60 space-y-1.5 shadow-2xs hover:border-primary/40 transition-colors">
                 <div className="flex items-center gap-2">
                   <Network className="w-4 h-4 text-emerald-500 shrink-0" />
                   <span className="text-xs font-mono font-semibold text-foreground uppercase tracking-wider">
@@ -60,21 +68,21 @@ export const AboutSection = () => {
               </div>
             </div>
 
-            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed pt-1">
+            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed pt-1 max-w-[62ch]">
               Untested software is unverified software. Across systems like HeartOut and GetReport, I treat comprehensive test suites (541+ automated unit and integration specs) not as bureaucratic overhead, but as the foundational bedrock of fearless shipping.
             </p>
 
             {/* Architectural Credential Badges */}
             <div className="pt-2 grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-2.5">
-              <div className="flex items-center gap-2 px-3.5 py-2.5 rounded-xl border border-border bg-card text-xs font-medium text-foreground shadow-2xs">
+              <div className="flex items-center gap-2 px-3.5 py-2.5 rounded-xl border border-border bg-card text-xs font-medium text-foreground shadow-2xs hover:border-primary/40 transition-colors">
                 <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
                 <span className="truncate font-mono">541+ Automated Tests</span>
               </div>
-              <div className="flex items-center gap-2 px-3.5 py-2.5 rounded-xl border border-border bg-card text-xs font-medium text-foreground shadow-2xs">
+              <div className="flex items-center gap-2 px-3.5 py-2.5 rounded-xl border border-border bg-card text-xs font-medium text-foreground shadow-2xs hover:border-primary/40 transition-colors">
                 <Award className="w-4 h-4 text-primary shrink-0" />
                 <span className="truncate font-mono">AWS Certified</span>
               </div>
-              <div className="flex items-center gap-2 px-3.5 py-2.5 rounded-xl border border-border bg-card text-xs font-medium text-foreground shadow-2xs">
+              <div className="flex items-center gap-2 px-3.5 py-2.5 rounded-xl border border-border bg-card text-xs font-medium text-foreground shadow-2xs hover:border-primary/40 transition-colors">
                 <FileCode2 className="w-4 h-4 text-emerald-500 shrink-0" />
                 <span className="truncate font-mono">IEEE EAIC Author</span>
               </div>
@@ -82,8 +90,8 @@ export const AboutSection = () => {
           </BlurFade>
 
           {/* Right Column: Architectural Principles Card (Double-Bezel) */}
-          <BlurFade delay={0.15} inView className="lg:col-span-5 p-1.5 rounded-[1.5rem] border border-border/80 bg-muted/20 shadow-xs">
-            <div className="rounded-[1.375rem] border border-border bg-card p-6 sm:p-7 shadow-sm space-y-6">
+          <BlurFade delay={0.15} inView className="lg:col-span-5 p-1.5 rounded-[1.5rem] border border-border/80 bg-muted/20 shadow-xs hover:border-primary/40 transition-all duration-300">
+            <div className="rounded-[1.375rem] border border-border/80 bg-card p-6 sm:p-7 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)] space-y-6">
               <div className="border-b border-border pb-4">
                 <span className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground font-semibold">
                   Architectural Tenets
@@ -143,8 +151,8 @@ export const AboutSection = () => {
 
         {/* Magic UI Terminal CLI Simulation for Architecture Verification */}
         <BlurFade delay={0.2} inView>
-          <div className="mt-12 pt-8 border-t border-border/70">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+          <div className="mt-14 pt-10 border-t border-border/70">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
               <div>
                 <span className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground font-semibold">
                   Automated Verification Console
@@ -153,10 +161,30 @@ export const AboutSection = () => {
                   Context-Ly Code Intelligence Benchmark Run
                 </h3>
               </div>
-              <span className="inline-flex items-center gap-1.5 text-[11px] font-mono text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20 self-start sm:self-auto">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                Live Subprocess Run
-              </span>
+              <div className="flex items-center gap-2 self-start sm:self-auto">
+                <button
+                  type="button"
+                  onClick={handleCopy}
+                  className="inline-flex items-center gap-1.5 text-xs font-mono text-muted-foreground hover:text-foreground px-2.5 py-1 rounded-md border border-border bg-card shadow-2xs transition-colors cursor-pointer"
+                  title="Copy benchmark command"
+                >
+                  {copiedCmd ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-emerald-500" />
+                      <span className="text-emerald-500 font-semibold">Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>Copy Command</span>
+                    </>
+                  )}
+                </button>
+                <span className="inline-flex items-center gap-1.5 text-[11px] font-mono text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  Live Subprocess Run
+                </span>
+              </div>
             </div>
 
             <Terminal title="zsh - contextly daemon v0.2.4" sequence={true} className="max-w-none">

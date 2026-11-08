@@ -5,6 +5,7 @@ import { ExternalLink, Copy, Check, BookOpen, Award, FileText } from 'lucide-rea
 import { useToast } from '@/hooks/use-toast';
 import { BlurFade } from '@/components/magicui/blur-fade';
 import { BorderBeam } from '@/components/magicui/border-beam';
+import { cn } from '@/lib/utils';
 
 interface Publication {
   title: string;
@@ -69,19 +70,19 @@ export const PublicationsSection = () => {
   };
 
   return (
-    <SectionWrapper id="publications" className="py-10 sm:py-12 bg-background border-t border-border">
+    <SectionWrapper id="publications" className="py-20 sm:py-28 md:py-32 bg-background border-t border-border">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
         
         {/* Section Header */}
-        <div className="max-w-2xl mb-8 sm:mb-10">
+        <div className="max-w-2xl mb-10 sm:mb-14">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-muted/60 text-xs font-medium text-foreground mb-3"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-border bg-muted/60 text-xs font-mono font-medium text-foreground mb-4 shadow-2xs"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-            <span>Academic Rigor</span>
+            <span>ACADEMIC RIGOR</span>
           </motion.div>
           
           <motion.h2
@@ -89,7 +90,7 @@ export const PublicationsSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.05 }}
-            className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground font-display leading-[1.12]"
           >
             Research & Publications
           </motion.h2>
@@ -99,7 +100,7 @@ export const PublicationsSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="mt-3 text-muted-foreground text-base leading-relaxed"
+            className="mt-4 text-muted-foreground text-base sm:text-lg leading-relaxed max-w-[62ch]"
           >
             Peer-reviewed research exploring spatial edge sensing, distributed sensor arrays, and autonomous energy optimization published in IEEE Xplore.
           </motion.p>
@@ -109,7 +110,7 @@ export const PublicationsSection = () => {
         <div className="space-y-6">
           {publications.map((pub, idx) => (
             <BlurFade key={pub.title} delay={0.1 + idx * 0.1} inView>
-              <div className="p-1.5 rounded-[1.375rem] border border-border/80 bg-muted/20 shadow-xs hover:border-primary/40 transition-all duration-200 relative overflow-hidden">
+              <div className="p-1.5 rounded-[1.5rem] border border-border/80 bg-muted/20 shadow-xs hover:border-primary/40 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 relative overflow-hidden">
                 <BorderBeam
                   size={100}
                   duration={14}
@@ -117,7 +118,7 @@ export const PublicationsSection = () => {
                   colorFrom="hsl(var(--primary))"
                   colorTo="#10b981"
                 />
-                <div className="p-6 sm:p-8 rounded-2xl border border-border/70 bg-card relative z-10">
+                <div className="p-6 sm:p-8 rounded-[1.375rem] border border-border/70 bg-card shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)] relative z-10">
                 <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
                   
                   {/* Left Column: Badges, Title, Authors, DOI & Abstract */}
@@ -176,40 +177,62 @@ export const PublicationsSection = () => {
                       href={pub.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group/btn inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-foreground text-background text-xs font-medium hover:opacity-90 transition-all shadow-xs"
+                      className="group/btn inline-flex items-center justify-center gap-2 pl-4 pr-1.5 py-2 rounded-full bg-foreground text-background text-xs font-medium hover:opacity-90 active:scale-[0.98] transition-all shadow-xs"
                     >
                       <span>Read on IEEE Xplore</span>
-                      <ExternalLink className="w-3.5 h-3.5 transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+                      <span className="w-5 h-5 rounded-full bg-background/20 flex items-center justify-center transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 shrink-0">
+                        <ExternalLink className="w-3 h-3 text-background" />
+                      </span>
                     </a>
 
-                    {/* Citation Format Buttons */}
+                    {/* Citation Format Buttons with Inline Feedback */}
                     <div className="flex items-center gap-2 justify-end w-full">
                       <button
                         type="button"
                         onClick={() => handleCopyCitation('BibTeX')}
-                        className="inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-full border border-border bg-muted/40 hover:bg-muted text-foreground transition-colors cursor-pointer text-xs font-mono flex-1 md:flex-initial"
+                        className={cn(
+                          "inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-full border text-xs font-mono transition-all cursor-pointer flex-1 md:flex-initial",
+                          copiedFormat === 'BibTeX'
+                            ? "bg-emerald-500/15 border-emerald-500/40 text-emerald-400 font-semibold"
+                            : "border-border bg-muted/40 hover:bg-muted text-foreground"
+                        )}
                         title="Copy BibTeX Citation"
                       >
                         {copiedFormat === 'BibTeX' ? (
-                          <Check className="w-3.5 h-3.5 text-emerald-500" />
+                          <>
+                            <Check className="w-3.5 h-3.5 text-emerald-500" />
+                            <span>Copied BibTeX!</span>
+                          </>
                         ) : (
-                          <Copy className="w-3.5 h-3.5 text-muted-foreground" />
+                          <>
+                            <Copy className="w-3.5 h-3.5 text-muted-foreground" />
+                            <span>BibTeX</span>
+                          </>
                         )}
-                        <span>BibTeX</span>
                       </button>
 
                       <button
                         type="button"
                         onClick={() => handleCopyCitation('APA')}
-                        className="inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-full border border-border bg-muted/40 hover:bg-muted text-foreground transition-colors cursor-pointer text-xs font-mono flex-1 md:flex-initial"
+                        className={cn(
+                          "inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-full border text-xs font-mono transition-all cursor-pointer flex-1 md:flex-initial",
+                          copiedFormat === 'APA'
+                            ? "bg-emerald-500/15 border-emerald-500/40 text-emerald-400 font-semibold"
+                            : "border-border bg-muted/40 hover:bg-muted text-foreground"
+                        )}
                         title="Copy APA Citation"
                       >
                         {copiedFormat === 'APA' ? (
-                          <Check className="w-3.5 h-3.5 text-emerald-500" />
+                          <>
+                            <Check className="w-3.5 h-3.5 text-emerald-500" />
+                            <span>Copied APA!</span>
+                          </>
                         ) : (
-                          <Copy className="w-3.5 h-3.5 text-muted-foreground" />
+                          <>
+                            <Copy className="w-3.5 h-3.5 text-muted-foreground" />
+                            <span>APA</span>
+                          </>
                         )}
-                        <span>APA</span>
                       </button>
                     </div>
 

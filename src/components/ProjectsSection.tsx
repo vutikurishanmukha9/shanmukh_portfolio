@@ -273,7 +273,7 @@ const ModernProjectCard: React.FC<{
     <motion.div
       variants={projectCardVariants}
       className={cn(
-        'group p-1.5 rounded-[1.375rem] border border-border/80 bg-muted/20 shadow-xs hover:border-primary/40 hover:shadow-md transition-all duration-300 flex flex-col justify-between overflow-hidden relative',
+        'group p-1.5 rounded-[1.5rem] border border-border/80 bg-muted/20 shadow-xs hover:border-primary/40 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden relative',
         featured && 'md:col-span-2 xl:col-span-3'
       )}
     >
@@ -286,7 +286,7 @@ const ModernProjectCard: React.FC<{
           colorTo="#10b981"
         />
       )}
-      <div className="rounded-2xl border border-border/70 bg-card p-5 sm:p-6 flex flex-col justify-between h-full relative z-10">
+      <div className="rounded-[1.375rem] border border-border/70 bg-card p-5 sm:p-6 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)] flex flex-col justify-between h-full relative z-10">
         <div className={cn(featured ? 'grid grid-cols-1 md:grid-cols-12 gap-6 items-center' : 'space-y-4')}>
           
           {/* Visual Mockup Container */}
@@ -343,7 +343,7 @@ const ModernProjectCard: React.FC<{
                 {primaryTech.map((tech) => (
                   <span
                     key={tech}
-                    className="px-2.5 py-0.5 rounded-lg text-xs font-medium bg-muted/60 border border-border/60 text-foreground"
+                    className="px-2.5 py-0.5 rounded-md text-xs font-mono font-normal bg-muted/40 border border-border/50 text-muted-foreground hover:text-foreground hover:border-border transition-colors"
                   >
                     {tech}
                   </span>
@@ -537,19 +537,19 @@ export const ProjectsSection: React.FC = () => {
   const standardProjects = filteredProjects.filter((p) => p !== heroProject);
 
   return (
-    <SectionWrapper id="projects" className="py-10 sm:py-12 border-t border-border relative bg-background">
+    <SectionWrapper id="projects" className="py-20 sm:py-28 md:py-32 border-t border-border relative bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-10">
         
         {/* Section Header */}
-        <div className="max-w-2xl mb-8 sm:mb-10">
+        <div className="max-w-2xl mb-10 sm:mb-14">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-muted/60 text-xs font-medium text-foreground mb-3"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-border bg-muted/60 text-xs font-mono font-medium text-foreground mb-4 shadow-2xs"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-            <span>Production Codebase</span>
+            <span>PRODUCTION CODEBASE</span>
           </motion.div>
 
           <motion.h2
@@ -557,7 +557,7 @@ export const ProjectsSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.05 }}
-            className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground font-display leading-[1.12]"
           >
             Featured Projects
           </motion.h2>
@@ -567,7 +567,7 @@ export const ProjectsSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-muted-foreground mt-3 text-base leading-relaxed"
+            className="text-muted-foreground mt-4 text-base sm:text-lg leading-relaxed max-w-[62ch]"
           >
             End-to-end architectures engineered with strict type safety, asynchronous microservices, and production ML pipelines.
           </motion.p>
@@ -576,8 +576,8 @@ export const ProjectsSection: React.FC = () => {
         {/* Toolbar: Category Switcher + View Mode Switcher */}
         <div className="mb-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
           
-          {/* Category Tabs with Counts (Smooth Horizontal Swipe on Mobile) */}
-          <div className="flex items-center gap-1.5 p-1 bg-card border border-border rounded-xl overflow-x-auto no-scrollbar touch-pan-x max-w-full">
+          {/* Category Tabs with Counts (Smooth Sliding Pill Physics) */}
+          <div className="flex items-center gap-1 p-1 bg-card border border-border/80 rounded-xl overflow-x-auto no-scrollbar touch-pan-x max-w-full">
             {categories.map((cat) => {
               const count = cat === 'All' ? projects.length : projects.filter((p) => p.category === cat).length;
               const isSelected = selectedCategory === cat;
@@ -588,15 +588,24 @@ export const ProjectsSection: React.FC = () => {
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
                   className={cn(
-                    'px-3 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center gap-1.5 whitespace-nowrap shrink-0 cursor-pointer',
+                    'relative px-3.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center gap-2 whitespace-nowrap shrink-0 cursor-pointer',
                     isSelected
-                      ? 'bg-foreground text-background shadow-xs'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                      ? 'text-primary font-semibold'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-muted/40'
                   )}
                 >
-                  <span>{cat}</span>
-                  <span className={cn('text-[10px] px-1.5 py-0.2 rounded-md font-mono', isSelected ? 'bg-background/20 text-background' : 'bg-muted text-muted-foreground')}>
-                    {count}
+                  {isSelected && (
+                    <motion.div
+                      layoutId="active-project-filter"
+                      className="absolute inset-0 bg-primary/20 border border-primary/45 rounded-lg shadow-[0_0_12px_rgba(249,115,22,0.25)] z-0 pointer-events-none"
+                      transition={{ type: 'spring', stiffness: 420, damping: 32, mass: 0.5 }}
+                    />
+                  )}
+                  <span className="relative z-10 flex items-center gap-2">
+                    <span>{cat}</span>
+                    <span className={cn('text-[10px] px-1.5 py-0.2 rounded font-mono', isSelected ? 'bg-primary/25 text-primary font-bold' : 'bg-muted text-muted-foreground')}>
+                      {count}
+                    </span>
                   </span>
                 </button>
               );

@@ -8,6 +8,7 @@ import { SkillFilterProvider } from "@/context/SkillFilterContext";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { ViewportEdgeFade } from "@/components/ViewportEdgeFade";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 import Index from "./pages/Index";
 import ProductDesigner from "./pages/ProductDesigner";
 import NotFound from "./pages/NotFound";
@@ -58,6 +59,21 @@ const App = () => (
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </LayoutWrapper>
+              <ErrorBoundary>
+                <LayoutWrapper>
+                  <Routes>
+                    <Route path="/" element={<Index />} />
+                    <Route path="/design" element={<ProductDesigner />} />
+                    <Route path="/product-design" element={<ProductDesigner />} />
+                    <Route path="/case-study/unicorn" element={<CaseStudyUnicorn />} />
+                    <Route path="/case-study/adidas" element={<CaseStudyAdidas />} />
+                    <Route path="/case-study/sales" element={<CaseStudySalesReport />} />
+                    <Route path="/case-study/sales-report" element={<CaseStudySalesReport />} />
+                    <Route path="/project/contextly" element={<ProjectContextLy />} />
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </LayoutWrapper>
+              </ErrorBoundary>
             </BrowserRouter>
           </TooltipProvider>
         </SmoothScrollProvider>

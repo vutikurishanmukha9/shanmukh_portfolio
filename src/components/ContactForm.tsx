@@ -139,7 +139,7 @@ export const ContactForm = () => {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="group/btn w-full h-11 rounded-full bg-primary hover:bg-primary-hover text-primary-foreground font-sans font-medium text-sm flex items-center justify-center gap-2.5 cursor-pointer transition-all mt-2 shadow-xs"
+        className="group/btn w-full h-11 rounded-full bg-primary hover:bg-primary-hover active:scale-[0.98] text-primary-foreground font-sans font-medium text-sm flex items-center justify-center gap-2.5 cursor-pointer transition-all mt-2 shadow-xs"
       >
         {isSubmitting ? (
           <>

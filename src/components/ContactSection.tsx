@@ -38,7 +38,7 @@ const ContactCard = ({ contact }: { contact: { icon: LucideIcon; label: string; 
         type="button"
         onClick={handleCopy}
         className={cn(
-          "px-2.5 sm:px-3 py-1 sm:py-1.5 text-xs font-mono font-medium rounded-lg border border-border transition-all flex items-center gap-1.5 self-end sm:self-auto shrink-0 cursor-pointer shadow-xs",
+          "px-2.5 sm:px-3 py-1 sm:py-1.5 text-xs font-mono font-medium rounded-lg border border-border transition-all flex items-center gap-1.5 self-end sm:self-auto shrink-0 cursor-pointer shadow-xs active:scale-[0.98]",
           copied
             ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
             : "bg-card text-foreground hover:bg-muted"
@@ -80,11 +80,11 @@ const socialLinks = [
 
 export const ContactSection = () => {
   return (
-    <SectionWrapper id="contact" className="py-10 sm:py-12 bg-background border-t border-border">
+    <SectionWrapper id="contact" className="py-20 sm:py-28 md:py-32 bg-background border-t border-border">
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
 
         {/* Section Header */}
-        <div className="text-center mb-8 sm:mb-10 max-w-2xl mx-auto">
+        <div className="text-center mb-10 sm:mb-12 max-w-2xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -108,7 +108,7 @@ export const ContactSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="mt-3 text-muted-foreground text-sm sm:text-base font-sans max-w-lg mx-auto leading-relaxed"
+            className="mt-3 text-muted-foreground text-sm sm:text-base font-sans max-w-[62ch] mx-auto leading-[1.7]"
           >
             Open for full-time engineering roles, backend systems architecture, and applied AI/ML pipelines.
           </motion.p>
@@ -121,9 +121,9 @@ export const ContactSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4 }}
-            className="flex flex-col h-full min-w-0 p-1.5 rounded-[1.375rem] border border-border/80 bg-muted/20 shadow-xs"
+            className="flex flex-col h-full min-w-0 p-1.5 rounded-[1.5rem] border border-border/80 bg-muted/20 shadow-xs hover:border-primary/30 transition-all duration-300"
           >
-            <div className="rounded-2xl border border-border/70 bg-card p-4 sm:p-6 lg:p-8 shadow-xs h-full flex flex-col justify-between min-w-0">
+            <div className="rounded-[1.375rem] border border-border/70 bg-card p-4 sm:p-6 lg:p-8 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)] h-full flex flex-col justify-between min-w-0">
               <div>
                 <div className="flex flex-col xs:flex-row xs:items-center justify-between border-b border-border pb-4 mb-5 sm:mb-6 gap-2">
                   <div className="flex items-center gap-2">
@@ -137,7 +137,7 @@ export const ContactSection = () => {
                   </span>
                 </div>
 
-                <p className="text-muted-foreground text-sm leading-relaxed mb-6 font-sans">
+                <p className="text-muted-foreground text-sm leading-[1.7] mb-6 font-sans max-w-[62ch]">
                   Whether you are hiring for a software engineering role, exploring high-throughput data architectures, or discussing compiler-level developer tools, I welcome thoughtful technical conversations.
                 </p>
 
@@ -174,7 +174,7 @@ export const ContactSection = () => {
                         href={social.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl border border-border bg-card hover:bg-muted text-foreground hover:text-primary font-mono text-xs font-medium shadow-xs transition-colors"
+                        className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl border border-border bg-card hover:bg-muted text-foreground hover:text-primary active:scale-[0.98] font-mono text-xs font-medium shadow-xs transition-all"
                         title={social.name}
                         aria-label={social.name}
                       >
@@ -194,9 +194,9 @@ export const ContactSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.1 }}
-            className="flex flex-col h-full min-w-0 p-1.5 rounded-[1.375rem] border border-border/80 bg-muted/20 shadow-xs"
+            className="flex flex-col h-full min-w-0 p-1.5 rounded-[1.5rem] border border-border/80 bg-muted/20 shadow-xs hover:border-primary/30 transition-all duration-300"
           >
-            <div className="rounded-2xl border border-border/70 bg-card p-4 sm:p-6 lg:p-8 shadow-xs h-full flex flex-col justify-between min-w-0">
+            <div className="rounded-[1.375rem] border border-border/70 bg-card p-4 sm:p-6 lg:p-8 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)] h-full flex flex-col justify-between min-w-0">
               <div>
                 <div className="flex flex-col xs:flex-row xs:items-center justify-between border-b border-border pb-4 mb-5 sm:mb-6 gap-2">
                   <h3 className="text-base font-head font-semibold text-foreground">

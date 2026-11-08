@@ -223,9 +223,9 @@ const CaseStudyCard = ({ study, index }: { study: CaseStudy; index: number }) =>
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-      className="p-1.5 rounded-[1.375rem] border border-border/80 bg-muted/20 shadow-xs hover:border-primary/40 hover:shadow-md transition-all duration-300"
+      className="p-1.5 rounded-[1.5rem] border border-border/80 bg-muted/20 shadow-xs hover:border-primary/40 hover:-translate-y-1 hover:shadow-xl transition-all duration-300"
     >
-      <div className="rounded-2xl border border-border/70 bg-card overflow-hidden shadow-xs">
+      <div className="rounded-[1.375rem] border border-border/70 bg-card overflow-hidden shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]">
       <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-0">
         
         {/* Left Preview Panel */}
@@ -354,26 +354,26 @@ const CaseStudyCard = ({ study, index }: { study: CaseStudy; index: number }) =>
 
 export const CaseStudiesSection = () => {
   return (
-    <SectionWrapper id="case-studies" className="py-10 sm:py-12 border-t border-border bg-muted/10">
+    <SectionWrapper id="case-studies" className="py-20 sm:py-28 md:py-32 border-t border-border bg-muted/10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
         
         {/* Section Header */}
-        <div className="max-w-2xl mb-8 sm:mb-10">
+        <div className="max-w-2xl mb-10 sm:mb-14">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-card text-xs font-medium text-foreground mb-3 whitespace-nowrap shrink-0"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-border bg-card text-xs font-mono font-medium text-foreground mb-4 shadow-2xs whitespace-nowrap shrink-0"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-            <span>Deep Dive Analysis</span>
+            <span>DEEP DIVE ANALYSIS</span>
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.05 }}
-            className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground font-display leading-[1.12]"
           >
             Engineering Case Studies
           </motion.h2>
@@ -382,7 +382,7 @@ export const CaseStudiesSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="mt-3 text-muted-foreground text-base leading-relaxed"
+            className="mt-4 text-muted-foreground text-base sm:text-lg leading-relaxed max-w-[62ch]"
           >
             Real data transformations, statistical root-cause analyses, and production BI models with verified outcomes.
           </motion.p>
