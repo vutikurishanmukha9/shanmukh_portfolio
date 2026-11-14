@@ -46,19 +46,6 @@ const App = () => (
         <SmoothScrollProvider>
           <TooltipProvider>
             <BrowserRouter>
-              <LayoutWrapper>
-                <Routes>
-                  <Route path="/" element={<Index />} />
-                  <Route path="/design" element={<ProductDesigner />} />
-                  <Route path="/product-design" element={<ProductDesigner />} />
-                  <Route path="/case-study/unicorn" element={<CaseStudyUnicorn />} />
-                  <Route path="/case-study/adidas" element={<CaseStudyAdidas />} />
-                  <Route path="/case-study/sales" element={<CaseStudySalesReport />} />
-                  <Route path="/case-study/sales-report" element={<CaseStudySalesReport />} />
-                  <Route path="/project/contextly" element={<ProjectContextLy />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </LayoutWrapper>
               <ErrorBoundary>
                 <LayoutWrapper>
                   <Routes>
