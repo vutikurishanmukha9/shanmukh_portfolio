@@ -34,8 +34,31 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   }, [theme]);
 
   const toggleTheme = useCallback(() => {
-    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
-  }, []);
+    const nextTheme: Theme = theme === 'dark' ? 'light' : 'dark';
+
+    const applyTheme = () => {
+      const root = document.documentElement;
+      if (nextTheme === 'dark') {
+        root.classList.add('dark');
+        root.classList.remove('light');
+        document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#050507');
+      } else {
+        root.classList.add('light');
+        root.classList.remove('dark');
+        document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#fafafa');
+      }
+      localStorage.setItem('portfolio-theme', nextTheme);
+      setTheme(nextTheme);
+    };
+
+    if (typeof document !== 'undefined' && 'startViewTransition' in document) {
+      document.startViewTransition(() => {
+        applyTheme();
+      });
+    } else {
+      applyTheme();
+    }
+  }, [theme]);
 
   const value = useMemo(() => ({ theme, toggleTheme }), [theme, toggleTheme]);
 
